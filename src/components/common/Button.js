@@ -1,18 +1,14 @@
 import React from 'react';
-import { Text, TouchableOpacity } from 'react-native'
+import { Text, TouchableOpacity, Image } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Button = (props) => {
     const { buttonStyle, textStyle } = styles;
 
     return (
-        <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.style]}>
+        <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.style]}> 
             <Text style={[textStyle, props.textStyle]}>
-            <Ionicons 
-            name = {props.name}
-            size = {20}
-            color = {'#3b5998'}
-            />{props.children}
+            {props.children}
             </Text>
         </TouchableOpacity>
     );

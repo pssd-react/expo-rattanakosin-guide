@@ -5,7 +5,10 @@ import {
     StyleSheet,
     ListView,
     Image,
+    ImageBackground,
     TouchableOpacity} from 'react-native'
+import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../common';
+import { SocialIcon } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 const listViewData = [
@@ -16,7 +19,7 @@ const listViewData = [
     {'id': '5', 'section':'Logout', 'name':'ios-power'}
 ]
 
-const BACKGROUND_URI = 'https://cdn.hipwallpaper.com/i/82/23/X84mwq.png'
+const BACKGROUND_URI = 'https://scontent.fbkk1-5.fna.fbcdn.net/v/t1.15752-9/40231303_293778361409035_3921667967200264192_n.jpg?_nc_fx=fbkk1-2&_nc_cat=0&oh=5848dd2bad55cb3ad2db545779bf04bd&oe=5C04E144'
 
 class ProfileScreen extends Component{
     constructor(){
@@ -31,10 +34,33 @@ class ProfileScreen extends Component{
     render(){
         return (
             <View>
-            <Image
-                style = {styles.thumbnailStyle}
-                source={{uri : BACKGROUND_URI}} 
-            />
+            <ImageBackground
+            source={{uri : BACKGROUND_URI}}
+            style={styles.thumbnailStyle}
+            > 
+                <CardSection style={{ justifyContent: 'center', marginTop: 60}}>
+                    <Text style={{  fontSize: 22, color: '#fff'  }}>ยังไม่ได้เข้าสู่ระบบ</Text>
+                </CardSection>
+                <CardSection style={{paddingLeft:30, paddingRight:30}}>
+                    <Button onPress={null} 
+                        style={{backgroundColor: '#ffc94c'}} 
+                        textStyle={{color: '#000'}}>
+                        เข้าสู่ระบบด้วยหมายเลขโทรศัพท์
+                    </Button>
+                </CardSection>
+                <CardSection style={{paddingLeft:30, paddingRight:30}}>
+                    <SocialIcon style={{flex: 1, borderRadius: 5, fontSize: 16 }}
+                    title='เข้าสู่ระบบด้วย Facebook'
+                    button
+                    type='facebook'
+                    />
+                </CardSection>
+                <CardSection style={{ justifyContent: 'center', marginTop: 18}}>
+                    <TouchableOpacity onPress={null}>
+                        <Text style={{  fontSize: 16, textDecorationLine: 'underline', color:'#fff', }}>ลงทะเบียน</Text>
+                    </TouchableOpacity >
+                </CardSection>
+            </ImageBackground>
             <ListView
             dataSource={this.state.dataSource}
             renderRow={(rowData) => {
@@ -77,7 +103,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     thumbnailStyle: {
-        height: '60%',
+        height: '57%',
         width:'100%'
     },
     listViewTextContainer:{
