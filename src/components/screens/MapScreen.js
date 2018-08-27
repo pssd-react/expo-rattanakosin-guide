@@ -3,21 +3,24 @@ import {
     View,
     Text, 
     StyleSheet} from 'react-native'
-import {MapView} from 'expo'
-    
-class MapScreen extends Component{
+import {MapView, Location, Constants} from 'expo'
 
+class MapScreen extends Component{
     render(){
         return (
-            <MapView
+        <View  style={{ flex: 1}}>
+        <MapView
             style={{ flex: 1 }}
             initialRegion={{
-              latitude: 37.78825,
-              longitude: -122.4324,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
+              latitude: 13.755617,
+              longitude: 100.498478,
+              latitudeDelta: 0.0222,
+              longitudeDelta: 0.0221,
             }}
+            showsMyLocationButton= {true}
+            showsUserLocation={true}
           />
+          </View>
         )
     }
 }
