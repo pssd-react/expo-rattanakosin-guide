@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_welcome"
+                android:padding="4dp"
+                tools:context="th.co.DigitalVentures.RattanakosinGuide.module.taladmain.TaladMainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/btn_agree"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Big"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:textColor="@color/black"/>
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:gravity="center"
+            android:text="@string/talad"
+            android:textColor="@color/black"/>
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:text="@string/detail"
+            android:textAlignment="center"
+            android:textColor="@color/text_gray_dark"/>
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/select"
+            android:textColor="@color/text_notify"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            android:gravity="center"
+           android:layout_marginTop="20dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            >
+
+            <Button
+                android:id="@+id/btn_thai_lang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/thai_lang"
+                style="@style/SimpleTextDBMomentX.Small"
+                android:textColor="@drawable/text_state_selection"
+                android:background="@drawable/tab_lang_state_selection"
+                />
+
+            <Button
+                android:id="@+id/btn_eng_lang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/eng_lang"
+                style="@style/SimpleTextDBMomentX.Small"
+                android:background="@drawable/tab_lang_state_selection"
+                android:textColor="@drawable/text_state_selection"
+                android:layout_marginLeft="-1dp"
+                android:layout_marginRight="-1dp"
+                />
+
+            <Button
+                android:id="@+id/btn_china_lang"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                style="@style/SimpleTextDBMomentX.Small"
+                android:text="@string/china_lang"
+                android:background="@drawable/tab_lang_state_selection"
+                android:textColor="@drawable/text_state_selection"
+                />
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical">-->
+        <!--<TextView-->
+        <!--android:layout_marginTop="@dimen/margin_top"-->
+        <!--android:textAlignment="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/are_you"-->
+        <!--style="@style/SimpleTextDBMomentX.Normal" />-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_marginTop="@dimen/margin"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center">-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginRight="@dimen/menu_margin">-->
+        <!--<Button-->
+        <!--android:id="@+id/btnShopper"-->
+        <!--android:layout_width="54dp"-->
+        <!--android:layout_height="54dp"-->
+        <!--android:background="@drawable/button_state_shopper_style" />-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/menu_shopper"-->
+        <!--style="@style/SimpleTextDBMomentX.Normal"/>-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:gravity="center">-->
+        <!--<Button-->
+        <!--android:id="@+id/btnTourist"-->
+        <!--android:layout_width="54dp"-->
+        <!--android:layout_height="54dp"-->
+        <!--android:background="@drawable/button_state_tourist_style"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/menu_tourist"-->
+        <!--style="@style/SimpleTextDBMomentX.Normal"/>-->
+        <!--</LinearLayout>-->
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="vertical"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_marginLeft="@dimen/menu_margin">-->
+        <!--<Button-->
+        <!--android:id="@+id/btnVisitor"-->
+        <!--android:layout_width="54dp"-->
+        <!--android:layout_height="54dp"-->
+        <!--android:background="@drawable/button_state_visitor_style"/>-->
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/manu_visitor"-->
+        <!--style="@style/SimpleTextDBMomentX.Normal"/>-->
+        <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_agree"
+        style="@style/SimpleTextDBMomentX.Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/color_btn_yellow"
+        android:text="@string/txt_agree_button"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        />
+
+</RelativeLayout>

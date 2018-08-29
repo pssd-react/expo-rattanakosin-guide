@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <th.co.DigitalVentures.RattanakosinGuide.utility.CustomFontTabLayout
+        android:id="@+id/TabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabTextAppearance="@style/SimpleTextDBMomentX.Normal"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        />
+
+    <th.co.DigitalVentures.RattanakosinGuide.utility.NonSwipeableViewPager
+        android:id="@+id/vp_manage_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </th.co.DigitalVentures.RattanakosinGuide.utility.NonSwipeableViewPager>
+
+</LinearLayout>

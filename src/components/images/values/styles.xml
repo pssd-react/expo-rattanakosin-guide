@@ -1,0 +1,236 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textAllCaps">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:dropDownListViewStyle">@style/MyListViewStyle</item>
+    </style>
+
+
+    <style name="NewDialog">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@color/black_opacity40</item>
+        <item name="android:windowTitleStyle">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MyListViewStyle" parent="@android:style/Widget.ListView">
+        <item name="android:divider">#f0f0f0</item>
+        <item name="android:dividerHeight">2px</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.Transparent" parent="AppTheme">
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="colorPrimary">@android:color/transparent</item>
+        <item name="colorPrimaryDark">@android:color/transparent</item>
+    </style>
+
+    <style name="AppTheme.ActionBar.White" parent="AppTheme">
+        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
+
+    <style name="TextLabel">
+        <!-- Hint color and label color in FALSE state -->
+        <item name="android:textColorHint">@android:color/black</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Label color in TRUE state and bar color FALSE and TRUE State -->
+        <item name="colorAccent">@android:color/black</item>
+        <item name="colorControlNormal">@android:color/black</item>
+        <item name="colorControlActivated">@android:color/black</item>
+        <item name="fontPath">fonts/CircularBold.ttf</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX" parent="android:TextAppearance">
+        <item name="fontPath">fonts/DBMomentX.ttf</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold" parent="android:TextAppearance">
+        <item name="fontPath">fonts/DBMomentXBd.ttf</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXMedium" parent="android:TextAppearance">
+        <item name="fontPath">fonts/DBMomentXMed.ttf</item>
+    </style>
+
+    <style name="SimpleTextPSLxText" parent="android:TextAppearance">
+        <item name="fontPath">fonts/PSLxText.ttf</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Mega" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">54sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Large" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">46sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Big" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Medium" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Normal" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Small" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentX.Mini" parent="SimpleTextDBMomentX">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <style name="SimpleTextDBMomentXBold.Mega" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">54sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold.Large" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">46sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold.Big" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold.Medium" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold.Normal" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">22sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold.Small" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXBold.Mini" parent="SimpleTextDBMomentXBold">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+
+    <!--<style name="SimpleTextDBMomentXBold.Mega" parent="SimpleTextDBMomentXBold.Mega">-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXBold.Large" parent="SimpleTextDBMomentX.Large">-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXBold.Big" parent="SimpleTextDBMomentXBold">-->
+    <!--<item name="android:textSize">32sp</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXBold.Medium" parent="SimpleTextDBMomentX.Medium">-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXBold.Normal" parent="SimpleTextDBMomentX.Normal">-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXBold.Small" parent="SimpleTextDBMomentX.Small">-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXBold.Mini" parent="SimpleTextDBMomentX.Mini">-->
+    <!--<item name="android:textStyle">bold</item>-->
+    <!--</style>-->
+
+    <!--<style name="SimpleTextDBMomentXMedium.Big" parent="SimpleTextDBMomentX">-->
+    <!--<item name="android:textSize">32sp</item>-->
+    <!--</style>-->
+
+
+    <style name="SimpleTextDBMomentXMedium.Medium" parent="SimpleTextDBMomentXMedium">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXMedium.Normal" parent="SimpleTextDBMomentXMedium">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXMedium.Small" parent="SimpleTextDBMomentXMedium">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="SimpleTextDBMomentXMedium.Mini" parent="SimpleTextDBMomentXMedium">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Dialog_No_Border" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="SwitchButtonStyle">
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabTextAppearance">@style/MyCustomTextAppearance</item>
+    </style>
+
+    <style name="MyCustomTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+
+
+    <style name="LoginTheme" parent="AppTheme.NoActionBar">
+        <item name="colorAccent">@android:color/white</item>
+        <!--<item name="colorControlNormal">@android:color/white</item>-->
+        <item name="colorControlActivated">@android:color/white</item>
+        <item name="android:textColorHint">@color/gray_edittext_hint</item>
+    </style>
+
+    <style name="LoginThemePlatinum" parent="AppTheme.NoActionBar">
+        <item name="android:textColorHint">@color/gray_color_add_photo_view</item>
+        <item name="colorControlActivated">@color/black</item>
+        <item name="colorAccent">@android:color/black</item>
+        <item name="android:textSize">16sp</item>
+        <!--<item name="colorControlNormal">@android:color/white</item>-->
+    </style>
+
+    <!--<style name="dialog_theme" parent="AppTheme" >-->
+        <!--<item name="colorPrimary">@color/colorPrimary</item>-->
+        <!--<item name="colorPrimaryDark">@color/colorPrimary</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+    <!--</style>-->
+
+
+</resources>

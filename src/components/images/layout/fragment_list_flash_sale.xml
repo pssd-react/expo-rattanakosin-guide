@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <th.co.DigitalVentures.RattanakosinGuide.utility.CustomFontTabLayout
+        style="@style/SimpleTextDBMomentX.Normal"
+        android:id="@+id/tab_Layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextAppearance="@style/SimpleTextDBMomentX.Normal"
+        app:tabTextColor="@color/gray_text"
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"
+        />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <th.co.DigitalVentures.RattanakosinGuide.utility.NonSwipeableViewPager
+            android:id="@+id/vp_flash_sale_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </th.co.DigitalVentures.RattanakosinGuide.utility.NonSwipeableViewPager>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

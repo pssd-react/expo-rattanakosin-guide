@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/image_viewer_title"
+    android:background="@color/black"
+    >
+
+
+    <th.co.DigitalVentures.RattanakosinGuide.utility.ViewPagerFixed
+        android:id="@+id/vp_product"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </th.co.DigitalVentures.RattanakosinGuide.utility.ViewPagerFixed>
+
+    <ImageView
+        android:id="@+id/imv_close_showimage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
+        android:layout_marginTop="10dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel"/>
+
+
+</FrameLayout>

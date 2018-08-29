@@ -1,0 +1,182 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context="th.co.DigitalVentures.RattanakosinGuide.module.more.managepromotionflashsale.AddFlashSaleAndPromotionDetailSecondPageFragment"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:id="@+id/ll_detail_th"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thai_language_wording"
+            android:textColor="@color/black"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txt_th"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_name_detail_th"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:textColorHighlight="@color/black"
+                android:imeOptions="actionNext"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_content_detail_th"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/must_add_promotion_content_detail"
+                android:textColorHighlight="@color/black"
+                android:imeOptions="actionNext"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/red"
+            android:text="@string/noti_to_add_input_in_th"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_detail_en"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/english_language_wording"
+            android:textColor="@color/black"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txt_en"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_name_detail_en"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:textColorHighlight="@color/black"
+                android:imeOptions="actionNext"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_content_detail_en"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/add_promotion_content_detail"
+                android:textColorHighlight="@color/black"
+                android:imeOptions="actionNext"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_detail_cn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp">
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/china_language_wording"
+            android:textColor="@color/black"/>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/txt_cn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_name_detail_cn"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:maxLines="1"
+                android:textColorHighlight="@color/black"
+                android:imeOptions="actionNext"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_content_detail_cn"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:hint="@string/add_promotion_content_detail"
+                android:textColorHighlight="@color/black"
+                android:imeOptions="actionDone"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+    </LinearLayout>
+</LinearLayout>
+
+</ScrollView>

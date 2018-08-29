@@ -1,0 +1,687 @@
+<resources>
+    <string name="app_name">Rattanakosin Guide</string>
+    <string name="title_activity_talad_map_view_main">TaladMapViewMainActivity(EN)</string>
+    <string name="title_map">地图</string>
+    <string name="title_promotion">优惠</string>
+    <!--<string name="title_scb_pay">กระเป๋าเงิน(EN)</string>-->
+    <string name="title_favorite">我的行程</string>
+    <string name="title_more">个人资料</string>
+
+    <!--<string name="title_more_th">เพิ่มเติม(EN)</string>-->
+
+    <string name="welcome">欢迎使用</string>
+    <string name="talad">Rattanakosin Guide</string>
+    <string name="detail">简单发现周边商店和美食</string>
+    <string name="select">语言</string>
+    <string-array name="language_array"
+        >
+        <item>ไทย</item>
+        <item>English</item>
+        <item>中文</item>
+    </string-array>
+
+    <!--<string name="are_you">Are you?(EN)</string>-->
+    <!--<string name="menu_shopper">Shopper(EN)</string>-->
+    <!--<string name="menu_tourist">Tourist(EN)</string>-->
+    <!--<string name="manu_visitor">Visitor(EN)</string>-->
+
+    <!--MerchantShopFragment-->
+    <string name="loading">载入中...</string>
+    <string name="tab_product">详细资料</string>
+    <string name="tab_map">地图</string>
+    <string name="tab_review">点评</string>
+
+    <string name="toolbar_title_promotion">特殊优惠</string>
+    <string name="toolbar_title_favorite">最爱</string>
+    <string name="toolbar_title_how_to_use">如何使用</string>
+    <string name="toolbar_title_about_app">关于本应用</string>
+
+    <string name="head_shop_related">类似商户</string>
+    <string name="head_place_related">相关地点</string>
+    <!--<string name="favorite">Favorite(EN)</string>-->
+    <string name="del_favorite">移除</string>
+    <string name="sort_by">排序</string>
+    <string name="sort_by_distianct">距离</string>
+    <string name="fab_label">人气</string>
+    <string name="share">分享</string>
+    <string name="btn_read_more">阅读更多</string>
+    <!--<string name="btn_collapse">Collapse(EN)</string>-->
+
+    <!--<string name="bookmark">Bookmark(EN)</string>-->
+    <!--<string name="un_bookmark">Un-bookmark(EN)</string>-->
+    <!--<string name="un_bookmark_sure">Are you sure?(EN)</string>-->
+
+    <!--<string name="test_value">Android Data Recovery, an incredible tool for recovering, allows you to retrieve Android data such as contacts, text messages, call history, photos, WhatsApp history, videos, audios, documents and restore them back to Android phones of any brand with simple steps. No longer will loss of data from an internal or external memory card be a big headache for Android user who know this application.(CN)</string>-->
+
+    <!--<string name="call_now">Call to (EN)</string>-->
+    <!--<string name="call">call(EN)</string>-->
+    <!--<string name="open_time">Open / Closed (CN)</string>-->
+
+    <!--User Guide-->
+    <!--<string name="user_guide1">Get Started!(EN)</string>-->
+    <!--<string name="user_guide1_sub">Lorem ipsum dolor sit amet, Consectetur adipisicing elit, sed do eiusmod.(EN)</string>-->
+    <!--<string name="user_guide_skip">Skip(EN)</string>-->
+
+
+    <!--type marker-->
+    <!--<string name="heart_type">Heart</string>-->
+    <!--<string name="live_type">Live</string>-->
+    <!--<string name="promo_type">Promotion</string>-->
+
+
+    <!--MapFragment-->
+    <string name="open_market">经营时间:</string>
+    <string name="close_market">关闭</string>
+    <string name="close_market_all_day">休息中</string>
+    <string name="open"> / 营业时间:</string>
+    <string name="no_label">号</string>
+    <string name="shbject_common_label">部分</string>
+    <string name="soi_common_label">胡同</string>
+    <string name="zone">区</string>
+    <string name="floor">楼</string>
+    <string name="close_shop_label">Close</string>
+    <string name="common_store">商户</string>
+    <string name="scb_common">SCB 泰国汇商银行</string>
+    <string name="time_no_data"> - </string>
+    <string name="guide_skip">跳跃</string>
+    <string name="guide_page_one_title">从地图上发现更多</string>
+    <string name="guide_page_one_message">发现或搜寻商品类、商店名称、产品、等等…</string>
+    <string name="guide_page_two_title">惠活动及快闪销售</string>
+    <string name="guide_page_two_message">马上在这发现商店及商品的最新优惠。</string>
+    <!--<string name="guide_page_three_title">分享感受</string>-->
+    <!--<string name="guide_page_three_message">想什么就表达什么！用表情符号传达你对商店和商品的感想。</string>-->
+    <string name="guide_page_three_title">推荐店铺/推荐商品</string>
+    <string name="guide_page_three_message">更多推荐详情请点击 shopping planner,也可添加个人地图</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--<string name="hello_blank_fragment">Hello blank fragment(EN)</string>-->
+    <string name="txt_read_more">阅读更多</string>
+
+
+    <!--<string name="guide_page_four_title">โอนเงินหากันง่ายๆ(CN)</string>-->
+    <!--<string name="guide_page_four_message">ซื้อของให้เพื่อนก็ให้เพื่อนโอนให้ เงินหมดก็ให้เพื่อนโอนให้ \nเพื่อนเงินหมด!!! ก็โอนให้เพื่อนได้เช่นกัน(CN)</string>-->
+
+    <!--<string name="guide_page_five_title">เติมเงินทันใจ(CN)</string>-->
+    <!--<string name="guide_page_five_message">เติมเงินง่ายๆ รวดเร็ว เติมปุ๊บเข้าปั๊บ\n ที่เคาน์เตอร์เซอร์วิสชั้นนำทั่วประเทศ(CN)</string>-->
+    <string name="guide_go_to_application">登入 App</string>
+    <string name="common_right_braces">)</string>
+    <string name="common_left_braces">(</string>
+    <string name="common_slade">/</string>
+    <!--<string name="common_unknown">\???</string>-->
+    <string name="common_dash">-</string>
+
+    <string name="post_txt">提交点评</string>
+    <string name="write_review_txt">写点评</string>
+    <string name="report_txt">删除</string>
+    <!--<string name="agree_report_txt">ยืนยันการแจ้งลบ(EN)</string>-->
+    <string name="cancel">取消</string>
+    <string name="agree_txt">确认</string>
+    <string name="update_now">更新</string>
+    <string name="report_reason_1">内容含不当信息</string>
+    <string name="report_reason_2">内容不正确</string>
+    <string name="report_reason_3">内容令人反感／不感兴趣</string>
+    <string name="report_reason_4">垃圾信息</string>
+    <string name="reason_del_txt">举报删除的原因</string>
+    <string name="detail_hint">评价…</string>
+    <!--<string name="topic_hint">ชื่อผู้ใช้งาน(EN)</string>-->
+    <string name="rating_click_txt">点击星星为商户打分</string>
+    <!--<string name="status_report_txt">สถานะการแจ้งลบ(EN)</string>-->
+    <string name="close_txt">关闭</string>
+    <string name="ok_txt">确认</string>
+    <string name="report_success">举报删除点评</string>
+    <string name="report_success_detail_txt">已收到您举报删除点评的申请。</string>
+    <string name="delete_success">删除完毕</string>
+    <string name="delete_success_detail_txt">点评已被永久删除</string>
+    <!--<string name="report_live_video_success_detail_txt">ในกรณีที่มีผู้ใช้งานแจ้งลบตั้งแต่ 10 คนขึ้นไป\nระบบจะทำการซ่อนโพสดังกล่าวไว้(EN)</string>-->
+    <string name="report_failure">它被用来报告</string>
+    <string name="report_failure_detail_txt">删除了 无法再删除它。</string>
+    <string name="version">版本</string>
+    <string name="condition">使用条款</string>
+    <!--<string name="fingerprint">เข้าระบบโดยลายนิ้วมือ(EN)</string>-->
+    <!--<string name="notification">การแจ้งเตือน(EN)</string>-->
+    <string name="change_lang">语言</string>
+    <string name="setting">设置</string>
+    <string name="change_password">更改密码</string>
+    <string name="promotion_and_flashsale">处理优惠活动及快闪销售</string>
+    <string name="store_manager">店舖管理</string>
+    <string name="coupons_discount">折扣优惠券</string>
+    <string name="store_manager_menu_pro_and_flash">处理优惠活动</string>
+    <string name="store_manager_menu_scan_qr">扫描二维码</string>
+    <string name="discount_history">优惠券领取历史记录</string>
+    <string name="setting_gps">设置</string>
+    <string name="condition_detail">ตั้ง PIN เรียบร้อยแล้ว ทุกครั้งก่อนจะเข้าใช้งาน มันก็จะถามหา PIN ก่อนเสมอ เพื่อความปลอดภัยอ่ะเนาะ … คำถามคือ ถ้าลืม PIN จะเกิดอะไรขึ้น? คำตอบคือ ถ้าลืม PIN หรือ ใส่ PIN ผิดไป 10 ครั้ง เราก็สามารถตั้ง PIN ใหม่ได้นะครับ แต่ว่าจะต้อง ทำการลบข้อมูลใน App ทั้งหมดออกก่อน (เพื่อความปลอดภัย ว่าจะไม่มีคนอื่นมาเข้าถึงข้อมูลของเรา) … ไม่ต้องห่วงนะ ข้อมูล ที่อยู่ใน App ก็คือ ข้อมูลเลขที่บัญชีต่างๆ ที่เราใส่ไว้เพื่ออำนวย ความสะดวกตัวเองเวลาจะป้อนข้อมูล และข้อมูลประวัติการทำ รายการของเรา ซึ่งปกติมันก็ถูกบันทึกลงในสมุดบัญชีอยู่แล้ว ครับ ข้อสังเกตคือ SCB ติ๊ด ติ๊ด นั้นใช้ทำธุรกรรมได้ 4 แบบครับ คือ ฝากเงินสด, ถอนเงินสด, โอนเงิน และ จ่ายบิล … ง่ายที่สุดเลย ก็คือ เลือกว่าจะทำธุรกรรมอะไร จากนั้นแค่ใส่เลขที่บัญชี กับ จำนวนเงินที่เราต้องการทำธุรกรรมที่สาขาลงไป จากนั้นกดปุ่ม “สร้าง QR Code” อย่างในกรณีนี้ ผมเลือกจะถอนเงินสดดูครับ(CN)</string>
+    <string name="china_lang">中文</string>
+    <string name="eng_lang">English</string>
+    <string name="thai_lang">ไทย</string>
+    <!--<string name="change_profile">ชื่อโปรไฟล์(EN)</string>-->
+    <!--<string name="change_id_card">เลขที่บัตรประจำตัวประชาชน(EN)</string>-->
+    <!--<string name="change_addr">ที่อยู่(EN)</string>-->
+    <!--<string name="change_phone">หมายเลขโทรศัพท์(EN)</string>-->
+    <!--<string name="account_purse">บัญชีที่ผูกกับกระเป๋าเงิน(EN)</string>-->
+    <!--<string name="user_type">ประเภทผู้ใช้งาน(EN)</string>-->
+    <!--<string name="change_pin">เปลี่ยนรหัส PIN(EN)</string>-->
+    <!--<string name="fb_txt">เฟสบุ๊ค(EN)</string>-->
+    <!--<string name="link">Link(EN)</string>-->
+    <!--<string name="profile_detail">ข้อมูลส่วนตัว(EN)</string>-->
+    <string name="save">保存</string>
+    <!--<string name="pin_old">รหัส PIN เดิม(EN)</string>-->
+    <!--<string name="pin_new">รหัส PIN ใหม่(EN)</string>-->
+    <!--<string name="pin_new_again">ยืนยันรหัส PIN ใหม่(EN)</string>-->
+    <!--<string name="interested">รายการที่สนใจ(EN)</string>-->
+    <string name="review_list">我的点评</string>
+    <string name="how_to_use">使用方法</string>
+    <!--<string name="contact">ติดต่อสอบถาม(EN)</string>-->
+    <string name="sign_out">登出</string>
+    <string name="get_started">开始</string>
+    <string name="get_started_detail">ตั้ง PIN เรียบร้อยแล้ว ทุกครั้งก่อนจะเข้าใช้งาน มันก็จะถามหา PIN ก่อนเสมอ เพื่อความปลอดภัยอ่ะเนาะ … คำถามคือ ถ้าลืม PIN จะเกิดอะไรขึ้น? คำตอบคือ ถ้าลืม PIN หรือ ใส่ PIN ผิดไป 10 ครั้ง เราก็สามารถตั้ง PIN ใหม่ได้นะครับ แต่ว่าจะต้อง ทำการลบข้อมูลใน App ทั้งหมดออกก่อน (เพื่อความปลอดภัย ว่าจะไม่มีคนอื่นมาเข้าถึงข้อมูลของเรา) … ไม่ต้องห่วงนะ ข้อมูล ที่อยู่ใน App ก็คือ ข้อมูลเลขที่บัญชีต่างๆ ที่เราใส่ไว้เพื่ออำนวย ความสะดวกตัวเองเวลาจะป้อนข้อมูล และข้อมูลประวัติการทำ รายการของเรา ซึ่งปกติมันก็ถูกบันทึกลงในสมุดบัญชีอยู่แล้ว ครับ ข้อสังเกตคือ SCB ติ๊ด ติ๊ด นั้นใช้ทำธุรกรรมได้ 4 แบบครับ คือ ฝากเงินสด, ถอนเงินสด, โอนเงิน และ จ่ายบิล … ง่ายที่สุดเลย(EN)</string>
+    <string name="select_item_to_delete">编辑</string>
+    <string name="edit_item">编辑</string>
+    <string name="delete_item">删除</string>
+    <string name="edit_review_item">编辑评论</string>
+    <string name="save_edit_review">保存</string>
+    <string name="delete_review">您确定吗？</string>
+    <string name="delete_detail_message">点评将永久删除，无法找回。</string>
+    <string name="search_detail_title">暂无结果</string>
+    <string name="search_detail_message">请指定商店名称</string>
+
+    <!--<string name="block_common">บล๊อก(EN)</string>-->
+    <string name="open_store">Open(CN)</string>
+    <string name="close_store">Close(CN)</string>
+
+    <string name="common_open_store">经营时间</string>
+    <string name="common_time_unit_am">AM</string>
+    <string name="common_time_unit_pm">PM</string>
+    <string name="type_something">搜寻…</string>
+    <!--<string name="promotion_store">โปรโมชั่นร้านค้า(EN)</string>-->
+    <!--<string name="common_hello">สวัสดี(EN)</string>-->
+    <string name="common_jj">RATTANAKOSIN</string>
+    <string name="common_guide">GUIDE</string>
+    <!--<string name="cosmetics_beauty">ความสวยความงาม(EN)</string>-->
+    <!--<string name="common_close_talad">Closed(EN)</string>-->
+    <!--<string name="common_open_talad">เปิดร้าน 08:30(EN)</string>-->
+    <!--<string name="test_profile">Boss Apichai(EN)</string>-->
+    <!--<string name="test_phone">+66 86 659 4371(EN)</string>-->
+    <string name="common_thai">ไทย</string>
+    <string name="common_version">1.0.0(CN)</string>
+    <string name="common_facebook">Facebook(CN)</string>
+    <!--<string name="common_line">Line(EN)</string>-->
+    <!--<string name="common_youtube">Youtube(EN)</string>-->
+    <!--<string name="common_twitter">Twitter(EN)</string>-->
+    <!--<string name="common_google">Google(EN)</string>-->
+    <!--<string name="common_ig">IG(EN)</string>-->
+    <!--<string name="test_profile_it_s_me">It\'s me(EN)</string>-->
+    <!--<string name="test_profile_86">86(EN)</string>-->
+    <!--<string name="test_profile_134">134(EN)</string>-->
+    <!--<string name="text_profile_31">31</string>-->
+    <!--<string name="text_temperature_c">\u2103</string>-->
+    <!--<string name="text_profile_34">สูงสุด 34 ํ(EN)</string>-->
+    <!--<string name="text_profile_28">ต่ำสุด 28 ํ(EN)</string>-->
+    <!--<string name="text_profile_weather">ท้องฟ้าปลอดโปร่ง(EN)</string>-->
+    <!--<string name="test_profile_boss_apichai">สวัสดี, Boss Apichai!(EN)</string>-->
+    <!--<string name="test_profile_phone">02-777-7777(EN)</string>-->
+    <string name="scb_pay">SCB PAY(CN)</string>
+    <string name="title_more_store">商店简介</string>
+    <string name="title_more_place">位置详情</string>
+    <string name="meter">米</string>
+    <string name="kilometer">公里</string>
+    <string name="toilet">厕所</string>
+    <string name="atm">ATM</string>
+
+    ///////Month///////
+    <string name="m1">JAN</string>
+    <string name="m2">FEB</string>
+    <string name="m3">MAR</string>
+    <string name="m4">APR</string>
+    <string name="m5">MAY</string>
+    <string name="m6">JUN</string>
+    <string name="m7">JUL</string>
+    <string name="m8">AUG</string>
+    <string name="m9">SEP</string>
+    <string name="m10">OCT</string>
+    <string name="m11">NOV</string>
+    <string name="m12">DEC</string>
+
+
+    <string name="about_easyjj">关于本 App</string>
+    <string name="swith_on">On</string>
+    <string name="swith_off">Off</string>
+    <!--<string name="file_provider">th.co.digio.mfec.fileprovider</string>-->
+    <!--<string name="share_using">share_merchant</string>-->
+    <string name="txt_agree_button">确认</string>
+    <string name="txt_close_button">关闭</string>
+    <string name="common_message_share">分享</string>
+    <string name="common_share_cancel">取消</string>
+    <string name="string_common_or">要么</string>
+    <string name="string_common_line">LINE</string>
+    <string name="string_common_share_facebook">Facebook</string>
+    <string name="string_common_share_twitter">Twitter</string>
+    <string name="string_common_share_messanger">Messenger</string>
+    <string name="string_common_share_copy">复制链接</string>
+    <string name="string_common_share_ig">Instagram</string>
+    <string name="common_string_copy_link">已拷贝链接</string>
+    <string name="detail_date_time">在</string>
+    <string name="hour_ago">一小时前</string>
+    <string name="hours_ago">小时前</string>
+    <string name="minute_ago">一分钟前</string>
+    <string name="minutes_ago">几分钟前</string>
+    <string name="yesterday_at">昨天 在</string>
+    <string name="just_now">现在</string>
+    <string name="common_string_not_login_title">您还没登入</string>
+    <string name="message_easy_jj_login">马上登入享受多样功能！写点评，用表情符号表达心情，把喜爱的商店存入你的最爱。</string>
+    <string name="common_string_login_facebook">Facebook 登入</string>
+    <string name="setting_more_list_review_string">我的点评</string>
+    <string name="market_jatujak">Rattanakosin</string>
+
+    <string name="market_general_information">Platinum Fashion Mall</string>
+    <string name="market_27_project">区域 Platinum</string>
+    <string name="market_clock_tower">加都加市场钟楼</string>
+    <string name="market_service">乍都乍周末市场的服务设施</string>
+    <string name="market_nearby_places">周边景点玩乐</string>
+    <string name="market_connection_points">到达方式</string>
+    <string name="market_music">关于加都加市场的歌</string>
+    <string name="market_announcements">加都加市场组织调理公告栏</string>
+    <string name="market_refer">参考资料</string>
+
+    <string name="string_logout_facebook">登出</string>
+    <string name="string_logout_facebook_detail">您确定要退出？</string>
+    <string name="store_close_merchant">ปิดร้านE</string>
+    <string name="store_open_merchant">เปิดร้านE</string>
+    <string name="guide_page_emo_title">Express emotion through emoticon</string>
+    <string name="guide_page_emo_message">Finding interested event and shop on Chatuchak map</string>
+    <string name="common_easy">Easy</string>
+    <string name="common_splash_jj">JJ</string>
+    <string name="jj_market_guide">JJ Market Guide</string>
+    <string name="powerby_digital_ventures">Powered by Digital Ventures</string>
+    <string name="select_language">语言</string>
+    <string name="promotion_details">特殊优惠</string>
+
+    <string name="cat1">餐饮</string>
+    <string name="cat2">商户</string>
+    <string name="cat3">商业区</string>
+    <string name="cat4">住宿</string>
+    <string name="cat5">景点</string>
+    <string name="cat6">学校和政府机构</string>
+    <string name="cat7">医疗保健机构</string>
+    <string name="cat8">公共设施</string>
+    <string name="cat9">服务</string>
+    <string name="cat10">银行</string>
+
+    <string name="cat13">อุปกรณ์อิเล็กทรอนิกส์</string>
+    <string name="cat11">หนังสือ</string>
+    <string name="cat14">ที่นอนและชุดเครื่องนอน</string>
+    <string name="cat12">เสื้อผ้าสตรี</string>
+    <string name="cat15">เครื่องสำอาง</string>
+
+
+    <string name="string_common_error">抱歉！</string>
+    <string name="error_message_facebook">登入 Facebook 时出现问题。</string>
+    <string name="error_message_service">抱歉！该服务无法连接。检查您的互联网连接，然后重试。</string>
+    <string name="string_search_result">搜寻结果</string>
+    <string name="string_common_out_of_range">对不起，您目前无法使用此功能。</string>
+    <string name="error_message_out_of_range">当你在加都市周末市场时，它会工作。</string>
+
+    <string name="num_select_review_delete_item">删除 %1$s 条点评</string>
+    <string name="common_string_no_internet">请检查你的网路</string>
+    <string name="facebook_login_dialog_header">您还没登入</string>
+    <string name="facebook_login_dialog_detail">马上登入享受多样功能！写点评，用表情符号表达心情，把喜爱的商店存入你的最爱。</string>
+    <string name="howto_search">如何发现和找到有兴趣的地点</string>
+    <!--<string name="url_howto_search">https://dev-shop.digitalventures.co.th/help/cn/index.html</string>-->
+    <string name="howto_into_map">如何通过地图功能查看位置</string>
+    <!--<string name="url_howto_into_map">https://dev-shop.digitalventures.co.th/help/cn/help2.html</string>-->
+    <string name="howto_emojicon">如何使用表情符号分享对商户的喜恶</string>
+    <!--<string name="url_howto_emojicon">https://dev-shop.digitalventures.co.th/help/cn/help3.html</string>-->
+    <string name="howto_review">推荐分享及处理分享</string>
+    <!--<string name="url_howto_review">https://dev-shop.digitalventures.co.th/help/cn/help4.html</string>-->
+    <!--<string name="howto_manage_shop">加入和管理【我的最爱】商店</string>-->
+    <string name="howto_manage_shop">创建行程</string>
+    howto_manage_shop
+    <!--<string name="url_howto_manage_shop">https://dev-shop.digitalventures.co.th/help/cn/help5.html</string>-->
+    <string name="howto_setting">应用设置</string>
+    <!--<string name="url_howto_setting">https://dev-shop.digitalventures.co.th/help/cn/help6.html</string>-->
+
+    <string name="alert_dialog_update">提醒</string>
+    <string name="alert_dialog_update_detail">您的应用程序可更新</string>
+    <string name="alert_dialog_update_now">现在更新</string>
+
+
+    <string name="main_search">搜寻</string>
+    <string name="home_search">查找商品</string>
+    <string name="home_search_need">关键词搜索</string>
+    <string name="home_search_ever">搜索记录</string>
+    <string name="home_search_need_detail">搜索关键词</string>
+    <string name="home_search_no_item">找不到相关信息</string>
+
+    <string name="text_project_detail">ด้วยร้านค้าที่มีมากกว่า 2,500 ร้านค้า แพลทินัมครบครันด้วยสินค้าที่ตอบสนองทุกความต้องการ ไม่ว่าจะเป็น เสื้อผ้าสตรี เสื้อผ้าบุรุษ เสื้อผ้าเด็ก รองเท้า กระเป๋า เครื่องประดับ ของฝากที่ระลึก หลากสไตล์ที่พร้อมตอบสนองไลฟ์สไตล์ทันสมัยทุกรูปแบบ แบ่งออกเป็นโครงการต่างๆ ดังนี้
+        \n\n
+        \n• ชั้นใต้ดิน (Ginza)\t\t\tสินค้าประเภทยีนส์ และเสื้อผ้าแฟชั่น
+        \n• ชั้น 1 (Soho)\t\t\t\tเสื้อผ้าแฟชั่นสตรี
+        \n• ชั้น 2 (Oxford)\t\t\tเสื้อผ้าแฟชั่นสตรี และเด็ก
+        \n• ชั้น 3 (Nathan)\t\t\tเสื้อผ้าแฟชั่นสตรี บุรุษ และชุดชั้นใน
+        \n• ชั้น 4 (Camden)\t\t\tเสื้อผ้าแฟชั่นสตรี กระเป๋า รองเท้า
+        \n• ชั้น 5 (Orchard)\t\t\tศูนย์รวมเครื่องหนัง กระเป๋า รองเท้า เครื่องประดับ และกิ๊ฟช็อป
+        \n• ชั้น 7-10\t\t\t\t\t\t\พื้นที่จอดรถและคาร์โก้ บริการรับ-ส่งสินค้า
+        \n• ชั้น 11\t\t\t\t\t\t\t\tคลังสินค้า และสำนักงาน เดอะแพลทินัม แฟชั่นมอลล์
+        \n• ชั้น 12-23\t\t\t\t\t\t\tคอนโดมิเนียมพักอาศัย
+    </string>
+    <string name="text_announcement_detail">- กรุณาอย่าให้เงินกับขอทาน\n- ไม่มีนโยบายให้ขายของแบกับดิน (ยกเว้นตลาดนัดจตุจักรกลางคืนวันศุกร์ซึ่งจัดที่บริเวณลานอเนกประสงค์หน้าธนาคารออมสิน และลานส่งเสริมการขายหน้าอาคารที่ทำการตลาดนัด)\n- อย่านำสินค้ามาวางขายล้ำริมฝาระบายน้ำ (เฉพาะผู้ค้าริมถนนภายในตลาดนัดจตุจักร)\n- สำหรับผู้ค้ารถเข็น หาบเร่ แผงลอย สามารถขายอาหารสินค้าได้จนถึง 9:00 น.</string>
+    <string name="text_clock_detail">乍都乍钟楼是市场的重要地标，位于市场的中心，是游客们逛市场的最佳起点，也是游客们相约见面的最佳地点，来到乍都乍周末市场的游客都会在这里留下照片，以此证明自己曾经来过乍都乍周末市场。钟楼始建于1987年，为了庆祝当年十二月五日泰国九世王的六十大寿而建。</string>
+    <string name="market_jatujak_01">拉达那哥欣岛（Koh Rattanakosin）是泰国最重要的旅游景点之一，它位于湄南河东部凸岸，以湄南河与最初作为护城河的运河为界，是体现城市的文明的生活品味和繁荣的艺术中心，它结合着现代与传统的文化风格,幷且代表着另一个城市的建筑文化。\n\n
+    街上有许多商店和米其林星极餐厅以及各种悠闲精致的咖啡店，来到这里，您可以轻易享受到独特的饮料和特有的氛围，您可以欣赏到每独一无二风格装饰的店。\n\n
+    Rattanakosin岛上还有一个现代化的寺庙和博物馆，当您在炎热的南洋气候中, 尽可往图书馆享受阅读的时光和舒适的室内温度,您更可以在图书馆内深刻了解暹罗在古往今来的故事, 幷神游游览湄南河风光。\n\n
+    当您享受完畅快购物的乐趣后, Rattanakosin岛的 Tha Maharaj 多设有按摩及水疗服务，让您在疲惫之余，可以得到充分的休息。夜晚开放的酒吧，您可以自由自在的享受岛上的迷人的夜色和浪漫的风情，岛上不乏一流的酒店和舒适的落脚旅馆，足以接待各方的游人，如果你亲身体验Rattanakosin 岛后，你一定会喜欢上这里独特的风情，和悠闲难忘的假日。</string>
+    <string name="market_jatujak_02">เปิดให้บริการทุกวัน\n
+วันจันทร์, อังคาร, พฤหัสบดีและศุกร์ เปิดให้บริการเวลา 09.00 – 20.00 น.\n
+และวันพุธ เสาร์และอาทิตย์ เปิดให้บริการเวลา 08.00 – 20.00 น. </string>
+    <string name="market_nearby">前往乍都乍周末市场的交通十分便利，乘坐BTS轻轨、MRT地铁及的士都可以轻松到达，附近也有很多值得游玩的景点及重要地点，例如： \n\n- 乍都乍公园\n- 火车市场\n- 乍都乍JJ Mall 购物商城\n- 泰国国家农贸市场\n- Central Lardprao\n- Union Mall\n- 曼谷儿童博物馆\n- 北部及东北部汽车站（Mo Chit 2）\n</string>
+    <string name="market_servive_detail">• ศูนย์อาหาร
+                                        \n• ธนาคารและบริการทางการเงินต่างๆ
+                                        \n• ห้องละหมาด
+                                        \n• ห้องน้ำ
+                                        \n• ห้องพยาบาล
+    </string>
+    <string name="common_error_string_title_gps">关闭定位</string>
+    <string name="common_string_error_gps_message">请打开GPS定位，以便获取当前位置</string>
+    <string name="main_search_string">ต้องการค้นหา</string>
+    <string name="string_regcomment_shop">推荐店铺</string>
+    <string name="string_star_shop">设施</string>
+    <string name="string_heart_shop">ร้านค้าที่น่าสนใจ</string>
+    <string name="string_poc_shop">PRODUCTS of Chatuchak</string>
+    <string name="string_category_shop">类别</string>
+    <string name="title_main">首页</string>
+
+    <!-- About Chatuchak-->
+    <string name="about_platinum">关于 Rattanakosin</string>
+    <string name="travel">交通方式</string>
+    <string name="travel_detail">末市场多种交通方式可供选择</string>
+    <string name="private_car">私家车</string>
+    <string name="private_car_detail">• ที่จอดรถ 1,500 คัน</string>
+    <string name="mass_rapid_transit">铁路公共交通</string>
+    <string name="morchit_bts_sukhumvit">BTS轻轨 Mo Chit 站 素坤逸线</string>
+    <string name="jatujak_mrt_chaloem_ratchamongkhon">MRT地铁 Chatuchak 站</string>
+    <string name="kamphaeng_phet_mrt_chaloem_ratchamongkhon">MRT地铁 Kamphaeng Phet 站</string>
+    <string name="jatujak_text">乍都乍公园站</string>
+    <string name="bus_stop">公共汽车</string>
+    <string name="normal_time">正常运营时间:</string>
+    <string name="text_shine">24小时运营:</string>
+    <string name="jatujak_door_01">乍都乍市场站</string>
+    <string name="string_no_promotion">当前还没有优惠</string>
+    <string name="string_no_fav_item">还没有感兴趣的店铺</string>
+    <string name="string_no_review">当前还没有评论记录</string>
+    <string name="no_review">当前还没有评论</string>
+    <string name="string_youtube_publish_on">发表于</string>
+
+    <!-- VDO Chanel -->
+    <string name="vdo_chanel">Video Channel</string>
+    <string name="vdo_chanel_name">Products of Chatuchak</string>
+    <string name="vdo_chanel_name_detail">1 view / 1 week ago</string>
+    <string name="video_chanel">Video\nChannel</string>
+    <string name="live_map">地图</string>
+    <string name="video_title_detail">พลิกโฉมจตุจักร สู่ยุคดิจิทัล</string>
+    <string name="string_error_no_result">沒有結果</string>
+    <string name="store_of_jj">ร้านค้าที่ร่วมโปรโมชัน\nกับ SCB</string>
+    <string name="fav_trip">ทริปที่น่าสนใจ</string>
+    <string name="spirit_of_jj">视屏</string>
+    <string name="shopping_planner">推荐产品</string>
+    <string name="live_map_btn">地图</string>
+
+
+    <!-- Manage -->
+    <string name="manage_promotion">快闪销售</string>
+    <string name="manage_flash_sale">快闪销售</string>
+    <string name="add_promotion">+ 添加优惠活动</string>
+    <string name="add_flash_sale">+ 添加闪卖</string>
+    <string name="manage_no_promotion">还没有优惠</string>
+    <string name="manage_no_flash_sale">没有闪卖详情</string>
+    <string name="publishing">กำลังเผยแพร่</string>
+    <string name="no_publish">ยังไม่เผยแพร่</string>
+    <string name="time_out">หมดเขต</string>
+    <string name="del_flashsale_manage">确认删除闪卖活动</string>
+    <string name="del_flashsale_manage_sub">如果确认该活动将消失</string>
+    <string name="del_promotion_manage">确认删除优惠活动</string>
+    <string name="del_promotion_manage_sub">如果确认该活动将消失</string>
+
+    <!--flash sale-->
+    <string name="text_flashsale">แฟลชเซลล์</string>
+    <string name="flashsale_tab_1">当前</string>
+    <string name="flashsale_tab_2">即将推出</string>
+    <string name="title_flash_sale">秒杀活动</string>
+    <string name="text_flashsale_detail">秒杀活动细节</string>
+    <string name="text_promotion_detail">特殊优惠</string>
+    <string name="add_flash_sale_title">添加闪卖</string>
+    <string name="edit_flash_sale">闪卖</string>
+    <string name="add_promotion_title">添加优惠活动</string>
+    <string name="hint_end_date">截止日期</string>
+    <string name="hint_start_date">起始日起</string>
+    <string name="notice">提示</string>
+    <string name="notice_flash_sale_detail">闪卖将根据所选时间创建（24小时内</string>
+    <string name="notice_promotion_detail">创建优惠活动只能选择日期</string>
+    <string name="add_detail_next">下一個</string>
+    <string name="add_detail_finish">提高</string>
+    <string name="add_flashsale_title_dialog">完成添加闪卖</string>
+    <string name="add_flashsale_detail_dialog">系统成功添加闪卖活动</string>
+    <string name="thai_language_wording">泰國</string>
+    <string name="english_language_wording">英文</string>
+    <string name="china_language_wording">中文</string>
+    <string name="must_add_promotion_content_detail">細節*</string>
+    <string name="add_promotion_content_detail">細節</string>
+    <string name="noti_to_add_input_in_th">* อย่างน้อยต้องระบุข้อมูลร้านค้าเป็นภาษาไทย</string>
+    <string name="add_promotion_title_dialog">完成添加优惠</string>
+    <string name="add_promotion_title_detail">系统成功添加优惠活动</string>
+    <string name="noti_to_add_date">请为您的秒杀或优惠活动设定日期。</string>
+    <string name="noti_to_add_image">请为您的秒杀或优惠活动添加图案。</string>
+    <string name="noti_edit_title_promotion">แก้ไขโปรโมชั่นสำเร็จ</string>
+    <string name="noti_edit_title_flashsale">แก้ไขแฟลซเซลล์สำเร็จ</string>
+    <string name="noti_edit_desc_promotion">ระบได้แก้ไขโปรโมชั่นเรียบร้อยแล้ว</string>
+    <string name="noti_edit_desc_flashsale">ระบบได้แก้ไขแฟลซเซลล์เรียบร้อยแล้ว</string>
+    <string name="add_promotion_name_detail_in_th">優惠名稱 (泰國)*</string>
+    <string name="add_promotion_name_detail_in_en">優惠名稱 (英文)</string>
+    <string name="add_flashsale_name_detail_in_th">快闪销售名稱 (泰國)*</string>
+    <string name="add_flashsale_name_detail_in_en">快闪销售名稱 (英文)</string>
+    <string name="add_promotion_name_detail_in_cn">優惠名稱 (中文)</string>
+    <string name="add_flashsale_name_detail_in_cn">快闪销售名稱 (中文)</string>
+
+
+    <!--Open Camera-->
+    <string name="open_camera">相机</string>
+    <string name="open_gallery">照片</string>
+    <string name="del_image_camera">删除</string>
+    <string name="common_string_time_left">剩下时间</string>
+    <string name="common_string_by">通过</string>
+
+    <!-- Login -->
+    <string name="login_title">登录</string>
+    <string name="login_title_email_or_phone"> อีเมล/หมายเลขโทรศัพท์</string>
+    <string name="login_title_email">手机登入</string>
+    <string name="login_to_reigster_title">注册</string>
+    <string name="login_placeholder_username">用户名</string>
+    <string name="login_placeholder_password">旧密码</string>
+    <string name="login_placeholder_password_new">新密码</string>
+    <string name="login_placeholder_password_new_confirm">重新输入六个字符密码</string>
+    <string name="login_failed_title">Oops</string>
+    <string name="login_failed_desc">无法登录</string>
+    <string name="login_failed_invalid_form">กรุณากรอกข้อมูลให้ถูกต้อง</string>
+    <string name="login_success_title">Success</string>
+    <string name="login_success_desc">เข้าสู่ระบบสำเร็จ</string>
+    <string name="login_or">หรือ</string>
+    <string name="login_skip">跳过</string>
+    <string name="common_save">保存</string>
+
+    <!-- Register -->
+    <string name="register_title">注册</string>
+    <string name="register_title_confirm">确认</string>
+    <string name="register_title_otp">确认 OTP</string>
+    <string name="register_placeholder_otp">OTP 6 digit</string>
+    <string name="register_placeholder_display_name">用户名</string>
+    <string name="register_placeholder_email">อีเมล์</string>
+    <string name="register_placeholder_email_or_password">手机号码</string>
+    <string name="register_placeholder_email_or_password_confirm">确认电话号码</string>
+    <string name="register_placeholder_email_confirm">ยืนยันอีเมล์</string>
+    <string name="register_placeholder_confirmpassword">确认密码</string>
+    <string name="register_cancel">取消</string>
+    <string name="register_submit">提交</string>
+    <string name="register_agree">I Agree to the </string>
+    <string name="register_term">使用须知</string>
+    <string name="register_success_line_1">注册成功</string>
+    <string name="register_success_line_2">ขอแสดงความยินดี ! คุณได้ยืนยันทำการลงทะเบียนเรียบร้อยแล้ว</string>
+    <string name="forget_password">忘记密码</string>
+
+    <!-- Term -->
+    <string name="term_title">使用须知</string>
+    <string name="term_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante blandit, pulvinar felis id, tempor ligula. Integer pellentesque sed diam quis suscipit. Morbi est nulla, eleifend et leo sit amet, tempus fringilla mi. Donec accumsan tristique ipsum id congue. Duis et volutpat nunc. Sed vitae vestibulum nisl. Nulla euismod purus volutpat ante finibus vestibulum. Pellentesque tempor nunc arcu, ac varius lacus iaculis sed. In mauris nulla, dignissim in mi ut, ultrices auctor lectus. Nunc vitae nulla ut lectus tempor venenatis.
+
+Quisque eu tempus neque. Suspendisse quam quam, commodo et hendrerit a, laoreet sed orci. Nam dignissim pulvinar facilisis. Aliquam lacinia eleifend massa, eget ultricies nunc posuere sit amet. Vivamus id leo purus. Vivamus turpis ex, aliquam eu nibh a, iaculis rutrum nisi. Vivamus rhoncus ac orci consequat interdum.
+
+Phasellus feugiat molestie magna a ullamcorper. Maecenas condimentum ultricies ornare. Nunc eget ultricies orci. Fusce congue, dui vel luctus tempus, massa erat convallis enim, sed egestas orci ex id justo. Ut commodo, neque ac bibendum vehicula, turpis leo porttitor leo, quis ornare odio mi id nunc. Praesent ornare, nunc at scelerisque commodo, lectus est porta lectus, in aliquam diam mauris et eros. Nam at varius lectus, nec convallis justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla malesuada erat ut tortor dictum, vel maximus purus placerat. Fusce in dolor purus. In aliquam ante ante, non porttitor massa condimentum ullamcorper. Morbi a dolor posuere, elementum eros vel, aliquam turpis. Vestibulum id lacus libero.
+
+Nunc id vestibulum nibh. Quisque at lacus quam. Integer iaculis elit tristique tincidunt mollis. Nulla aliquet laoreet sapien, tempus tempus mi facilisis eu. In dolor augue, sagittis eget sagittis id, efficitur et eros. In molestie elementum luctus. Pellentesque ut lobortis purus, at interdum magna. Etiam mattis lacus eu lectus semper iaculis. Phasellus pharetra, mauris in maximus aliquet, nunc libero semper felis, nec tristique urna lacus ac leo. Donec eu odio lorem. Ut laoreet posuere erat sit amet dictum.
+
+Proin auctor, ex id tempus blandit, ante sapien tempor diam, a dictum elit enim sed nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras sit amet condimentum tellus, a gravida diam. Aenean eget leo nisi. Nullam pellentesque bibendum nisl, vel accumsan diam aliquet nec. Phasellus pellentesque, leo et porta faucibus, libero nisi euismod mauris, a lobortis nisl arcu scelerisque lectus. Vivamus velit eros, commodo nec pretium eget, gravida vitae lacus. Sed accumsan ante condimentum massa blandit, in hendrerit mi molestie. Praesent eu velit eu ipsum mollis porttitor. Fusce varius elementum arcu, a aliquam nulla malesuada non. Aliquam mattis neque vel porttitor ultrices. Interdum et malesuada fames ac ante ipsum primis in faucibus.</string>
+
+    <!--Trip-->
+    <string name="trip_trab_1">我的行程</string>
+    <string name="trip_trab_2">精选行程</string>
+    <string name="trip_guide">请选择您要添加的地点。</string>
+    <string name="trip_store_in_trip">创建行程</string>
+    <string name="btn_text_back_to_trip">返回行程</string>
+    <string name="notify_sensor">打开Wi-Fi，更好的使用地图</string>
+    <string name="trip">行程</string>
+    <string name="trip_look_trip">查看推荐行程</string>
+    <string name="trip_no_facility_in_trip">您的行程中还没添加任何地点。</string>
+    <string name="need_to_store">必去的 %1$s 家店铺</string>
+    <string name="need_to_store_title">家店铺</string>
+    <string name="follow">关注</string>
+    <string name="trip_look_my_trip">我的行程</string>
+    <string name="following">已关注</string>
+    <string name="trip_no_trip">沒有推薦的旅行</string>
+    <string name="add_promotion_image">图片尺寸不超过2MB或长宽不超过414px *240px</string>
+    <string name="txt_info_promotion">优惠活动店家可选择优惠活动起止日期</string>
+    <string name="txt_info_flash_sale">店家可选择闪卖时长，每月不超过四次，每次不超过二十四小时。闪卖创建后会出现在 Live Map 页面</string>
+    <string name="register_password">密码</string>
+    <string name="del_my_hilight_trip">确认删除行程活动</string>
+    <string name="del_my_hilight_trip_sub">如果确认该活动将消失</string>
+    <string name="no_store_in_trip2">在您的行程中，添加更多地点。\n\"添加地点\"</string>
+
+
+    <!--map_info-->
+    <string name="good_to_know">应该知道的标志</string>
+    <string name="map_flash_sale">秒杀活动</string>
+    <string name="map_info_store">商户</string>
+    <string name="map_how_to_use">高效使用地图的建议</string>
+    <string name="map_info_internet">打开流量数据</string>
+    <string name="map_info_wifi">打开wifi</string>
+    <string name="map_info_bluetooth">关闭蓝牙</string>
+    <string name="map_info_powerbank">不使用充电宝</string>
+    <string name="flash_sale_count">可选择四 %1$s 闪卖清单</string>
+    <string name="see_shop_detail">查看</string>
+    <string name="flash_sale_see_shop">見商店</string>
+
+    <!-- Register Error -->
+    <string name="register_error_title">抱歉！</string>
+    <string name="register_error_display_null">Please insert your display name.</string>
+    <string name="register_error_phone_null">Please insert your mobile number.</string>
+    <string name="register_error_phone_invalid_format">Invalid mobile number.</string>
+    <string name="register_error_phone_invalid_confirm">Confirm Invalid mobile number.</string>
+    <string name="register_error_password_null">Please insert your password.</string>
+    <string name="register_error_password_invalid_confirm">密碼不匹配</string>
+    <string name="connection_lost_text">Connection Lost</string>
+    <string name="tap_retry">Tap Retry</string>
+    <string name="coupon_path">coupon_path</string>
+    <string name="register_error_email_invalid_format">Invalid email.</string>
+    <string name="otp_password">请输入您收到的六位数 OTP 一次性密码</string>
+    <string name="otp_new_password">即使申请新的OTP 一次性密码</string>
+    <string name="text_back_to_chang_password">ย้อนกลับ</string>
+    <string name="seting_new_password">建立新密码</string>
+    <string name="need_otp_password">取得 OTP</string>
+    <string name="number_otp">参考编号</string>
+    <string name="exp_five_minute">OTP 登入密码有效时间为五分钟</string>
+    <string name="more_mobile_number">手机号码</string>
+    <string name="changed_password_success">密码已更改</string>
+    <string name="changed_password_success_detail">您的密码已被更改</string>
+    <string name="new_password_six_number">创建六个字符密码</string>
+    <string name="time_throttle_otp">time_throttle_otp</string>
+    <string name="comfirm_new_password">重新输入六个字符密码</string>
+    <string name="register_faild">註冊失敗。</string>
+    <!--<string name="register_faild_detail">您所输入的电话号码已使用，请重新输入。</string>-->
+    <string name="txt_input_more_6_number">密码必须至少有6个字符</string>
+    <string name="participating_store">地图</string>
+    <string name="register_success_start_app">开始使用</string>
+    <string name="flash_sale_no_active">同时只限一个特惠秒杀活动。请取消已开启的秒杀活动或等秒杀活动截止再重新开启。</string>
+    <string name="cant_add_flash_sale">无法开启新秒杀活动。</string>
+
+    <string name="more_than_one_year">You can not add flash sales and promotion, no longer than 24 hours</string>
+    <string name="aleart_add_flash_sale_24_hr">闪卖将根据所选时间创建（24小时内）</string>
+    <string name="notify_flash_sale">通知</string>
+    <string name="only_one_flash_sale_be_active">同时只限一个特惠秒杀活动。请取消已开启的秒杀活动或等秒杀活动截止再重新开启。</string>
+    <string name="personal_information">請填寫信息</string>
+    <string name="date_of_birth">วัน/เดือน/ปีเกิด</string>
+    <string name="delete_search_history">清除历史记录</string>
+    <string name="start_shopping_coupon">เริ่มช้อปปิ้งกับเราด้วยคูปองส่วนลดมูลค่า 100 บาท</string>
+    <string name="use_coupon_in_application">สามารถกดใช้งานได้ที่ปุ่มคูปองภายในแอปพลิเคชัน</string>
+    <string name="coupon_price">100 บาท</string>
+    <string name="story_main">Story</string>
+    <string name="novotel_main">NOVOTEL</string>
+    <string name="food_shop">餐厅</string>
+    <string name="recommend_trip">RECOMMENDED\nTRIP</string>
+    <string name="txt_coupon_main">COUPON</string>
+    <string name="txt_sale_main">SALE</string>
+    <string name="txt_report_coupon">优惠卷</string>
+    <string name="select_reviews">选择</string>
+    <string name="position_sticky">锁定位置</string>
+    <string name="txt_position_sticky">放置的图钉</string>
+    <string name="click_to_pin">长按定位并可\n建立图钉</string>
+
+    <string name="remove_pin_marker_title">您确定吗？</string>
+    <string name="remove_pin_marker_detail">删除后将无法恢复。</string>
+    <string name="overlay_guide_pin">您的位置图钉将会储存到\n【我的行程】里</string>
+    <string name="create_pin">在地图上新增图\n钉即可设立见面点</string>
+    <string name="pin_position">图钉名称</string>
+    <string name="product_price">Baht</string>
+    <string name="txt_create_pin">您所建立的\n图钉位置</string>
+
+    <string name="unable_location_title">无法取得您的位置信息</string>
+    <string name="unable_location_detail">请开启定位服务，并允许 Platinum Guide 使用定位服务</string>
+    <string name="shop_map">地图</string>
+    <string name="train_subways">
+        • รถไฟฟ้าบีทีเอส สถานีชิดลม และเดินเชื่อมต่อทางเดินเท้าลอยฟ้า R-Walk ประมาณ 10 นาที
+         \n• รถไฟฟ้าบีทีเอส สถานีราชเทวี เดินประมาณ 15 นาที
+        \n• รถไฟฟ้าแอร์พอร์ต เรล ลิงก์ สถานีราชปรารภ เดินประมาณ 10 นาที
+    </string>
+    <string name="boat">เรือ</string>
+    <string name="boat_station">• ท่าเรือประตูน้ำ</string>
+    <string name="van_car">รถตู้</string>
+    <string name="van_station">• สายปิ่นเกล้า – ประตูน้ำ
+        \n• สายวัดสน – ประตูน้ำ
+        \n• พระราม 2 - ประตูน้ำ</string>
+    <string name="bus_number">• สาย 2, 11, 23, 38, 60, 62, 79, 93, 99, 113, 139, 140, 505, 511</string>
+    <string name="request_new_otp">您可以再次获取OTP密码</string>
+    <string name="cancel_pin">清楚图钉</string>
+    <string name="toast_out_app">退出此 app</string>
+    <string name="trip_trab_3">独家优惠</string>
+    <string name="add_place">添加地点</string>
+    <string name="tv_no_pin_list">您还没有图钉。</string>
+    <string name="string_hour">小时</string>
+    <string name="string_to">至</string>
+    <string name="no_list_flash_sale">没有秒杀活动</string>
+    <string name="no_palce_in_trip">您的行程中还没添加任何地点。</string>
+    <string name="string_contrac">Contact</string>
+    <string name="road">ถนน</string>
+    <string name="sub_district">แขวง</string>
+    <string name="district">เขต</string>
+    <string name="string_class">ห้อง</string>
+    <string name="building">อาคาร</string>
+    <string name="search_by_cate">分类搜寻</string>
+    <string name="buy_now">BUY NOW</string>
+    <string name="no_promotion_fou">目前没有优惠活动</string>
+    <string name="promotion_to_dat">今日优惠</string>
+    <string name="see_all">更多</string>
+    <string name="title_website">Website</string>
+    <string name="scheules_time">周末营业</string>
+    <string name="hr">小時</string>
+    <string name="howto_create_pin">如何添加新的图钉</string>
+    <string name="eat">吃喝</string>
+    <string name="tour">旅游</string>
+    <string name="shopping">购物</string>
+    <string name="other">其他</string>
+    <string name="navigate_map">方向</string>
+    <string name="buy_ticket">Buy Ticket</string>
+    <string name="coupon_type">coupon_type</string>
+</resources>
