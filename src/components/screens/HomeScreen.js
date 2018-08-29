@@ -9,7 +9,7 @@ class HomeScreen extends Component{
   render(){
     return (
         <View style={styles.container}>
-            <Text>5555</Text>
+            <Text>555</Text>
         </View>
     )
 }
