@@ -9,10 +9,10 @@ import {
     SafeAreaView,
     FlatList
 } from 'react-native'
-import { Card } from '../common/Card'
-import { CardSection } from '../common/CardSection'
+import { Card } from '../../common/Card'
+import { CardSection } from '../../common/CardSection'
 import { List, ListItem,SearchBar } from "react-native-elements";
-import { getUsers } from "../../api/index";
+import { getUsers } from "../../../api/index";
 
 
 const INITAL_STATE = {
@@ -21,7 +21,7 @@ const INITAL_STATE = {
 
 
 
-class HomeScreen extends Component{
+class SearchScreen extends Component{
 
     state = INITAL_STATE;
 
@@ -139,4 +139,4 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 })
-export default HomeScreen
+export default SearchScreen
