@@ -91,12 +91,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     buttonStyle: {
-<<<<<<< HEAD
-        fontSize: 18,
-=======
         //color: '#131313',
         //fontSize: 18,
->>>>>>> 473e30a5304e50eeba69204be8e9c03413a6d3ea
         backgroundColor: '#F8E21C',
         width: 100,
         height: 15,

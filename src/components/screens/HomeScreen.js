@@ -3,36 +3,16 @@ import {
     View,
     Text, 
     StyleSheet,
-<<<<<<< HEAD
     TouchableOpacity,
-    Image,
-    ImageBackground,
-    SafeAreaView,
-    FlatList
+    ScrollView,
+    Image
 } from 'react-native'
-import { Card } from '../common/Card'
-import { CardSection } from '../common/CardSection'
-import { List, ListItem,SearchBar } from 'react-native-elements';
-import { getUsers } from '../../api/index';
-import axios from 'axios';
-
-const  data = {
-    RqAppID:"1234",
-    UserLanguage:"EN",
-    MarketID:"3",
-    Version:"1.1.4"
-}
-    
-
-var token = 'Basic Z3Vlc3Q6cGFzc3dvcmQ=';
-
-var  headers = {
-    "Content-Type": 'application/json',
-    "Authorization": token
-=======
-    TouchableOpacity} from 'react-native'
-import {Button, Icon} from 'react-native-elements'
+import { Button  } from '../common/Button';
+import { Card  } from '../common/Card';
+import { CardSection } from '../common/CardSection';
+import { Icon} from 'react-native-elements'
 import axios from 'axios'
+import _ from 'lodash'
 
 var token = 'Basic Z3Vlc3Q6cGFzc3dvcmQ=';
 var  data = {
@@ -48,89 +28,140 @@ var config = {
             }
 };
 
+
+
 class HomeScreen extends Component{
+    state = { 
+        items: [],
+        datas: [],
+        Menu: []
+    };
+
     componentWillMount(){
-        //console.log(this.props.user);
-
-    }
-
-    onPressGetData(){
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
         data , config )
-        .then(( response ) => {
-            console.log(response.data);
-        })
+        .then(response => {this.setState({ items: response.data } ) })
         .catch((error) => {
             console.log('axios error:',error);
         });
     }
 
-  render(){
-    return (
-        <View style={styles.container}>
-            <Button 
-            title='BUTTON WITH RIGHT ICON'
-            onPress={()=> this.onPressGetData()}
-            />
-            <Text>555</Text>
-        </View>
-    )
->>>>>>> 473e30a5304e50eeba69204be8e9c03413a6d3ea
-}
+   
 
-class HomeScreen extends Component{
-
-    componentWillMount(){
-        //console.log(this.props.user);
-        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
-        {data: data} , {headers: headers} )
-        .then((response) => {
-            console.log(response.data);
+    renderData(){
+        let i=1
+        _.map((this.state.items.MenuList), (val)=>{
+            if(val.Sequence !== '1'){
+                this.state.Menu[i] = val;
+            }
+            _.each((val.SliderList), (why) => {
+                this.state.datas[i] = why;
+               // console.log(this.state.datas.Name)
+            })
+            i++
         })
-        .catch((error) => {
-            console.log('axios error:',error);
-        });
     }
-
- 
     
-    render() {
+
+    renderItem(){
+            console.log(this.state.Menu)
+            return this.state.Menu.map(items => 
+                <ItemDetail key={items.Name} items={items}/>
+            );
+    }
+
+    
+  render(){
+        {this.renderData()}
         return (
-         <View style={ styles.container}>
-            <Text style={ styles.textStyle}> ABC </Text>
-         </View>
+            <View>
+                
+                     {this.renderItem()}
+               
+            </View>
+            
         );
-      }
+    }
+
+
 }
+
 const styles = StyleSheet.create({
-    textStyle:{
-        color: '#a6a6a6',
-        fontSize : 16,
-        textDecorationLine: 'underline'
-       // color: '#FFFFFF'
+    headerContentStyle: {
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        paddingTop: 4,
     },
-    overlayContainer:{
-        flex:1,
-       // color: '#FFFFFF'
+    headerTextStyle: {
+        fontSize: 18
     },
-  container:{
-      flex: 1,
-      padding: 10,
-      marginTop: 15,
-      marginBottom: 15,
-      
-  },
-  stretch: {
-    flex:1,
-    width: 200,
-    height: 500
+    thumbnailStyle:{
+        height: 50,
+        width: 50
     },
-    header: {
-        color: '#FFFFFF',
-        fontSize: 25,
-        paddingLeft: 40,
-        paddingRight: 40,
-        fontWeight: 'bold',
+    thumbnaiContainerStyle: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginLeft: 10,
+        marginRight: 10
     },
+    imageStyle: {
+        height: 300,
+        width: '100%',
+        flex: 1
+    }
 })
+
+
+
+
+const ItemDetail = ({ items }) => {
+    const {
+        thumbnailStyle,
+        headerContentStyle,
+        thumbnaiContainerStyle,
+        headerTextStyle,
+        imageStyle
+    } = styles;
+ 
+    return (
+        <ScrollView>
+            <Card  style={{ flex: 4}}>
+                <CardSection  style={{ flex: 1}}>
+                <View style={headerContentStyle}>
+                    <Text style={headerTextStyle} >{items.Name}</Text>
+                    <Text style={headerTextStyle}> ดูทั้งหมด </Text>
+                </View>
+                </CardSection>
+                <CardSection >
+                    <ScrollView horizontal={true}
+                        showsHorizontalScrollIndicator={false} >
+                    <Image
+                        style={{width: 150, height: 100, borderRightWidth: 5}}
+                        source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+                        />
+                        <Image
+                        style={{width: 150, height: 100 ,borderRightWidth: 5}}
+                        source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+                        />
+                        <Image
+                        style={{width: 150, height: 100,borderRightWidth: 5}}
+                        source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+                        />
+                        <Image
+                        style={{width: 150, height: 100,borderRightWidth: 5}}
+                        source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+                        />
+                    </ScrollView>
+                </CardSection>
+            </Card>
+        </ScrollView>
+    )
+}
+
+
+
+
+
 export default HomeScreen
