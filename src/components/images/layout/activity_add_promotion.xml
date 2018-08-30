@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include layout="@layout/app_bar_main"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp">
+    <FrameLayout
+        android:id="@+id/ft_add_promotion_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:layout_above="@+id/btn_add_promotion"></FrameLayout>
+    <Button
+        style="@style/SimpleTextDBMomentX.Normal"
+        android:id="@+id/btn_add_promotion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        android:background="@color/colorPrimary"
+        android:text="@string/add_detail_next"
+        />
+    </RelativeLayout>
+    </LinearLayout>
+    <View
+        android:id="@+id/view_dialog_backgound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_opacity60"
+        android:visibility="gone"
+        />
+</RelativeLayout>

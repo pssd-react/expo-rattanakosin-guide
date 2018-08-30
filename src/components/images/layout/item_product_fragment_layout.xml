@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.github.chrisbanes.photoview.PhotoView
+            android:layout_marginTop="50dp"
+            android:id="@+id/snappy_image_viewer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/placeholder_product_item"
+            android:maxHeight="400dp"/>
+
+        <TextView
+            android:id="@+id/tv_product_name"
+            style="@style/SimpleTextDBMomentXBold.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_below="@id/snappy_image_viewer"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/tv_price_product"
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_below="@id/tv_product_name"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/white"
+            />
+
+        <TextView
+            android:id="@+id/tv_product_desc"
+            android:layout_below="@id/tv_price_product"
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+
+</android.support.v4.widget.NestedScrollView>

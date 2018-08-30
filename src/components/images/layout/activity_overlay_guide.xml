@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:id="@+id/ll_back_page"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+        android:id="@+id/iv_overlay_guide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:visibility="visible"
+        android:scaleType="fitXY"
+        android:src="@drawable/dialog_overlay_guide_th"
+
+        />
+
+</LinearLayout>

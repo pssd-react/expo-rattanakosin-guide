@@ -1,0 +1,77 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:focusableInTouchMode="true"
+              tools:context="com.dv.dj.talad.th.dv.dj.talad.module.productmerchant.reviewmerchant.writereview.WriteReviewFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:background="@color/color_tab_not_select"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <RatingBar
+            android:id="@+id/rating_star"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:numStars="5"
+            android:stepSize="1"
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:progressDrawable="@drawable/review_star_rating_bar"
+           />
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/rating_click_txt"
+            android:textColor="@color/gray_text"/>
+    </LinearLayout>
+
+
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:paddingLeft="10dp"-->
+        <!--android:paddingRight="1dp"-->
+        <!--&gt;-->
+
+        <!--<EditText-->
+            <!--android:id="@+id/et_user_report"-->
+            <!--style="@style/SimpleTextDBMomentX.Normal"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:hint="ชื่อผู้ใช้งาน"/>-->
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/tv_user_report"&ndash;&gt;-->
+            <!--&lt;!&ndash;style="@style/SimpleTextDBMomentX.Normal"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="20dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:hint="ชื่อผู้ใช้งาน"/>&ndash;&gt;-->
+    <!--</android.support.design.widget.TextInputLayout>-->
+
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="10dp"
+        android:paddingRight="1dp">
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/et_detail_report"
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/detail_hint"
+            android:textColorHighlight="@color/black"/>
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

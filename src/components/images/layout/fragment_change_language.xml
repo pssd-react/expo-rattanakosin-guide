@@ -1,0 +1,117 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:background="@color/white"
+             tools:context="com.dv.dj.talad.th.dv.dj.talad.module.more.setting.ChangeLanguageFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        >
+
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:id="@+id/ll_change_th"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="@string/thai_lang"/>
+
+            <ImageView
+                android:id="@+id/iv_lang_th"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="20dp"
+                android:src="@drawable/ic_correct_lang"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/grey2"
+            />
+
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:id="@+id/ll_change_eng"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="@string/eng_lang"/>
+
+            <ImageView
+                android:id="@+id/iv_lang_eng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="20dp"
+                android:src="@drawable/ic_correct_lang"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:background="@color/grey2"
+            />
+
+        <LinearLayout
+            android:paddingLeft="10dp"
+            android:id="@+id/ll_change_ch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center_vertical"
+                android:paddingLeft="5dp"
+                android:text="@string/china_lang"/>
+
+            <ImageView
+                android:id="@+id/iv_lang_ch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:padding="20dp"
+                android:src="@drawable/ic_correct_lang"
+                android:visibility="invisible"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:background="@color/grey2"
+            />
+    </LinearLayout>
+
+</LinearLayout>

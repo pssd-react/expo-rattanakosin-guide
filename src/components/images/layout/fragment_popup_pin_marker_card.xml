@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_gravity="bottom"
+             >
+
+
+    <RelativeLayout
+        android:id="@+id/rl_card_pin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <View
+            android:id="@+id/v_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5"/>
+
+        <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+            android:id="@+id/iv_cancel_add_pin"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/v_line"
+            android:adjustViewBounds="true"
+            android:paddingBottom="10dp"
+            android:paddingEnd="20dp"
+            android:paddingStart="10dp"
+            android:paddingTop="20dp"
+            android:src="@drawable/ic_close"/>
+
+        <LinearLayout
+            android:id="@+id/ll_list_store_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/iv_cancel_add_pin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="20dp"
+            android:paddingTop="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:paddingEnd="10dp"
+                android:paddingStart="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_marker_pin_red_small"
+                        />
+
+                    <EditText
+                        android:id="@+id/et_name_pin"
+                        style="@style/SimpleTextDBMomentXBold.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center_vertical"
+                        android:hint="@string/pin_position"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:maxLines="1"
+                        android:maxWidth="280dp"
+                        android:visibility="gone"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_name_pin"
+                        style="@style/SimpleTextDBMomentXBold.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="5dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:maxWidth="280dp"
+                        android:text=""/>
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:id="@+id/iv_name_pin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="10dp"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_edit_event_pin"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_title_detail"
+                    style="@style/SimpleTextDBMomentX.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:adjustViewBounds="true"
+                        android:src="@drawable/ic_merchant_location"/>
+
+                    <TextView
+                        android:id="@+id/tv_distance"
+                        style="@style/SimpleTextDBMomentX.Small"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="left"
+                        android:paddingLeft="3dp"
+                        android:textColor="@color/color_text"
+                        />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/fl_save_pin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_list_store_parent"
+                    android:layout_marginTop="5dp"
+                    android:visibility="gone"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/imv_save_pin"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="@color/button_color_grey"
+                        />
+
+                    <TextView
+                        android:id="@+id/tv_save"
+                        style="@style/SimpleTextDBMomentX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/save"
+                        android:textColor="@color/text_color_grey"
+                        android:textSize="24sp"/>
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/fl_unpin"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/ll_list_store_parent"
+                    android:layout_marginTop="5dp"
+                    >
+
+                    <ImageButton
+                        android:id="@+id/imv_unpin"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:background="#EAEAEA"
+                        />
+
+                    <TextView
+                        style="@style/SimpleTextDBMomentX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="@string/cancel_pin"
+                        android:textColor="@color/login_platinum"
+                        android:textSize="24sp"/>
+
+
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

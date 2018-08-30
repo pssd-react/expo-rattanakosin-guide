@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rg_selected_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/dev_server"
+                style="@style/SimpleTextDBMomentX.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:padding="10dp"
+                android:tag="@string/dev_env_url_path"
+                android:text="DEV"
+                android:textColor="@color/colorAccent"/>
+
+            <RadioButton
+                android:id="@+id/sit_server"
+                style="@style/SimpleTextDBMomentX.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="@string/sit_env_url_path"
+                android:text="SIT"
+                android:textColor="@color/colorAccent"/>
+
+            <RadioButton
+                android:id="@+id/uat_server"
+                style="@style/SimpleTextDBMomentX.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="@string/uat_env_url_path"
+                android:text="UAT"
+                android:textColor="@color/colorAccent"/>
+
+            <RadioButton
+                android:id="@+id/new_environment_server"
+                style="@style/SimpleTextDBMomentX.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="@string/new_env_url_path"
+                android:text="NGINXPLUS(NEW ENVIRONMENT)"
+                android:textColor="@color/colorAccent"/>
+
+            <RadioButton
+                android:id="@+id/prod_server"
+                style="@style/SimpleTextDBMomentX.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:tag="@string/prod_env_url_path"
+                android:text="PROD(FOR TEST)"
+                android:textColor="@color/colorAccent"/>
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/bt_selected_server_side"
+            style="@style/Base.Widget.AppCompat.Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select"/>
+    </LinearLayout>
+
+</RelativeLayout>
