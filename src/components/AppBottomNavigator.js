@@ -7,6 +7,8 @@ import HomeScreen from './screens/HomeScreen'
 import ProfileScreen from './screens/ProfileScreen'
 import FlashSaleScreen from './screens/FlashSaleScreen'
 import TripScreen from './screens/TripScreen'
+import {StoreGlobal} from './config/language_setup'
+import I18n from './config/i18n'
 
 const AppBottomNavigator = createMaterialTopTabNavigator(
     {
@@ -37,15 +39,15 @@ const AppBottomNavigator = createMaterialTopTabNavigator(
                 const { routeName } = navigation.state;
                 let labelName,textColor;
                 if (routeName === 'Home') {
-                labelName = 'Home';
+                    labelName = I18n.t('home');
                 } else if (routeName === 'Map') {
-                labelName = 'Live Map';
+                    labelName = I18n.t('livemap');
                 }else if (routeName === 'Flash_Sale') {
-                labelName = 'Flash Sale';
+                    labelName = I18n.t('flashsale');
                 } else if (routeName === 'Trip') {
-                labelName = 'Trip';
+                    labelName = I18n.t('trip');
                 } else if (routeName === 'Profile') {
-                labelName = 'Profile';
+                    labelName = I18n.t('prof');
                 }
 
                 if(focused){

@@ -3,9 +3,7 @@ import {
     View,
     Text, 
     StyleSheet} from 'react-native'
-
 export class Interesting extends Component{
-  
 
     render(){
         return (

@@ -11,100 +11,46 @@ import {
 } from 'react-native'
 import { Card } from '../common/Card'
 import { CardSection } from '../common/CardSection'
-import { List, ListItem,SearchBar } from "react-native-elements";
-import { getUsers } from "../../api/index";
+import { List, ListItem,SearchBar } from 'react-native-elements';
+import { getUsers } from '../../api/index';
+import axios from 'axios';
 
-
-const INITAL_STATE = {
-    text: 'คำที่เคยค้นหา'
+const  data = {
+    RqAppID:"1234",
+    UserLanguage:"EN",
+    MarketID:"3",
+    Version:"1.1.4"
 }
+    
 
+var token = 'Basic Z3Vlc3Q6cGFzc3dvcmQ=';
 
+var  headers = {
+    "Content-Type": 'application/json',
+    "Authorization": token
+}
 
 class HomeScreen extends Component{
 
-    state = INITAL_STATE;
-
-   
-    componentDidMount() {
-        this.makeRemoteRequest();
-    }
-    
-      makeRemoteRequest = () => {
-        this.setState({ loading: true });
-    
-        // getUsers()
-        //   .then(users => {
-        //     this.setState({
-        //       loading: false,
-        //       data: users
-        //     });
-        //   })
-        //   .catch(error => {
-        //     this.setState({ error, loading: false });
-        //   });
-      };
-
-    renderSeparator = () => {
-        return (
-          <View
-            style={{
-              height: 1,
-              width: "86%",
-              backgroundColor: "#CED0CE",
-              marginLeft: "14%"
-            }}
-          />
-        );
-      };
-
-    renderHeader () {
-        return <SearchBar
-            showLoading
-            placeholder='Search'
-            lightTheme
-            onChangeText={(value) => this.renderState(value)}
-        />;
-    };
-
-    renderFooter = () => {
-        if (!this.state.loading) return null;
-    
-        return (
-          <View
-            style={{
-              paddingVertical: 20,
-              borderColor: "#CED0CE"
-            }}
-          >
-            <ActivityIndicator animating size="large" />
-          </View>
-        );
-    };
-
-    renderState  ( text ) {
-        console.log( text );
-        this.setState({
-           text: 'คำที่ต้องการค้นหา'
+    componentWillMount(){
+        //console.log(this.props.user);
+        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
+        {data: data} , {headers: headers} )
+        .then((response) => {
+            console.log(response.data);
+        })
+        .catch((error) => {
+            console.log('axios error:',error);
         });
     }
 
+ 
     
-
     render() {
         return (
-          <SafeAreaView>
-            <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
-              <FlatList
-                ItemSeparatorComponent={this.renderSeparator}
-                ListHeaderComponent={this.renderHeader}
-                ListFooterComponent={this.renderFooter}
-              />
-            </List>
-            <View  style= {styles.container}>
-                <Text style= {styles.textStyle}> {this.state.text} </Text>
-            </View>
-          </SafeAreaView>
+         <View style={ styles.container}>
+            <Text style={ styles.textStyle}> ABC </Text>
+         </View>
         );
       }
 }
