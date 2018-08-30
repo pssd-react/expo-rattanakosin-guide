@@ -29,7 +29,7 @@ const styles = {
         paddingBottom: 10
     },
     buttonStyle:{
-        color: '#0E0D00',
+        //color: '#0E0D00',
         flex: 1,
         alignSelf: 'stretch',
         backgroundColor: '#fff',
