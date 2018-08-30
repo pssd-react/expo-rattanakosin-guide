@@ -13,6 +13,8 @@ import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Heade
 import firebase from 'firebase';
 import { SocialIcon } from 'react-native-elements'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import {createStackNavigator} from 'react-navigation'
+import {SettingScreen, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen} from './profilescreen'
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -37,6 +39,7 @@ const listViewData = [
 const BACKGROUND_URI = require('../images/drawable-hdpi/bg_more.webp/')
 
 class ProfileScreen extends Component{
+    static navigationOptions = {header: null}
     constructor(){
         super()
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
@@ -161,6 +164,19 @@ class ProfileScreen extends Component{
         }
     }
 
+    onRowPress(rowData){
+        if(rowData.id === '1'){
+            this.props.navigation.navigate('Setting');
+        }else if(rowData.id === '2'){
+            this.props.navigation.navigate('HowToUse');
+        }else if(rowData.id === '3'){
+            this.props.navigation.navigate('AboutRattanakosin');
+        }else if(rowData.id === '4'){
+            this.props.navigation.navigate('AboutApp');
+        }else if(rowData.id === '5'){
+        }
+    }
+
     render(){
         return (
             <View>
@@ -175,7 +191,7 @@ class ProfileScreen extends Component{
             renderRow={(rowData) => {
             
             return (
-            <TouchableOpacity >
+            <TouchableOpacity onPress={()=>this.onRowPress(rowData)}>
                 <View style={styles.listViewContainer}>
                     <View style={styles.iconContainerStyle}>
                     <Image style={{width:22, height:22}}
@@ -247,4 +263,23 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ProfileScreen
+const ProfileMenu = createStackNavigator({
+    Main : {
+        screen : ProfileScreen
+    },
+    Setting : {
+        screen : SettingScreen
+    },
+    HowToUse : {
+        screen : HowToUseScreen
+    },
+    AboutRattanakosin : {
+        screen : AboutRattanakosinScreen
+    },
+    AboutApp : {
+        screen : AboutAppScreen
+    }
+})
+
+
+export default ProfileMenu

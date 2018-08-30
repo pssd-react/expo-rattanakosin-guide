@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createMaterialTopTabNavigator } from 'react-navigation'
 import MapScreen from './screens/MapScreen'
 import HomeScreen from './screens/HomeScreen'
-import ProfileScreen from './screens/ProfileScreen'
+import ProfileMenu from './screens/ProfileScreen'
 import FlashSaleScreen from './screens/FlashSaleScreen'
 import TripScreen from './screens/TripScreen'
 import {StoreGlobal} from './config/language_setup'
@@ -16,7 +16,7 @@ const AppBottomNavigator = createMaterialTopTabNavigator(
         Map:{screen: MapScreen},
         Flash_Sale:{screen: FlashSaleScreen},
         Trip: {screen: TripScreen},
-        Profile : {screen: ProfileScreen}
+        Profile : {screen: ProfileMenu}
     },{ 
         navigationOptions: ({navigation}) =>({
             tabBarIcon: ({ focused, tintColor }) => {
