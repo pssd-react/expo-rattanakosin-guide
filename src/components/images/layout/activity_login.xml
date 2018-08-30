@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/iv_hide_keyboard"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_welcome"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="10"
+        >
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:weightSum="100"
+                >
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    >
+                </View>
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX.Mega"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/login_title"
+                    />
+
+
+                <android.support.design.widget.TextInputLayout
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:textColorHighlight="@color/text_login"
+                    android:textColorHint="@color/gray_color_add_photo_view"
+                    app:hintTextAppearance="@style/LoginThemePlatinum"
+
+                    >
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/edittext_login_username"
+                        style="@style/SimpleTextDBMomentX.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:backgroundTint="@color/text_notify"
+                        android:hint="@string/register_placeholder_email_or_password"
+                        android:imeOptions="actionNext"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/black"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHighlight="@color/text_login"
+                    app:hintTextAppearance="@style/LoginThemePlatinum"
+                    android:textColorHint="@color/gray_color_add_photo_view"
+                    >
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/edittext_login_password"
+                        style="@style/SimpleTextDBMomentX.Medium"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:backgroundTint="@color/text_notify"
+                        android:hint="@string/register_password"
+                        android:imeOptions="actionDone"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="@android:color/black"
+                        android:textColorHighlight="@color/black"
+                        android:textColorHint="@color/black"
+                        />
+
+                </android.support.design.widget.TextInputLayout>
+
+
+                <Button
+                    style="@style/SimpleTextDBMomentX.Medium"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:background="@drawable/button_border_login_orange_state"
+                    android:onClick="actionLogin"
+                    android:text="@string/login_title"
+                    android:textColor="@android:color/black"
+                    />
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="15dp"
+                    android:freezesText="true"
+                    android:gravity="center"
+                    android:text="@string/string_common_or"
+                    android:textColor="@color/text_notify"
+                    />
+
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    >
+
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_facebook_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/button_border_facebook_state"
+                        android:onClick="actionLoginWithFacebook"
+                        android:paddingBottom="8dp"
+                        android:paddingTop="8dp"
+                        >
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:src="@drawable/ic_facebook_login"
+                                />
+
+                            <TextView
+                                style="@style/SimpleTextDBMomentX.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="5dp"
+                                android:freezesText="true"
+                                android:gravity="center"
+                                android:text="@string/common_string_login_facebook"
+                                android:textColor="@color/white"
+                                />
+                        </LinearLayout>
+
+
+                    </RelativeLayout>
+
+
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/tv_skip"
+                    style="@style/SimpleTextDBMomentX.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:onClick="actionSkip"
+                    android:padding="5dp"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/login_skip"
+                    android:textColor="@color/login_platinum"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/relative_login_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        >
+
+        <Button
+            style="@style/SimpleTextDBMomentX.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|right"
+            android:onClick="actionGoToRegister"
+            android:text="@string/login_to_reigster_title"
+            android:textColor="@color/login_platinum"
+            />
+
+        <Button
+            android:id="@+id/btn_forgot_password"
+            style="@style/SimpleTextDBMomentX.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical|left"
+            android:onClick="actionForgotPassword"
+            android:text="@string/forget_password"
+            android:textColor="@color/login_platinum"
+
+            />
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:orientation="vertical">
+
+    <fragment
+        android:id="@+id/mapFavoriteTripView"
+        class="th.co.DigitalVentures.RattanakosinGuide.utility.MySupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        android:orientation="vertical">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTintMode="src_over"
+            android:scaleType="center"
+            android:src="@drawable/my_location_button"
+            android:tag="1"
+            app:backgroundTint="@color/white"
+            app:borderWidth="0dp"
+            />
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_list_shop_detail"
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="14dp"
+        android:background="@color/black_opacity60"
+        android:visibility="gone">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/indicator_list_product"
+            android:layout_marginTop="15dp"
+            />
+
+        <com.viewpagerindicator.CirclePageIndicator
+            android:id="@+id/indicator_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/white"
+            android:padding="5dp"
+            android:visibility="gone"
+            app:fillColor="#ffffff"
+            app:pageColor="#c4c4c4"
+            app:radius="2dp"
+            app:strokeColor="#c4c4c4"
+            app:strokeWidth="1dp"
+            />
+
+
+    </RelativeLayout>
+</FrameLayout>

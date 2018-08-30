@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <FrameLayout
+        android:id="@+id/fl_layout_marchant"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <View
+        android:id="@+id/view_dialog_backgound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_opacity60"
+        android:visibility="gone"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_merchant_payment_panel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:orientation="vertical"
+        android:visibility="invisible">
+
+        <ImageView
+            android:id="@+id/imv_merchant_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-80dp"
+            android:src="@drawable/ic_payment_tab"
+            />
+
+        <ImageView
+            android:id="@+id/imv_merchant_wallet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wallet_tab"/>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_share_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+
+        <FrameLayout
+            android:id="@+id/fl_backgroud_black"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black_opacity10"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+
+            <TextView
+                style="@style/SimpleTextDBMomentX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="@string/common_message_share"
+                android:textSize="24sp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rl_list_share_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:scrollbars="horizontal"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="5dp"
+                android:background="@color/lightGrey"
+                />
+
+            <Button
+                android:id="@+id/bt_cancel_share"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:text="@string/common_share_cancel"
+                android:textAllCaps="false"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

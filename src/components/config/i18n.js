@@ -1,4 +1,4 @@
-import I18n from 'react-native-i18n'
+import I18n from 'ex-react-native-i18n'
 import th from './languages/th'
 import en from './languages/en'
 

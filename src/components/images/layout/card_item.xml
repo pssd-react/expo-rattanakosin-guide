@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#E5E5E5"/>
+
+    <com.daimajia.swipe.SwipeLayout
+        android:id="@+id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        >
+
+
+        <LinearLayout
+            android:id="@+id/ll_del_fv"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_fv_red"
+            android:gravity="center"
+            android:orientation="vertical"
+            >
+
+            <ImageView
+                android:id="@+id/img_un_fv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fv_slid"
+                />
+
+            <TextView
+                android:id="@+id/tv_un_fv"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/del_favorite"
+                android:textColor="@color/white"
+                />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/llDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            >
+
+            <RelativeLayout
+                android:id="@+id/ll_list_store_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imv_logo"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/iv_delete"
+                        android:layout_toRightOf="@+id/imv_logo"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        >
+
+                        <TextView
+                            android:id="@+id/tv_store_name"
+                            style="@style/SimpleTextDBMomentXBold.Medium"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="20dp"
+                            android:textStyle="bold"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_category_shop_detail"/>
+
+                            <TextView
+                                android:id="@+id/tv_store_category"
+                                style="@style/SimpleTextDBMomentX.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/color_text"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_star_shop_detail"/>
+
+                            <TextView
+                                android:id="@+id/tv_store_rating"
+                                style="@style/SimpleTextDBMomentX.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/duskYellow"/>
+
+
+                            <RatingBar
+                                android:id="@+id/rb_shop_rating"
+                                android:layout_width="wrap_content"
+                                android:layout_height="12dp"
+                                android:layout_marginLeft="5dp"
+                                android:isIndicator="true"
+                                android:numStars="5"
+                                android:progressDrawable="@drawable/star_rating_bar"
+                                />
+
+                            <!--<ImageView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="20dp"-->
+                            <!--android:src="@drawable/ic_distance_shop_detail"/>-->
+
+                            <!--<TextView-->
+                            <!--android:id="@+id/tv_store_distance"-->
+                            <!--style="@style/SimpleTextDBMomentX.Small"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="5dp"-->
+                            <!--android:textColor="@color/color_text"-->
+                            <!--/>-->
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_location_shop_detail"/>
+
+                            <TextView
+                                android:id="@+id/tv_store_location"
+                                style="@style/SimpleTextDBMomentX.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/color_text"/>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_distance_shop_detail"/>
+
+                            <TextView
+                                android:id="@+id/tv_store_distance"
+                                style="@style/SimpleTextDBMomentX.Small"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/color_text"
+                                />
+
+                            <TextView
+                                android:id="@+id/tv_store_time"
+                                style="@style/SimpleTextDBMomentX.Small"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:textColor="@color/color_text"
+                                android:visibility="gone"/>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                android:id="@+id/iv_unfollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:adjustViewBounds="true"
+                android:paddingBottom="20dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="20dp"
+                android:src="@drawable/ic_other_review"/>
+        </FrameLayout>
+
+    </com.daimajia.swipe.SwipeLayout>
+</LinearLayout>

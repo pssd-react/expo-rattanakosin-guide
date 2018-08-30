@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ll_bg_head"
+    android:background="@color/white"
+    android:orientation="vertical"
+    >
+
+    <include
+        android:id="@+id/in_clud_eapp_bar_layout"
+        layout="@layout/app_bar_main"
+        android:visibility="visible"
+        />
+
+
+    <FrameLayout
+        android:id="@+id/fl_change_lang"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+    </FrameLayout>
+    <!--<th.co.scb.PlatinumGuide.utility.NonSwipeableViewPager-->
+    <!--android:id="@+id/vp_edit_setting"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"/>-->
+</LinearLayout>

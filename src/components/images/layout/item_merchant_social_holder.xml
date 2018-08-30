@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightGrey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical"
+        android:padding="12dp">
+
+        <TextView
+            android:id="@+id/tv_title_website"
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/title_website"/>
+
+
+        <TextView
+            android:id="@+id/tv_link_website"
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:lines="1"
+            android:layout_marginBottom="8dp"
+            android:textColor="@color/violet"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/ll_call_shop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_phone"/>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_item_merchant_phone"
+                    style="@style/SimpleTextDBMomentX.Normal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:textColor="@color/violet"/>
+
+                <View
+                    android:id="@+id/under_line_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="2dp"
+                    android:layout_alignEnd="@id/tv_item_merchant_phone"
+                    android:layout_alignStart="@id/tv_item_merchant_phone"
+                    android:layout_below="@id/tv_item_merchant_phone"
+                    android:background="@color/violet"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fb"/>
+
+            <TextView
+                android:id="@+id/tvFacebook"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llLine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_social"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_line"/>
+
+            <TextView
+                android:id="@+id/tvLine"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llYoutube"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_social"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_yt"/>
+
+            <TextView
+                android:id="@+id/tvYoutube"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llTwitter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_social"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_tt"/>
+
+            <TextView
+                android:id="@+id/tvTwitter"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llGoogle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_social"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_google"/>
+
+            <TextView
+                android:id="@+id/tvGoogle"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/llIG"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_social"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_ig"/>
+
+            <TextView
+                android:id="@+id/tvIG"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginBottom="@dimen/margin"
+        android:background="@color/lightGrey"/>
+
+</LinearLayout>

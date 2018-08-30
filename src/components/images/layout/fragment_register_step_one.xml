@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/register_order"
+        android:paddingBottom="15dp"
+        android:paddingTop="15dp">
+
+        <TextView
+            style="@style/SimpleTextDBMomentX.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="@string/personal_information"
+            android:textColor="@android:color/black"
+            />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_below="@id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical"
+        >
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            app:colorAccent="@color/black"
+            app:colorControlActivated="@color/black"
+            app:colorControlHighlight="@color/black"
+            app:hintTextAppearance="@style/LoginThemePlatinum"
+
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_display_name"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/text_notify"
+                android:hint="@string/register_placeholder_display_name"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHighlight="@color/black"
+                android:textColorHint="@color/black"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/gray_color_add_photo_view"
+            app:colorAccent="@color/black"
+            app:colorControlActivated="@color/black"
+            app:colorControlHighlight="@color/black"
+            app:hintTextAppearance="@style/LoginThemePlatinum"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_mobile"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/text_notify"
+                android:hint="@string/register_placeholder_email_or_password"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHighlight="@android:color/black"
+                android:textColorHint="@color/black"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/gray_color_add_photo_view"
+            app:colorAccent="@color/black"
+            app:colorControlActivated="@color/black"
+            app:colorControlHighlight="@color/black"
+            app:hintTextAppearance="@style/LoginThemePlatinum"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_password"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/text_notify"
+                android:hint="@string/register_password"
+                android:imeOptions="actionNext"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHighlight="@android:color/black"
+                android:textColorHint="@color/black"
+
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/gray_color_add_photo_view"
+            app:colorAccent="@color/black"
+            app:colorControlActivated="@color/black"
+            app:colorControlHighlight="@color/black"
+            app:hintTextAppearance="@style/LoginThemePlatinum"
+            >
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/et_confirm_password"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="@color/text_notify"
+                android:hint="@string/register_placeholder_confirmpassword"
+                android:imeOptions="actionDone"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="@android:color/black"
+                android:textColorHighlight="@android:color/black"
+                android:textColorHint="@color/black"
+                />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_term_of_use"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="actionGoToTerm"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                style="@style/SimpleTextDBMomentX.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/register_agree"
+                android:textColor="@color/login_platinum"
+                />
+
+            <TextView
+                android:id="@+id/textview_register_term"
+                style="@style/SimpleTextDBMomentX.Mini"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="2dp"
+                android:text="@string/register_term"
+                android:textColor="@color/login_platinum"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_next"
+        style="@style/SimpleTextDBMomentX.Normal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="30dp"
+        android:background="@color/color_btn_register"
+        android:text="@string/add_detail_next"
+        android:textColor="@color/gray_color_add_photo_view"
+        />
+
+</RelativeLayout>

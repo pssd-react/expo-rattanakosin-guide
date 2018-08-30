@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        >
+
+        <android.support.design.widget.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+            <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                android:id="@+id/img_trip"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_info_map"
+                />
+            </FrameLayout>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/iv_back_manage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:paddingRight="10dp"
+                        android:src="@drawable/ic_arrow_back_white"/>
+
+                    <TextView
+                        style="@style/SimpleTextDBMomentX.Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="@string/promotion_and_flashsale"
+                        android:textColor="@color/white"/>
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        >
+
+                        <FrameLayout
+                            android:id="@+id/fm_bg_info"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/circle_info_manage">
+
+
+                            <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                                android:id="@+id/ic_info_promotion"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:adjustViewBounds="true"
+                                android:padding="8dp"
+                                android:src="@drawable/button_state_info_manage_promotion"/>
+
+                        </FrameLayout>
+
+                    </RelativeLayout>
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.CollapsingToolbarLayout>
+    </android.support.design.widget.AppBarLayout>
+
+    <FrameLayout
+        android:id="@+id/vp_more_manage_pro_flash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/app_bar_layout"
+        />
+
+
+    <View
+        android:id="@+id/bg_info_promotion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_info_map"
+        />
+
+    <RelativeLayout
+        android:id="@+id/ll_info_promotion_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_bar_layout"
+        android:layout_centerHorizontal="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/bg_info_promotion_detail"
+        android:clickable="true"
+        android:gravity="center"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+        <LinearLayout
+            android:id="@+id/ll_info_icon_map"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                    android:id="@+id/iv_info_promotion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="85dp"
+                    android:layout_centerHorizontal="true"
+                    android:adjustViewBounds="true"
+                    android:padding="5dp"
+                    android:src="@drawable/ic_info_promiton_manage"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_line"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/manage_promotion"
+                    android:textColor="@color/login_platinum"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_line"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="left"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_info_promotion"
+                    android:textColor="#4A4A4A"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+            android:id="@+id/iv_line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_info_icon_map"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/line"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_info_icon_flashsale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/iv_line"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:weightSum="4">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center">
+
+                <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                    android:id="@+id/iv_info_flashsale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="85dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="15dp"
+                    android:adjustViewBounds="true"
+                    android:padding="3dp"
+                    android:src="@drawable/ic_info_flashsale_manage"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_line"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="@string/manage_flash_sale"
+                    android:textColor="@color/login_platinum"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_line"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="left"
+                    android:paddingBottom="10dp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/txt_info_flash_sale"
+                    android:textColor="#4A4A4A"
+                    android:textSize="20sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+    <View
+        android:id="@+id/view_dialog_backgound"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_opacity60"
+        android:visibility="gone"
+        />
+
+</RelativeLayout>

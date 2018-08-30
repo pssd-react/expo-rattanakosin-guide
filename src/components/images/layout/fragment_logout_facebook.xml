@@ -1,0 +1,255 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/dialog_background_inset"
+        >
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="350dp"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_dialog_no_resource">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/ll_close_parent"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:src="@drawable/ic_logout_jj"/>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_title_detail_message"
+                        style="@style/SimpleTextDBMomentX.Big"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="10dp"
+                        android:freezesText="true"
+                        android:text="@string/string_logout_facebook"/>
+
+                    <TextView
+                        android:id="@+id/tv_detail_message"
+                        style="@style/SimpleTextDBMomentX.Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="8dp"
+                        android:freezesText="true"
+                        android:text="@string/string_logout_facebook_detail"/>
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_close_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/lightGrey"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    >
+
+                    <Button
+                        android:id="@+id/button_cancel"
+                        style="@style/SimpleTextDBMomentX.Normal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.995"
+                        android:background="@android:color/transparent"
+                        android:text="@string/cancel"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"/>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.01"
+                        android:background="@color/lightGrey"
+                        />
+
+                    <Button
+                        android:id="@+id/button_agree"
+                        style="@style/SimpleTextDBMomentX.Normal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.995"
+                        android:background="@android:color/transparent"
+                        android:text="@string/agree_txt"
+                        android:textAllCaps="false"
+                        android:textColor="@color/black"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@color/white"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="10">-->
+
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="2"-->
+        <!--android:background="@color/cardview_dark_background">-->
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="right">-->
+
+        <!--<ImageView-->
+        <!--android:id="@+id/ic_close_dialog"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:adjustViewBounds="true"-->
+        <!--android:src="@drawable/ic_close"-->
+        <!--android:layout_margin="10dp"/>-->
+        <!--</FrameLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="bottom"-->
+        <!--android:layout_margin="15dp"-->
+        <!--android:orientation="vertical">-->
+
+        <!--<TextView-->
+        <!--style="@style/SimpleTextDBMomentXBold.Medium"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/report_txt"-->
+        <!--android:textColor="@color/white"/>-->
+
+        <!--<TextView-->
+        <!--style="@style/SimpleTextDBMomentXBold.Normal"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="@string/agree_report_txt"-->
+        <!--android:textColor="@color/gray_text"/>-->
+        <!--</LinearLayout>-->
+        <!--</FrameLayout>-->
+
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="7"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--&gt;-->
+        <!--<ImageView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/ic_delete_black"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:layout_margin="20dp"/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/tv_title_detail_message"-->
+        <!--style="@style/SimpleTextDBMomentXBold.Medium"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="left"-->
+        <!--android:layout_marginTop="20dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:textColor="@color/black"-->
+        <!--/>-->
+        <!--<TextView-->
+        <!--android:id="@+id/tv_detail_message"-->
+        <!--style="@style/SimpleTextDBMomentX.Normal"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="left"-->
+        <!--android:layout_marginTop="10dp"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:textColor="@color/black"/>-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_weight="1"-->
+        <!--android:layout_marginBottom="20dp"-->
+        <!--android:weightSum="1">-->
+
+        <!--<Button-->
+        <!--android:id="@+id/button_cancel"-->
+        <!--style="@style/SimpleTextDBMomentX.Small"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:background="@color/color_tab_not_select"-->
+        <!--android:layout_marginLeft="20dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:text="@string/cancel"-->
+        <!--android:textColor="@color/white"/>-->
+
+        <!--<Button-->
+        <!--android:id="@+id/button_agree"-->
+        <!--style="@style/SimpleTextDBMomentX.Small"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:background="@color/violet"-->
+        <!--android:text="@string/agree_txt"-->
+        <!--android:layout_marginLeft="5dp"-->
+        <!--android:layout_marginRight="20dp"-->
+        <!--android:textColor="@color/white"/>-->
+        <!--</LinearLayout>-->
+        <!--</LinearLayout>-->
+    </RelativeLayout>
+</FrameLayout>

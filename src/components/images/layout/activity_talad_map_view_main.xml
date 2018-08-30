@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coo_main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="th.co.DigitalVentures.RattanakosinGuide.module.main.TaladMapViewMainActivity">
+
+    <FrameLayout
+        android:id="@+id/fl_all"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <th.co.DigitalVentures.RattanakosinGuide.utility.NonSwipeableViewPager
+                android:id="@+id/main_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/card_tab_layout"/>
+
+
+            <FrameLayout
+                android:id="@+id/vp_from_marker"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_above="@+id/card_tab_layout"
+                android:layout_gravity="bottom"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                >
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="14dp"
+                    android:background="@color/black_opacity60">
+
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/pager_list_not_product"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        />
+                </RelativeLayout>
+            </FrameLayout>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                app:cardElevation="10dp">
+
+                <android.support.design.widget.TabLayout
+                    android:id="@+id/tab_layout_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_gravity="bottom"
+                    android:background="@drawable/inactive_menu_bg"
+                    android:minHeight="?attr/actionBarSize"
+                    app:tabMode="fixed"
+                    app:tabPaddingEnd="-1dp"
+                    app:tabPaddingStart="-1dp"
+                    />
+            </android.support.v7.widget.CardView>
+
+        </RelativeLayout>
+
+
+    </FrameLayout>
+
+
+    <com.github.mmin18.widget.RealtimeBlurView
+        android:id="@+id/view_promotion"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:realtimeBlurRadius="20dp"
+        app:realtimeOverlayColor="@color/black_opacity60"/>
+
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_promotion"
+        android:layout_width="wrap_content"
+        android:layout_height="340dp"
+        android:layout_gravity="center"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingEnd="14dp"
+        android:paddingLeft="14dp"
+        android:paddingRight="14dp"
+        android:paddingStart="14dp"/>
+
+
+</FrameLayout>

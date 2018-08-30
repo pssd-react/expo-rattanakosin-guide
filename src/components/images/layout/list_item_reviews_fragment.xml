@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_list_reviews"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tab_delete_review_layout"
+        android:layout_marginTop="5dp"
+        android:overScrollMode="never"
+        android:scrollbars="vertical"
+        />
+
+    <TextView
+        android:id="@+id/no_review_history"
+        style="@style/SimpleTextDBMomentX.Big"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="@string/string_no_review"
+        android:textColor="@color/color_text"
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:id="@+id/tab_delete_review_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/color_tab_not_select"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/tv_delete_review"
+            style="@style/SimpleTextDBMomentX.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:textColor="@color/white"
+            />
+    </RelativeLayout>
+</RelativeLayout>
