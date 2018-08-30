@@ -53,7 +53,7 @@ export class FlashSaleScreen extends Component{
                         second: FlashSalePromotion,
                     })}
                     onIndexChange={index => this.setState({ index })}
-                    initialLayout={{ width: Dimensions.get('window').width }}
+                    initialLayout={{ width: Dimensions.get('window').width,height:Dimensions.get('window').height }}
                 />
             </View>
         )
