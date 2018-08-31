@@ -10,11 +10,10 @@ import {
     WebView,
     TouchableOpacity} from 'react-native'
 import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../common';
-import firebase from 'firebase'; 
+import firebase from 'firebase'
 import { SocialIcon } from 'react-native-elements'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import {createStackNavigator} from 'react-navigation'
-import {SettingScreen, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen} from './profilescreen'
+import {SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen} from './profilescreen'
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -324,7 +323,7 @@ const ProfileMenu = createStackNavigator({
         screen : ProfileScreen
     },
     Setting : {
-        screen : SettingScreen
+        screen : LanguageMenu,navigationOptions:{header:null}
     },
     HowToUse : {
         screen : HowToUseScreen

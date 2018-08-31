@@ -9,16 +9,18 @@ import {
     Linking,
     WebView,
     TouchableOpacity} from 'react-native'
-import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../common';
-import firebase from 'firebase'; 
+import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../../common';
 import { SocialIcon } from 'react-native-elements'
-import Ionicons from 'react-native-vector-icons/Ionicons'
+
 
 const listData = [
     {'id': '1', 'section':'ภาษา', 'language': 'ไทย', 'url': ''},
+    {'id': '2', 'section':'ภาษา', 'language': 'ไทย', 'url': ''},
+    {'id': '3', 'section':'ภาษา', 'language': 'ไทย', 'url': ''},
 ]
 
 class SettingLanguage extends Component{
+    static navigationOptions = {title: 'Setting'}
     constructor(){
         super()
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
@@ -30,7 +32,7 @@ class SettingLanguage extends Component{
 
     render(){
         return (
-            <View>
+            /*<View>
             <ListView
             dataSource={this.renderListmenu()}
             renderRow={(rowData) => {
@@ -44,7 +46,7 @@ class SettingLanguage extends Component{
                         <View style={styles.chevronContainerStyle}>
                             <Text style={styles.listViewTextStyle}>{rowData.language}</Text>
                             <Image 
-                            source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                            source={ require('../../../images/drawable-hdpi/ic_arrow_right.webp') } /> 
                         </View>
                     </View>
                 </TouchableOpacity>
@@ -53,7 +55,10 @@ class SettingLanguage extends Component{
             contentContainerStyle={{width:'100%', backgroundColor: '#DDDDDD'}}
             />
             <View style={styles.viewBlockStyle}/>
-            </View>
+            </View>*/
+            <View style={styles.container}>
+                <Text>SettingLanguage</Text>
+                </View>
         )
     }
 }
