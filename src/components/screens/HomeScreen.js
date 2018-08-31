@@ -34,7 +34,9 @@ class HomeScreen extends Component{
     state = { 
         items: [],
         datas: [],
-        Menu: []
+        Menu: [ 
+    
+        ]
     };
 
     componentWillMount(){
@@ -44,6 +46,7 @@ class HomeScreen extends Component{
         .catch((error) => {
             console.log('axios error:',error);
         });
+       
     }
 
    
@@ -56,28 +59,28 @@ class HomeScreen extends Component{
             }
             _.each((val.SliderList), (why) => {
                 this.state.datas[i] = why;
-               // console.log(this.state.datas.Name)
+               // console.logthis.state.datas.Name)
             })
             i++
         })
+       
     }
     
 
-    renderItem(){
-            console.log(this.state.Menu)
-            return this.state.Menu.map(items => 
-                <ItemDetail key={items.Name} items={items}/>
-            );
+    
+    renderItem( Menu ){
+
+        return <ItemDetail Menu={ Menu } />;
+        
     }
 
-    
+
+
   render(){
         {this.renderData()}
         return (
             <View>
-                
-                     {this.renderItem()}
-               
+                    {this.renderItem(this.state.Menu)}
             </View>
             
         );
@@ -92,6 +95,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         paddingTop: 4,
+        paddingBottom: 5
     },
     headerTextStyle: {
         fontSize: 18
@@ -113,52 +117,72 @@ const styles = StyleSheet.create({
     }
 })
 
+const {
+    thumbnailStyle,
+    headerContentStyle,
+    thumbnaiContainerStyle,
+    headerTextStyle,
+    imageStyle
+} = styles;
 
 
+class ItemDetail extends Component {
 
-const ItemDetail = ({ items }) => {
-    const {
-        thumbnailStyle,
-        headerContentStyle,
-        thumbnaiContainerStyle,
-        headerTextStyle,
-        imageStyle
-    } = styles;
- 
-    return (
-        <ScrollView>
-            <Card  style={{ flex: 4}}>
-                <CardSection  style={{ flex: 1}}>
-                <View style={headerContentStyle}>
-                    <Text style={headerTextStyle} >{items.Name}</Text>
-                    <Text style={headerTextStyle}> ดูทั้งหมด </Text>
-                </View>
-                </CardSection>
-                <CardSection >
-                    <ScrollView horizontal={true}
-                        showsHorizontalScrollIndicator={false} >
-                    <Image
-                        style={{width: 150, height: 100, borderRightWidth: 5}}
-                        source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-                        />
-                        <Image
-                        style={{width: 150, height: 100 ,borderRightWidth: 5}}
-                        source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-                        />
-                        <Image
-                        style={{width: 150, height: 100,borderRightWidth: 5}}
-                        source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-                        />
-                        <Image
-                        style={{width: 150, height: 100,borderRightWidth: 5}}
-                        source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-                        />
-                    </ScrollView>
-                </CardSection>
-            </Card>
-        </ScrollView>
-    )
+    // renderImg(){
+    //     console.log(this.state.datas)
+    //     return this.state.datas.map(items => 
+    //         <ItemImg key={items.Name} items={items}/>
+    //     );
+    // }
+
+    render(){
+        return (
+            <ScrollView>
+                <Card  style={{ flex: 4}}>
+                    <CardSection  style={{ flex: 1}}>
+                    <View style={headerContentStyle}>
+                        <Text style={headerTextStyle} >{Menu}</Text>
+                        <Text style={headerTextStyle}> ดูทั้งหมด </Text>
+                    </View>
+                    </CardSection>
+                    <CardSection >
+                      
+                    </CardSection>
+                </Card>
+            </ScrollView>
+        )
+    }
 }
+
+
+
+
+
+// const ItemImg = ({ items }) => {
+ 
+//     return (
+        
+//                     <ScrollView horizontal={true}
+//                         showsHorizontalScrollIndicator={false} >
+//                     <Image
+//                         style={{width: 150, height: 100, borderRightWidth: 5}}
+//                         source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+//                         />
+//                         <Image
+//                         style={{width: 150, height: 100 ,borderRightWidth: 5}}
+//                         source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+//                         />
+//                         <Image
+//                         style={{width: 150, height: 100,borderRightWidth: 5}}
+//                         source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
+//                         />
+//                         <Image
+//                         style={{width: 150, height: 100,borderRightWidth: 5}}
+//                         source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
+//                         />
+//                     </ScrollView>
+//     )
+// }
 
 
 
