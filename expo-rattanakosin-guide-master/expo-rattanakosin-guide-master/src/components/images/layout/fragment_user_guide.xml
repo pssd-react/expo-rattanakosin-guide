@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/wvp_guide_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginBottom="20dp"/>
+    </LinearLayout>
+
+    <com.viewpagerindicator.CirclePageIndicator
+        android:id="@+id/banner_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_skip"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:padding="15dp"
+        android:layout_centerInParent="true"
+        app:fillColor="@color/white"
+        app:pageColor="@color/txt_unselected_new"
+        app:strokeColor="@color/txt_unselected_new"/>
+
+    <RelativeLayout
+        android:id="@+id/rl_skip"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_move_forward"
+            style="@style/SimpleTextDBMomentX.Normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/guide_skip"
+            android:textAllCaps="false"
+            android:textColor="@color/violet"
+            />
+
+        <Button
+            android:id="@+id/btn_go_to_application"
+            style="@style/SimpleTextDBMomentX.Medium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@color/violet"
+            android:text="@string/guide_go_to_application"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+
+</RelativeLayout>

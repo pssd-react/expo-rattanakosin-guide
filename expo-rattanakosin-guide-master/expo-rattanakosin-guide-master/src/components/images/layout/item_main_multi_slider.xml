@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.asksira.loopingviewpager.LoopingViewPager
+        android:id="@+id/multiViewPager"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        app:autoScroll="true"
+        app:isInfinite="true"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:scrollInterval="5000"
+        app:wrap_content="true"/>
+
+    <com.rd.PageIndicatorView
+        android:layout_marginBottom="20dp"
+        android:id="@+id/indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/multiViewPager"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:piv_animationDuration="200"
+        app:piv_animationType="slide"
+        app:piv_interactiveAnimation="true"
+        app:piv_radius="4dp"
+        app:piv_selectedColor="@color/colorPrimary"
+        app:piv_unselectedColor="@color/gray_color_add_photo_view"/>
+
+</android.support.constraint.ConstraintLayout>

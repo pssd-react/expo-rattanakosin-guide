@@ -1,0 +1,740 @@
+<resources>
+    <string name="app_name">Rattanakosin Guide</string>
+    <string name="title_activity_talad_map_view_main">TaladMapViewMainActivity(EN)</string>
+    <string name="title_map">Live Map</string>
+    <string name="title_promotion">Promotion</string>
+    <!--<string name="title_scb_pay">กระเป๋าเงิน(EN)</string>-->
+    <string name="title_favorite">My Trip</string>
+    <string name="title_more">Profile</string>
+
+    <string name="facebook_app_id">218694008697549</string>
+    <string name="fb_login_protocol_scheme">fb218694008697549</string>
+
+    <string name="dev_env_url_path">https://dev-shop.digitalventures.co.th</string>
+    <string name="sit_env_url_path">https://sit-shop.digitalventures.co.th</string>
+    <string name="uat_env_url_path">https://uat-shop.digitalventures.co.th</string>
+    <string name="new_env_url_path">https://nginxplus-shop.digitalventures.co.th</string>
+    <string name="prod_env_url_path">https://shop.digitalventures.co.th</string>
+
+    <string name="dev_qr_key">DVCHATUCHAKGUIDE</string>
+    <string name="sit_qr_key">8TH0E9BT9JVM8WCY</string>
+    <string name="uat_qr_key">V4JBZJRLLSO1L53J</string>
+    <string name="new_qr_key">V4JBZJRLLSO1L53J</string>
+    <string name="prod_qr_key">OSKBJFB2J0RY857M</string>
+
+    <!--<string name="title_more_th">เพิ่มเติม(EN)</string>-->
+
+    <string name="welcome">Welcome to the</string>
+    <string name="talad">Rattanakosin Guide</string>
+    <string name="detail">All the Shops at Your Fingertips</string>
+    <string name="select">Language</string>
+    <string-array name="language_array">
+        <item>ไทย</item>
+        <item>English</item>
+        <item>中文</item>
+    </string-array>
+    <!--<string name="are_you">Are you?(EN)</string>-->
+    <!--<string name="menu_shopper">Shopper(EN)</string>-->
+    <!--<string name="menu_tourist">Tourist(EN)</string>-->
+    <!--<string name="manu_visitor">Visitor(EN)</string>-->
+
+    <!--MerchantShopFragment-->
+    <string name="loading">Loading...</string>
+    <string name="tab_product">Details</string>
+    <string name="tab_map">Map</string>
+    <string name="tab_review">Reviews</string>
+
+    <string name="toolbar_title_promotion">Promotion</string>
+    <string name="toolbar_title_favorite">Favorite</string>
+    <string name="toolbar_title_how_to_use">How to Use</string>
+    <string name="toolbar_title_about_app">About Application</string>
+
+    <string name="head_shop_related">Similar stores</string>
+    <string name="head_place_related">Similar Places</string>
+    <!--<string name="favorite">Favorite(EN)</string>-->
+    <string name="del_favorite">Remove</string>
+    <string name="sort_by">Sort by</string>
+    <string name="sort_by_distianct">Distance</string>
+    <string name="fab_label">Popularity</string>
+    <string name="share">Share</string>
+    <string name="btn_read_more">Read more</string>
+    <!--<string name="btn_collapse">Collapse(EN)</string>-->
+
+    <!--<string name="bookmark">Bookmark(EN)</string>-->
+    <!--<string name="un_bookmark">Un-bookmark(EN)</string>-->
+    <!--<string name="un_bookmark_sure">Are you sure?(EN)</string>-->
+
+    <!--<string name="test_value">Android Data Recovery, an incredible tool for recovering, allows you to retrieve Android data such as contacts, text messages, call history, photos, WhatsApp history, videos, audios, documents and restore them back to Android phones of any brand with simple steps. No longer will loss of data from an internal or external memory card be a big headache for Android user who know this application.(EN)</string>-->
+
+    <!--<string name="call_now">Call to (EN)</string>-->
+    <!--<string name="call">call(EN)</string>-->
+    <!--<string name="open_time">Open / Closed (EN)</string>-->
+
+    <!--&lt;!&ndash;User Guide&ndash;&gt;-->
+    <!--<string name="user_guide1">Get Started!(EN)</string>-->
+    <!--<string name="user_guide1_sub">Lorem ipsum dolor sit amet, Consectetur adipisicing elit, sed do eiusmod.(EN)</string>-->
+    <!--<string name="user_guide_skip">Skip(EN)</string>-->
+
+
+    <!--&lt;!&ndash;type marker&ndash;&gt;-->
+    <!--<string name="heart_type">Heart</string>-->
+    <!--<string name="live_type">Live</string>-->
+    <!--<string name="promo_type">Promotion</string>-->
+
+
+    <!--MapFragment-->
+    <string name="open_market">Open today:</string>
+    <string name="close_market">Closed</string>
+    <string name="close_market_all_day">Closed</string>
+    <string name="open"> / Business hours:</string>
+    <string name="no_label">No.</string>
+    <string name="shbject_common_label">Section</string>
+    <string name="soi_common_label">Soi</string>
+    <string name="zone">Zone</string>
+    <string name="floor">Floor</string>
+    <string name="close_shop_label">Close</string>
+    <string name="common_store">Shops</string>
+    <string name="scb_common">SCB</string>
+    <string name="time_no_data"> - </string>
+    <string name="guide_skip">Skip</string>
+    <string name="guide_page_one_title">Find stores on the map</string>
+    <string name="guide_page_one_message">Find products by category, search by name, even find toilet locations.</string>
+    <string name="guide_page_two_title">Promotion &amp; Flash Sale</string>
+    <string name="guide_page_two_message">Find the latest promotions around you right here.</string>
+    <string name="guide_page_three_title">Shopping Planner</string>
+    <string name="guide_page_three_message">Follow you favorites stores and recommended products from our Shopping Planner, and create your own trip.</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <!--<string name="hello_blank_fragment">Hello blank fragment(EN)</string>-->
+    <string name="txt_read_more">Read more</string>
+
+
+    <!--<string name="guide_page_four_title">โอนเงินหากันง่ายๆ(EN)</string>-->
+    <!--<string name="guide_page_four_message">ซื้อของให้เพื่อนก็ให้เพื่อนโอนให้ เงินหมดก็ให้เพื่อนโอนให้ \nเพื่อนเงินหมด!!! ก็โอนให้เพื่อนได้เช่นกัน(EN)</string>-->
+
+    <!--<string name="guide_page_five_title">เติมเงินทันใจ(EN)</string>-->
+    <!--<string name="guide_page_five_message">เติมเงินง่ายๆ รวดเร็ว เติมปุ๊บเข้าปั๊บ\n ที่เคาน์เตอร์เซอร์วิสชั้นนำทั่วประเทศ(EN)</string>-->
+    <string name="guide_go_to_application">Go to the App</string>
+    <string name="common_right_braces">)</string>
+    <string name="common_left_braces">(</string>
+    <string name="common_slade">/</string>
+    <!--<string name="common_unknown">\???</string>-->
+    <string name="common_dash">-</string>
+
+    <string name="post_txt">Post</string>
+    <string name="write_review_txt">Write a review</string>
+    <string name="report_txt">Remove</string>
+    <!--<string name="agree_report_txt">ยืนยันการแจ้งลบ(EN)</string>-->
+    <string name="cancel">Cancel</string>
+    <string name="agree_txt">Confirm</string>
+    <string name="update_now">Update</string>
+    <string name="report_reason_1">The content is inappropriate.</string>
+    <string name="report_reason_2">The content is not relevant.</string>
+    <string name="report_reason_3">It’s annoying and not interesting.</string>
+    <string name="report_reason_4">It’s spam.</string>
+    <string name="reason_del_txt">Request to remove the review because</string>
+    <string name="detail_hint">Write review here...</string>
+    <!--<string name="topic_hint">ชื่อผู้ใช้งาน(EN)</string>-->
+    <string name="rating_click_txt">Tap on star to give rating</string>
+    <!--<string name="status_report_txt">สถานะการแจ้งลบ(EN)</string>-->
+    <string name="close_txt">Close</string>
+    <string name="ok_txt">OK</string>
+    <string name="report_success">Request submitted</string>
+    <string name="report_success_detail_txt">Your request to remove the review has been received.</string>
+    <string name="delete_success">Delete success</string>
+    <string name="delete_success_detail_txt">Review has been deleted</string>
+    <!--<string name="report_live_video_success_detail_txt">ในกรณีที่มีผู้ใช้งานแจ้งลบตั้งแต่ 10 คนขึ้นไป\nระบบจะทำการซ่อนโพสดังกล่าวไว้(EN)</string>-->
+    <string name="report_failure">Your report is being reviewed</string>
+    <string name="report_failure_detail_txt">Resubmit a Report is unable to do.</string>
+    <string name="version">Version</string>
+    <string name="condition">Terms of Use</string>
+    <!--<string name="fingerprint">เข้าระบบโดยลายนิ้วมือ(EN)</string>-->
+    <!--<string name="notification">การแจ้งเตือน(EN)</string>-->
+    <string name="change_lang">Language</string>
+    <string name="change_password">Change Password</string>
+    <string name="setting">Settings</string>
+    <string name="promotion_and_flashsale">Manage promotion and flash sale</string>
+    <string name="store_manager">Shop management</string>
+    <string name="coupons_discount">Discount Coupon</string>
+    <string name="store_manager_menu_pro_and_flash">จัดการโปรโมชั่นและแฟลชเซลล์</string>
+    <string name="store_manager_menu_scan_qr">Scan QR Code</string>
+    <string name="discount_history">Discount Coupon History</string>
+    <string name="setting_gps">Setting</string>
+    <string name="condition_detail">ตั้ง PIN เรียบร้อยแล้ว ทุกครั้งก่อนจะเข้าใช้งาน มันก็จะถามหา PIN ก่อนเสมอ เพื่อความปลอดภัยอ่ะเนาะ … คำถามคือ ถ้าลืม PIN จะเกิดอะไรขึ้น? คำตอบคือ ถ้าลืม PIN หรือ ใส่ PIN ผิดไป 10 ครั้ง เราก็สามารถตั้ง PIN ใหม่ได้นะครับ แต่ว่าจะต้อง ทำการลบข้อมูลใน App ทั้งหมดออกก่อน (เพื่อความปลอดภัย ว่าจะไม่มีคนอื่นมาเข้าถึงข้อมูลของเรา) … ไม่ต้องห่วงนะ ข้อมูล ที่อยู่ใน App ก็คือ ข้อมูลเลขที่บัญชีต่างๆ ที่เราใส่ไว้เพื่ออำนวย ความสะดวกตัวเองเวลาจะป้อนข้อมูล และข้อมูลประวัติการทำ รายการของเรา ซึ่งปกติมันก็ถูกบันทึกลงในสมุดบัญชีอยู่แล้ว ครับ ข้อสังเกตคือ SCB ติ๊ด ติ๊ด นั้นใช้ทำธุรกรรมได้ 4 แบบครับ คือ ฝากเงินสด, ถอนเงินสด, โอนเงิน และ จ่ายบิล … ง่ายที่สุดเลย ก็คือ เลือกว่าจะทำธุรกรรมอะไร จากนั้นแค่ใส่เลขที่บัญชี กับ จำนวนเงินที่เราต้องการทำธุรกรรมที่สาขาลงไป จากนั้นกดปุ่ม “สร้าง QR Code” อย่างในกรณีนี้ ผมเลือกจะถอนเงินสดดูครับ(EN)</string>
+    <string name="china_lang">中文</string>
+    <string name="eng_lang">English</string>
+    <string name="thai_lang">ไทย</string>
+    <!--<string name="change_profile">ชื่อโปรไฟล์(EN)</string>-->
+    <!--<string name="change_id_card">เลขที่บัตรประจำตัวประชาชน(EN)</string>-->
+    <!--<string name="change_addr">ที่อยู่(EN)</string>-->
+    <!--<string name="change_phone">หมายเลขโทรศัพท์(EN)</string>-->
+    <!--<string name="account_purse">บัญชีที่ผูกกับกระเป๋าเงิน(EN)</string>-->
+    <!--<string name="user_type">ประเภทผู้ใช้งาน(EN)</string>-->
+    <!--<string name="change_pin">เปลี่ยนรหัส PIN(EN)</string>-->
+    <!--<string name="fb_txt">เฟสบุ๊ค(EN)</string>-->
+    <!--<string name="link">Link(EN)</string>-->
+    <!--<string name="profile_detail">ข้อมูลส่วนตัว(EN)</string>-->
+    <string name="save">Save</string>
+    <!--<string name="pin_old">รหัส PIN เดิม(EN)</string>-->
+    <!--<string name="pin_new">รหัส PIN ใหม่(EN)</string>-->
+    <!--<string name="pin_new_again">ยืนยันรหัส PIN ใหม่(EN)</string>-->
+    <!--<string name="interested">รายการที่สนใจ(EN)</string>-->
+    <string name="review_list">Reviews history</string>
+    <string name="how_to_use">How to use</string>
+    <!--<string name="contact">ติดต่อสอบถาม(EN)</string>-->
+    <string name="sign_out">Logout</string>
+    <string name="get_started">Getting start</string>
+    <string name="get_started_detail">ตั้ง PIN เรียบร้อยแล้ว ทุกครั้งก่อนจะเข้าใช้งาน มันก็จะถามหา PIN ก่อนเสมอ เพื่อความปลอดภัยอ่ะเนาะ … คำถามคือ ถ้าลืม PIN จะเกิดอะไรขึ้น? คำตอบคือ ถ้าลืม PIN หรือ ใส่ PIN ผิดไป 10 ครั้ง เราก็สามารถตั้ง PIN ใหม่ได้นะครับ แต่ว่าจะต้อง ทำการลบข้อมูลใน App ทั้งหมดออกก่อน (เพื่อความปลอดภัย ว่าจะไม่มีคนอื่นมาเข้าถึงข้อมูลของเรา) … ไม่ต้องห่วงนะ ข้อมูล ที่อยู่ใน App ก็คือ ข้อมูลเลขที่บัญชีต่างๆ ที่เราใส่ไว้เพื่ออำนวย ความสะดวกตัวเองเวลาจะป้อนข้อมูล และข้อมูลประวัติการทำ รายการของเรา ซึ่งปกติมันก็ถูกบันทึกลงในสมุดบัญชีอยู่แล้ว ครับ ข้อสังเกตคือ SCB ติ๊ด ติ๊ด นั้นใช้ทำธุรกรรมได้ 4 แบบครับ คือ ฝากเงินสด, ถอนเงินสด, โอนเงิน และ จ่ายบิล … ง่ายที่สุดเลย(EN)</string>
+    <string name="select_item_to_delete">Edit</string>
+    <string name="edit_item">Edit</string>
+    <string name="delete_item">Delete</string>
+    <string name="edit_review_item">Edit Review</string>
+    <string name="save_edit_review">Save</string>
+    <string name="delete_review">Are you sure?</string>
+    <string name="delete_detail_message">Tap confirm if you want to delete this review permanently.</string>
+    <string name="search_detail_title">Could not find what you are looking for</string>
+    <string name="search_detail_message">Please specify a shop name.</string>
+
+    <!--<string name="block_common">บล๊อก(EN)</string>-->
+    <string name="open_store">Open</string>
+    <string name="close_store">Close</string>
+
+    <string name="common_open_store">Open today:</string>
+    <string name="common_time_unit_am">AM</string>
+    <string name="common_time_unit_pm">PM</string>
+    <string name="type_something">Search…</string>
+    <!--<string name="promotion_store">โปรโมชั่นร้านค้า(EN)</string>-->
+    <!--<string name="common_hello">สวัสดี(EN)</string>-->
+    <string name="common_jj">RATTANAKOSIN</string>
+    <string name="common_guide">GUIDE</string>
+    <!--<string name="cosmetics_beauty">ความสวยความงาม(EN)</string>-->
+    <!--<string name="common_close_talad">Closed(EN)</string>-->
+    <!--<string name="common_open_talad">เปิดร้าน 08:30(EN)</string>-->
+    <!--<string name="test_profile">Boss Apichai(EN)</string>-->
+    <!--<string name="test_phone">+66 86 659 4371(EN)</string>-->
+    <string name="common_thai">ไทย</string>
+    <string name="common_version">1.0.0(EN)</string>
+    <string name="common_facebook">Facebook(EN)</string>
+    <!--<string name="common_line">Line(EN)</string>-->
+    <!--<string name="common_youtube">Youtube(EN)</string>-->
+    <!--<string name="common_twitter">Twitter(EN)</string>-->
+    <!--<string name="common_google">Google(EN)</string>-->
+    <!--<string name="common_ig">IG(EN)</string>-->
+    <!--<string name="test_profile_it_s_me">It\'s me(EN)</string>-->
+    <!--<string name="test_profile_86">86(EN)</string>-->
+    <!--<string name="test_profile_134">134(EN)</string>-->
+    <!--<string name="text_profile_31">31</string>-->
+    <!--<string name="text_temperature_c">\u2103</string>-->
+    <!--<string name="text_profile_34">สูงสุด 34 ํ(EN)</string>-->
+    <!--<string name="text_profile_28">ต่ำสุด 28 ํ(EN)</string>-->
+    <!--<string name="text_profile_weather">ท้องฟ้าปลอดโปร่ง(EN)</string>-->
+    <!--<string name="test_profile_boss_apichai">สวัสดี, Boss Apichai!(EN)</string>-->
+    <!--<string name="test_profile_phone">02-777-7777(EN)</string>-->
+    <string name="scb_pay">SCB PAY(EN)</string>
+    <string name="title_more_store">Store details</string>
+    <string name="title_more_place">Location Details</string>
+    <string name="meter">m</string>
+    <string name="kilometer">km</string>
+    <string name="toilet">Toilet</string>
+    <string name="atm">ATM</string>
+
+    ///////Month///////
+    <string name="m1">JAN</string>
+    <string name="m2">FEB</string>
+    <string name="m3">MAR</string>
+    <string name="m4">APR</string>
+    <string name="m5">MAY</string>
+    <string name="m6">JUN</string>
+    <string name="m7">JUL</string>
+    <string name="m8">AUG</string>
+    <string name="m9">SEP</string>
+    <string name="m10">OCT</string>
+    <string name="m11">NOV</string>
+    <string name="m12">DEC</string>
+
+
+    <string name="about_easyjj">About this App</string>
+    <string name="swith_on">On</string>
+    <string name="swith_off">Off</string>
+    <!--<string name="file_provider">th.co.digio.mfec.fileprovider</string>-->
+    <!--<string name="share_using">share_merchant</string>-->
+    <string name="txt_agree_button">Confirm</string>
+    <string name="txt_close_button">Close</string>
+    <string name="common_message_share">Share</string>
+    <string name="common_share_cancel">Cancel</string>
+    <string name="string_common_line">LINE</string>
+    <string name="string_common_or">or</string>
+    <string name="string_common_share_facebook">Facebook</string>
+    <string name="string_common_share_twitter">Twitter</string>
+    <string name="string_common_share_messanger">Messenger</string>
+    <string name="string_common_share_copy">Copy Link</string>
+    <string name="string_common_share_ig">Instagram</string>
+    <string name="common_string_copy_link">copied link</string>
+    <string name="detail_date_time">at</string>
+    <string name="hour_ago">hour ago</string>
+    <string name="hours_ago">hours ago</string>
+    <string name="minute_ago">minute ago</string>
+    <string name="minutes_ago">minutes ago</string>
+    <string name="yesterday_at">Yesterday at</string>
+    <string name="just_now">Just now</string>
+    <string name="common_string_not_login_title">You have not logged in</string>
+    <string name="message_easy_jj_login">Login for more features such as emoticons, save to favorites, and write reviews.</string>
+    <string name="common_string_login_facebook">Login with Facebook</string>
+    <string name="setting_more_list_review_string">Review history</string>
+    <string name="short_link_firebase_url">https://firebasedynamiclinks.googleapis.com/v1/</string>
+    <string name="youtube_url">https://www.googleapis.com/youtube/v3/</string>
+    <string name="market_jatujak">Rattanakosin</string>
+
+    <string name="market_general_information">Platinum Fashion Mall</string>
+    <string name="market_27_project">Section in Platinum</string>
+    <string name="market_clock_tower">Chatuchak’s Clock Tower</string>
+    <string name="market_service">Other Services in Platinum Fashion Mall</string>
+    <string name="market_nearby_places">Nearby places and attractions</string>
+    <string name="market_connection_points">Directions to Chatuchak</string>
+    <string name="market_music">Chatuchak Songs</string>
+    <string name="market_announcements">Notice of Chatuchak Order and Management</string>
+    <string name="market_refer">References</string>
+
+    <string name="string_logout_facebook">Log out</string>
+    <string name="string_logout_facebook_detail">Are you sure you want to log out?</string>
+    <string name="store_close_merchant">ปิดร้านE</string>
+    <string name="store_open_merchant">เปิดร้านE</string>
+    <string name="guide_page_emo_title">Express emotion through emoticon</string>
+    <string name="guide_page_emo_message">Finding interested event and shop on Chatuchak map</string>
+    <string name="common_easy">Easy</string>
+    <string name="common_splash_jj">JJ</string>
+    <string name="jj_market_guide">JJ Market Guide</string>
+    <string name="powerby_digital_ventures">Powered by Digital Ventures</string>
+
+
+    <string name="select_language">Language</string>
+    <string name="promotion_details">Promotion details</string>
+
+    <string name="cat1">Restaurants</string>
+    <string name="cat2">Shops</string>
+    <string name="cat3">Commercial Areas</string>
+    <string name="cat4">Accommodation</string>
+    <string name="cat5">Points of Interest</string>
+    <string name="cat6">Schools and Government Offices</string>
+    <string name="cat7">Health Care</string>
+    <string name="cat8">Facilities</string>
+    <string name="cat9">Services</string>
+    <string name="cat10">Bank</string>
+
+    <string name="cat13">อุปกรณ์อิเล็กทรอนิกส์</string>
+    <string name="cat11">หนังสือ</string>
+    <string name="cat14">ที่นอนและชุดเครื่องนอน</string>
+    <string name="cat12">เสื้อผ้าสตรี</string>
+    <string name="cat15">เครื่องสำอาง</string>
+
+
+    <string name="string_common_error">Sorry</string>
+    <string name="error_message_facebook">Something went wrong signing in Facebook</string>
+    <string name="error_message_service">Sorry, the service couldn’t be connected. Check your internet connection and try again.</string>
+    <string name="string_search_result">Search results</string>
+    <string name="string_common_out_of_range">Sorry, you are unable to use this feature at this moment.</string>
+    <string name="error_message_out_of_range">It will work when you are at Chatuchak Weekend Market only.</string>
+
+    <string name="num_select_review_delete_item">%1$s Delete</string>
+    <string name="common_string_no_internet">No Internet Connection</string>
+    <string name="facebook_login_dialog_header">You are not logged in</string>
+    <string name="facebook_login_dialog_detail">Login for more features such as emoticons, save to favorites, and write reviews.</string>
+
+    <!-- ค้นหาร้านอาหารและหมวดหมู่ร้านอาหาร -->
+    <string name="find_restuarant_one">1) ค้นหาร้านค้าที่ต้องการโดยพิมพ์ที่ช่อง “ต้องการค้นหา”</string>
+    <string name="find_restuarant_sub_one">ในกรณีต้องการค้นหาตามหมวดหมู่ของร้านค้าให้ เลือกไอคอน “หมวดหมู่” เพื่อเลือกหมวดหมู่ของ </string>
+    <string name="find_restuarant_two">2) เมื่อพิมพ์ชื่อร้านค้า ที่ต้องการจะค้นหาแล้ว หน้าจอจะแสดงผล ดังรูป ให้คลิกที่ชื่อร้านค้าหรือกดปุ่มค้าหาที่แป้นพิมพ์</string>
+    <string name="find_restuarant_tree">3) ระบบจะแสดงรายชื่อร้านค้า ดังรูป</string>
+    <string name="find_restuarant_four">4) เมื่อเลื่อนรายชื่อร้านค้าลงจนสุดขอบสามารถดูจุดที่ตั้งร้านค้าผ่านแผนที่ได้</string>
+    <string name="find_restuarant_five">5) ในกรณีที่ค้นหาข้อมูลไม่พบ หน้าจอจะแสดงผล ดังรูป</string>
+
+    <!-- ค้นหาร้านอาหารและหมวดหมู่ร้านอาหาร -->
+    <string name="find_restuarant_map1">1) ข้อมูลร้านค้า จะแสดงผลอยู่บนแผนที่ ดังรูป</string>
+    <string name="find_restuarant_map2">2) เมื่อทำการคลิกที่ร้านค้าบนแผนที่แล้ว หน้าจอจะแสดงผล ดังรูป</string>
+    <string name="find_restuarant_map3">3) เมื่อทำการคลิกร้านค้า เพื่อเข้าไปดูรายละเอียด หน้าจอจะแสดงผล ดังรูป</string>
+
+    <!-- วิธีใช้งานไอคอนแสดงอารมณ์ -->
+    <string name="use_logo1">1) หน้าจอแสดงผลในหน้าแรก</string>
+    <string name="use_logo2">2) เมื่อทำการคลิก ไอคอนรูปหัวใจ หน้าจอจะแสดงผล ดังรูป</string>
+    <string name="use_logo3">3) เมื่อคลิกไอคอนสัญลักษณ์แสดงอารมณ์ หน้าจอจะแสดงผล ดังรูป</string>
+    <string name="th0">การจัดการรีวิว มีทั้งหมด 4 วิธี ซึ่งประกอบไปด้วย การเขียนรีวิว, การลบรีวิว, การแจ้งลบ, การแชร์ข้อมูลรีวิว</string>
+    <string name="th1">1) การเขียนรีวิว</string>
+    <string name="th1_1">1.1) หน้าแสดงข้อมูลรีวิวทั้งหมดของร้านค้า จะแสดงผลดังรูป</string>
+    <string name="th1_2">1.2) ต้องทำการเข้าสู่ระบบด้วยเฟสบุ๊คก่อนทำการเขียนรีวิว ดังรูป </string>
+    <string name="th1_3">1.3) หน้าจอการเขียนรีวิว จะแสดงผล ดังรูป</string>
+    <string name="th2">2) การลบรีวิว</string>
+    <string name="th2_1">2.1) หน้าการลบรีวิว สามารถลบได้เฉพาะเจ้าของร้านค้าเท่านั้น</string>
+    <string name="th2_2">2.2) หน้าจอยืนยันการลบรีวิว ดังรูป</string>
+    <string name="th3">3) การแจ้งลบรีวิว</string>
+    <string name="th3_1">3.1) หน้าการแจ้งลบรีวิว จะแสดงผล ดังรูป</string>
+    <string name="th3_2">3.2) หน้าจอการแจ้งเหตุผลในการแจ้งลบรีวิว จะแสดงผล ดังรูป</string>
+    <string name="th3_3">3.3) หน้าจอแสดงผลการแจ้งลบสำเร็จ จะแสดงผล ดังรูป</string>
+    <string name="th3_4">3.4) เมื่อทำการแจ้งลบซ้ำ จะแสดงผล ดังรูป</string>
+    <string name="fou1">1) จัดเก็บร้านค้าที่สนใจ เมื่อคลิกไอคอนรูปหัวใจ ดังรูป</string>
+    <string name="fou2">2) ชื่อร้านค้าที่บันทึกไว้จะไปปรากฏบนเมนู "ร้านที่สนใจ" ดังรูป</string>
+    <string name="fou3">3) ในกรณีที่ต้องการลบรายการร้านค้าที่บันทึกไว้ให้สไลด์หน้าจอไปทางซ้ายเพื่อลบ</string>
+    <string name="fiv1">1) เข้าสู่ระบบด้วยเฟสบุ๊ค เมื่อต้องการบันทึกร้านค้าที่สนใจหรือรีวิวร้านค้า</string>
+    <string name="fiv2">2) ในกรณีที่ต้องการออกจากระบบด้วยเฟสบุ๊ค ให้เลือกเมนู ออกจากระบบ</string>
+    <string name="fiv3">3) ในกรณีที่ต้องการเปลี่ยนภาษาของแอพพลิเคชั่น เลือกเมนู ตั้งค่า และเลือกเมนู เปลี่ยนภาษา</string>
+    <string name="fiv4">4) เลือกภาษาที่ต้องการใช้งาน โดยแอพพลิเคชั่นรองรับทั้งหมด 3 ภาษาคือไทย อังกฤษและจีน</string>
+    <string name="howto_search">How to discover and find locations of interest</string>
+    <!--<string name="url_howto_search">https://dev-shop.digitalventures.co.th/help/en/index.html</string>-->
+    <string name="howto_into_map">How to view location through the Map feature</string>
+    <!--<string name="url_howto_into_map">https://dev-shop.digitalventures.co.th/help/en/help2.html</string>-->
+    <string name="howto_emojicon">Using Emoticons to Express Yourself</string>
+    <!--<string name="url_howto_emojicon">https://dev-shop.digitalventures.co.th/help/en/help3.html</string>-->
+    <string name="howto_review">Make a review and manage your reviews</string>
+    <!--<string name="url_howto_review">https://dev-shop.digitalventures.co.th/help/en/help4.html</string>-->
+    <string name="howto_manage_shop">Create a trip</string>
+    <!--<string name="url_howto_manage_shop">https://dev-shop.digitalventures.co.th/help/en/help5.html</string>-->
+    <string name="howto_setting">Application setting</string>
+    <!--<string name="url_howto_setting">https://dev-shop.digitalventures.co.th/help/en/help6.html</string>-->
+
+    <string name="alert_dialog_update">Update available!</string>
+    <string name="alert_dialog_update_detail">A new version of application is available.</string>
+    <string name="alert_dialog_update_now">Update now</string>
+
+    <string name="main_search">Search...</string>
+    <string name="home_search">Search</string>
+    <string name="home_search_need">Search term</string>
+    <string name="home_search_ever">Search history</string>
+    <string name="home_search_need_detail">Search keyword</string>
+    <string name="home_search_no_item">No data found</string>
+
+
+    <string name="text_project_detail">ด้วยร้านค้าที่มีมากกว่า 2,500 ร้านค้า แพลทินัมครบครันด้วยสินค้าที่ตอบสนองทุกความต้องการ ไม่ว่าจะเป็น เสื้อผ้าสตรี เสื้อผ้าบุรุษ เสื้อผ้าเด็ก รองเท้า กระเป๋า เครื่องประดับ ของฝากที่ระลึก หลากสไตล์ที่พร้อมตอบสนองไลฟ์สไตล์ทันสมัยทุกรูปแบบ แบ่งออกเป็นโครงการต่างๆ ดังนี้
+        \n\n
+        \n• ชั้นใต้ดิน (Ginza)\t\t\tสินค้าประเภทยีนส์ และเสื้อผ้าแฟชั่น
+        \n• ชั้น 1 (Soho)\t\t\t\tเสื้อผ้าแฟชั่นสตรี
+        \n• ชั้น 2 (Oxford)\t\t\tเสื้อผ้าแฟชั่นสตรี และเด็ก
+        \n• ชั้น 3 (Nathan)\t\t\tเสื้อผ้าแฟชั่นสตรี บุรุษ และชุดชั้นใน
+        \n• ชั้น 4 (Camden)\t\t\tเสื้อผ้าแฟชั่นสตรี กระเป๋า รองเท้า
+        \n• ชั้น 5 (Orchard)\t\t\tศูนย์รวมเครื่องหนัง กระเป๋า รองเท้า เครื่องประดับ และกิ๊ฟช็อป
+        \n• ชั้น 7-10\t\t\t\t\t\t\พื้นที่จอดรถและคาร์โก้ บริการรับ-ส่งสินค้า
+        \n• ชั้น 11\t\t\t\t\t\t\t\tคลังสินค้า และสำนักงาน เดอะแพลทินัม แฟชั่นมอลล์
+        \n• ชั้น 12-23\t\t\t\t\t\t\tคอนโดมิเนียมพักอาศัย
+    </string>
+    <string name="text_announcement_detail">- กรุณาอย่าให้เงินกับขอทาน\n- ไม่มีนโยบายให้ขายของแบกับดิน (ยกเว้นตลาดนัดจตุจักรกลางคืนวันศุกร์ซึ่งจัดที่บริเวณลานอเนกประสงค์หน้าธนาคารออมสิน และลานส่งเสริมการขายหน้าอาคารที่ทำการตลาดนัด)\n- อย่านำสินค้ามาวางขายล้ำริมฝาระบายน้ำ (เฉพาะผู้ค้าริมถนนภายในตลาดนัดจตุจักร)\n- สำหรับผู้ค้ารถเข็น หาบเร่ แผงลอย สามารถขายอาหารสินค้าได้จนถึง 9:00 น.</string>
+    <string name="text_clock_detail">One of the most recognizable landmarks that is located at the heart of the market. Chatuchak Weekend Market Clock Tower is not only a meeting point and a starting point for the visitors, it is also a must-selfie with and the most frequent checked in place in the market. The clock tower was constructed in 1987 (BE 2530) for a celebration of His Majesty King Bhumibol Adulyadej on his 60th birthday on December 5th, 1987.</string>
+    <string name="market_jatujak_01">Nowhere else feels quite like Koh Rattanakosin, there’s always this sense of awe when people come here. It must be the architecture, the way signs look, the smell, or the way people lived. And of course, as Bangkok’s oldest district, Koh Rattankosin was open for business since Bangkok became capital. Today, Koh Rattanakosin has evolved into the center for the city’s most hip and chic spots. The old mixing with new modern concepts has attracted travelers around the world to experience Old Town Bangkok. Surrounded on three sides by rivers, Koh Rattanakosin means Rattanakosin Island, and it is home to Bangkok’s original heritage.\n\n
+        The historical roots define many restaurants, cafes, and shops that line both sides of the streets. From local stalls to Michelin-starred ones, food here never disappoints. And the same goes for the cafes where brilliant ideas are brought to life – making them unique and memorable experiences. Whether you’re in for a slow day or an adventurous one, you’ll discover beautiful temples and museums in Koh Rattanakosin like the Rattanakosin Exhibition Hall.\n\n
+        As the sun sets, don’t forget to stop for a relaxing massage at Tha Maharaj before embarking on the amazing food experience that the district is known. While the night is young, we recommend having a drink at one of the charming bars. Cap the night at beautiful and cozy hostels. Now this is the true old town experience – only at Koh Rattanakosin.</string>
+    <string name="market_jatujak_02">เปิดให้บริการทุกวัน\n
+วันจันทร์, อังคาร, พฤหัสบดีและศุกร์ เปิดให้บริการเวลา 09.00 – 20.00 น.\n
+และวันพุธ เสาร์และอาทิตย์ เปิดให้บริการเวลา 08.00 – 20.00 น. </string>
+    <string name="market_nearby">Surrounded by many public transportations e.g. skytrain (BTS), subway (MRT), public buses and vans, and taxi. Getting to Chatuchak Weekend Market is never a problem. The market is also located adjacent to other popular places where visitors can hop to easily using public transportation. \n\n- Chatuchak Park\n- State Railway Public Park\n- Air-Conditioned JJ Market (JJ Mall)\n- Or Tor Kor Market\n- Central Ladprao\n- Union Mall\n- Children\'s Discovery Museum\n- Bangkok Bus Terminal (Mo Chit 2)\n</string>
+    <string name="market_servive_detail">• ศูนย์อาหาร
+                                        \n• ธนาคารและบริการทางการเงินต่างๆ
+                                        \n• ห้องละหมาด
+                                        \n• ห้องน้ำ
+                                        \n• ห้องพยาบาล
+    </string>
+    <string name="common_error_string_title_gps">Location Services disabled</string>
+    <string name="common_string_error_gps_message">Rattanakosin Guide needs access to your location. Please turn on Location Services in your device settings.</string>
+
+    <!-- About Chatuchak-->
+    <string name="about_platinum">About Rattanakosin</string>
+    <string name="travel">How to get there</string>
+    <string name="travel_detail">Traveling to Platinum Fashion Mall is easy. Multiple means of transportation are available for visitors to choose from.</string>
+    <string name="private_car">Private car</string>
+    <string name="private_car_detail">• ที่จอดรถ 1,500 คัน</string>
+    <string name="mass_rapid_transit">Train &amp; Subways</string>
+    <string name="morchit_bts_sukhumvit">Mo Chit Station BTS Sukhumvit Line</string>
+    <string name="jatujak_mrt_chaloem_ratchamongkhon">Chatuchak Park station MTR: Bangkok Metro Chaloem Ratchamongkhon Line</string>
+    <string name="kamphaeng_phet_mrt_chaloem_ratchamongkhon">Chatuchak Park station MTR: Bangkok Metro Chaloem Ratchamongkhon Line</string>
+    <string name="jatujak_text">Chatuchak Park</string>
+    <string name="bus_stop">Bus</string>
+    <string name="normal_time">Daily operating hours (5am – 11pm):</string>
+    <string name="text_shine">24 hours bus lines:</string>
+    <string name="jatujak_door_01">Chatuchak Market (gate 1)</string>
+    <string name="url_term_and_condition">http://dv.co.th/rattanakosin-guide/terms.html</string>
+    <string name="main_search_string">ต้องการค้นหา</string>
+    <string name="string_regcomment_shop">Recommended Stores</string>
+    <string name="string_poc_shop">PRODUCTS of Chatuchak</string>
+    <string name="string_star_shop">Amenities</string>
+    <string name="string_heart_shop">ร้านค้าที่น่าสนใจ</string>
+    <string name="string_category_shop">Categories</string>
+    <string name="title_main">Home</string>
+    <string name="train_subways">
+        • รถไฟฟ้าบีทีเอส สถานีชิดลม และเดินเชื่อมต่อทางเดินเท้าลอยฟ้า R-Walk ประมาณ 10 นาที
+         \n• รถไฟฟ้าบีทีเอส สถานีราชเทวี เดินประมาณ 15 นาที
+        \n• รถไฟฟ้าแอร์พอร์ต เรล ลิงก์ สถานีราชปรารภ เดินประมาณ 10 นาที
+    </string>
+    <string name="boat">เรือ</string>
+    <string name="boat_station">• ท่าเรือประตูน้ำ</string>
+    <string name="van_car">รถตู้</string>
+    <string name="van_station">• สายปิ่นเกล้า – ประตูน้ำ
+        \n• สายวัดสน – ประตูน้ำ
+        \n• พระราม 2 - ประตูน้ำ</string>
+    <string name="bus_number">• สาย 2, 11, 23, 38, 60, 62, 79, 93, 99, 113, 139, 140, 505, 511</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- VDO Chanel -->
+    <string name="vdo_chanel">Video Channel</string>
+    <string name="vdo_chanel_name">Products of Chatuchak</string>
+    <string name="vdo_chanel_name_detail">1 view / 1 week ago</string>
+    <string name="video_chanel">Video\nChannel</string>
+    <string name="promotion_main">Promotion</string>
+    <string name="fav_trip">ทริปที่น่าสนใจ</string>
+    <string name="shopping_planner">Shopping\nPlanner</string>
+    <string name="live_map">Live Map</string>
+    <string name="video_title_detail">พลิกโฉมจตุจักร สู่ยุคดิจิทัล</string>
+    <string name="string_no_promotion">No promotion found</string>
+    <string name="string_no_fav_item">No store found</string>
+    <string name="string_no_review">No review</string>
+    <string name="no_review">No review</string>
+    <string name="string_youtube_publish_on">Published on </string>
+    <string name="string_error_no_result">No Result</string>
+    <string name="spirit_of_jj">Video</string>
+    <string name="live_map_btn">Live Map</string>
+
+    <!-- Manage -->
+    <string name="manage_promotion">Promotion</string>
+    <string name="manage_flash_sale">Flash Sale</string>
+    <string name="add_promotion">+ Add a promotion</string>
+    <string name="add_flash_sale">+ Add flash sale</string>
+    <string name="manage_no_promotion">No promotion available</string>
+    <string name="manage_no_flash_sale">No flash sale available</string>
+    <string name="publishing">กำลังเผยแพร่</string>
+    <string name="no_publish">ยังไม่เผยแพร่</string>
+    <string name="time_out">หมดเขต</string>
+    <string name="del_promotion_manage">Delete promotion</string>
+    <string name="del_promotion_manage_sub">If you click Ok, your promotion will be permanently deleted.</string>
+    <string name="del_flashsale_manage">Delete flash sales</string>
+    <string name="del_flashsale_manage_sub">If you click Ok, your flash sale will be permanently deleted.</string>
+    <!--flash sale-->
+    <string name="text_flashsale">Flash Sale</string>
+    <string name="flashsale_tab_1">Current</string>
+    <string name="flashsale_tab_2">Coming soon</string>
+    <string name="title_flash_sale">Flash Sale</string>
+    <string name="text_flashsale_detail">Flash Sale Details</string>
+    <string name="text_promotion_detail">Promotion Details</string>
+    <string name="add_flash_sale_title">Add Flash Sale</string>
+    <string name="edit_flash_sale">Edit Flash Sale</string>
+    <string name="add_promotion_title">Add Promotion</string>
+    <string name="hint_end_date">End date</string>
+    <string name="hint_start_date">Start date</string>
+    <string name="notice">Remark</string>
+    <string name="notice_flash_sale_detail">Your flash sale will end as schedule, no longer than 24 hours</string>
+    <string name="notice_promotion_detail">Only dates can be set when creating a promotion</string>
+    <string name="add_detail_next">Next</string>
+    <string name="add_detail_finish">Add</string>
+    <string name="add_flashsale_title_dialog">Flash sale added</string>
+    <string name="add_flashsale_detail_dialog">Your flash sale has already been added to the system</string>
+    <string name="thai_language_wording">Thai language</string>
+    <string name="english_language_wording">English language</string>
+    <string name="china_language_wording">Chinese language</string>
+    <string name="add_promotion_name_detail_in_th">Promotion Name (Thai)*</string>
+    <string name="add_promotion_name_detail_in_en">Promotion Name (English)</string>
+    <string name="add_flashsale_name_detail_in_th">Flash Sale Name (Thai)*</string>
+    <string name="add_flashsale_name_detail_in_en">Flash Sale Name (English)</string>
+    <string name="add_promotion_name_detail_in_cn">Promotion Name (Chinese)</string>
+    <string name="add_flashsale_name_detail_in_cn">Flash Sale (Chinese)</string>
+    <string name="must_add_promotion_content_detail">Detail*</string>
+    <string name="add_promotion_content_detail">Detail</string>
+    <string name="noti_to_add_input_in_th">* อย่างน้อยต้องระบุข้อมูลร้านค้าเป็นภาษาไทย</string>
+
+
+    <string name="add_promotion_title_dialog">Promotion added</string>
+    <string name="add_promotion_title_detail">Your promotion has already been added to the system</string>
+    <string name="noti_to_add_date">Please set a date for your Flash Sale or Promotion.</string>
+    <string name="noti_to_add_image">Please add an image for your Flash Sale or Promotion.</string>
+
+    <string name="noti_edit_title_promotion">แก้ไขโปรโมชั่นสำเร็จ</string>
+    <string name="noti_edit_title_flashsale">แก้ไขแฟลชเซลล์สำเร็จ</string>
+    <string name="noti_edit_desc_promotion">ระบได้แก้ไขโปรโมชั่นเรียบร้อยแล้ว</string>
+    <string name="noti_edit_desc_flashsale">ระบบได้แก้ไขแฟลชเซลล์เรียบร้อยแล้ว</string>
+
+    <!--Open Camera-->
+    <string name="open_camera">Camera</string>
+    <string name="open_gallery">Choose image</string>
+    <string name="del_image_camera">Delete</string>
+    <string name="common_string_time_left">Time left(s)</string>
+    <string name="common_string_by">by</string>
+
+
+    <!-- Login -->
+    <string name="login_title">Sign in</string>
+    <string name="login_title_email_or_phone">E-mail/Phone number</string>
+    <string name="login_title_email">Login with Phone Number</string>
+    <string name="login_to_reigster_title">Register</string>
+    <string name="login_placeholder_username">Username</string>
+    <string name="login_placeholder_password">Old password</string>
+    <string name="login_placeholder_password_new">New password</string>
+    <string name="login_placeholder_password_new_confirm">Confirm new password</string>
+    <string name="login_failed_title">Oops</string>
+    <string name="login_failed_desc">Cannot sign in</string>
+    <string name="login_failed_invalid_form">กรุณากรอกข้อมูลให้ถูกต้อง</string>
+    <string name="login_success_title">Success</string>
+    <string name="login_success_desc">เข้าสู่ระบบสำเร็จ</string>
+    <string name="login_or">or</string>
+    <string name="login_skip">Skip</string>
+    <string name="common_save">Save</string>
+
+    <!-- Register -->
+    <string name="register_password">Password</string>
+    <string name="register_title">Register</string>
+    <string name="register_title_confirm">Confirm</string>
+    <string name="register_title_otp">Confirm OTP</string>
+    <string name="register_placeholder_otp">OTP 6 digit</string>
+    <string name="register_placeholder_display_name">Display Name</string>
+    <string name="register_placeholder_email">E-mail</string>
+    <string name="register_placeholder_email_or_password">Mobile number</string>
+    <string name="register_placeholder_email_or_password_confirm">Confirm mobile number</string>
+    <string name="register_placeholder_email_confirm">Confirm e-mail</string>
+    <string name="register_placeholder_confirmpassword">Confirm password</string>
+    <string name="register_cancel">Cancel</string>
+    <string name="register_submit">Submit</string>
+    <string name="register_agree">I Agree to the </string>
+    <string name="register_term">term of use</string>
+    <string name="register_success_line_1">Registration complete</string>
+    <string name="register_success_line_2">ขอแสดงความยินดี ! คุณได้ยืนยันทำการลงทะเบียนเรียบร้อยแล้ว</string>
+    <string name="forget_password">Forgot password</string>
+
+    <!-- Term -->
+    <string name="term_title">Terms of use</string>
+    <string name="term_desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae ante blandit, pulvinar felis id, tempor ligula. Integer pellentesque sed diam quis suscipit. Morbi est nulla, eleifend et leo sit amet, tempus fringilla mi. Donec accumsan tristique ipsum id congue. Duis et volutpat nunc. Sed vitae vestibulum nisl. Nulla euismod purus volutpat ante finibus vestibulum. Pellentesque tempor nunc arcu, ac varius lacus iaculis sed. In mauris nulla, dignissim in mi ut, ultrices auctor lectus. Nunc vitae nulla ut lectus tempor venenatis.
+
+Quisque eu tempus neque. Suspendisse quam quam, commodo et hendrerit a, laoreet sed orci. Nam dignissim pulvinar facilisis. Aliquam lacinia eleifend massa, eget ultricies nunc posuere sit amet. Vivamus id leo purus. Vivamus turpis ex, aliquam eu nibh a, iaculis rutrum nisi. Vivamus rhoncus ac orci consequat interdum.
+
+Phasellus feugiat molestie magna a ullamcorper. Maecenas condimentum ultricies ornare. Nunc eget ultricies orci. Fusce congue, dui vel luctus tempus, massa erat convallis enim, sed egestas orci ex id justo. Ut commodo, neque ac bibendum vehicula, turpis leo porttitor leo, quis ornare odio mi id nunc. Praesent ornare, nunc at scelerisque commodo, lectus est porta lectus, in aliquam diam mauris et eros. Nam at varius lectus, nec convallis justo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla malesuada erat ut tortor dictum, vel maximus purus placerat. Fusce in dolor purus. In aliquam ante ante, non porttitor massa condimentum ullamcorper. Morbi a dolor posuere, elementum eros vel, aliquam turpis. Vestibulum id lacus libero.
+
+Nunc id vestibulum nibh. Quisque at lacus quam. Integer iaculis elit tristique tincidunt mollis. Nulla aliquet laoreet sapien, tempus tempus mi facilisis eu. In dolor augue, sagittis eget sagittis id, efficitur et eros. In molestie elementum luctus. Pellentesque ut lobortis purus, at interdum magna. Etiam mattis lacus eu lectus semper iaculis. Phasellus pharetra, mauris in maximus aliquet, nunc libero semper felis, nec tristique urna lacus ac leo. Donec eu odio lorem. Ut laoreet posuere erat sit amet dictum.
+
+Proin auctor, ex id tempus blandit, ante sapien tempor diam, a dictum elit enim sed nunc. Interdum et malesuada fames ac ante ipsum primis in faucibus. Cras sit amet condimentum tellus, a gravida diam. Aenean eget leo nisi. Nullam pellentesque bibendum nisl, vel accumsan diam aliquet nec. Phasellus pellentesque, leo et porta faucibus, libero nisi euismod mauris, a lobortis nisl arcu scelerisque lectus. Vivamus velit eros, commodo nec pretium eget, gravida vitae lacus. Sed accumsan ante condimentum massa blandit, in hendrerit mi molestie. Praesent eu velit eu ipsum mollis porttitor. Fusce varius elementum arcu, a aliquam nulla malesuada non. Aliquam mattis neque vel porttitor ultrices. Interdum et malesuada fames ac ante ipsum primis in faucibus.</string>
+
+    <!--Trip-->
+    <string name="trip">Trip</string>
+    <string name="trip_trab_1">My trip</string>
+    <string name="trip_trab_2">Recommended</string>
+    <string name="trip_guide">Select locations and\nadd them to your trip here.</string>
+    <string name="trip_store_in_trip">Create Trip</string>
+    <string name="trip_look_trip">Check out recommended trips</string>
+    <string name="trip_look_my_trip">View My Trip</string>
+    <string name="trip_no_trip">No recommended trips</string>
+    <string name="need_to_store">%1$s stores to go</string>
+    <string name="trip_no_facility_in_trip">There are no locations \nadded to your trip.</string>
+    <string name="no_store_in_trip2">To add a location to your trip, tap below\n\"Add a location\"</string>
+    <string name="follow">Follow</string>
+    <string name="following">Following</string>
+    <string name="btn_text_back_to_trip">Back to Trip</string>
+    <string name="del_my_hilight_trip">Delete trip</string>
+    <string name="del_my_hilight_trip_sub">if you click confirm, your trip will be permanently deleted.</string>
+    <string name="notify_sensor">Connect the Wi-Fi &amp; Bluetooth to get better use of the map.</string>
+    <string name="add_promotion_image">Maximum upload image size: \n2MB or W414 px X H240 px</string>
+    <string name="txt_info_promotion">Seller can set a start date and end date for a promotion when creating a promotion</string>
+    <string name="txt_info_flash_sale">Seller can create a period for flash sale. The maximum length for a period is 24 hours, and 4 flash sales / months. Once the flash sales is created, it will be displayed on Live Map</string>
+
+
+    <!--map_info-->
+    <string name="good_to_know">Good to know</string>
+    <string name="map_flash_sale">Flash Sale</string>
+    <string name="map_info_store">Shops</string>
+    <string name="map_how_to_use">How to best use the Map.</string>
+    <string name="map_info_internet">Turn on data connection</string>
+    <string name="map_info_wifi">Turn on Wi-Fi</string>
+    <string name="map_info_bluetooth">Turn on Bluetooth</string>
+    <string name="map_info_powerbank">Do not charge a device with power bank</string>
+    <string name="flash_sale_count">You can add %1$s more flash sales</string>
+    <string name="see_shop_detail">View details</string>
+    <string name="flash_sale_see_shop">See shops</string>
+
+    <!-- Register Error -->
+    <string name="register_error_title">Sorry</string>
+    <string name="register_error_display_null">Please insert your display name.</string>
+    <string name="register_error_phone_null">Please insert your mobile number.</string>
+    <string name="register_error_phone_invalid_format">Invalid mobile number.</string>
+    <string name="register_error_phone_invalid_confirm">Confirm Invalid mobile number.</string>
+    <string name="register_error_password_null">Please insert your password.</string>
+    <string name="register_error_password_invalid_confirm">Password do not match</string>
+    <string name="otp_password">Please enter the 6-digit OTP.</string>
+    <string name="otp_new_password">Resend OTP</string>
+    <string name="text_back_to_chang_password">ย้อนกลับ</string>
+    <string name="seting_new_password">Create new password</string>
+    <string name="need_otp_password">Get OTP</string>
+    <string name="number_otp">Ref. code</string>
+    <string name="exp_five_minute">OTP is valid for 5 minutes.</string>
+    <string name="more_mobile_number">Mobile phone no.</string>
+    <string name="changed_password_success">Your password was successfully changed.</string>
+    <string name="changed_password_success_detail">Password changed</string>
+    <string name="new_password_six_number">New password (6 digits)</string>
+    <string name="comfirm_new_password">Confirm new password</string>
+    <string name="register_faild">Registration failed.</string>
+    <!--<string name="register_faild_detail">您所输入的电话号码已使用，请重新输入。</string>-->
+    <string name="txt_input_more_6_number">Passwords must be at least 6 characters long.</string>
+    <string name="participating_store">Live Map</string>
+    <string name="register_success_start_app">Start</string>
+    <string name="only_one_flash_sale_be_active">Only one flash sale can be active, please delete the existing flash sale or try again after the existing flash sale ends.</string>
+    <string name="cant_add_flash_sale">Unable to add new flash sale.</string>
+    <string name="more_than_one_year">Your flash sale will end as schedule, no longer than 1 year</string>
+    <string name="aleart_add_flash_sale_24_hr">You can not add flash sales and promotion, no longer than 24 hours</string>
+    <string name="notify_flash_sale">Notification</string>
+    <string name="personal_information">Please fill in information</string>
+    <string name="date_of_birth">วัน/เดือน/ปีเกิด</string>
+    <string name="delete_search_history">Clear History</string>
+    <string name="start_shopping_coupon">เริ่มช้อปปิ้งกับเราด้วยคูปองส่วนลดมูลค่า 100 บาท</string>
+    <string name="use_coupon_in_application">สามารถกดใช้งานได้ที่ปุ่มคูปองภายในแอปพลิเคชัน</string>
+    <string name="coupon_price">100 บาท</string>
+    <string name="story_main">Story</string>
+    <string name="novotel_main">NOVOTEL</string>
+    <string name="food_shop">Restaurants and Cafes</string>
+    <string name="recommend_trip">RECOMMENDED\nTRIP</string>
+    <string name="txt_coupon_main">COUPON</string>
+    <string name="txt_sale_main">SALE</string>
+    <string name="txt_report_coupon">Coupon</string>
+    <string name="select_reviews">select</string>
+    <string name="position_sticky">Pinned location</string>
+    <string name="txt_position_sticky">Pinned Location</string>
+    <string name="remove_pin_marker_title">Are you sure?</string>
+    <string name="remove_pin_marker_detail">You cannot revert this action.</string>
+    <string name="overlay_guide_pin">You just pinned a location on the map.\nIt will be added to My Trips.</string>
+    <string name="create_pin">Create meeting point\nby adding a pin on the map.</string>
+    <string name="click_to_pin">Tap and hold to\nadd pin.</string>
+    <string name="pin_position">Name of Pinned Location</string>
+    <string name="product_price">Baht</string>
+    <string name="txt_create_pin">Your pinned\nlocation.</string>
+    <string name="unable_location_title">Unable to identify your location.</string>
+    <string name="unable_location_detail">Please allow Platinum Guide to access your location while using the app.</string>
+    <string name="shop_map">Map</string>
+    <string name="request_new_otp">You can get OTP password again in</string>
+    <string name="cancel_pin">Remove pin</string>
+    <string name="toast_out_app">Tap to exit the app.</string>
+    <string name="trip_trab_3">Exclusive</string>
+    <string name="add_place">Add a location</string>
+    <string name="tv_no_pin_list">You have no pinned locations.</string>
+    <string name="string_hour">Hours</string>
+    <string name="string_to">to</string>
+    <string name="no_list_flash_sale">No Flash Sale found</string>
+    <string name="no_palce_in_trip">There are no locations\nadded to your trip.</string>
+    <string name="string_contrac">Contact</string>
+    <string name="road">ถนน</string>
+    <string name="sub_district">แขวง</string>
+    <string name="district">เขต</string>
+    <string name="string_class">ห้อง</string>
+    <string name="building">อาคาร</string>
+    <string name="moo">หมู่ที่</string>
+    <string name="search_by_cate">Find by Category</string>
+    <string name="buy_now">BUY NOW</string>
+    <string name="no_promotion_fou">There are currently no promotions.</string>
+    <string name="promotion_to_dat">Today\'s Promotion</string>
+    <string name="see_all">View all</string>
+    <string name="title_website">Website</string>
+    <string name="scheules_time">Open on Weekends at</string>
+    <string name="hr">Hours</string>
+    <string name="howto_create_pin">How to add a pin to the map</string>
+    <string name="eat">Eat</string>
+    <string name="tour">Travel</string>
+    <string name="shopping">Shop</string>
+    <string name="other">More</string>
+
+    <string name="connection_lost_text">Connection Lost</string>
+    <string name="tap_retry">Tap Retry</string>
+    <string name="coupon_path">coupon_path</string>
+    <string name="register_error_email_invalid_format">Invalid email.</string>
+    <string name="time_throttle_otp">time_throttle_otp</string>
+    <string name="navigate_map">Direction</string>
+    <string name="buy_ticket">Buy Ticket</string>
+    <string name="coupon_type">coupon_type</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/heartload_00000" android:fromDegrees="0" android:toDegrees="30" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00001" android:fromDegrees="30" android:toDegrees="60" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00002" android:fromDegrees="60" android:toDegrees="90" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00003" android:fromDegrees="90" android:toDegrees="120" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00004" android:fromDegrees="120" android:toDegrees="150" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00005" android:fromDegrees="150" android:toDegrees="180" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00006" android:fromDegrees="180" android:toDegrees="210" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00007" android:fromDegrees="210" android:toDegrees="240" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00008" android:fromDegrees="240" android:toDegrees="270" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00009" android:fromDegrees="270" android:toDegrees="300" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00010" android:fromDegrees="300" android:toDegrees="330" android:duration="150" />
+    <item android:drawable="@drawable/heartload_00011" android:fromDegrees="330" android:toDegrees="360" android:duration="150" />
+</animation-list>

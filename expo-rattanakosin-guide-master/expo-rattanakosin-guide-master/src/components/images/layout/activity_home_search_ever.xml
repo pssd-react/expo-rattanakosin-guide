@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/searc_head"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white"
+              android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        >
+
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/app_bar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <View
+                android:id="@+id/view_space_action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:visibility="gone"/>
+
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_title_bar"
+                app:popupTheme="@style/AppTheme.PopupOverlay">
+
+                <RelativeLayout
+                    android:id="@+id/submenu_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <ImageView
+                        android:id="@+id/icon_back_menu"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="15dp"
+                        android:src="@drawable/ic_arrow_back_search_result"
+                        android:visibility="gone"/>
+
+
+                    <TextView
+                        android:id="@+id/tv_app_bar_name"
+                        style="@style/SimpleTextDBMomentX.Normal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/icon_back_menu"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="@color/white"/>
+
+                </RelativeLayout>
+
+            </android.support.v7.widget.Toolbar>
+
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cv_home_search_ever"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="40dp"
+            app:cardCornerRadius="3dp"
+            app:cardElevation="5dp">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="10">
+
+                <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                    android:id="@+id/iv_back_home_search_ever"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1.5"
+                    android:adjustViewBounds="true"
+                    android:paddingBottom="14dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="14dp"
+                    android:src="@drawable/ic_back_search_home"/>
+
+
+                <EditText
+                    android:id="@+id/et_search_need"
+                    style="@style/SimpleTextDBMomentX.Normal"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="7.5"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:hint="@string/home_search"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLength="100"
+                    android:maxLines="1"
+                    android:textColor="@color/text_black"/>
+
+                <ImageView
+                    android:id="@+id/iv_clear_home_search"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:paddingBottom="18dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="18dp"
+                    android:src="@drawable/ic_clear_text_searc"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </FrameLayout>
+
+
+    <TextView
+        android:id="@+id/tv_search_ever"
+        style="@style/SimpleTextDBMomentX.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25dp"
+        android:text="@string/home_search_ever"
+        android:textColor="@color/text_gray_dark"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="6.5dp"
+        android:background="@color/lightGrey"/>
+    <!--<RelativeLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content">-->
+
+    <LinearLayout
+        android:id="@+id/ll_search_keyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_list_home_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <LinearLayout
+            android:id="@+id/ll_delete_search_history"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_delete_search_history"/>
+
+            <TextView
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="10dp"
+                android:text="@string/delete_search_history"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_result_hit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+    </FrameLayout>
+    <!--<LinearLayout-->
+    <!--android:id="@+id/ll_no_item"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:orientation="vertical"-->
+    <!--android:paddingLeft="20dp"-->
+    <!--android:visibility="gone"-->
+    <!--android:paddingRight="20dp">-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/home_list"-->
+    <!--style="@style/SimpleTextDBMomentX.Normal"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:paddingBottom="10dp"-->
+    <!--android:paddingTop="10dp"-->
+    <!--android:text="@string/home_search_no_item"-->
+    <!--android:textColor="@color/text_black_list"-->
+
+    <!--/>-->
+
+    <!--&lt;!&ndash;<View&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:layout_height="1dp"&ndash;&gt;-->
+    <!--&lt;!&ndash;android:background="@color/lightGrey" />&ndash;&gt;-->
+    <!--</LinearLayout>-->
+
+    <!--</RelativeLayout>-->
+
+
+</LinearLayout>

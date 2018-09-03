@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/rl_register"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <include layout="@layout/app_bar_main"/>
+
+        <FrameLayout
+            android:id="@+id/fm_register_platinum"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/fm_register_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_info_map"
+        android:clickable="true"
+        android:gravity="center"
+        android:visibility="gone">
+
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="500dp"
+            android:layout_gravity="center"
+            android:background="@color/white"
+            >
+
+            <TextView
+                android:id="@+id/txt_register_success"
+                style="@style/SimpleTextDBMomentX.Big"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:gravity="center_horizontal"
+                android:text="@string/register_success_line_1"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/txt_detail"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txt_register_success"
+                android:gravity="center_horizontal"
+                />
+
+            <FrameLayout
+                android:id="@+id/fm_register_coupon"
+                android:layout_width="335dp"
+                android:layout_height="175dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="2">
+
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:id="@+id/img_register_coupon"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="2"
+                        android:src="@drawable/ic_register_human"
+                        />
+
+
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/text_use_coupon"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/fm_register_coupon"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                />
+
+            <Button
+                android:id="@+id/btn_register_success"
+                style="@style/SimpleTextDBMomentX.Normal"
+                android:layout_width="335dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_yellow_platinum"
+                android:text="@string/register_success_start_app"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

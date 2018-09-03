@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/ll_detail_list_shop"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_shop_detail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:weightSum="6">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="7"
+                >
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="center">
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:id="@+id/imv_cat_fashion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:adjustViewBounds="true"
+                        />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_store_name"
+                    style="@style/SimpleTextDBMomentXBold"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="6.5"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:textSize="28sp"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.5"/>
+
+                <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                    android:id="@+id/imv_flat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/button_state_fab_merchant_style"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tv_store_location"
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:textColor="@color/color_text"
+                    android:textSize="22sp"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_list_store_parent"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_weight="5"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <ImageView
+                android:id="@+id/imv_logo"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_weight="0.85"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="top"
+                android:layout_toRightOf="@+id/imv_logo"
+                android:layout_weight="2.1"
+                android:orientation="vertical"
+
+                >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical|left"
+                    android:orientation="horizontal"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/ll_review"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:background="@drawable/button_redius_border_gray"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        >
+
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_star_active"/>
+
+                        <TextView
+                            android:id="@+id/tv_store_rating"
+                            style="@style/SimpleTextDBMomentX"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:lines="1"
+                            android:maxWidth="40dp"
+                            android:paddingEnd="1dp"
+                            android:textColor="@color/duskYellow"
+                            android:textSize="18sp"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toRightOf="@+id/ll_review"
+                        android:background="@drawable/button_redius_border_gray"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:minWidth="40dp"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_location_active"/>
+
+                        <TextView
+                            android:id="@+id/tv_store_distance"
+                            style="@style/SimpleTextDBMomentX"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="3dp"
+                            android:ellipsize="end"
+                            android:lines="1"
+                            android:maxWidth="80dp"
+                            android:textColor="@color/color_text"
+                            android:textSize="18sp"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_product_of_jj"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_alignBottom="@+id/ll_distance"
+                        android:layout_alignTop="@+id/ll_distance"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toRightOf="@+id/ll_distance"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_redius_border_gray"
+                        android:gravity="center"
+                        android:minWidth="20dp"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/logo_product_of_jj"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_product_of_platinum"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_promotion"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_alignBottom="@+id/ll_distance"
+                        android:layout_alignTop="@+id/ll_distance"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toRightOf="@+id/ll_product_of_jj"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_redius_border_gray"
+                        android:gravity="center"
+                        android:minWidth="20dp"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_promotion_active"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_flashsale"
+                        android:layout_width="0dp"
+                        android:layout_height="25dp"
+                        android:layout_alignBottom="@+id/ll_distance"
+                        android:layout_alignTop="@+id/ll_distance"
+                        android:layout_marginLeft="3dp"
+                        android:layout_toRightOf="@+id/ll_promotion"
+                        android:layout_weight="1"
+                        android:background="@drawable/button_redius_border_gray"
+                        android:gravity="center"
+                        android:minWidth="35dp"
+                        android:orientation="horizontal"
+                        android:padding="3dp"
+                        >
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:adjustViewBounds="true"
+                            android:src="@drawable/ic_flashsale_active"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_product_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="bottom"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:id="@+id/product_item_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="5dp"
+                        android:src="@drawable/placeholder_product_item"/>
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:id="@+id/product_item_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="5dp"
+                        android:src="@drawable/placeholder_product_item"/>
+
+                    <com.inthecheesefactory.thecheeselibrary.widget.AdjustableImageView
+                        android:id="@+id/product_item_3"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:padding="5dp"
+                        android:src="@drawable/placeholder_product_item"/>
+                </LinearLayout>
+
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/ll_desc_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="5dp"
+                    android:gravity="top"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:id="@+id/tv_shop_description"
+                        style="@style/SimpleTextDBMomentX"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="3"
+                        android:text=""
+                        android:textSize="22sp"/>
+                </LinearLayout>
+
+                </ScrollView>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_list_store_parent"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/imv_map_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_violet"
+                    />
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/shop_map"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1"
+                android:visibility="gone">
+
+                <ImageButton
+                    android:id="@+id/imv_detail_list_shop"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_violet"
+                    />
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/shop_map"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"/>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/imv_navigate"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:background="@drawable/button_violet"
+                    />
+
+                <TextView
+                    style="@style/SimpleTextDBMomentX"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/navigate_map"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"/>
+            </FrameLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
