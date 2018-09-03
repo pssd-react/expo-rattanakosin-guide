@@ -31,9 +31,9 @@ export class FlashSaleScreen extends Component{
     state = INITAL_STATE;
     
     renderHeader = () => {
-        console.log(this.state.index);
+        //console.log(this.state.index);
         if(this.state.index == '0'){
-            console.log("เข้า IF");
+            //console.log("เข้า IF");
             return  <Header headerText= 'โปรฟ้าผ่า' />
         }else { 
             console.log("เข้า Else");
