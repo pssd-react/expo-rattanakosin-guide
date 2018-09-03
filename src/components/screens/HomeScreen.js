@@ -13,6 +13,8 @@ import { CardSection } from '../common/CardSection';
 import { Icon} from 'react-native-elements'
 import axios from 'axios'
 import _ from 'lodash'
+import { HomeMenuScreens } from './homelistscreens'
+import { createStackNavigator } from 'react-navigation'
 
 var  data = {
         'RqAppID':'1234',
@@ -31,56 +33,18 @@ var config = {
 
 class HomeScreen extends Component{
     state = { 
-<<<<<<< HEAD
-        items: [],
-        datas: [],
-        Menu: [ 
-    
-        ]
-=======
         item: ''
->>>>>>> 78d081117fb010a1cca648e4f8d6c3738a15bcf6
     };
 
     componentWillMount(){
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
         data , config )
-<<<<<<< HEAD
-        .then(response => {this.setState({ items: response.data } ) })
-=======
         .then(response => {this.setState({ item : response.data } ) })
->>>>>>> 78d081117fb010a1cca648e4f8d6c3738a15bcf6
         .catch((error) => {
             console.log('axios error:',error);
         });
        
     }
-<<<<<<< HEAD
-
-   
-
-    renderData(){
-        let i=1
-        _.map((this.state.items.MenuList), (val)=>{
-            if(val.Sequence !== '1'){
-                this.state.Menu[i] = val;
-            }
-            _.each((val.SliderList), (why) => {
-                this.state.datas[i] = why;
-               // console.logthis.state.datas.Name)
-            })
-            i++
-        })
-       
-    }
-    
-
-    
-    renderItem( Menu ){
-
-        return <ItemDetail Menu={ Menu } />;
-        
-=======
     
     renderItem(){
        //console.log(this.state.item)
@@ -89,32 +53,49 @@ class HomeScreen extends Component{
             })
         
         return  hellow 
->>>>>>> 78d081117fb010a1cca648e4f8d6c3738a15bcf6
     }
 
 
 
   render(){
-<<<<<<< HEAD
-        {this.renderData()}
-        return (
-            <View>
-                    {this.renderItem(this.state.Menu)}
-            </View>
-=======
         //console.log(this.state)
         return (
             <Card style={{flex:1}}>
                 <CardSection>
-                    <View style={{height:'30%'}}>
-
-                    </View>
+                    <View style={{ flexDirection: 'row' ,  marginLeft: 60  }} >
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image
+                                style={{ flexDirection: 'colu mn', marginLeft: 10 }}
+                                source={ require('../images/drawable-hdpi/ic_type_category_food.webp')}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image
+                                style={{ flexDirection: 'column', marginLeft: 10 }}
+                                source={ require('../images/drawable-hdpi/ic_type_category_bank.webp')}
+                            />
+                        </View>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image
+                                style={{ flexDirection: 'column', marginLeft: 10 }}
+                                source={ require('../images/drawable-hdpi/ic_type_category_facilities.webp')}
+                            />
+                        
+                        </View>
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Menu')}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image
+                                style={{ flexDirection: 'column', marginLeft: 10 }}
+                                source={ require('../images/drawable-hdpi/ic_type_category_hotel.webp')}
+                            />
+                        </View>
+                        </TouchableOpacity>
+                     </View>
                 </CardSection>
                 <CardSection>
                     {this.renderItem()}
                 </CardSection>
             </Card>
->>>>>>> 78d081117fb010a1cca648e4f8d6c3738a15bcf6
             
         );
     }
@@ -160,36 +141,10 @@ const {
 
 
 class ItemDetail extends Component {
-<<<<<<< HEAD
-
-=======
     state = {
         item : []
     }
->>>>>>> 78d081117fb010a1cca648e4f8d6c3738a15bcf6
-    // renderImg(){
-    //     console.log(this.state.datas)
-    //     return this.state.datas.map(items => 
-    //         <ItemImg key={items.Name} items={items}/>
-    //     );
-    // }
-
-<<<<<<< HEAD
-    render(){
-        return (
-            <ScrollView>
-                <Card  style={{ flex: 4}}>
-                    <CardSection  style={{ flex: 1}}>
-                    <View style={headerContentStyle}>
-                        <Text style={headerTextStyle} >{Menu}</Text>
-                        <Text style={headerTextStyle}> ดูทั้งหมด </Text>
-                    </View>
-                    </CardSection>
-                    <CardSection >
-                      
-                    </CardSection>
-                </Card>
-=======
+  
     renderImg(imgs){
         //if scale blah blah
         const base_url = 'https://uat-shop.digitalventures.co.th'
@@ -232,7 +187,6 @@ class ItemDetail extends Component {
         return (
             <ScrollView>
                 {this.renderData()}
->>>>>>> 78d081117fb010a1cca648e4f8d6c3738a15bcf6
             </ScrollView>
         )
     }
@@ -242,34 +196,16 @@ class ItemDetail extends Component {
 
 
 
-// const ItemImg = ({ items }) => {
- 
-//     return (
-        
-//                     <ScrollView horizontal={true}
-//                         showsHorizontalScrollIndicator={false} >
-//                     <Image
-//                         style={{width: 150, height: 100, borderRightWidth: 5}}
-//                         source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-//                         />
-//                         <Image
-//                         style={{width: 150, height: 100 ,borderRightWidth: 5}}
-//                         source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-//                         />
-//                         <Image
-//                         style={{width: 150, height: 100,borderRightWidth: 5}}
-//                         source={{uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png'}}
-//                         />
-//                         <Image
-//                         style={{width: 150, height: 100,borderRightWidth: 5}}
-//                         source={{uri: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADMAAAAzCAYAAAA6oTAqAAAAEXRFWHRTb2Z0d2FyZQBwbmdjcnVzaEB1SfMAAABQSURBVGje7dSxCQBACARB+2/ab8BEeQNhFi6WSYzYLYudDQYGBgYGBgYGBgYGBgYGBgZmcvDqYGBgmhivGQYGBgYGBgYGBgYGBgYGBgbmQw+P/eMrC5UTVAAAAABJRU5ErkJggg=='}}
-//                         />
-//                     </ScrollView>
-//     )
-// }
+const HomeMenu = createStackNavigator({
+    Main : {
+        screen : HomeScreen
+    },
+    Menu : {
+        screen : HomeMenuScreens
+    },
+})
 
 
 
 
-
-export default HomeScreen
+export default HomeMenu

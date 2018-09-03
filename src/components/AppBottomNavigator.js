@@ -3,7 +3,7 @@ import { Button, View, Text } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createMaterialTopTabNavigator } from 'react-navigation'
 import MapScreen from './screens/MapScreen'
-import HomeScreen from './screens/HomeScreen'
+import HomeMenu from './screens/HomeScreen'
 import ProfileMenu from './screens/ProfileScreen'
 import FlashSaleScreen from './screens/FlashSaleScreen'
 import TripScreen from './screens/TripScreen'
@@ -12,7 +12,7 @@ import I18n from './config/i18n'
 
 const AppBottomNavigator = createMaterialTopTabNavigator(
     {
-        Home : {screen: HomeScreen},
+        Home : {screen: HomeMenu},
         Map:{screen: MapScreen},
         Flash_Sale:{screen: FlashSaleScreen},
         Trip: {screen: TripScreen},
