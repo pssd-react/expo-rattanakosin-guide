@@ -61,7 +61,7 @@ class HomeScreen extends Component{
   render(){
         //console.log(this.state)
         return (
-            <Card style={{flex:1}}>
+            <Card style={{flex:1 , backgroundColor: '#ffffff' }}>
                 <ScrollView>
                 <CardSection>
                     <View style={{ flexDirection: 'row' ,  marginLeft: 60  }} >
