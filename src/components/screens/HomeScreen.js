@@ -32,6 +32,7 @@ var config = {
 
 
 class HomeScreen extends Component{
+    static navigationOptions = {header: null}
     state = { 
         item: ''
     };
@@ -61,11 +62,12 @@ class HomeScreen extends Component{
         //console.log(this.state)
         return (
             <Card style={{flex:1}}>
+                <ScrollView>
                 <CardSection>
                     <View style={{ flexDirection: 'row' ,  marginLeft: 60  }} >
                         <View style={{ flexDirection: 'row' }}>
                             <Image
-                                style={{ flexDirection: 'colu mn', marginLeft: 10 }}
+                                style={{ flexDirection: 'column', marginLeft: 10 }}
                                 source={ require('../images/drawable-hdpi/ic_type_category_food.webp')}
                             />
                         </View>
@@ -95,6 +97,7 @@ class HomeScreen extends Component{
                 <CardSection>
                     {this.renderItem()}
                 </CardSection>
+                </ScrollView>
             </Card>
             
         );
@@ -185,9 +188,9 @@ class ItemDetail extends Component {
 
     render(){
         return (
-            <ScrollView>
+            <View>
                 {this.renderData()}
-            </ScrollView>
+            </View>
         )
     }
 }
