@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, BackHandler } from 'react-native';
 import AppBottomNavigator from './src/components/AppBottomNavigator';
-//import SettingLanguage from './src/components/screens/settingscreens/SettingLanguage';
 
-export default class App extends React.Component {
-  render() {
-    return (
-        <AppBottomNavigator />
-        //<SettingLanguage />
+
+class App extends React.Component {
+ 
+   render() {
+     return (
+      <AppBottomNavigator/>
     );
   }
 }
+export default App;

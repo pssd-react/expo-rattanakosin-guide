@@ -1,13 +1,24 @@
 import React, {Component} from 'react';
 import {AppRegistry, Text, View, TouchableOpacity } from 'react-native';
-import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../common';
+import {HeaderBackButton } from 'react-navigation'
+import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../../common';
 
-export default class ChangePassword extends Component {
+export class ChangePassword extends Component {
+    static navigationOptions = { header: null }
     state ={ phone: '', otp: '', confirm_otp: '', error: '', loading: false };
+
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
+    }
+
     render() {
         const { container, containerStyle, alignButton, signupTextCont } = styles
         return (
-            <View style={{justifyContent: 'center'}}>
+            <View style={{backgroundColor: '#fff', flex: 1}}>
+            <Header headerText="เปลี่ยนรหัสผ่าน" 
+                    backgroundImage= {require('../../../images/drawable-hdpi/bg_more.webp')}
+                    headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+            <View style={{justifyContent: 'center',marginTop:20}}>
                 <View style={{ marginLeft: 30, marginRight: 30 }}>
                     <CardSection>
                         <LabelInput 
@@ -40,6 +51,7 @@ export default class ChangePassword extends Component {
                     </CardSection>
                 </View>
             </View>
+        </View>
            
         );
     }

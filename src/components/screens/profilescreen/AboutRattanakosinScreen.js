@@ -5,11 +5,22 @@ import {
     StyleSheet,
     ScrollView,
     } from 'react-native'
-    import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../common';
+import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../common';
+import { HeaderBackButton } from 'react-navigation'
+
 export class AboutRattanakosinScreen extends Component {
-    static navigationOptions = {title: 'About Rattanakosin Screen'}
+    static navigationOptions = {header: null}
+
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
+    }
+
     render(){
         return (
+            <View>
+            <Header headerText="เกี่ยวกับรัตนโกสินทร์" 
+                backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+                headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
             <ScrollView>
                 <View style={styles.container}>
                 <CardSection>
@@ -41,6 +52,7 @@ export class AboutRattanakosinScreen extends Component {
                 </CardSection>
                 </View>
             </ScrollView>
+            </View>
         )
     }
 }

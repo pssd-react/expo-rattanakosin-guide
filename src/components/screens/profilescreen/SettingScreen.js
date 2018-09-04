@@ -8,6 +8,7 @@ import {
     TouchableOpacity} from 'react-native'
 import {createStackNavigator, HeaderBackButton } from 'react-navigation'
 import SettingLanguage from './settingscreens/SettingLanguage'
+import { Header } from '../../common';
 
 const listData = [
     {'id': '1', 'section':'ภาษา', 'language':'ไทย' },
@@ -18,13 +19,16 @@ const listData = [
 }
 
 class SettingScreen extends Component {
-    
-    static navigationOptions = { title: "ตั้งค่า", headerLeft: <HeaderBackButton onPress={() => this.props.navigation.goBack(null)} />,}
+   // static navigationOptions = { header: null }
     state=INITIAL_STATE
 
     componentWillMount(){
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
         this.setState({dataSource:ds.cloneWithRows(listData)})
+    }
+
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
     }
    
     onRowPress(rowData){
@@ -37,6 +41,9 @@ class SettingScreen extends Component {
 
         return ( 
             <View>
+                <Header headerText="ตั้งค่า" 
+                backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+                headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 <ListView
                 dataSource={this.state.dataSource}
                 renderRow={(rowData) => {
@@ -76,7 +83,9 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 1,
         backgroundColor: '#ffffff',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        height: 60,
+        alignItems: 'center'
     },
     thumbnailStyle: {
         height: '57%',
@@ -115,7 +124,7 @@ const styles = StyleSheet.create({
 
 const LanguageMenu = createStackNavigator({
     Main : {
-        screen : SettingScreen
+        screen : SettingScreen, navigationOptions:{header: null} 
     },
     Language : {
         screen : SettingLanguage

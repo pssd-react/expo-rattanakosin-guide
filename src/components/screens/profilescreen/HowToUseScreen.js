@@ -7,6 +7,9 @@ import {
     ListView,
     Linking,
     TouchableOpacity} from 'react-native'
+import { HeaderBackButton } from 'react-navigation'
+import { Header } from '../../common';
+
 const listData = [
     {'id': '1', 'section':'วิธีค้นหาสถานที่และหมวดหมู่ของร้านค้า', 'url':'https://uat-shop.digitalventures.co.th/rattanakosin/th/index.html' },
     {'id': '2', 'section':'วิธีเข้าสู่สถานที่จากหน้าแผนที่', 'url':'https://uat-shop.digitalventures.co.th/rattanakosin/th/help2.html' },
@@ -22,18 +25,25 @@ const listData = [
 
 export class HowToUseScreen extends Component {
 
-    static navigationOptions = {title: 'วิธีการใช้งาน'}
+    static navigationOptions = {header: null}
     state=INITIAL_STATE
 
     componentWillMount(){
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
         this.setState({dataSource:ds.cloneWithRows(listData)})
     }
+
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
+    }
    
     render(){
 
         return ( 
             <View>
+                <Header headerText="วิธีการใช้งาน" 
+                backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+                headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 <ListView
                 dataSource={this.state.dataSource}
                 renderRow={(rowData) => {
