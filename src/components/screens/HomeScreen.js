@@ -19,6 +19,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
+import { Restaurants } from './itemscreens/Restaurants';
 
 var data = {
     'RqAppID': '1234',
@@ -76,7 +77,7 @@ class HomeScreen extends Component {
                         style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%', height: 200 }}
                         source={require('../assets/Wat-Suthat.jpg')}
                     >
-
+  
                         <View style={{
                             flexDirection: 'row', padding: 10,
                             backgroundColor: 'white', marginHorizontal: 20,
@@ -99,15 +100,17 @@ class HomeScreen extends Component {
                     </ImageBackground>
                     <CardSection style={{ bottom: 50, marginLeft: '4%', marginRight: '4%' }}>
                         <View style={{ flexDirection: 'row' }} >
-                            <View style={styles.imgLeft}>
-                                <Image
-                                    style={{ width: '100%', height: '100%' }}
-                                    source={require('../images/drawable-hdpi/ic_main_food.webp')}
-                                />
-                                <Text style={styles.textLeft} >
-                                    กิน
-                                </Text>
-                            </View>
+                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')} >
+                                <View style={styles.imgLeft}>
+                                    <Image
+                                        style={{ width: '100%', height: '100%' }}
+                                        source={require('../images/drawable-hdpi/ic_main_food.webp')}
+                                    />
+                                    <Text style={styles.textLeft} >
+                                        กิน
+                                    </Text>
+                                </View>
+                            </TouchableOpacity>
                             <View style={styles.imgRight}>
                                 <Image
                                     style={{ width: '100%', height: '100%' }}
@@ -239,16 +242,27 @@ class ItemDetail extends Component {
 
     renderImg(imgs) {
         //if scale blah blah
-        const base_url = 'https://uat-shop.digitalventures.co.th'
-
-        return _.map(imgs.SliderList, imgSlider => {
-            return (<Image
-                style={{ width: 150, height: 100, borderRightWidth: 5 }}
-                source={{ uri: 'https://images-na.ssl-images-amazon.com/images/I/51Gji7jFNjL._SX425_.jpg' }}
-            />)
-        })
-
+        const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
+        console.log(imgs.Sequence);
+        if(imgs.Scale === 'F' && imgs.Sequence != '1' ){
+            return _.map(imgs.SliderList, imgSlider => {
+                return (<Image
+                    style={{ width: 250, height: 100,  marginRight: 10 }}
+                    source={{ uri: base_url + imgSlider.ImageURL }}
+                />)
+            })
+        }
+        else if(imgs.Scale === 'H' && imgs.Sequence != '1'){
+            return _.map(imgs.SliderList, imgSlider => {
+                return (<Image
+                    style={{ width: 150, height: 100, marginRight: 10 }}
+                    source={{ uri: base_url + imgSlider.ImageURL }}
+                />)
+            })
+        }
     }
+
+    
 
     renderData() {
         return _.map(this.props.items, item => {
@@ -295,6 +309,9 @@ const HomeMenu = createStackNavigator({
     Menu: {
         screen: HomeMenuScreens
     },
+    restaurants: {
+        screen: Restaurants
+    }
 })
 
 

@@ -170,8 +170,9 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     textLeft: {
-        width: '100%' , 
-        fontSize: 12, 
+        marginTop: 10,
+        width: '100%',
+        fontSize: 12
     },
     textCenter: {
         width: '100%' , 
