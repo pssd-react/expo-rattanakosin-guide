@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Text, View, TouchableOpacity, ImageBackground } from 'react-native'
+import {Text, View, TouchableOpacity, ImageBackground, BackHandler } from 'react-native'
 import {LabelInput, Button, CardSection,} from '../../../common'
 import {ChangePassword} from './ChangePassword'
 import {RegisterForm} from './RegisterForm'
@@ -10,7 +10,7 @@ import {StoreGlobal} from '../../../config/GlobalState'
 class LoginForm extends Component {
     static navigationOptions = { header: null }
     state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false,  userInfo: '', };
-    
+
     async loginWithFacebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
         ('1886750428085436', { permissions: ['public_profile'] })

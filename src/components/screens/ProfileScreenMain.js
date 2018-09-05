@@ -32,18 +32,18 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 const listDataLogin = [
-    {'id': '1', 'section':'Setting', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '2', 'section':'How to use', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '3', 'section':'About Rattanakosin', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '4', 'section':'About this App', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '5', 'section':'Logout', 'name':require('../images/drawable-hdpi/ic_more_logout.webp/'), 'url': ''}
+    {'id': '1', 'section':'ตั้งค่า', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '2', 'section':'วิธีการใช้งาน', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '3', 'section':'เกี่ยวกับรัตนโกสินทร์', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '4', 'section':'เกี่่ยวกับแอปพลิเคชัน', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '5', 'section':'ออกจากระบบ', 'name':require('../images/drawable-hdpi/ic_more_logout.webp/'), 'url': ''}
 ]
 
 const listDataNoLogin = [
-    {'id': '1', 'section':'Setting', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '2', 'section':'How to use', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '3', 'section':'About Rattanakosin', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '4', 'section':'About this App', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '1', 'section':'ตั้งค่า', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '2', 'section':'วิธีการใช้งาน', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '3', 'section':'เกี่ยวกับรัตนโกสินทร์', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '4', 'section':'เกี่่ยวกับแอปพลิเคชัน', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
 ]
 
 const BACKGROUND_URI = require('../images/drawable-hdpi/bg_more.webp/')
@@ -52,6 +52,7 @@ class ProfileScreenMain extends Component{
     state= {
     userInfo: '',
     dataSource : '',
+    //status_login: false,
 }
     static navigationOptions = {header: null}
     
@@ -67,9 +68,14 @@ class ProfileScreenMain extends Component{
                 console.log(user)
             }
         }) 
+        console.log('--------componentDidMount----------')
+        console.log(this.state)
     }
 
-    component
+    componentWillUpdate(){
+        console.log('--------componentWillUpdate----------')
+        console.log(this.state)
+    }
 
     async loginWithFacebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
@@ -100,11 +106,14 @@ class ProfileScreenMain extends Component{
     onButtonRegister(){
         this.props.navigation.navigate('Register')
     }
-
     _renderUserInfo() {
+        console.log('---check---')
+       console.log(this.state.userInfoFB)
+      // this.setState({status_login:true})
+        //this.state.status_login = true
         return (
             <View style={{ alignItems: 'center' }}>
-                <CardSection style={{ justifyContent: 'center', marginTop: 40}}>
+                <CardSection style={{ justifyContent: 'center', marginTop: 20}}>
                 </CardSection>
                 <CardSection style={{paddingLeft:30, paddingRight:30}}>
                     <Image 
@@ -145,6 +154,8 @@ class ProfileScreenMain extends Component{
     }
 
     _renderProfile(){
+        //this.state.status_login = false
+       // this.setState({status_login:false})
         return (
                 <View>
                     <CardSection style={{ justifyContent: 'center', marginTop: 60}}>
@@ -176,16 +187,21 @@ class ProfileScreenMain extends Component{
     }
 
     renderButtonFB(status=1){
-        console.log(status)
+        console.log(status) 
         console.log("=======Pro========")
-        console.log(this.state.userInfo)
+        console.log(this.state.userInfoFB)
         console.log("====================")
-        if(status === 0){
-           console.log("เข้า status 0")
-          // this.state.userInfo = null
-          return(this.renderPage());
-            
+        if(this.state.userInfoFB === undefined){
+            console.log("=======Nooooo========")
+           // return(this._renderProfile());
         }
+        if(status === 0){
+        //   console.log("เข้า status 0 ")
+          // this.state.userInfo = null
+         // return(this.renderPage());
+          return(this._renderProfile());
+            
+         }
         if((!this.state.userInfoFB)){
            // console.log(this.state.userInfo)
             return(this._renderProfile());
@@ -195,16 +211,29 @@ class ProfileScreenMain extends Component{
             return (
                 this._renderUserInfo()
             );
+        }else{
+               return(this._renderProfile());
         }
-            
+       
         
+    }
+    
+    renderBlock(){
+       // if(this.state.status_login){
+          //  console.log('Login')
+       // }else{
+         //   console.log('LogOut')
+       // }
+        console.log("bbbbbbbbbbb")
+        console.log(this.state)
+        return (<View style={styles.viewBlockStyle}/>);     
     }
 
     renderListmenu(){
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-
+        //console.log(this.state)
         if(!this.state.userInfoFB){
-            console.log(this.state)
+           // console.log(this.state)
             this.state = {
                 dataSource : ds.cloneWithRows(listDataNoLogin),
             }
@@ -230,12 +259,12 @@ class ProfileScreenMain extends Component{
             this.props.navigation.navigate('AboutApp');
         }else if(rowData.id === '5'){
            // this.props.navigation.navigate('Main');
-           console.log('///////////////////////')
-           console.log(this.state)
-           console.log('///////////////////////')
-           console.log(this.state.userInfoFB)
+          // console.log('///////////////////////')
+          // console.log(this.state)
+           //console.log('///////////////////////')
+           //console.log(this.state.userInfoFB)
            //setState({userInfoFB = null})
-            this.renderButtonFB(0);
+            this.renderButtonFB();
             
         }
     }
@@ -267,6 +296,7 @@ class ProfileScreenMain extends Component{
                     <View style={styles.chevronContainerStyle}>
                     <Image 
                     source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                    
                     </View>
                 </View>
             </TouchableOpacity>
@@ -275,7 +305,7 @@ class ProfileScreenMain extends Component{
             contentContainerStyle={{width:'100%', backgroundColor: '#DDDDDD'}}
             
             />
-            <View style={styles.viewBlockStyle}/>
+            {this.renderBlock()}
             </View>
         )
     }
@@ -295,10 +325,10 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 1,
         backgroundColor: '#ffffff',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     thumbnailStyle: {
-        height: '57%',
+        height: 360,
         width:'100%'
     },
     listViewTextContainer:{
@@ -308,7 +338,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     viewBlockStyle: {
-        height: '10%'
+        height: '18%'
     },
     iconStyle:{
         marginRight: 5,

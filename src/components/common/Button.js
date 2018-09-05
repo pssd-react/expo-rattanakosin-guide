@@ -14,7 +14,6 @@ const Button = (props) => {
     );
 };
 
-
 const styles = {
     textStyle: {
         alignSelf: 'center',

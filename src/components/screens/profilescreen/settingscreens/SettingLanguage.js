@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
         marginBottom: 1,
         backgroundColor: '#ffffff',
         flexDirection: 'row',
-        height: 60,
+        height: 58,
         alignItems: 'center'
     },
     thumbnailStyle: {

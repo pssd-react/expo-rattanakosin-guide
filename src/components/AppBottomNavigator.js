@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Button, View, Text } from 'react-native'
+import { Button, View, Text, Image } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createMaterialTopTabNavigator } from 'react-navigation'
 import MapScreen from './screens/MapScreen'
@@ -32,6 +32,7 @@ const AppBottomNavigator = createMaterialTopTabNavigator(
                 iconName = 'ios-person';
                 }
                 return (<Ionicons name={iconName} size={20} color={tintColor} />);
+               // return (<Image source={require()}  size={20}  />);
             },
             tabBarLabel: ({ focused })=>{
                 const { routeName } = navigation.state;
