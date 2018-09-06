@@ -1,0 +1,145 @@
+import React, {Component} from 'react'
+import {
+    View, 
+    Text,
+    StyleSheet,
+    TouchableOpacity,
+    Image
+} from 'react-native'
+import { Card  } from '../../common/Card';
+import { CardSection } from '../../common/CardSection';
+import { Icon} from 'react-native-elements'
+
+export class HomeMenuScreens extends Component {
+    
+    renderHeadingText(){
+        return (
+            <View style={styles.headerStyle}>   
+                <Text style={styles.textStyle} > Categories </Text>
+            </View>
+        )
+    }
+
+    renderBlogContent(){
+        return (
+            <View style={{ flex:5,alignItems:'center',justifyContent:'space-around'}}>
+                <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                            source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')}
+                        />
+                        <Text style={{fontSize: 12, alignItems:'center'}} >
+                            Restaurants
+                        </Text>
+                    </View>
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                            source={ require('../../images/drawable-hdpi/ic_type_category_place_travel.webp')}
+                        />  
+                        <Text style={{fontSize: 12, alignItems:'center'}} >
+                            Points of Interest
+                        </Text>
+                    </View>
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                            source={ require('../../images/drawable-hdpi/ic_type_category_shop.webp')}
+                        />
+                        <Text style={{fontSize: 12, alignItems:'center'}} >
+                            Shops
+                        </Text>
+                    </View>   
+                </CardSection>
+                <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                                source={ require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
+                            />
+                            <Text style={{fontSize: 12, alignItems:'center'}} >
+                                Accommodation
+                            </Text>
+                    </View>
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                                source={ require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
+                            />  
+                            <Text style={{fontSize: 12, alignItems:'center'}} >
+                                Commercial Areas
+                            </Text>
+                    </View>
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                                source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
+                            />
+                            <Text style={{fontSize: 12, alignItems:'center'}} >
+                                Bank
+                            </Text>
+                    </View>   
+                </CardSection>
+                <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                            source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')}
+                        />
+                        <View style={{flexDirection:'column', alignItems:'center'}}>
+                            <Text style={{fontSize: 12, alignItems:'center'}} >
+                            Schools and Government offices 
+                            </Text>
+                        </View>
+                    </View>
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                            source={ require('../../images/drawable-hdpi/ic_type_category_service.webp')}
+                        />  
+                        <Text style={{fontSize: 12, alignItems:'center'}} >
+                        Services
+                        </Text>
+                    </View>
+                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
+                        <Image
+                            style = { {width: 70 , height: 70, alignItems:'center'}}
+                            source={ require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
+                        />
+                        <Text style={{fontSize: 12, alignItems:'center'}} >
+                        Facilities
+                        </Text>
+                    </View>   
+                </CardSection>
+            </View>
+        )
+    }
+
+    render(){
+        return (
+            <Card style={{flex:1,backgroundColor: '#ffffff'}}>
+                {this.renderHeadingText()}
+                {this.renderBlogContent()}
+           </Card>
+        )
+    }
+}
+
+const styles = StyleSheet.create({
+    container:{
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    headerStyle:{
+        flex:1,
+        alignItems:'center',
+        justifyContent:'center'
+    },
+    textStyle:{
+        fontSize: 25,
+        paddingTop: 20,
+        paddingBottom: 30
+    }
+})

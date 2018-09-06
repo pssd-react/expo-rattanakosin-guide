@@ -28,7 +28,8 @@ export class TripScreen extends Component{
     render(){
         return (
             <View style={styles.container}>
-                <Header headerText= 'ทริป' />
+                <Header headerText="ทริป" 
+                backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
                 <TabView
                     navigationState={this.state}
                     renderScene={SceneMap({

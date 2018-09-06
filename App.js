@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import AppBottomNavigator from './src/components/AppBottomNavigator';
-import {StoreGlobal} from './src/components/config/language_setup';
+import {StoreGlobal} from './src/components/config/GlobalState';
 import I18n from './src/components/config/i18n'
 
 INITIAL_STATE = {
