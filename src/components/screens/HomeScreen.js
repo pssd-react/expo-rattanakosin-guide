@@ -9,8 +9,10 @@ import {
     ImageBackground,
     Platform,
     StatusBar,
-    TextInput
+    TextInput,
+    Dimensions
 } from 'react-native'
+import Carousel from 'react-native-carousel-view'
 import { Button } from '../common/Button';
 import { Card } from '../common/Card';
 import { CardSection } from '../common/CardSection';
@@ -19,22 +21,28 @@ import axios from 'axios'
 import _ from 'lodash'
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
-import { Restaurants } from './itemscreens/Restaurants';
+import { Restaurants } from './itemscreens/Restaurants'; 
+import { Shop } from './itemscreens/Shop'
+import { Travel } from './itemscreens/Travel'
+import { Accommodation } from './itemscreens/Accommodation'
+import { Bank } from './itemscreens/Bank'
+import { Commercial_Areas } from './itemscreens/Commercial_Areas'
+import { Facilities } from './itemscreens/Facilities'
+import { Schools_and_Government } from './itemscreens/Schools_and_Government'
+import { Services } from './itemscreens/Services'
 
-var data = {
+const data = {
     'RqAppID': '1234',
     'UserLanguage': 'EN',
     'MarketID': '3',
     'Version': '1.1.4'
 }
-var config = {
-    headers: {
-        'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
-        'Content-Type': 'application/json'
-    }
+const config = {
+        headers: {
+            'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+            'Content-Type': 'application/json'
+        }
 };
-
-
 
 class HomeScreen extends Component {
     static navigationOptions = { header: null }
@@ -58,106 +66,104 @@ class HomeScreen extends Component {
     }
 
     renderItem() {
-        //console.log(this.state.item)
-        const hellow = _.map((this.state), (items) => {
-            return (<ItemDetail items={items.MenuList} />)
-        })
+        let i=0
+        const list = _.map((this.state), (items) => {
+            return (<ItemDetail key={i} items={items.MenuList} />)
+            i++
 
-        return hellow
+        })
+        return list
     }
 
+    renderHeader(){
+        return (
+            <ImageBackground
+            style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%' }}
+            source={require('../../components/images/drawable-hdpi/bg_platinum_main.webp')}
+            >
+                <View style={{
+                    width: '70%',
+                    borderRadius: 8,
+                    flexDirection: 'row', padding: 5,
+                    backgroundColor: 'white', marginHorizontal: 20,
+                    shadowOffset: { width: 0, height: 0 },
+                    shadowColor: 'black',
+                    shadowOpacity: 0.2,
+                    elevation: 1,
+                    marginTop: Platform.OS == 'android' ? 30 : null}}>
+                    <Icon name="search" size={20} style={{ marginRight: 10 }} />
+                    <TextInput
+                        underlineColorAndroid="transparent"
+                        placeholder="ค้นหา ..."
+                        placeholderTextColor="grey"
+                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }}/>
+                </View>
+            </ImageBackground>
+        )
+    }
 
+    renderTopMenu(){
+        return (
+            <CardSection style={{flex:1,bottom: 40, flexDirection: 'row', justifyContent: 'center', alignItems:'center' }}>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')} >
+                    <View style={styles.imgLeft}>
+                        <Image
+                            style={{ width: 70, height: 70 }}
+                            source={require('../images/drawable-hdpi/ic_main_food.webp')}
+                        />
+                        <Text style={styles.textLeft} >
+                            กิน
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('travel')}>
+                    <View style={styles.imgRight}>
+                        <Image
+                            style={{ width: 70, height: 70 }}
+                            source={require('../images/drawable-hdpi/ic_main_travel.webp')}
+                        />
+                        <Text style={styles.textLeft} >
+                            เที่ยว
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity  onPress={()=> this.props.navigation.navigate('shop')}>
+                    <View style={styles.imgRight}>
+                        <Image
+                            style={{ width: 70, height: 70 }}
+                            source={require('../images/drawable-hdpi/ic_main_shop.webp')}
+                        />
+                        <Text style={styles.textLeft} >
+                            ช้อป
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Menu')} >
+                    <View style={styles.imgEnd}>
+                        <Image
+                            style={{ width: 70, height: 70 }}
+                            source={require('../images/drawable-hdpi/ic_main_other.webp')}
+                        />
+                        <Text style={styles.textLeft} >
+                            อื่นๆ   
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            </CardSection>
+        )}
 
     render() {
-        //console.log(this.state)
         return (
-            <View style={{ flex: 1 }}>
-                <ScrollView>
-                    <ImageBackground
-                        style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%', height: 200 }}
-                        source={require('../assets/Wat-Suthat.jpg')}
-                    >
-  
-                        <View style={{
-                            flexDirection: 'row', padding: 10,
-                            backgroundColor: 'white', marginHorizontal: 20,
-                            shadowOffset: { width: 0, height: 0 },
-                            shadowColor: 'black',
-                            shadowOpacity: 0.2,
-                            elevation: 1,
-                            marginTop: Platform.OS == 'android' ? 30 : null
-                        }}>
-                            <Icon name="search" size={20} style={{ marginRight: 10 }} />
-                            <TextInput
-                                underlineColorAndroid="transparent"
-                                placeholder="ค้นหา ..."
-                                placeholderTextColor="grey"
-                                style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }}
-                            />
-
-                        </View>
-
-                    </ImageBackground>
-                    <CardSection style={{ bottom: 50, marginLeft: '4%', marginRight: '4%' }}>
-                        <View style={{ flexDirection: 'row' }} >
-                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')} >
-                                <View style={styles.imgLeft}>
-                                    <Image
-                                        style={{ width: '100%', height: '100%' }}
-                                        source={require('../images/drawable-hdpi/ic_main_food.webp')}
-                                    />
-                                    <Text style={styles.textLeft} >
-                                        กิน
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                            <View style={styles.imgRight}>
-                                <Image
-                                    style={{ width: '100%', height: '100%' }}
-                                    source={require('../images/drawable-hdpi/ic_main_travel.webp')}
-                                />
-                                <Text style={styles.textLeft} >
-                                    เที่ยว
-                                </Text>
-                            </View>
-
-                            <View style={styles.imgRight}>
-                                <Image
-                                    style={{ width: '100%', height: '100%' }}
-                                    source={require('../images/drawable-hdpi/ic_main_shop.webp')}
-                                />
-                                <Text style={styles.textLeft} >
-                                    ช้อป
-                                </Text>
-                            </View>
-                            <TouchableOpacity onPress={()=>this.props.navigation.navigate('Menu')} >
-                                <View style={styles.imgRight}>
-                                    <Image
-                                        style={{ width: '100%', height: '100%' }}
-                                        source={require('../images/drawable-hdpi/ic_main_other.webp')}
-                                    />
-                                    <Text style={styles.textLeft} >
-                                        อื่นๆ   
-                                    </Text>
-                                </View>
-                            </TouchableOpacity>
-                        </View>
-
-                    </CardSection>
-
-                    <Card style={{ flex: 1 }}>
-                        <ScrollView>
-                            <CardSection>
-                                {this.renderItem()}
-                            </CardSection>
-                        </ScrollView>
-                    </Card>
-                </ScrollView>
-            </View>
-        );
-    }
-
-
+            <ScrollView>
+                <View style={{ flex: 1, backgroundColor: 'white' }}>
+                        {this.renderHeader()}
+                        {this.renderTopMenu()}
+                    <View style={{flex:4, bottom:40}}>
+                        {this.renderItem()}
+                    </View>
+                </View>
+            </ScrollView>  
+        )}
 }
 
 const styles = StyleSheet.create({
@@ -169,71 +175,70 @@ const styles = StyleSheet.create({
         paddingBottom: 5
     },
     headerTextStyle: {
-        fontSize: 18
-    },
-    thumbnailStyle: {
-        height: 50,
-        width: 50
-    },
-    thumbnaiContainerStyle: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
-        marginRight: 10
-    },
-    imageStyle: {
-        height: 300,
-        width: '100%',
-        flex: 1
-    }, imgLeft: {
+        fontSize: 14,
+        fontWeight:'bold'
+    },imgLeft: {
         flexDirection: 'column',
-        marginRight: 20,
-        marginTop: 20,
-        marginBottom: 5,
-        width: 70,
-        height: 70,
+        paddingTop: 5,
+        paddingBottom: 5,
+        marginRight: '2.5%',
+        marginTop: '5%',
+        marginBottom: '5%',
+        flex:1,
         alignItems: 'center',
         justifyContent: 'center'
     }, imgRight: {
         flexDirection: 'column',
-        marginLeft: 10,
-        marginRight: 20,
-        marginTop: 20,
-        marginBottom: 20,
-        width: 70,
-        height: 70,
+        paddingTop: 5,
+        paddingBottom: 5,
+        marginLeft: '2.5%',
+        marginRight: '2.5%',
+        marginTop: '5%',
+        marginBottom: '5%',
+        flex:1,
         alignItems: 'center',
         justifyContent: 'center'
-    },
+    }, imgEnd: {
+        flexDirection: 'column',
+        paddingTop: 5,
+        paddingBottom: 5,
+        marginLeft: '2.5%',
+        marginTop: '5%',
+        marginBottom: '5%',
+        flex:1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }
+    ,
     textLeft: {
-        marginLeft: 50,
-        marginTop: 10,
-        width: '100%',
         fontSize: 12
     },
-    imgCenter: {
-        flexDirection: 'column',
-        marginLeft: 40,
-        marginRight: 45,
-        marginTop: 20,
-        marginBottom: 5,
-        width: 70,
-        height: 70,
-        alignItems: 'center',
-        justifyContent: 'center'
+    recomNameText: { 
+        position:'absolute', 
+        bottom: 0, 
+        left:0, 
+        fontSize: 8, 
+        color: 'white', 
+        fontWeight:'bold',
+        textShadowColor:'black',
+        textShadowOffset:{width: 1, height: 1},
+        textShadowRadius:1
     },
-
+    recomBlog:{ flex:1, 
+        marginBottom:5, 
+        marginLeft:5,
+        shadowColor:'black',
+        shadowOffset:{width: 2, height: 2}
+    }
 
 })
 
 const {
-    thumbnailStyle,
     headerContentStyle,
-    thumbnaiContainerStyle,
     headerTextStyle,
-    imageStyle
+    recomNameText,
+    recomBlog
 } = styles;
-
 
 class ItemDetail extends Component {
     state = {
@@ -241,50 +246,129 @@ class ItemDetail extends Component {
     }
 
     renderImg(imgs) {
-        //if scale blah blah
         const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
-     //   console.log(imgs.Sequence);
-        if(imgs.Scale === 'F' && imgs.Sequence != '1' ){
-            return _.map(imgs.SliderList, imgSlider => {
-                return (<Image
-                    style={{ width: 250, height: 100,  marginRight: 10 }}
-                    source={{ uri: base_url + imgSlider.ImageURL }}
-                />)
+        let imgRes = ''
+        let i = 0
+        let banner = 'banner'
+        let imageF = 'imgF'
+        let imageH = 'imgH'
+        console.log(imgs.Sequence);
+        if(imgs.Scale === 'F' && imgs.MenuType === '06' ){
+            imgRes = _.map(imgs.SliderList, imgSlider => {
+                return (
+                    <ImageBackground
+                        key={imageF+''+i}
+                        style={{ 
+                        width: 250, 
+                        height: 100, 
+                        marginRight: 10}}
+                        source={{ uri: base_url + imgSlider.ImageURL }}
+                    >
+                        <View style={recomBlog}>
+                            <Text style={recomNameText}>{imgSlider.Name}</Text>
+                        </View>
+                    </ImageBackground>
+                )
+                i++
             })
+
+            return (
+                <CardSection>
+                    <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        {imgRes}
+                    </ScrollView>
+                </CardSection>
+            )
         }
-        else if(imgs.Scale === 'H' && imgs.Sequence != '1'){
-            return _.map(imgs.SliderList, imgSlider => {
-                return (<Image
-                    style={{ width: 150, height: 100, marginRight: 10 }}
-                    source={{ uri: base_url + imgSlider.ImageURL }}
-                />)
-             })
+        else if(imgs.Scale === 'H' && imgs.MenuType === '06'){
+            imgRes =  _.map(imgs.SliderList, imgSlider => {
+                return (
+                    <ImageBackground
+                        key={imageH+''+i}
+                        style={{ 
+                        width: 150,
+                        height: 100, 
+                        marginRight: 10}}
+                        source={{ uri: base_url + imgSlider.ImageURL }}
+                    >
+                        <View style={recomBlog}>
+                            <Text style={recomNameText}>{imgSlider.Name}</Text>
+                        </View>
+                    </ImageBackground>
+                )
+                i++
+            })
+
+            return (
+                <CardSection>
+                    <ScrollView
+                        horizontal={true}
+                        showsHorizontalScrollIndicator={false}
+                    >
+                        {imgRes}
+                    </ScrollView>
+                </CardSection>
+            )
+        }else if(imgs.MenuType === '10'){
+            imgRes = _.map(imgs.SliderList, imgSlider => {
+                return (
+                <View key={banner+''+i} style={{width: Dimensions.get('window').width, height: 150}}>
+                    <Image
+                        style={{height:150}}
+                        source={{ uri: base_url + imgSlider.ImageURL }}
+                    />
+                </View>
+                )
+                i++
+            })
+
+            return (
+                <Carousel
+                    delay={3000}
+                    indicatorAtBottom={true}
+                    indicatorSize={20}
+                    indicatorColor="purple"
+                    width= {'100%'}
+                    height={150}
+                >
+                {imgRes}
+                </Carousel>
+            )
         }
+
+        
     }
 
-    
+    renderText(item){
+        const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
+       if(item.MenuType === '06'){ 
+           return (
+            <CardSection style={{ flex: 1 }}>
+                <View style={headerContentStyle}>
+                    <CardSection style={{ flexDirection: 'row', flex: 1 , justifyContent: 'space-between'}}>
+                        <Text style={headerTextStyle} >{item.Name}</Text>
+                        <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}}>
+                        <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                        <Image 
+                        style={{height:15, width:15, tintColor: 'green'}}
+                        source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                        </View>
+                    </CardSection>
+                </View>
+            </CardSection>
+        )}
+    }
 
     renderData() {
         return _.map(this.props.items, item => {
             return (
-                <Card style={{ flex: 4 }}>
-                    <CardSection style={{ flex: 1 }}>
-                        <View style={headerContentStyle}>
-                            <CardSection style={{ flexDirection: 'row', flex: 1 }}>
-                                <Text style={headerTextStyle} >{item.Name}</Text>
-                                <Text style={{ justifyContent: 'flex-end' }} >ดูทั้งหมด</Text>
-                            </CardSection>
-                        </View>
-                    </CardSection>
-                    <CardSection >
-                        <ScrollView
-                            horizontal={true}
-                            showsHorizontalScrollIndicator={false}
-                        >
-                            {this.renderImg(item)}
-                        </ScrollView>
-                    </CardSection>
-                </Card>
+                <View key={item.Sequence} style={{ flex: 1 }}>
+                        {this.renderText(item)}
+                        {this.renderImg(item)}
+                </View>
             )
         })
     }
@@ -298,10 +382,6 @@ class ItemDetail extends Component {
     }
 }
 
-
-
-
-
 const HomeMenu = createStackNavigator({
     Main: {
         screen: HomeScreen
@@ -311,10 +391,31 @@ const HomeMenu = createStackNavigator({
     },
     restaurants: {
         screen: Restaurants
+    },
+    travel: {
+        screen: Travel
+    },
+    shop: {
+        screen: Shop
+    },
+    accommodation: {
+        screen: Accommodation
+    },
+    commercial_areas:{
+        screen: Commercial_Areas
+    },
+    bank:{
+        screen: Bank
+    },
+    schools_and_government:{
+        screen: Schools_and_Government
+    },
+    services:{
+        screen: Services
+    },
+    facilities:{
+        screen: Facilities
     }
 })
-
-
-
 
 export default HomeMenu

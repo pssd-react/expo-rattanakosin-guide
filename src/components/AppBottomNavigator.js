@@ -4,10 +4,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons'
 import { createMaterialTopTabNavigator } from 'react-navigation'
 import MapScreen from './screens/MapScreen'
 import HomeMenu from './screens/HomeScreen'
-import ProfileMenu from './screens/ProfileScreen'
+import {ProfileMenu} from './screens/ProfileScreenMain'
 import FlashSaleScreen from './screens/FlashSaleScreen'
 import TripScreen from './screens/TripScreen'
-import {StoreGlobal} from './config/language_setup'
+import {StoreGlobal} from './config/GlobalState'
 import I18n from './config/i18n'
 
 const AppBottomNavigator = createMaterialTopTabNavigator(

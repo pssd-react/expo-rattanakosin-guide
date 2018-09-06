@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, TouchableOpacity, Image } from 'react-native'
+import { Text, TouchableOpacity, Image, View } from 'react-native'
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ButtonStar = (props) => {
@@ -7,12 +7,14 @@ const ButtonStar = (props) => {
 
     return (
         <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.style]}>
-            <Image style={{width:'30%', height:'30%'}}
+            <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
+            <Image style={{width:20, height:20, alignSelf:'center'}}
              source={ require('../images/drawable-hdpi/ic_star_fill.webp')} 
             /> 
             <Text style={[textStyle, props.textStyle]}>
              {props.children}
             </Text>
+            </View>
         </TouchableOpacity>
     );
 };
@@ -31,6 +33,7 @@ const styles = {
         alignSelf: 'stretch',
         backgroundColor: '#fffff',
         borderColor: '#333333',
+        justifyContent: 'center',
         borderRadius: 5,
         marginLeft: 5,
         marginRight: 5,

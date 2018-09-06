@@ -10,11 +10,14 @@ import {
     WebView,
     TouchableOpacity} from 'react-native'
 import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../common';
-import firebase from 'firebase';
+import firebase from 'firebase'
 import { SocialIcon } from 'react-native-elements'
-import Ionicons from 'react-native-vector-icons/Ionicons'
 import {createStackNavigator} from 'react-navigation'
-import {SettingScreen, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen} from './profilescreen'
+import {SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen} from './profilescreen'
+import {StoreGlobal} from '../config/GlobalState'
+
+import LoginMenu from './profilescreen/loginscreens/LoginForm'
+import {RegisterForm} from './profilescreen/loginscreens/RegisterForm';
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -28,35 +31,45 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const listViewData = [
+const listDataLogin = [
     {'id': '1', 'section':'Setting', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
     {'id': '2', 'section':'How to use', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
     {'id': '3', 'section':'About Rattanakosin', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
     {'id': '4', 'section':'About this App', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '5', 'section':'Logout', 'name':require('../images/drawable-hdpi/ic_more_logout.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'}
+    {'id': '5', 'section':'Logout', 'name':require('../images/drawable-hdpi/ic_more_logout.webp/'), 'url': ''}
+]
+
+const listDataNoLogin = [
+    {'id': '1', 'section':'Setting', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '2', 'section':'How to use', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '3', 'section':'About Rattanakosin', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
+    {'id': '4', 'section':'About this App', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
 ]
 
 const BACKGROUND_URI = require('../images/drawable-hdpi/bg_more.webp/')
 
-class ProfileScreen extends Component{
+class ProfileScreenMain extends Component{
+    state= {
+    userInfo: '',
+    dataSource : '',
+}
     static navigationOptions = {header: null}
-    constructor(){
-        super()
+    
+    
+    componentWillMount(){
         const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-
-        this.state = {
-            dataSource : ds.cloneWithRows(listViewData),
-            userInfo: null
-        }
+        this.setState({dataSource:ds.cloneWithRows(listDataNoLogin)})
     }
 
     componentDidMount(){
         firebase.auth().onAuthStateChanged((user) => {
             if(user != null){
-                console.log(user)
+              //  console.log(user)
             }
-        })
+        }) 
     }
+
+    component
 
     async loginWithFacebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
@@ -64,16 +77,27 @@ class ProfileScreen extends Component{
 
         if(type === 'success'){
             /* const credentail = firebase.auth.FacebookAuthProvider.credentail(token)
-
             firebase.auth().signInWithCredential(credentail).catch((error) => {
                 console.log(error)
             }) */
+            
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
-            const userInfo = await response.json();
-            this.setState({ userInfo });
-            console.log(userInfo)
+            const userInfoFB = await response.json();
+           this.setState({ userInfoFB });
+           this.state.userInfo = userInfoFB
+          //  console.log('******')
+          //  console.log(this.state.userInfo)
          
         }
+    }
+
+    onButtonLoginNumber(){
+       // Actions.login();
+       this.props.navigation.navigate('Login')
+    }
+
+    onButtonRegister(){
+        this.props.navigation.navigate('Register')
     }
 
     _renderUserInfo() {
@@ -83,30 +107,30 @@ class ProfileScreen extends Component{
                 </CardSection>
                 <CardSection style={{paddingLeft:30, paddingRight:30}}>
                     <Image 
-                    source={{ uri: this.state.userInfo.picture.data.url }}
-                    style={{ width: 130, height: 130 }}
+                    source={{ uri: this.state.userInfoFB.picture.data.url }}
+                    style={{ width: 150, height: 150 }}
                     />
                 </CardSection>
                 <CardSection style={{paddingLeft:30, paddingRight:30}}>
-                    <Text style={{ fontSize: 20, color: '#fff', fontWeight: 'bold' }}>{this.state.userInfo.name}</Text>
+                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{this.state.userInfoFB.name}</Text>
                 </CardSection>
                 <CardSection style={{justifyContent: 'space-between', marginTop: 20}}>
                     <View style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
                         <TouchableOpacity onPress={null}>
                         <View style={{ flexDirection: 'row' }}>
-                            <Image
+                            <Image style={{ width: 25, height: 30 }}
                             source={ require('../images/drawable-hdpi/ic_report_review_item.webp')}
                             />
                             <View style={{ flexDirection: 'column', marginLeft: 10 }}>
                                 <Text style={{ fontSize: 16 , color: '#fff'}}>ประวัติการรีวิว</Text>
-                                <Text style={{ fontSize: 16 , color: '#fff'}}>0</Text>
+                                <Text style={{ fontSize: 20 , color: '#fff'}}>0</Text>
                             </View>
                         </View>
                         </TouchableOpacity>
                     </View>
                     <View style={{flex: 1, alignItems: 'center'}}>
                         <View style={{ flexDirection: 'row' }}>
-                            <Image
+                            <Image style={{ width: 22, height: 28 }}
                             source={ require('../images/drawable-hdpi/ic_report_coupon.webp')}
                             />
                             <View style={{ flexDirection: 'column', marginLeft: 10 }}>
@@ -119,23 +143,22 @@ class ProfileScreen extends Component{
         );
     }
 
-    renderButtonFB(){
-        if(!this.state.userInfo){
-            return (
+    _renderProfile(){
+        return (
                 <View>
                     <CardSection style={{ justifyContent: 'center', marginTop: 60}}>
                         <Text style={{  fontSize: 22, color: '#fff'  }}>ยังไม่ได้เข้าสู่ระบบ</Text>
                     </CardSection>
                     <CardSection style={{paddingLeft:30, paddingRight:30}}>
-                        <Button onPress={null} 
+                        <Button onPress={() => this.onButtonLoginNumber()} 
                             style={{backgroundColor: '#ffc94c'}} 
                             textStyle={{color: '#000'}}>
                             เข้าสู่ระบบด้วยหมายเลขโทรศัพท์
                         </Button>
                     </CardSection>
                     <CardSection style={{paddingLeft:30, paddingRight:30}}>
-                        <SocialIcon style={{flex: 1, borderRadius: 5}}
-                        title={'เข้าสู่ระบบด้วย Facebook'}
+                        <SocialIcon style={{ flex: 1, borderRadius: 5 }}
+                        title='เข้าสู่ระบบด้วย Facebook'
                         fontStyle={{fontSize:16 }}
                         button
                         type='facebook'
@@ -143,24 +166,55 @@ class ProfileScreen extends Component{
                         />
                     </CardSection>
                     <CardSection style={{ justifyContent: 'center', marginTop: 18}}>
-                        <TouchableOpacity onPress={null}>
+                        <TouchableOpacity onPress={() => this.onButtonRegister()}>
                             <Text style={{  fontSize: 16, textDecorationLine: 'underline', color:'#fff', }}>ลงทะเบียน</Text>
                         </TouchableOpacity>
                     </CardSection>
                 </View>
             );
+    }
+
+    renderButtonFB(status=1){
+        console.log(status)
+        console.log("=======Pro========")
+        console.log(this.state.userInfo)
+        console.log("====================")
+        if(status === 0){
+         //  console.log("เข้า status 0")
+          // this.state.userInfo = null
+          return(this.renderPage());
+            
         }
+        if((!this.state.userInfoFB)){
+           // console.log(this.state.userInfo)
+            return(this._renderProfile());
+        }
+        //console.log(this.state.userInfo)
+        if(this.state.userInfoFB){
             return (
                 this._renderUserInfo()
             );
+        }
+            
         
     }
 
     renderListmenu(){
-        if(!this.state.userInfo){
-            
-        }else{
+        const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
 
+        if(!this.state.userInfoFB){
+         //   console.log(this.state)
+            this.state = {
+                dataSource : ds.cloneWithRows(listDataNoLogin),
+            }
+            return this.state.dataSource;
+
+        }else{
+            //console.log(this.state.userInfo)
+            this.state = {
+                dataSource : ds.cloneWithRows(listDataLogin),
+            }
+            return this.state.dataSource;
         }
     }
 
@@ -174,10 +228,18 @@ class ProfileScreen extends Component{
         }else if(rowData.id === '4'){
             this.props.navigation.navigate('AboutApp');
         }else if(rowData.id === '5'){
+           // this.props.navigation.navigate('Main');
+       //    console.log('///////////////////////')
+       //    console.log(this.state)
+        //   console.log('///////////////////////')
+        //   console.log(this.state.userInfoFB)
+           //setState({userInfoFB = null})
+            this.renderButtonFB(0);
+            
         }
     }
 
-    render(){
+    renderPage(){
         return (
             <View>
             <ImageBackground
@@ -186,8 +248,9 @@ class ProfileScreen extends Component{
             > 
                 {this.renderButtonFB()}
             </ImageBackground>
+
             <ListView
-            dataSource={this.state.dataSource}
+            dataSource={this.renderListmenu()}
             renderRow={(rowData) => {
             
             return (
@@ -214,6 +277,10 @@ class ProfileScreen extends Component{
             <View style={styles.viewBlockStyle}/>
             </View>
         )
+    }
+
+    render(){
+        return(this.renderPage());
     }
 }
 
@@ -263,12 +330,12 @@ const styles = StyleSheet.create({
     }
 })
 
-const ProfileMenu = createStackNavigator({
+export const ProfileMenu = createStackNavigator({
     Main : {
-        screen : ProfileScreen
+        screen : ProfileScreenMain
     },
     Setting : {
-        screen : SettingScreen
+        screen : LanguageMenu, navigationOptions:{header:null}
     },
     HowToUse : {
         screen : HowToUseScreen
@@ -278,8 +345,11 @@ const ProfileMenu = createStackNavigator({
     },
     AboutApp : {
         screen : AboutAppScreen
+    },
+    Login : {
+        screen : LoginMenu, navigationOptions:{header:null}
+    },
+    Register : {
+        screen : RegisterForm
     }
 })
-
-
-export default ProfileMenu

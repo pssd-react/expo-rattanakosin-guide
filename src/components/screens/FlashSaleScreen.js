@@ -10,10 +10,10 @@ import { FlashSaleLightning,FlashSalePromotion } from './stackscreens'
 import {
     createBottomTabNavigator,
     createStackNavigator,
+    HeaderBackButton
 } from 'react-navigation';
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { Header } from '../common/Header'
-
 
 const INITAL_STATE = { 
     index: 0,
@@ -23,10 +23,7 @@ const INITAL_STATE = {
     ],
 };
 
-
-
 export class FlashSaleScreen extends Component{
-
 
     state = INITAL_STATE;
     
@@ -34,13 +31,16 @@ export class FlashSaleScreen extends Component{
         //console.log(this.state.index);
         if(this.state.index == '0'){
             //console.log("เข้า IF");
-            return  <Header headerText= 'โปรฟ้าผ่า' />
+            return  <Header headerText="โปรฟ้าผ่า" 
+            backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
+            
         }else { 
-            console.log("เข้า Else");
-            return <Header headerText= 'โปรโมชั่น' />
+            //console.log("เข้า Else");
+            return <Header headerText="โปรโมชั่น" 
+            backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
+            
         }
     }
-
 
     render(){
         return (
@@ -60,14 +60,11 @@ export class FlashSaleScreen extends Component{
     }
 }
 
-
-
 const styles = StyleSheet.create({
     container:{
         flex:1,
        
     }
 })
-
 
 export default FlashSaleScreen

@@ -22,7 +22,7 @@ var data = {
 	"ViewType":"04",
 	"RowNum":"0",
 	"Keyword":"",
-	"ShopCategory":"264",
+	"ShopCategory":"266",
 	"UserID":"1",
 	"MarketID":"3",
 	"CouponType":"",
@@ -40,7 +40,7 @@ var config = {
 
 
 
-export class Restaurants extends Component {
+export class Commercial_Areas extends Component {
     state = {
         item: ''
     };
@@ -144,14 +144,14 @@ class ItemDetail extends Component {
     }
     renderData() {
         return _.map(this.props.items, item => {
-         //  console.log( item.ImageUrl )
+       //    console.log( item.ImageUrl )
             return (
                 <View style={{flex:1}}>
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
                             <Image style={{width:30, height:30,marginRight:15}}
-                                source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
+                                source={ require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')} 
                             /> 
                                 <Text style={styles.ViewTextStyle}> {item.LocationName} </Text>
                             </View>
@@ -220,4 +220,4 @@ class ItemDetail extends Component {
         )
     }           
 }
-export default Restaurants
+export default Commercial_Areas
