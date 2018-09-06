@@ -243,7 +243,7 @@ class ItemDetail extends Component {
     renderImg(imgs) {
         //if scale blah blah
         const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
-        console.log(imgs.Sequence);
+     //   console.log(imgs.Sequence);
         if(imgs.Scale === 'F' && imgs.Sequence != '1' ){
             return _.map(imgs.SliderList, imgSlider => {
                 return (<Image
@@ -258,7 +258,7 @@ class ItemDetail extends Component {
                     style={{ width: 150, height: 100, marginRight: 10 }}
                     source={{ uri: base_url + imgSlider.ImageURL }}
                 />)
-            })
+             })
         }
     }
 
