@@ -29,9 +29,10 @@ export class HomeMenuScreens extends Component {
             <View style={{ flex:5,alignItems:'center',justifyContent:'space-around'}}>
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
                   
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')} >
-                            
+                    
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')}
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')}
@@ -39,13 +40,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Restaurants
                                 </Text>
-                            
                         </TouchableOpacity>
-                    </View>
-         
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('travel')} >
-           
+                   
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('travel')}  
+                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                         >
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_place_travel.webp')}
@@ -54,11 +53,10 @@ export class HomeMenuScreens extends Component {
                                     Points of Interest
                                 </Text>
                         </TouchableOpacity>
-                    </View>
-
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('shop')} >
-                           
+                  
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('shop')}
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_shop.webp')}
@@ -66,16 +64,14 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Shops
                                 </Text>
-                            
                         </TouchableOpacity>
-                    </View>   
                 </CardSection>
                 
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
 
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('accommodation')} >
-                           
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('accommodation')} 
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >
                                 <Image
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
@@ -83,13 +79,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Accommodation
                                 </Text>
-                            
                         </TouchableOpacity>
-                    </View>
-
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('commercial_areas')} >
-                           
+                 
+                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('commercial_areas')} 
+                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                         >
                                 <Image
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
@@ -97,13 +91,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Commercial Areas
                                 </Text>
-                           
                         </TouchableOpacity>
-                    </View>
-
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('bank')} >
-                               
+                   
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('bank')}
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >           
                                 <Image
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
@@ -111,16 +103,14 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Bank
                                 </Text>
-                           
-                        </TouchableOpacity>
-                    </View>   
+                        </TouchableOpacity> 
                 </CardSection>
 
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
 
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('schools_and_government')} >
-                                
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('schools_and_government')} 
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >     
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')}
@@ -129,14 +119,14 @@ export class HomeMenuScreens extends Component {
                                     <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Schools and Government offices 
                                     </Text>
-                                </View>
-                            
+                                </View> 
                         </TouchableOpacity>
-                    </View>
+                   
 
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('services')} >
-                                 
+                    
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('services')} 
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >       
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_service.webp')}
@@ -146,11 +136,10 @@ export class HomeMenuScreens extends Component {
                                 </Text>
                            
                         </TouchableOpacity>
-                    </View>
 
-                    <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('facilities')} >
-                               
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('facilities')} 
+                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
+                        >
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
@@ -160,8 +149,6 @@ export class HomeMenuScreens extends Component {
                                 </Text>
                            
                         </TouchableOpacity>
-                    </View>
-
                 </CardSection>
             </View>
         )
