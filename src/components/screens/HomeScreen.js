@@ -19,6 +19,7 @@ import { CardSection } from '../common/CardSection';
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
 import _ from 'lodash'
+//Itemscreens
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import { Restaurants } from './itemscreens/Restaurants'; 
@@ -30,6 +31,13 @@ import { Commercial_Areas } from './itemscreens/Commercial_Areas'
 import { Facilities } from './itemscreens/Facilities'
 import { Schools_and_Government } from './itemscreens/Schools_and_Government'
 import { Services } from './itemscreens/Services'
+//Recommened
+import { RecommenedEats } from './recommended/RecommenedEats'
+import { RecommenedPlaces } from './recommended/RecommenedPlaces'
+import { RecommenedShop } from './recommended/RecommenedShop'
+import { RecommenedStays } from './recommended/RecommenedStays'
+
+
 
 const data = {
     'RqAppID': '1234',
@@ -351,7 +359,7 @@ class ItemDetail extends Component {
                     <CardSection style={{ flexDirection: 'row', flex: 1 , justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle} >{item.Name}</Text>
                         <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}}>
-                        <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                        {this.renderRecommened(item)}
                         <Image 
                         style={{height:15, width:15, tintColor: 'green'}}
                         source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
@@ -361,6 +369,40 @@ class ItemDetail extends Component {
             </CardSection>
         )}
     }
+
+
+    renderRecommened(item){
+        if(item.Sequence === '2' &&  item.MenuType === '06'){
+            return(
+                <TouchableOpacity >
+                    <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                </TouchableOpacity>
+            )
+        }else if(item.Sequence === '3' &&  item.MenuType === '06' ){
+            return(
+                <TouchableOpacity>
+                    <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                </TouchableOpacity>
+            )
+        }else if(item.Sequence === '4' &&  item.MenuType === '06' ){
+            return(
+                <TouchableOpacity>
+                    <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                </TouchableOpacity>
+            )
+        }else if(item.Sequence === '5' &&  item.MenuType === '06' ){
+            return(
+                <TouchableOpacity>
+                    <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                </TouchableOpacity>
+            )
+        }
+
+    }
+
+
+
+
 
     renderData() {
         return _.map(this.props.items, item => {
@@ -416,6 +458,13 @@ const HomeMenu = createStackNavigator({
     facilities:{
         screen: Facilities
     }
+    // recommenedEats:{
+    //     screen: RecommenedEats
+    // }
 })
+
+
+
+
 
 export default HomeMenu

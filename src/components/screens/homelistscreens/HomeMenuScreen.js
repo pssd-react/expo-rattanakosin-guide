@@ -6,6 +6,7 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native'
+import { Header } from '../../common/Header';
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
 import { Icon} from 'react-native-elements'
@@ -26,6 +27,7 @@ export class HomeMenuScreens extends Component {
 
     renderBlogContent(){
         return (
+            
             <View style={{ flex:5,alignItems:'center',justifyContent:'space-around'}}>
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
                   
@@ -118,7 +120,7 @@ export class HomeMenuScreens extends Component {
                                 <View style={{flexDirection:'column', alignItems:'center'}}>
                                     <Text style={{fontSize: 12, alignItems:'center'}} >
                                     Schools and Government offices 
-                                    </Text>
+                                    </Text> 
                                 </View> 
                         </TouchableOpacity>
                    
