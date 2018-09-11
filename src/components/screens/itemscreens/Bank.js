@@ -17,13 +17,14 @@ import { ButtonStar,ButtonLocal } from '../../common';
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
 
+
 var data = {
 	"RqAppID":"1234",
 	"UserLanguage":"EN",
 	"ViewType":"04",
 	"RowNum":"0",
 	"Keyword":"",
-	"ShopCategory":"264",
+	"ShopCategory":"459",
 	"UserID":"1",
 	"MarketID":"3",
 	"CouponType":"",
@@ -41,7 +42,7 @@ var config = {
 
 
 
-export class Restaurants extends Component {
+export class Bank extends Component {
     state = {
         item: ''
     };
@@ -60,22 +61,21 @@ export class Restaurants extends Component {
     }
 
     renderItem() {
-    //    console.log(this.state.item)
-        let loKey = 0
-        const  CardItem = _.map((this.state), (items) => {
-            loKey++
-            return (<ItemDetail key={'location_'+loKey} items={items.StaticLocation} />)
-        })
-
-        return CardItem
-    }
-
+        //    console.log(this.state.item)
+            let loKey = 0
+            const  CardItem = _.map((this.state), (items) => {
+                loKey++
+                return (<ItemDetail key={'location_'+loKey} items={items.StaticLocation} />)
+            })
+    
+            return CardItem
+        }
 
     render(){
         
         return (
             <View style={{flex:1}}>
-            <Header headerText="Restaurants" 
+            <Header headerText="Bank" 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                     <Card>
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     ViewTextStyle:{
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold'
     },
     iconContainerStyle:{
@@ -155,14 +155,14 @@ class ItemDetail extends Component {
     }
     renderData() {
         return _.map(this.props.items, item => {
-           //console.log( item )
+       //    console.log( item.ImageUrl )
             return (
                 <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
                             <Image style={{width:30, height:30,marginRight:15}}
-                                source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
+                                source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')} 
                             /> 
                                 <Text style={styles.ViewTextStyle}> {item.LocationName} </Text>
                             </View>

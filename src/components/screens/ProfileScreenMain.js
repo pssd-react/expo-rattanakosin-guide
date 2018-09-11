@@ -18,6 +18,8 @@ import {StoreGlobal} from '../config/GlobalState'
 
 import LoginMenu from './profilescreen/loginscreens/LoginForm'
 import {RegisterForm} from './profilescreen/loginscreens/RegisterForm';
+import { ScrollView } from '../../../node_modules/react-native-gesture-handler';
+import Modal from "react-native-modal";
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -31,34 +33,20 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const listDataLogin = [
-    {'id': '1', 'section':'Setting', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '2', 'section':'How to use', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '3', 'section':'About Rattanakosin', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '4', 'section':'About this App', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '5', 'section':'Logout', 'name':require('../images/drawable-hdpi/ic_more_logout.webp/'), 'url': ''}
-]
-
-const listDataNoLogin = [
-    {'id': '1', 'section':'Setting', 'name': require('../images/drawable-hdpi/ic_more_setting.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '2', 'section':'How to use', 'name': require('../images/drawable-hdpi/ic_more_how_to_use.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '3', 'section':'About Rattanakosin', 'name': require('../images/drawable-hdpi/ic_more_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-    {'id': '4', 'section':'About this App', 'name': require('../images/drawable-hdpi/ic_about_jj.webp/'), 'url': 'http://dv.co.th/rattanakosin-guide/terms.html'},
-]
-
 const BACKGROUND_URI = require('../images/drawable-hdpi/bg_more.webp/')
 
 class ProfileScreenMain extends Component{
     state= {
     userInfo: '',
     dataSource : '',
+    loading : false,
+    isModalVisible: false,
+    //status_login: false,
 }
     static navigationOptions = {header: null}
-    
-    
+
     componentWillMount(){
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-        this.setState({dataSource:ds.cloneWithRows(listDataNoLogin)})
+        this.setState({ isModalVisible: false });
     }
 
     componentDidMount(){
@@ -67,13 +55,16 @@ class ProfileScreenMain extends Component{
                 console.log(user)
             }
         }) 
+        this.setState({ isModalVisible: false });
     }
 
-    component
+    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
+    _activeModal = () => this.setState({ isModalVisible: true });
+    _deactiveModal = () => this.setState({ isModalVisible: false });
 
     async loginWithFacebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
-        ('1886750428085436', { permissions: ['public_profile'] })
+        ('287789215160486', { permissions: ['public_profile'] })
 
         if(type === 'success'){
             /* const credentail = firebase.auth.FacebookAuthProvider.credentail(token)
@@ -92,7 +83,6 @@ class ProfileScreenMain extends Component{
     }
 
     onButtonLoginNumber(){
-       // Actions.login();
        this.props.navigation.navigate('Login')
     }
 
@@ -103,7 +93,7 @@ class ProfileScreenMain extends Component{
     _renderUserInfo() {
         return (
             <View style={{ alignItems: 'center' }}>
-                <CardSection style={{ justifyContent: 'center', marginTop: 40}}>
+                <CardSection style={{ justifyContent: 'center', marginTop: 20}}>
                 </CardSection>
                 <CardSection style={{paddingLeft:30, paddingRight:30}}>
                     <Image 
@@ -174,69 +164,155 @@ class ProfileScreenMain extends Component{
             );
     }
 
-    renderButtonFB(status=1){
-        console.log(status)
-        console.log("=======Pro========")
-        console.log(this.state.userInfo)
-        console.log("====================")
-        if(status === 0){
-           console.log("เข้า status 0")
-          // this.state.userInfo = null
-          return(this.renderPage());
-            
+    renderButtonFB(){
+        if((!this.state.userInfoFB)|| this.state.userInfoFB === ""){
+            return(
+                this._renderProfile()
+            )
         }
-        if((!this.state.userInfoFB)){
-           // console.log(this.state.userInfo)
-            return(this._renderProfile());
+        if(this.state.userInfoFB){
+            return(
+                 this._renderUserInfo()
+            )            
         }
-        //console.log(this.state.userInfo)
+    }
+    
+    renderBlock(){
+        if(this.state.userInfoFB){
+             return (<View style={styles.viewBlockStyle}/>)
+        }
+       
+    }
+    renderButtonLogOut(){
+       
         if(this.state.userInfoFB){
             return (
-                this._renderUserInfo()
-            );
+                <TouchableOpacity onPress={() => this.onListLogOut()}>
+                        <View style={styles.listViewContainer}>
+                            <View style={styles.iconContainerStyle}>
+                                <Image style={{width:22, height:22}}
+                                source={ require('../images/drawable-hdpi/ic_more_logout.webp') } /> 
+                            </View>
+                            <View style={styles.listViewTextContainer}>
+                                <Text style={styles.listViewTextStyle}>ออกจากระบบ</Text>
+                            </View>
+                            <View style={styles.chevronContainerStyle}>
+                                <Image 
+                                source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                            </View>
+                        </View>
+                </TouchableOpacity>
+            );     
+        }else{
+            return (<View></View>);
         }
-            
         
     }
 
-    renderListmenu(){
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-
-        if(!this.state.userInfoFB){
-            console.log(this.state)
-            this.state = {
-                dataSource : ds.cloneWithRows(listDataNoLogin),
-            }
-            return this.state.dataSource;
-
-        }else{
-            //console.log(this.state.userInfo)
-            this.state = {
-                dataSource : ds.cloneWithRows(listDataLogin),
-            }
-            return this.state.dataSource;
-        }
+    onListSetting(){
+        this.props.navigation.navigate('Setting');
+    }
+    onListHowToUse(){
+        this.props.navigation.navigate('HowToUse');
+    }
+    onListAboutRattanakosin(){
+        this.props.navigation.navigate('AboutRattanakosin');
+    }
+    onListAboutApp(){
+        this.props.navigation.navigate('AboutApp');
     }
 
-    onRowPress(rowData){
-        if(rowData.id === '1'){
-            this.props.navigation.navigate('Setting');
-        }else if(rowData.id === '2'){
-            this.props.navigation.navigate('HowToUse');
-        }else if(rowData.id === '3'){
-            this.props.navigation.navigate('AboutRattanakosin');
-        }else if(rowData.id === '4'){
-            this.props.navigation.navigate('AboutApp');
-        }else if(rowData.id === '5'){
-           // this.props.navigation.navigate('Main');
-           console.log('///////////////////////')
-           console.log(this.state)
-           console.log('///////////////////////')
-           console.log(this.state.userInfoFB)
-           //setState({userInfoFB = null})
-            this.renderButtonFB(0);
-            
+    modalRender(){
+        console.log('this is loading : '+this.state.loading)
+        if(this.state.loading === true){
+            return (
+                <View style={{ flex: 1, 
+                    backgroundColor: '#fff', 
+                    marginBottom:270, 
+                    marginTop:270,
+                    marginLeft:140,
+                    marginRight:140,
+                    borderRadius: 5,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 5, height: 5 },
+                    shadowRadius: 5,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                    
+                <Spinner/>
+            </View>
+            )
         }
+        return (
+            <View style={{ flex: 1, 
+                backgroundColor: '#fff', 
+                marginBottom:130, 
+                marginTop:100,
+                borderRadius: 5,
+                shadowColor: '#000',
+                shadowOffset: { width: 5, height: 5 },
+                shadowRadius: 5,
+                flexDirection: 'column',
+                justifyContent: 'space-between',}}>
+                <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
+                    <Image source={require('../images/drawable-hdpi/ic_logout_jj.webp')}
+                            style={{width: 70, height: 70}}/>
+                </CardSection>
+                <CardSection style={{paddingLeft:20}}>
+                    <Text style={{ fontSize: 24}}>ออกจากระบบ</Text>
+                </CardSection>
+                <CardSection style={{paddingLeft:20}}>
+                    <Text style={{ fontSize: 16}}>ต้องการออกจากระบบหรือไม่</Text>
+                </CardSection>
+                <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                    <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                        onPress={() => this._deactiveModal()}>
+                            <Text style={{ fontSize: 16}}>ยกเลิก</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderLeftWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                        onPress={() => this.onLogOutModal()}>
+                            <Text style={{ fontSize: 16}}>ยืนยัน</Text>
+                    </TouchableOpacity>
+                </CardSection>
+                
+            </View>
+        )
+
+    }
+    //LogOut
+    renderModalLogOut(){
+        return(
+                <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
+                    {this.modalRender()}
+                </Modal>
+        )
+    }
+
+    onLogOutModal(){
+        this.state.loading = true
+        this._deactiveModal()
+        this._activeModal()
+        setTimeout(()=>{
+           this._toggleModal(),
+           this.state.loading = false,
+           this.onLogoutSuccess()
+        },3000)
+        
+        
+    }
+    onListLogOut(){
+        this._activeModal()
+    }
+
+    onLogoutSuccess(){
+        this.state.userInfoFB = undefined
+        this.setState({loading: false})
+        
+    }
+
+    onLoginSuccess(){
+        this.setState({loading: false})
     }
 
     renderPage(){
@@ -246,35 +322,79 @@ class ProfileScreenMain extends Component{
             source={ BACKGROUND_URI}
             style={styles.thumbnailStyle}
             > 
+                {this.renderModalLogOut()}
                 {this.renderButtonFB()}
             </ImageBackground>
+            <ScrollView 
+                showsVerticalScrollIndicator={false}> 
+                <TouchableOpacity onPress={()=>this.onListSetting()}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.iconContainerStyle}>
+                            <Image style={{width:22, height:22}}
+                            source={ require('../images/drawable-hdpi/ic_more_setting.webp') } /> 
+                        </View>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>ตั้งค่า</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity>
 
-            <ListView
-            dataSource={this.renderListmenu()}
-            renderRow={(rowData) => {
-            
-            return (
-            <TouchableOpacity onPress={()=>this.onRowPress(rowData)}>
-                <View style={styles.listViewContainer}>
-                    <View style={styles.iconContainerStyle}>
-                    <Image style={{width:22, height:22}}
-                    source={ rowData.name } /> 
+                <TouchableOpacity onPress={()=>this.onListHowToUse()}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.iconContainerStyle}>
+                            <Image style={{width:22, height:22}}
+                            source={ require('../images/drawable-hdpi/ic_more_how_to_use.webp') } /> 
+                        </View>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>วิธีการใช้งาน</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                        </View>
                     </View>
-                    <View style={styles.listViewTextContainer}>
-                    <Text style={styles.listViewTextStyle}>{rowData.section}</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this.onListAboutRattanakosin()}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.iconContainerStyle}>
+                            <Image style={{width:22, height:22}}
+                            source={ require('../images/drawable-hdpi/ic_more_about_jj.webp') } /> 
+                        </View>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>เกี่ยวกับรัตนโกสินทร์</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                        </View>
                     </View>
-                    <View style={styles.chevronContainerStyle}>
-                    <Image 
-                    source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                </TouchableOpacity>
+
+                <TouchableOpacity onPress={()=>this.onListAboutApp()}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.iconContainerStyle}>
+                            <Image style={{width:22, height:22}}
+                            source={ require('../images/drawable-hdpi/ic_about_jj.webp') } /> 
+                        </View>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>เกี่่ยวกับแอปพลิเคชัน</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
+                        </View>
                     </View>
-                </View>
-            </TouchableOpacity>
-            )
-            }}
-            contentContainerStyle={{width:'100%', backgroundColor: '#DDDDDD'}}
-            
-            />
-            <View style={styles.viewBlockStyle}/>
+                </TouchableOpacity>
+
+                {this.renderButtonLogOut()}
+            </ScrollView>
+                {this.renderBlock()}
+                
             </View>
         )
     }
@@ -294,10 +414,10 @@ const styles = StyleSheet.create({
         padding: 10,
         marginBottom: 1,
         backgroundColor: '#ffffff',
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     thumbnailStyle: {
-        height: '57%',
+        height: 360,
         width:'100%'
     },
     listViewTextContainer:{
@@ -307,7 +427,7 @@ const styles = StyleSheet.create({
         fontSize: 16
     },
     viewBlockStyle: {
-        height: '10%'
+        height: '18%'
     },
     iconStyle:{
         marginRight: 5,

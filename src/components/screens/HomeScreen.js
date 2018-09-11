@@ -21,7 +21,23 @@ import axios from 'axios'
 import _ from 'lodash'
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
-import { Restaurants } from './itemscreens/Restaurants';
+import { 
+    Restaurants, 
+    Accommodation, 
+    Bank, 
+    Commercial_Areas, 
+    Facilities, 
+    Shop, 
+    Schools_and_Government, 
+    Services, 
+    Travel 
+} from './itemscreens'
+import {
+    EatScreen, 
+    ShoppingScreen, 
+    PlacesScreen, 
+    StaysScreen
+} from './recommendedscreens'
 
 const data = {
     'RqAppID': '1234',
@@ -60,7 +76,7 @@ class HomeScreen extends Component {
     renderItem() {
         let i=0
         const list = _.map((this.state), (items) => {
-            return (<ItemDetail key={i} items={items.MenuList} />)
+            return (<ItemDetail key={i} items={items.MenuList} navigation={this.props.navigation}/>)
             i++
 
         })
@@ -108,7 +124,7 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> null}>
+                <TouchableOpacity onPress={()=> this.props.navigation.navigate('travel')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -119,7 +135,7 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> null}>
+                <TouchableOpacity  onPress={()=> this.props.navigation.navigate('shop')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -244,14 +260,14 @@ class ItemDetail extends Component {
         let banner = 'banner'
         let imageF = 'imgF'
         let imageH = 'imgH'
-        console.log(imgs.Sequence);
+        //console.log(imgs.Sequence);
         if(imgs.Scale === 'F' && imgs.MenuType === '06' ){
             imgRes = _.map(imgs.SliderList, imgSlider => {
                 return (
                     <ImageBackground
-                        key={imageF+''+i}
+                        key={imageF+'&&'+imgSlider.ImageURL}
                         style={{ 
-                        width: 150, 
+                        width: 200, 
                         height: 100, 
                         marginRight: 10}}
                         source={{ uri: base_url + imgSlider.ImageURL }}
@@ -261,7 +277,6 @@ class ItemDetail extends Component {
                         </View>
                     </ImageBackground>
                 )
-                i++
             })
 
             return (
@@ -279,7 +294,7 @@ class ItemDetail extends Component {
             imgRes =  _.map(imgs.SliderList, imgSlider => {
                 return (
                     <ImageBackground
-                        key={imageH+''+i}
+                        key={imageH+'&&'+imgSlider.ImageURL}
                         style={{ 
                         width: 150,
                         height: 100, 
@@ -291,7 +306,6 @@ class ItemDetail extends Component {
                         </View>
                     </ImageBackground>
                 )
-                i++
             })
 
             return (
@@ -307,14 +321,13 @@ class ItemDetail extends Component {
         }else if(imgs.MenuType === '10'){
             imgRes = _.map(imgs.SliderList, imgSlider => {
                 return (
-                <View key={banner+''+i} style={{width: Dimensions.get('window').width, height: 150}}>
+                <View key={banner+'&&'+imgSlider.ImageURL} style={{width: Dimensions.get('window').width, height: 150}}>
                     <Image
                         style={{height:150}}
                         source={{ uri: base_url + imgSlider.ImageURL }}
                     />
                 </View>
                 )
-                i++
             })
 
             return (
@@ -334,7 +347,24 @@ class ItemDetail extends Component {
         
     }
 
+    viewAll(key){
+        console.log(key)
+        if(key === '2'){
+           this.props.navigation.navigate('recomEat')
+        }
+        else if(key === '3'){
+            this.props.navigation.navigate('recomShop')
+         }
+        else if(key === '4'){
+            this.props.navigation.navigate('recomPlaces')
+         }
+        else if(key === '5'){
+            this.props.navigation.navigate('recomStays')
+         }
+    }
+
     renderText(item){
+        //console.log(item)
         const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
        if(item.MenuType === '06'){ 
            return (
@@ -343,7 +373,9 @@ class ItemDetail extends Component {
                     <CardSection style={{ flexDirection: 'row', flex: 1 , justifyContent: 'space-between'}}>
                         <Text style={headerTextStyle} >{item.Name}</Text>
                         <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}}>
+                        <TouchableOpacity onPress={()=> this.viewAll(item.Sequence)}>
                         <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
+                        </TouchableOpacity>
                         <Image 
                         style={{height:15, width:15, tintColor: 'green'}}
                         source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
@@ -357,7 +389,7 @@ class ItemDetail extends Component {
     renderData() {
         return _.map(this.props.items, item => {
             return (
-                <View key={item.Sequence} style={{ flex: 1 }}>
+                <View key={item.Sequence} style={{ flex: 1 }} navigation={this.props.navigation}>
                         {this.renderText(item)}
                         {this.renderImg(item)}
                 </View>
@@ -379,10 +411,46 @@ const HomeMenu = createStackNavigator({
         screen: HomeScreen
     },
     Menu: {
-        screen: HomeMenuScreens
+        screen: HomeMenuScreens, navigationOptions:{header:null}
     },
     restaurants: {
-        screen: Restaurants
+        screen: Restaurants, navigationOptions:{header:null}
+    },
+    travel: {
+        screen: Travel, navigationOptions:{header:null}
+    },
+    shop: {
+        screen: Shop, navigationOptions:{header:null}
+    },
+    accommodation: {
+        screen: Accommodation, navigationOptions:{header:null}
+    },
+    commercial_areas:{
+        screen: Commercial_Areas, navigationOptions:{header:null}
+    },
+    bank:{
+        screen: Bank, navigationOptions:{header:null}
+    },
+    schools_and_government:{
+        screen: Schools_and_Government, navigationOptions:{header:null}
+    },
+    services:{
+        screen: Services, navigationOptions:{header:null}
+    },
+    facilities:{
+        screen: Facilities, navigationOptions:{header:null}
+    },
+    recomEat:{
+        screen: EatScreen, navigationOptions:{header:null}
+    },
+    recomShop:{
+        screen: ShoppingScreen, navigationOptions:{header:null}
+    },
+    recomPlaces:{
+        screen: PlacesScreen, navigationOptions:{header:null}
+    },
+    recomStays:{
+        screen: StaysScreen, navigationOptions:{header:null}
     }
 })
 
