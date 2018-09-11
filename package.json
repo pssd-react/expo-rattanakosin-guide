@@ -36,6 +36,7 @@
     "react-native-firebase": "^4.3.8",
     "react-native-modal": "^6.5.0",
     "react-native-nested-scroll-view": "^7.0.0",
+    "react-native-otp-inputs": "^0.7.0",
     "react-native-router-flux": "^4.0.0-beta.31",
     "react-native-search-bar": "^3.4.2",
     "react-native-searchbar": "^1.15.0",
