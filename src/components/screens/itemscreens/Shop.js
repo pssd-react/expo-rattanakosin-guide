@@ -14,7 +14,12 @@ import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
 import { ButtonStar,ButtonLocal } from '../../common';
+<<<<<<< HEAD
 
+=======
+import { HeaderBackButton } from 'react-navigation'
+import { Header } from '../../common';
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 
 var data = {
 	"RqAppID":"1234",
@@ -54,6 +59,7 @@ export class Shop extends Component {
         });
     }
 
+<<<<<<< HEAD
     
     renderItem() {
     //    console.log(this.state.item)
@@ -64,15 +70,43 @@ export class Shop extends Component {
         return CardItem
     }
 
+=======
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
+    }
+
+    renderItem() {
+        //    console.log(this.state.item)
+            let loKey = 0
+            const  CardItem = _.map((this.state), (items) => {
+                loKey++
+                return (<ItemDetail key={'location_'+loKey} items={items.StaticLocation} />)
+            })
+    
+            return CardItem
+        }
+
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 
     render(){
         
         return (
+<<<<<<< HEAD
+=======
+            <View style={{flex:1}}>
+            <Header headerText="Shop" 
+            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
                     <Card>
                         <ScrollView>
                             {this.renderItem()}
                         </ScrollView>
                     </Card>
+<<<<<<< HEAD
+=======
+                </View>
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
         )
     }
 }
@@ -146,7 +180,11 @@ class ItemDetail extends Component {
         return _.map(this.props.items, item => {
        //    console.log( item.ImageUrl )
             return (
+<<<<<<< HEAD
                 <View style={{flex:1}}>
+=======
+                <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
@@ -219,5 +257,9 @@ class ItemDetail extends Component {
             </View>
         )
     }           
+<<<<<<< HEAD
 }
 export default Shop
+=======
+}
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26

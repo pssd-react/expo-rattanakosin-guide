@@ -10,7 +10,12 @@ import { Header } from '../../common/Header';
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
 import { Icon} from 'react-native-elements'
+<<<<<<< HEAD
 import { createStackNavigator } from 'react-navigation'
+=======
+import { createStackNavigator, HeaderBackButton } from 'react-navigation'
+import { Header } from '../../common';
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 // Import Item Screens 
 
 
@@ -23,6 +28,10 @@ export class HomeMenuScreens extends Component {
                 <Text style={styles.textStyle} > Categories </Text>
             </View>
         )
+    }
+
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
     }
 
     renderBlogContent(){
@@ -158,10 +167,15 @@ export class HomeMenuScreens extends Component {
 
     render(){
         return (
-            <Card style={{flex:1,backgroundColor: '#ffffff'}}>
-                {this.renderHeadingText()}
-                {this.renderBlogContent()}
-           </Card>
+            <View style={{flex:1}}>
+                <Header headerText="" 
+                backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+                headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+                <Card style={{flex:1,backgroundColor: '#ffffff'}}>
+                    {this.renderHeadingText()}
+                    {this.renderBlogContent()}
+                </Card>
+            </View>
         )
     }
 }

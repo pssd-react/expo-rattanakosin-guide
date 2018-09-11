@@ -14,7 +14,8 @@ import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
 import { ButtonStar,ButtonLocal } from '../../common';
-
+import { HeaderBackButton } from 'react-navigation'
+import { Header } from '../../common';
 
 var data = {
 	"RqAppID":"1234",
@@ -54,11 +55,16 @@ export class Restaurants extends Component {
         });
     }
 
-    
+    onButtonGoBack(){
+        this.props.navigation.popToTop()
+    }
+
     renderItem() {
     //    console.log(this.state.item)
+        let loKey = 0
         const  CardItem = _.map((this.state), (items) => {
-            return (<ItemDetail items={items.StaticLocation} />)
+            loKey++
+            return (<ItemDetail key={'location_'+loKey} items={items.StaticLocation} />)
         })
 
         return CardItem
@@ -68,11 +74,16 @@ export class Restaurants extends Component {
     render(){
         
         return (
+            <View style={{flex:1}}>
+            <Header headerText="Restaurants" 
+            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                     <Card>
                         <ScrollView>
                             {this.renderItem()}
                         </ScrollView>
                     </Card>
+                </View>
         )
     }
 }
@@ -144,9 +155,13 @@ class ItemDetail extends Component {
     }
     renderData() {
         return _.map(this.props.items, item => {
+<<<<<<< HEAD
          //  console.log( item.ImageUrl )
+=======
+           //console.log( item )
+>>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
             return (
-                <View style={{flex:1}}>
+                <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
@@ -220,4 +235,3 @@ class ItemDetail extends Component {
         )
     }           
 }
-export default Restaurants
