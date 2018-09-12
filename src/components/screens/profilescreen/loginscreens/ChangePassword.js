@@ -1,9 +1,10 @@
 import React, {Component} from 'react'
-import {AppRegistry, Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity } from 'react-native'
 import {HeaderBackButton } from 'react-navigation'
 import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../../common'
 import OtpInputs from 'react-native-otp-inputs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import TimerCountdown from 'react-native-timer-countdown';
 
 export class ChangePassword extends Component {
     static navigationOptions = { header: null }
@@ -15,8 +16,8 @@ export class ChangePassword extends Component {
             error: '', 
             loading: false,
             statusOTP: false,
-            onButtonOTP: false };
-
+            onButtonOTP: false,
+            timer: false };
 
     onChangeInput(type,text){
         console.log(text)
@@ -101,12 +102,41 @@ export class ChangePassword extends Component {
         }
     }
 
+    onTimer(){
+        if(this.state.timer === true){
+            return (
+                <View style={{backgroundColor: '#CDC9C9', flex:1, justifyContent:'center', alignItems: 'center',flexDirection:'row'}}>
+                    <TouchableOpacity  style={{flexDirection:'row'}}
+                        onPress={() => this.setState({timer:false})}>
+                        <Ionicons name={'ios-sync'} size={20} color={'blue'} />
+                        <Text style={{fontSize: 16, marginLeft:8}}>ขอรหัสผ่าน OTP</Text>
+                    </TouchableOpacity>
+                </View>
+            )
+        }else{
+            return (
+                <View style={{backgroundColor: '#CDC9C9', flex:1, justifyContent:'center', alignItems: 'center',flexDirection:'row'}}>
+                    <Text style={{marginRight:5, fontSize: 16, color:'blue'}}>ขอรหัสผ่านใหม่ได้ในอีก</Text>
+                    <TimerCountdown
+                        initialSecondsRemaining={500*60}
+                        onTick={secondsRemaining => console.log('tick', secondsRemaining)}
+                        onTimeElapsed={() => this.setState({timer:true})}
+                        allowFontScaling={true}
+                        style={{ fontSize: 16, color:'blue' }}
+                    />
+                </View>
+            )
+        }
+        
+    
+    }
+
     renderButtonOTP(){
         if(this.state.onButtonOTP === true){
             return (
                 <View style={{flex:1}}>
                 <CardSection style={{ marginLeft:15, marginRight:15, flex:3, flexDirection:'column'}}>
-                    <View style={{backgroundColor: '#CDC9C9', flex:2, justifyContent:'space-between', alignItems: 'center',flexDirection:'column'}}>  
+                    <View style={{backgroundColor: '#CDC9C9', flex:3, justifyContent:'space-between', alignItems: 'center',flexDirection:'column'}}>  
                         <Text style={{fontSize: 20,height:25}}>กรอกรหัสผ่าน OTP 6 หลัก</Text>
                             <View style={{flex:1}}>
                             <OtpInputs inputStyles={{flex: 1, width: 30, backgroundColor:'#fff',borderRadius:5,color:'#000', borderWidth:1, borderColor:'#aaa'}} 
@@ -117,12 +147,9 @@ export class ChangePassword extends Component {
                             </View>
                     </View>
                     <View style={{backgroundColor: '#CDC9C9', flex:1, justifyContent:'center', alignItems: 'center',flexDirection:'column'}}>
-                    <Text style={{fontSize: 14}}>เลขที่อ้างอิง BYFA, OTP จะหมดอายุภายใน 5 นาที</Text>
-                        <View style={{flexDirection:'row',alignItems:'center'}}>
-                            <Ionicons name={'ios-sync'} size={20} color={'blue'} />
-                            <Text style={{fontSize: 16, marginLeft:10}}>ขอรหัสผ่าน OTP</Text>
-                        </View>
+                        <Text style={{fontSize: 14}}>เลขที่อ้างอิง BYFA, OTP จะหมดอายุภายใน 5 นาที</Text>
                     </View>
+                    {this.onTimer()}
                 </CardSection>
                 <CardSection style={{flex: 1, justifyContent:'flex-end',marginLeft:10,marginRight:10}}>
                 <Button onPress={() => null} 
@@ -148,7 +175,6 @@ export class ChangePassword extends Component {
             <Header headerText="เปลี่ยนรหัสผ่าน" 
                     backgroundImage= {require('../../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-                    
             <View style={{justifyContent: 'center',paddingTop:10}}>
                 <View style={{ marginLeft: 30, marginRight: 30 }}>
                     <CardSection>
@@ -156,7 +182,7 @@ export class ChangePassword extends Component {
                             label="เบอร์โทรศัพท์ที่ลงทะเบียน"
                             value={this.state.phone}
                             onChangeText={this.onChangeInput.bind(this,'phone')}
-                            autoFocus={true}
+                            autoFocus = {true}
                             /> 
                     </CardSection>
                     <CardSection>
