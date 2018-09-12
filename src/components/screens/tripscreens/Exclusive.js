@@ -20,7 +20,7 @@ export class Exclusive extends Component{
                         </View>
                     </CardSection>
                     <View style={styles.container}>
-                        <Text style={styles.text} >Comming Soon </Text>
+                        <Text style={styles.text} >Test Push </Text>
                     </View>
                 </Card>
                 
