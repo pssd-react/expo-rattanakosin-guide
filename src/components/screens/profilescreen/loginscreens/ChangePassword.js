@@ -183,7 +183,7 @@ export class ChangePassword extends Component {
                             label="เบอร์โทรศัพท์ที่ลงทะเบียน"
                             value={this.state.phone}
                             onChangeText={this.onChangeInput.bind(this,'phone')}
-                            autoFocus = {true}
+                            autoFocus = {false}
                             /> 
                     </CardSection>
                     <CardSection>

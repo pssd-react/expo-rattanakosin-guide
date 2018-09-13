@@ -60,7 +60,7 @@ export class RegisterForm extends Component {
                                 label="ชื่อผู้ใช้งาน"
                                 value={this.state.name}
                                 onChangeText={name => this.setState({ name })}
-                                autoFocus={true}
+                                autoFocus={false}
                                 /> 
                         </CardSection>
                         <CardSection>

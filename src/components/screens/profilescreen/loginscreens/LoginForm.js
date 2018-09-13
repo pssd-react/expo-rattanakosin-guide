@@ -64,7 +64,7 @@ class LoginForm extends Component {
                             label="หมายเลขโทรศัพท์"
                             value={this.state.phone}
                             onChangeText={phone => this.setState({ phone })}
-                            autoFocus={true}
+                            autoFocus={false}
                             /> 
                     </CardSection>
                     <CardSection>
