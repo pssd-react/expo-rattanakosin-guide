@@ -76,7 +76,7 @@ class ProfileScreenMain extends Component{
             const userInfoFB = await response.json();
            this.setState({ userInfoFB });
            this.state.userInfo = userInfoFB
-            console.log('******')
+            console.log('****')
             console.log(this.state.userInfo)
          
         }
@@ -158,7 +158,7 @@ class ProfileScreenMain extends Component{
                     <CardSection style={{ justifyContent: 'center', marginTop: 18}}>
                         <TouchableOpacity onPress={() => this.onButtonRegister()}>
                             <Text style={{  fontSize: 16, textDecorationLine: 'underline', color:'#fff', }}>ลงทะเบียน</Text>
-                        </TouchableOpacity >
+                        </TouchableOpacity>
                     </CardSection>
                 </View>
             );

@@ -81,6 +81,7 @@ export class Shop extends Component {
                     <Card>
                         <ScrollView>
                             {this.renderItem()}
+                            <View style={{ height: 100}} />
                         </ScrollView>
                     </Card>
                 </View>
@@ -186,7 +187,7 @@ class ItemDetail extends Component {
                                             <View style={{ flex: 1 , marginRight: 15} }>
                                                 <ButtonStar style={styles.buttonStarStyle}
                                                 > 
-                                                    0.0
+                                                {item.Rating}
                                                 </ButtonStar>
                                             </View>
                                             <View style={{ flex: 2, marginLeft: 5}}>

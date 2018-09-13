@@ -10,7 +10,8 @@ import {
     Platform,
     StatusBar,
     TextInput,
-    Dimensions
+    Dimensions,
+    ActivityIndicator
 } from 'react-native'
 import Carousel from 'react-native-carousel-view'
 import { Button } from '../common/Button';
@@ -32,6 +33,7 @@ import {
     Services, 
     Travel 
 } from './itemscreens'
+import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
 import {
     EatScreen, 
     ShoppingScreen, 
@@ -320,13 +322,14 @@ class ItemDetail extends Component {
             )
         }else if(imgs.MenuType === '10'){
             imgRes = _.map(imgs.SliderList, imgSlider => {
+                console.log(imgSlider.Sequence)
                 return (
-                <View key={banner+'&&'+imgSlider.ImageURL} style={{width: Dimensions.get('window').width, height: 150}}>
+                <TouchableOpacity key={banner+'&&'+imgSlider.ImageURL} style={{width: Dimensions.get('window').width, height: 150}} onPress={()=> this.viewBanner(imgSlider.Sequence)}>
                     <Image
                         style={{height:150}}
                         source={{ uri: base_url + imgSlider.ImageURL }}
                     />
-                </View>
+                </TouchableOpacity>
                 )
             })
 
@@ -347,8 +350,18 @@ class ItemDetail extends Component {
         
     }
 
+
+    viewBanner(key){
+        if(key === '1'){
+            console.log(key)
+        }else if(key === '2'){
+            this.props.navigation.navigate('giftVou')
+        }
+    }
+
+
     viewAll(key){
-        console.log(key)
+        // console.log(key)
         if(key === '2'){
            this.props.navigation.navigate('recomEat')
         }
@@ -451,7 +464,13 @@ const HomeMenu = createStackNavigator({
     },
     recomStays:{
         screen: StaysScreen, navigationOptions:{header:null}
-    }
+    },
+    giftVou:{
+        screen: GiftVoucherScreen, navigationOptions:{header:null}
+    },
 })
+
+
+
 
 export default HomeMenu

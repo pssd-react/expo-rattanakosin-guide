@@ -13,3 +13,4 @@ export * from './ButtonFollow';
 export * from './LabelInput';
 export * from './ButtonLocal';
 export * from './ButtonStar';
+export * from './ButtonHighlight';
