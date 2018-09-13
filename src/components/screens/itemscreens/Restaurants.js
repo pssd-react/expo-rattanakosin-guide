@@ -81,6 +81,7 @@ export class Restaurants extends Component {
                     <Card>
                         <ScrollView>
                             {this.renderItem()}
+                            <View style={{ height: 100}} />
                         </ScrollView>
                     </Card>
                 </View>
@@ -155,11 +156,7 @@ class ItemDetail extends Component {
     }
     renderData() {
         return _.map(this.props.items, item => {
-<<<<<<< HEAD
-         //  console.log( item.ImageUrl )
-=======
            //console.log( item )
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
             return (
                 <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
                 <CardSection style={{height:40}}> 
@@ -190,7 +187,7 @@ class ItemDetail extends Component {
                                             <View style={{ flex: 1 , marginRight: 15} }>
                                                 <ButtonStar style={styles.buttonStarStyle}
                                                 > 
-                                                    0.0
+                                                {item.Rating}
                                                 </ButtonStar>
                                             </View>
                                             <View style={{ flex: 2, marginLeft: 5}}>

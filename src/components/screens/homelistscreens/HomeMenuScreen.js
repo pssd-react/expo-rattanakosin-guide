@@ -6,16 +6,11 @@ import {
     TouchableOpacity,
     Image
 } from 'react-native'
-import { Header } from '../../common/Header';
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
 import { Icon} from 'react-native-elements'
-<<<<<<< HEAD
-import { createStackNavigator } from 'react-navigation'
-=======
 import { createStackNavigator, HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 // Import Item Screens 
 
 

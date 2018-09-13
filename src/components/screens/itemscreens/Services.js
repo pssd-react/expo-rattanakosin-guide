@@ -14,12 +14,8 @@ import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
 import { ButtonStar,ButtonLocal } from '../../common';
-<<<<<<< HEAD
-
-=======
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 
 var data = {
 	"RqAppID":"1234",
@@ -59,18 +55,6 @@ export class Services extends Component {
         });
     }
 
-<<<<<<< HEAD
-    
-    renderItem() {
-    //    console.log(this.state.item)
-        const  CardItem = _.map((this.state), (items) => {
-            return (<ItemDetail items={items.StaticLocation} />)
-        })
-
-        return CardItem
-    }
-
-=======
     onButtonGoBack(){
         this.props.navigation.popToTop()
     }
@@ -86,27 +70,21 @@ export class Services extends Component {
             return CardItem
         }
 
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 
     render(){
         
         return (
-<<<<<<< HEAD
-=======
             <View style={{flex:1}}>
             <Header headerText="Services" 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
                     <Card>
                         <ScrollView>
                             {this.renderItem()}
+                            <View style={{ height: 100}} />
                         </ScrollView>
                     </Card>
-<<<<<<< HEAD
-=======
                 </View>
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
         )
     }
 }
@@ -180,11 +158,7 @@ class ItemDetail extends Component {
         return _.map(this.props.items, item => {
        //    console.log( item.ImageUrl )
             return (
-<<<<<<< HEAD
-                <View style={{flex:1}}>
-=======
                 <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
@@ -213,7 +187,7 @@ class ItemDetail extends Component {
                                             <View style={{ flex: 1 , marginRight: 15} }>
                                                 <ButtonStar style={styles.buttonStarStyle}
                                                 > 
-                                                    0.0
+                                                {item.Rating}
                                                 </ButtonStar>
                                             </View>
                                             <View style={{ flex: 2, marginLeft: 5}}>
@@ -257,9 +231,4 @@ class ItemDetail extends Component {
             </View>
         )
     }           
-<<<<<<< HEAD
 }
-export default Services
-=======
-}
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26

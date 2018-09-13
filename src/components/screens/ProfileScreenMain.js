@@ -52,7 +52,7 @@ class ProfileScreenMain extends Component{
     componentDidMount(){
         firebase.auth().onAuthStateChanged((user) => {
             if(user != null){
-              //  console.log(user)
+                console.log(user)
             }
         }) 
         this.setState({ isModalVisible: false });
@@ -76,8 +76,8 @@ class ProfileScreenMain extends Component{
             const userInfoFB = await response.json();
            this.setState({ userInfoFB });
            this.state.userInfo = userInfoFB
-          //  console.log('******')
-          //  console.log(this.state.userInfo)
+            console.log('****')
+            console.log(this.state.userInfo)
          
         }
     }
@@ -164,24 +164,11 @@ class ProfileScreenMain extends Component{
             );
     }
 
-<<<<<<< HEAD
-    renderButtonFB(status=1){
-        console.log(status)
-        console.log("=======Pro========")
-        console.log(this.state.userInfo)
-        console.log("====================")
-        if(status === 0){
-         //  console.log("เข้า status 0")
-          // this.state.userInfo = null
-          return(this.renderPage());
-            
-=======
     renderButtonFB(){
         if((!this.state.userInfoFB)|| this.state.userInfoFB === ""){
             return(
                 this._renderProfile()
             )
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
         }
         if(this.state.userInfoFB){
             return(
@@ -222,17 +209,6 @@ class ProfileScreenMain extends Component{
         
     }
 
-<<<<<<< HEAD
-    renderListmenu(){
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-
-        if(!this.state.userInfoFB){
-         //   console.log(this.state)
-            this.state = {
-                dataSource : ds.cloneWithRows(listDataNoLogin),
-            }
-            return this.state.dataSource;
-=======
     onListSetting(){
         this.props.navigation.navigate('Setting');
     }
@@ -245,7 +221,6 @@ class ProfileScreenMain extends Component{
     onListAboutApp(){
         this.props.navigation.navigate('AboutApp');
     }
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
 
     modalRender(){
         console.log('this is loading : '+this.state.loading)
@@ -314,27 +289,6 @@ class ProfileScreenMain extends Component{
         )
     }
 
-<<<<<<< HEAD
-    onRowPress(rowData){
-        if(rowData.id === '1'){
-            this.props.navigation.navigate('Setting');
-        }else if(rowData.id === '2'){
-            this.props.navigation.navigate('HowToUse');
-        }else if(rowData.id === '3'){
-            this.props.navigation.navigate('AboutRattanakosin');
-        }else if(rowData.id === '4'){
-            this.props.navigation.navigate('AboutApp');
-        }else if(rowData.id === '5'){
-           // this.props.navigation.navigate('Main');
-       //    console.log('///////////////////////')
-       //    console.log(this.state)
-        //   console.log('///////////////////////')
-        //   console.log(this.state.userInfoFB)
-           //setState({userInfoFB = null})
-            this.renderButtonFB(0);
-            
-        }
-=======
     onLogOutModal(){
         this.state.loading = true
         this._deactiveModal()
@@ -359,7 +313,6 @@ class ProfileScreenMain extends Component{
 
     onLoginSuccess(){
         this.setState({loading: false})
->>>>>>> ef8d2513c58ebffddba0f0c4c4b8bcce612e4c26
     }
 
     renderPage(){
