@@ -12,7 +12,12 @@
       "bundleIdentifier": "co.th.pssd-react.testcreaternapp"
     },
     "android": {
-      "package": "co.th.pssd_react.testcreaternapp"
+      "package": "co.th.pssd_react.testcreaternapp",
+      "config": {
+        "googleMaps": { 
+          "apiKey": "AIzaSyCqfpJow4aJZuVQpjFh2D4rpVOcbVGgt6A" 
+        }   
+     }
     }
   }
 }
