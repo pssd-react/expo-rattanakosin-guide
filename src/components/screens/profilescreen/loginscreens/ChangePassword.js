@@ -164,7 +164,7 @@ export class ChangePassword extends Component {
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.navigate('Login')
     }
 
     render() {

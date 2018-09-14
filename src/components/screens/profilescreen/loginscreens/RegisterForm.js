@@ -38,7 +38,7 @@ export class RegisterForm extends Component {
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.navigate('Login')
     }
 
     render() {
