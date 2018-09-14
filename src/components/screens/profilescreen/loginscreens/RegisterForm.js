@@ -38,7 +38,7 @@ export class RegisterForm extends Component {
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.navigate('Login')
     }
 
     render() {
@@ -60,7 +60,7 @@ export class RegisterForm extends Component {
                                 label="ชื่อผู้ใช้งาน"
                                 value={this.state.name}
                                 onChangeText={name => this.setState({ name })}
-                                autoFocus={false}
+                                autoFocus={true}
                                 /> 
                         </CardSection>
                         <CardSection>

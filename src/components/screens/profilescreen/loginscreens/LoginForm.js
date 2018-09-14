@@ -1,32 +1,28 @@
 import React, {Component} from 'react'
-import {Text, View, TouchableOpacity, ImageBackground } from 'react-native'
+import {Text, View, TouchableOpacity, ImageBackground, BackHandler } from 'react-native'
 import {LabelInput, Button, CardSection,} from '../../../common'
-import {ChangePassword} from './ChangePassword'
-import {RegisterForm} from './RegisterForm'
 import {createStackNavigator} from 'react-navigation'
 import { SocialIcon } from 'react-native-elements'
+import { ProfileScreenMain } from '../../ProfileScreenMain'
 import {StoreGlobal} from '../../../config/GlobalState'
 
 class LoginForm extends Component {
     static navigationOptions = { header: null }
-    state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false,  userInfo: '', };
-    
+    state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false,  userInfo: '', user: '' };
+
     async loginWithFacebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
-        ('1886750428085436', { permissions: ['public_profile'] })
+        ('287789215160486', { permissions: ['public_profile'] })
 
         if(type === 'success'){
-            /* const credentail = firebase.auth.FacebookAuthProvider.credentail(token)
-            firebase.auth().signInWithCredential(credentail).catch((error) => {
-                console.log(error)
-            }) */
+           
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
             const userInfo = await response.json();
             this.setState({ userInfo });
             //console.log(userInfo)
             StoreGlobal({type: 'set', key: 'userInfo', value: userInfo})
            // return this.state.userInfo.map(userInfo => 
-                console.log(this.state.userInfo)
+               // console.log(this.state.userInfo)
 
                // <ProfileScreenMain key={userInfo.id} userInfo={userInfo}/>
            // );
@@ -34,8 +30,17 @@ class LoginForm extends Component {
         }
     }
 
+    /*onButtonFacebook(){
+        this.lo
+        this.onButtonToProfile()
+    }*/
+
     onButtonToProfile(){
-        this.props.navigation.popToTop()
+        //this.props.navigation.popToTop()
+        const reload = null
+        this.props.navigation.navigate(
+            'Main', {reload}
+          )
     }
 
     onButtonChangePass(){
@@ -64,7 +69,7 @@ class LoginForm extends Component {
                             label="หมายเลขโทรศัพท์"
                             value={this.state.phone}
                             onChangeText={phone => this.setState({ phone })}
-                            autoFocus={false}
+                            autoFocus={true}
                             /> 
                     </CardSection>
                     <CardSection>
@@ -156,17 +161,4 @@ const styles = {
 
 }
 
-const LoginMenu = createStackNavigator({
-   Main : {
-        screen : LoginForm
-    },
-    ChangePass : {
-        screen : ChangePassword
-    },
-    Register : {
-        screen : RegisterForm
-    },
-    
-})
-
-export default LoginMenu
+export default LoginForm

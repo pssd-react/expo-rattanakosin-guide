@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 import {HeaderBackButton } from 'react-navigation'
@@ -165,7 +164,7 @@ export class ChangePassword extends Component {
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.navigate('Login')
     }
 
     render() {
@@ -183,7 +182,7 @@ export class ChangePassword extends Component {
                             label="เบอร์โทรศัพท์ที่ลงทะเบียน"
                             value={this.state.phone}
                             onChangeText={this.onChangeInput.bind(this,'phone')}
-                            autoFocus = {false}
+                            autoFocus = {true}
                             /> 
                     </CardSection>
                     <CardSection>
