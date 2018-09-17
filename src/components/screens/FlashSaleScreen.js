@@ -12,7 +12,7 @@ import {
     createStackNavigator,
     HeaderBackButton
 } from 'react-navigation';
-import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import { TabView, TabBar, SceneMap ,TabViewAnimated } from 'react-native-tab-view';
 import { Header } from '../common/Header'
 
 const INITAL_STATE = { 
@@ -47,6 +47,7 @@ export class FlashSaleScreen extends Component{
             <View style={styles.container}>
                 {this.renderHeader(this.state.index)}
                 <TabView
+                    style={styles.tabbar}
                     navigationState={this.state}
                     renderScene={SceneMap({
                         first: FlashSaleLightning,
@@ -63,7 +64,10 @@ export class FlashSaleScreen extends Component{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-       
+        
+    },
+    tabbar: {
+        backgroundColor: '#fff',
     }
 })
 
