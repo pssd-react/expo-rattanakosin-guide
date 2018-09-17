@@ -2,145 +2,138 @@ import React, {Component} from 'react'
 import {
     View,
     Text, 
-    StyleSheet,
-    ActivityIndicator,
-    Image
-    } from 'react-native'
+    Image,
+    StyleSheet} from 'react-native'
 import axios from 'axios'
-import {MapView, Location, Constants} from 'expo'
-
-
-
-var data = {
-	"RqAppID":"1234",
-	"UserLanguage":"EN",
-	"ViewType":"04",
-	"RowNum":"0",
-	"Keyword":"",
-	"ShopCategory":"264",
-	"UserID":"1",
-	"MarketID":"3",
-	"CouponType":"",
-	"CouponSubType":""
+import _ from 'lodash'
+import {MapView} from 'expo'
+    
+const data = {
+    'RqAppID':'1234',
+    'UserLanguage':'EN',
+    'ViewType':'05',
+    'RowNum':'0',
+    'Keyword':'',
+    'ShopCategory':'',
+    'UserID':'1',
+    'MarketID':'3',
+    'CouponType':'',
+    'CouponSubType':''
 }
-
-var config = {
+const config = {
     headers: {
         'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
         'Content-Type': 'application/json'
     }
 };
 
-
-
 class MapScreen extends Component{
-    
-    componentWillMount() {
+    state ={
+        _data : '',
+        marginBottom : 1
+    }
+
+    componentWillMount(){
+        this.renderService()
+    }
+
+
+    renderService(){
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
-            data, config)
-            .then(response => { this.setState({ item: response.data}) })
-            .catch((error) => {
-                console.log('map error:', error);
+        data, config)
+        .then(response => { this.setState({ _data: response.data }) })
+        .catch((error) => {
+            console.log('axios error:', error);
         });
     }
 
-    componentDidMount(){
-        this.setState({ mapLoaded: true});
-    }
-
-    onRegionChangeComplete = (region) =>{
-       // console.log(region);
-        this.setState({ region });
-    }
-    
-  
-    state = {
-        item: '',
-        mapLoaded: false,
-        region: {
-            latitude: 13.755617,
-            longitude: 100.498478,
-            latitudeDelta: 0.0222,
-            longitudeDelta: 0.0221,
-        },
-        markers : 
-        {
-          latitude: 13.744147,
-          longitude: 100.494137,
-          title: 'Foo Place',
-          subtitle: '1234 Foo Drive'
-        }
-    
-    }
-
-
     renderMarker(){
-        // console.log(this.state.item.StaticLocation)
-      
-
-        // let loKey = 0
-        // const  CardItem = _.map((this.state), (items) => {
-        //     loKey++
-        //     return (<ItemDetail key={'location_'+loKey} items={items.StaticLocation} />)
-        // })
-
-        // return CardItem
-
-            return(
-                <MapView.Marker
-                coordinate={{latitude: 13.73913079623,
-                longitude: 100.51648126149}}
-                image={require('../images/drawable-hdpi/ic_category_place_travel.webp')}
-                />
-            )
-       
-    }
-
-
-    render(){
-        if( !this.state.mapLoaded){
+        //console.log(this.state._data)
+        let _renderingIconType = ''
+        let _iconName = ''
+        return _.map((this.state._data.StaticLocation), _renderingData =>{
+            _renderingIconType = _.map((_renderingData.ShopCategory), _renderingCategory=>{
+                return _renderingCategory.ShopCategoryID
+            })
+            if(_renderingIconType[0] === '273'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_food.webp')
+            }
+            else if(_renderingIconType[0] === '274'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_shop.webp')
+            }
+            else if(_renderingIconType[0] === '275'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_shopping_mall.webp')
+            }
+            else if(_renderingIconType[0] === '276'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_hotel.webp')
+            }
+            else if(_renderingIconType[0] === '277'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_place_travel.webp')
+            }
+            else if(_renderingIconType[0] === '278'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_office.webp')
+            }
+            else if(_renderingIconType[0] === '280'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_facilities.webp')
+            }
+            else if(_renderingIconType[0] === '281'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_service.webp')
+            }
+            else if(_renderingIconType[0] === '460'){
+                _iconName = require('./../images/drawable-hdpi/ic_type_category_bank.webp')
+            }
             return (
-                <View style ={{flex: 1,justtifyContent: 'center '}}>
-                    <ActivityIndicator size="large" />
-                </View>
+            <MapView.Marker
+                    key={_renderingData.LocationID+''+_renderingData.ShopID}
+                    title={_renderingData.LocationName}
+                    description={_renderingData.ShopDescription}
+                    coordinate={{
+                        latitude: parseFloat(_renderingData.Latitude),
+                        longitude: parseFloat(_renderingData.Longitude)
+                    }}
+                > 
+                <Image
+                    style={{width:40, height:40}}
+                    source={_iconName}/>
+                </MapView.Marker>
             )
-        }
-    
-
+        })
+    }
+    render(){
         return (
-        <View  style={{ flex: 1}}>
-        <MapView
-            style={{ flex: 1 }}
-            region={ this.state.region }
-            onRegionChangeComplete={this.onRegionChangeComplete}
-          >
+            <MapView
+            style={{flex: 1, marginBottom: this.state.marginBottom}}
+            onMapReady={() => this.setState({marginBottom: 0})}
+            initialRegion={{
+              latitude: 13.754658,
+              longitude: 100.494037,
+              latitudeDelta: 0.0222,
+              longitudeDelta: 0.0122,
+            }}
+            showsMyLocationButton={true}
+            showsUserLocation={true}
+            showsPointsOfInterest = {false}
+            customMapStyle={[
+                {
+                featureType: 'poi',
+                elementType: 'labels',
+                stylers: [
+                     {
+                         visibility: 'off'
+                             }
+                 ]
+                 }
+            ]}>
             {this.renderMarker()}
           </MapView>
-          </View>
         )
     }
 }
 
-
-
-
-
-
-// const ItemDetail = ({ items }) => {
-
-//     return(
-//         <MapView.Marker
-//         coordinate={{latitude: 13.73913079623,
-//         longitude: 100.51648126149}}
-//         image={require('../images/drawable-hdpi/ic_category_place_travel.webp')}
-//         />
-//     )
-
-// }
-
-
-
-
-
+const styles = StyleSheet.create({
+    viewMapStyle:{
+        flex:1
+    }
+})
 
 export default MapScreen

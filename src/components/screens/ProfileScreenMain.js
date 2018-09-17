@@ -15,9 +15,9 @@ import { SocialIcon } from 'react-native-elements'
 import {createStackNavigator} from 'react-navigation'
 import {SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen} from './profilescreen'
 import {StoreGlobal} from '../config/GlobalState'
-
-import LoginMenu from './profilescreen/loginscreens/LoginForm'
-import {RegisterForm} from './profilescreen/loginscreens/RegisterForm';
+import {ChangePassword} from './profilescreen/loginscreens/ChangePassword'
+import {RegisterForm} from './profilescreen/loginscreens/RegisterForm'
+import LoginForm from './profilescreen/loginscreens/LoginForm'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler';
 import Modal from "react-native-modal";
 
@@ -41,6 +41,7 @@ class ProfileScreenMain extends Component{
     dataSource : '',
     loading : false,
     isModalVisible: false,
+    user: ''
     //status_login: false,
 }
     static navigationOptions = {header: null}
@@ -50,11 +51,6 @@ class ProfileScreenMain extends Component{
     }
 
     componentDidMount(){
-        firebase.auth().onAuthStateChanged((user) => {
-            if(user != null){
-                console.log(user)
-            }
-        }) 
         this.setState({ isModalVisible: false });
     }
 
@@ -74,10 +70,11 @@ class ProfileScreenMain extends Component{
             
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
             const userInfoFB = await response.json();
-           this.setState({ userInfoFB });
-           this.state.userInfo = userInfoFB
-            console.log('****')
-            console.log(this.state.userInfo)
+            StoreGlobal({type: 'set', key: 'userInfo', value: userInfoFB})
+            this.setState({ userInfoFB });
+           
+            console.log('******')
+            console.log(this.state.userInfoFB)
          
         }
     }
@@ -90,19 +87,19 @@ class ProfileScreenMain extends Component{
         this.props.navigation.navigate('Register')
     }
 
-    _renderUserInfo() {
+    _renderUserInfo(userInfoFB) {
         return (
             <View style={{ alignItems: 'center' }}>
                 <CardSection style={{ justifyContent: 'center', marginTop: 20}}>
                 </CardSection>
                 <CardSection style={{paddingLeft:30, paddingRight:30}}>
                     <Image 
-                    source={{ uri: this.state.userInfoFB.picture.data.url }}
+                    source={{ uri: userInfoFB.picture.data.url }}
                     style={{ width: 150, height: 150 }}
                     />
                 </CardSection>
                 <CardSection style={{paddingLeft:30, paddingRight:30}}>
-                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{this.state.userInfoFB.name}</Text>
+                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{userInfoFB.name}</Text>
                 </CardSection>
                 <CardSection style={{justifyContent: 'space-between', marginTop: 20}}>
                     <View style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
@@ -158,21 +155,25 @@ class ProfileScreenMain extends Component{
                     <CardSection style={{ justifyContent: 'center', marginTop: 18}}>
                         <TouchableOpacity onPress={() => this.onButtonRegister()}>
                             <Text style={{  fontSize: 16, textDecorationLine: 'underline', color:'#fff', }}>ลงทะเบียน</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity >
                     </CardSection>
                 </View>
             );
     }
 
     renderButtonFB(){
+        console.log('----renderButtonFB----') 
+        this.state.userInfoFB = StoreGlobal({type: 'get', key: 'userInfo'})
+        console.log( this.state.userInfoFB)
         if((!this.state.userInfoFB)|| this.state.userInfoFB === ""){
             return(
                 this._renderProfile()
             )
         }
         if(this.state.userInfoFB){
+
             return(
-                 this._renderUserInfo()
+                 this._renderUserInfo(this.state.userInfoFB)
             )            
         }
     }
@@ -306,6 +307,7 @@ class ProfileScreenMain extends Component{
     }
 
     onLogoutSuccess(){
+        StoreGlobal({type: 'set', key: 'userInfo', value: null})
         this.state.userInfoFB = undefined
         this.setState({loading: false})
         
@@ -467,7 +469,13 @@ export const ProfileMenu = createStackNavigator({
         screen : AboutAppScreen
     },
     Login : {
-        screen : LoginMenu, navigationOptions:{header:null}
+        screen : LoginForm, navigationOptions:{header:null}
+    },
+    Register : {
+        screen : RegisterForm
+    },
+    ChangePass : {
+        screen : ChangePassword
     },
     Register : {
         screen : RegisterForm

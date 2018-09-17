@@ -145,6 +145,7 @@ class ItemDetail extends Component {
                     return(     
                            
                                 <Image 
+                                key={imgSlider.Sequence+'_'+imgSlider.ImageURL}
                                 style={{height:150,width: Dimensions.get('window').width}}
                                 source={{ uri: base_url + imgSlider.ImageURL }}
                                 />         
@@ -160,7 +161,7 @@ class ItemDetail extends Component {
             //console.log(item.Sequence)
             if(item.Sequence === '1'){
                 return (
-                    <View style={{ flex: 1 }} >
+                    <View key={item.Sequence+'_'+item.ImageURL} style={{ flex: 1 }} >
                          {this.renderImg(item)}
                     </View>
                 )

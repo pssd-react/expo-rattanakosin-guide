@@ -324,12 +324,14 @@ class ItemDetail extends Component {
             imgRes = _.map(imgs.SliderList, imgSlider => {
                 console.log(imgSlider.Sequence)
                 return (
-                <TouchableOpacity key={banner+'&&'+imgSlider.ImageURL} style={{width: Dimensions.get('window').width, height: 150}} onPress={()=> this.viewBanner(imgSlider.Sequence)}>
+                <View key={banner+'&&'+imgSlider.ImageURL} style={{width: Dimensions.get('window').width, height: 150}} >
+                    <TouchableOpacity onPress={()=> this.viewBanner(imgSlider.Sequence)}>
                     <Image
                         style={{height:150}}
                         source={{ uri: base_url + imgSlider.ImageURL }}
                     />
-                </TouchableOpacity>
+                    </TouchableOpacity>
+                </View>
                 )
             })
 
