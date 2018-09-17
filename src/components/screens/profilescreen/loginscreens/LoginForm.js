@@ -1,39 +1,65 @@
 import React, {Component} from 'react'
-import {Text, View, TouchableOpacity, ImageBackground, BackHandler } from 'react-native'
+import {Text, View, TouchableOpacity, ImageBackground, Image } from 'react-native'
 import {LabelInput, Button, CardSection,} from '../../../common'
-import {createStackNavigator} from 'react-navigation'
 import { SocialIcon } from 'react-native-elements'
-import { ProfileScreenMain } from '../../ProfileScreenMain'
 import {StoreGlobal} from '../../../config/GlobalState'
+import axios from 'axios';
+import Modal from "react-native-modal";
 
 class LoginForm extends Component {
     static navigationOptions = { header: null }
-    state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false,  userInfo: '', user: '' };
+    state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false,  userInfo: '', user: '', isModalVisible: false, alert_phone: '' };
+
+    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
+    _activeModal = () => this.setState({ isModalVisible: true });
+    _deactiveModal = () => this.setState({ isModalVisible: false });
 
     async loginWithFacebook(){
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
         ('1886750428085436', { permissions: ['public_profile'] })
 
         if(type === 'success'){
-           
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
             const userInfo = await response.json();
-            this.setState({ userInfo });
-            //console.log(userInfo)
             StoreGlobal({type: 'set', key: 'userInfo', value: userInfo})
-           // return this.state.userInfo.map(userInfo => 
-               // console.log(this.state.userInfo)
-
-               // <ProfileScreenMain key={userInfo.id} userInfo={userInfo}/>
-           // );
+            this.setState({ userInfo });
             this.onButtonToProfile()
         }
     }
 
-    /*onButtonFacebook(){
-        this.lo
-        this.onButtonToProfile()
-    }*/
+    onButtonLogin(){
+        console.log("Number: "+ this.state.phone + " Pass: "+this.state.password)
+        const data = {
+            "RqAppID":"1234",
+            "Email": this.state.phone,
+            "Password": this.state.password,
+            "UserLanguage":"TH",
+            "MarketID":"1"
+        }
+        const config = {
+            headers: {
+                'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+                'Content-Type': 'application/json'
+            }
+        }
+        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/EmailLoginService',
+            data, config)
+        .then(response =>  {
+            if(response.data.ResponseDetail === 'Success'){
+                StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
+                this.onButtonToProfile()
+            }else{
+                this.setState({alert_phone:response.data.ResponseDetail})
+                this._toggleModal()
+            } 
+        }
+        )
+        .catch((error) => {
+            console.log('axios error: '+ error )
+        });
+        
+
+    }
 
     onButtonToProfile(){
         //this.props.navigation.popToTop()
@@ -51,6 +77,41 @@ class LoginForm extends Component {
     onButtonRegister(){
         console.log('Register')
         this.props.navigation.navigate('Register');
+    }
+
+    //Modal
+    renderModal(){
+        return(
+                <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
+                    <View style={{ flex: 1, 
+                    backgroundColor: '#fff', 
+                    marginBottom:130, 
+                    marginTop:100,
+                    borderRadius: 5,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 5, height: 5 },
+                    shadowRadius: 5,
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',}}>
+                        <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
+                            <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
+                                    style={{width: 70, height: 70}}/>
+                        </CardSection>
+                        <CardSection style={{paddingLeft:20}}>
+                            <Text style={{ fontSize: 22}}>ขอโทษค่ะ</Text>
+                        </CardSection>
+                        <CardSection style={{paddingLeft:20,  paddingRight: 20}}>
+                            <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
+                        </CardSection>
+                        <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                            <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                                onPress={() => this._deactiveModal()}>
+                                    <Text style={{ fontSize: 16}}>ปิด</Text>
+                            </TouchableOpacity>
+                        </CardSection>
+                    </View>
+                </Modal>
+        )
     }
 
     render() {
@@ -75,12 +136,13 @@ class LoginForm extends Component {
                     <CardSection>
                         <LabelInput 
                             label="รหัสผ่าน"
+                            secureTextEntry
                             value={this.state.password}
                             onChangeText={password => this.setState({ password })}
                             /> 
                     </CardSection>
                     <CardSection>
-                        <Button onPress={() => this.onButtonToProfile()} 
+                        <Button onPress={() => this.onButtonLogin()} 
                             style={{backgroundColor: '#ffc94c'}} 
                             textStyle={{color: '#000'}}>
                             เข้าสู่ระบบ
@@ -113,6 +175,7 @@ class LoginForm extends Component {
                         </TouchableOpacity >
                     </CardSection>
             </View>
+            {this.renderModal()}
           </ImageBackground>
         );
     }

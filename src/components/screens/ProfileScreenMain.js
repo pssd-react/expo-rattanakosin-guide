@@ -17,6 +17,7 @@ import {SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, Ab
 import {StoreGlobal} from '../config/GlobalState'
 import {ChangePassword} from './profilescreen/loginscreens/ChangePassword'
 import {RegisterForm} from './profilescreen/loginscreens/RegisterForm'
+import {RegisterOTP} from './profilescreen/loginscreens/RegisterOTP'
 import LoginForm from './profilescreen/loginscreens/LoginForm'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler';
 import Modal from "react-native-modal";
@@ -41,7 +42,8 @@ class ProfileScreenMain extends Component{
     dataSource : '',
     loading : false,
     isModalVisible: false,
-    user: ''
+    user: '',
+    userPhone: undefined
     //status_login: false,
 }
     static navigationOptions = {header: null}
@@ -63,16 +65,11 @@ class ProfileScreenMain extends Component{
         ('1886750428085436', { permissions: ['public_profile'] })
 
         if(type === 'success'){
-            /* const credentail = firebase.auth.FacebookAuthProvider.credentail(token)
-
-            firebase.auth().signInWithCredential(credentail).catch((error) => {
-                console.log(error)
-            }) */
-            
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
             const userInfoFB = await response.json();
-           this.setState({ userInfoFB });
+           
            StoreGlobal({type: 'set', key: 'userInfo', value: userInfoFB})
+           this.setState({ userInfoFB });
             console.log('******')
             console.log(this.state.userInfo)
          
@@ -87,7 +84,53 @@ class ProfileScreenMain extends Component{
         this.props.navigation.navigate('Register')
     }
 
+    _renderUserPhone(userPhone){
+        console.log('===userPhone===')
+        console.log(userPhone.UserDetail)
+        return (
+            <View style={{ alignItems: 'center' }}>
+                <CardSection style={{ justifyContent: 'center', marginTop: 20}}>
+                </CardSection>
+                <CardSection style={{paddingLeft:30, paddingRight:30}}>
+                    <Image 
+                    source={ require('../images/drawable-xhdpi/placeholder_profile_item.webp') }
+                    style={{ width: 150, height: 150 }}
+                    />
+                </CardSection>
+                <CardSection style={{paddingLeft:30, paddingRight:30}}>
+                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{userPhone.UserDetail.DisplayName}</Text>
+                </CardSection>
+                <CardSection style={{justifyContent: 'space-between', marginTop: 20}}>
+                    <View style={{flex: 1, alignItems: 'center', marginLeft: 20}}>
+                        <TouchableOpacity onPress={null}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image style={{ width: 25, height: 30 }}
+                            source={ require('../images/drawable-hdpi/ic_report_review_item.webp')}
+                            />
+                            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                                <Text style={{ fontSize: 16 , color: '#fff'}}>ประวัติการรีวิว</Text>
+                                <Text style={{ fontSize: 20 , color: '#fff'}}>0</Text>
+                            </View>
+                        </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flex: 1, alignItems: 'center'}}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image style={{ width: 22, height: 28 }}
+                            source={ require('../images/drawable-hdpi/ic_report_coupon.webp')}
+                            />
+                            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                                <Text style={{ fontSize: 16 , color: '#fff'}} >คูปอง</Text>
+                            </View>
+                        </View>
+                    </View>
+                </CardSection>
+            </View>
+        )
+    }
+
     _renderUserInfo(userInfoFB) {
+ 
         return (
             <View style={{ alignItems: 'center' }}>
                 <CardSection style={{ justifyContent: 'center', marginTop: 20}}>
@@ -164,29 +207,36 @@ class ProfileScreenMain extends Component{
     renderButtonFB(){
         console.log('----renderButtonFB----') 
         this.state.userInfoFB = StoreGlobal({type: 'get', key: 'userInfo'})
-        console.log( this.state.userInfoFB)
-        if((!this.state.userInfoFB)|| this.state.userInfoFB === ""){
+        this.state.userPhone = StoreGlobal({type: 'get', key: 'userPhone'})
+        console.log( this.state.userPhone )
+        if(this.state.userPhone){
+            console.log('--เข้า---')
+            return (
+                this._renderUserPhone(this.state.userPhone) 
+            )
+        }
+        else if((!this.state.userInfoFB)|| this.state.userInfoFB === "" ){
             return(
                 this._renderProfile()
             )
         }
-        if(this.state.userInfoFB){
-
+        else if(this.state.userInfoFB ){
             return(
-                 this._renderUserInfo(this.state.userInfoFB)
+                this._renderUserInfo(this.state.userInfoFB)
             )            
         }
+        
     }
     
     renderBlock(){
-        if(this.state.userInfoFB){
+        if(this.state.userInfoFB||this.state.userPhone){
              return (<View style={styles.viewBlockStyle}/>)
         }
        
     }
     renderButtonLogOut(){
        
-        if(this.state.userInfoFB){
+        if(this.state.userInfoFB||this.state.userPhone){
             return (
                 <TouchableOpacity onPress={() => this.onListLogOut()}>
                         <View style={styles.listViewContainer}>
@@ -308,6 +358,7 @@ class ProfileScreenMain extends Component{
 
     onLogoutSuccess(){
         StoreGlobal({type: 'set', key: 'userInfo', value: null})
+        StoreGlobal({type: 'set', key: 'userPhone', value: null})
         this.state.userInfoFB = undefined
         this.setState({loading: false})
         
@@ -477,9 +528,10 @@ export const ProfileMenu = createStackNavigator({
     ChangePass : {
         screen : ChangePassword
     },
-    Register : {
-        screen : RegisterForm
-    }
+    RegisterOTP : {
+        screen : RegisterOTP
+    },
+
 })
 
  

@@ -1,15 +1,74 @@
 import React, {Component} from 'react';
-import {AppRegistry, Text, View, StatusBar, TextInput, Animated } from 'react-native';
+import {Text, View, Image, TouchableOpacity,Linking,} from 'react-native';
 import {HeaderBackButton } from 'react-navigation'
 import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../../common';
+import {StoreGlobal} from '../../../config/GlobalState'
+import axios from 'axios';
+import Modal from "react-native-modal";
 
 export class RegisterForm extends Component {
     static navigationOptions = {header: null}
-    state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false };
+    state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false, isModalVisible: false, alert_phone:'' };
     
+    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
+    _activeModal = () => this.setState({ isModalVisible: true });
+    _deactiveModal = () => this.setState({ isModalVisible: false });
+
     onButtonPress(){
-        const { email, password } = this.state;
-        this.setState({error: '', loading: true });
+        console.log("Name: "+this.state.name+" Number: "+ this.state.phone + " Pass: "+this.state.password+ " com_Pass: "+this.state.confirm_password)
+        if(this.state.password < 6 ){
+            this.setState({alert_phone: "รหัสผ่าน ต้องมีความยาวไม่น้อยกว่า 6 ตัวอักษร"})
+            this._toggleModal()
+        }else if(this.state.confirm_password !== this.state.password){
+            this.setState({alert_phone: "โปรดระบุรหัสผ่านให้ตรงกัน"})
+            this._toggleModal()
+        }else{
+            const data = { 
+                "RqAppID":"1234",
+                "Mobile": this.state.phone,
+                "Type":"1",
+                "UserLanguage":"TH"
+            }
+            const config = {
+                headers: {
+                    'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+                    'Content-Type': 'application/json'
+                }
+            }
+            axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/RequestOTPService',
+                data, config)
+            .then(response =>  {
+                console.log(response.data)
+
+                if(response.data.ResponseStatus === '00'){
+                    console.log(true, response.data.ResponseDetail)
+                    StoreGlobal({type: 'set', key: 'RequestOTPService', value: {"DisplayName":this.state.name, 
+                                                                                "Phone":this.state.phone,
+                                                                                "Password":this.state.password,
+                                                                                "ConfirmPassword":this.state.confirm_password,
+                                                                                "Reference": response.data.Reference,}})
+                    this.onButtonRegisterOTP()
+                }else{
+                    console.log(false, response.data.ResponseDetail)
+                    this.setState({alert_phone:response.data.ResponseDetail})
+                    this._toggleModal()
+                }
+            })
+            .catch((error) => {
+                console.log('axios error: '+ error )
+            });
+        }
+        
+           /* if(response.data.ResponseDetail === 'Success'){
+                //StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
+               // console.log(response.data)
+                //this.onButtonRegisterOTP()
+            }else {
+                console.log(response.data.ResponseDetail)
+                
+            }*/
+        
+        
     }
 
     onLoginFail(){
@@ -25,20 +84,80 @@ export class RegisterForm extends Component {
         });
     }
 
-    renderButton(){
-        if(this.state.loading){
-            return <Spinner size="small"/>;
-        }
+    //Modal
+    renderModal(){
+        return(
+                <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
+                    <View style={{ flex: 1, 
+                    backgroundColor: '#fff', 
+                    marginBottom:130, 
+                    marginTop:100,
+                    borderRadius: 5,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 5, height: 5 },
+                    shadowRadius: 5,
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',}}>
+                        <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
+                            <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
+                                    style={{width: 70, height: 70}}/>
+                        </CardSection>
+                        <CardSection style={{paddingLeft:20}}>
+                            <Text style={{ fontSize: 22}}>ลงทะเบียนไม่สำเสร็จ</Text>
+                        </CardSection>
+                        <CardSection style={{paddingLeft:20, paddingRight: 20}}>
+                            <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
+                        </CardSection>
+                        <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                            <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                                onPress={() => this._deactiveModal()}>
+                                    <Text style={{ fontSize: 16}}>ปิด</Text>
+                            </TouchableOpacity>
+                        </CardSection>
+                    </View>
+                </Modal>
+        )
+    }
 
+    renderButton(){
+        if(this.state.name !== '' && this.state.phone !== '' && this.state.password !== '' && this.state.confirm_password !== ''){
+            return (
+                <Button onPress={()=>this.onButtonPress()} style={{backgroundColor: '#9f4289'}} textStyle={{color: '#fff'}}>
+                    ต่อไป
+                </Button> 
+            );
+        }
         return (
-            <Button onPress={this.onButtonPress.bind(this)} style={{backgroundColor: '#CDC9C9'}} textStyle={{color: '#8B8989'}}>
+            <View style={{
+                flex: 1,
+                alignSelf: 'stretch',
+                backgroundColor: '#CDC9C9',
+                borderRadius: 5,
+                marginLeft: 5,
+                marginRight: 5,
+                height: 50}}  >
+                <Text style={{alignSelf: 'center',
+                    color: '#8B8989',
+                    fontSize: 16,
+                    fontWeight: '600',
+                    paddingTop: 10 ,
+                    paddingBottom: 10}}>
+                    ต่อไป
+                </Text>
+            </View> 
+           /* <Button onPress={()=>this.onButtonRegisterOTP()} style={{backgroundColor: '#9f4289'}} textStyle={{color: '#fff'}}>
                 ต่อไป
-            </Button> 
+            </Button>*/
         );
     }
 
     onButtonGoBack(){
         this.props.navigation.navigate('Login')
+    }
+
+    onButtonRegisterOTP(){
+        console.log('RegisterOTP')
+        this.props.navigation.navigate('RegisterOTP');
     }
 
     render() {
@@ -53,7 +172,7 @@ export class RegisterForm extends Component {
                 <View style={viewStyle}>
                     <Text style={textStyle}> กรอกข้อมูลส่วนตัว </Text>
                 </View>
-                <View style={{justifyContent: 'center', marginTop: 20}}>
+                <View style={{justifyContent: 'center',marginTop:5}}>
                     <View style={{ marginLeft: 30, marginRight: 30 }}>
                         <CardSection>
                             <LabelInput 
@@ -72,26 +191,29 @@ export class RegisterForm extends Component {
                         </CardSection>
                         <CardSection>
                             <LabelInput 
-                                label="รหัสผ่าน"
+                                label="รหัสผ่าน" 
+                                secureTextEntry
                                 value={this.state.password}
                                 onChangeText={password => this.setState({ password })}
                                 /> 
                         </CardSection>
                         <CardSection>
                             <LabelInput 
-                                label="ยืนยันรหัสผ่าน"
+                                label="ยืนยันรหัสผ่าน" 
+                                secureTextEntry
                                 value={this.state.confirm_password}
                                 onChangeText={confirm_password => this.setState({ confirm_password })}
                                 /> 
                         </CardSection>
                         <View  > 
-                            <SignButton label="I Agree to the " sign="Term of user" /> 
+                            <SignButton label="I Agree to the " sign="Term of user" onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')}/> 
                         </View> 
                         <View style={signupTextCont}>
                             {this.renderButton()}
                         </View> 
                     </View>
                 </View>
+                {this.renderModal()}
             </View>
         );
     }
@@ -119,6 +241,7 @@ const styles = {
         justifyContent :'center',
         paddingVertical:16,
         flexDirection:'row',
+        marginTop: 40
     },
     containerStyle: {
         padding: 5,
