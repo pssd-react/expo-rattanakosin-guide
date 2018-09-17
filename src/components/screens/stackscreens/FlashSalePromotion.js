@@ -18,8 +18,8 @@ import _ from 'lodash'
 
 var data = {
     "RqAppID":"1234",
-    "UserLanguage":"EN",
-    "UserID":"1",
+    "UserLanguage":"TH",
+    "UserID":"",
     "ClientTime":"",
     "MarketID":"3",
     "ShopPromotionType":"A"
@@ -96,26 +96,44 @@ export class FlashSalePromotion extends Component{
     let num = 0;
     let count = null;
     if(this.state.numPresent === undefined){
-    _.map((this.state.item.StaticLocation), (items) => {
-      var Ctime = items.CurrentDateTime;
-      var Stime = items.StartDate;
-      var Etime = items.EndDate;
-      var Cres = Ctime.substring(0, 10);
-      var Sres = Stime.substring(0, 10);
-      var Eres = Etime.substring(0, 10);
-      var Cress = new Date(Cres);
-      var Sress = new Date(Sres);
-      var Eress = new Date(Eres);
-      console.log(Cress,'>=',Sress, '=',Cress >= Sress)
-      if(items.Is_FlashSale === 'N' ){
+    _.map((this.state.item.StaticLocation), (items) => {      
+      var d1 = items.CurrentDateTime.split(' ');
+      var a1 = d1[0].split('/');
+      var a2 = d1[1].split(':');
+      var Ctime = new Date( a1[2],a1[1],a1[0],a2[0],a2[1],a2[2])
+  
+      var d2 = items.StartDate.split(' ');
+      var b1 = d2[0].split('/');
+      var b2 = d2[1].split(':');
+      var Stime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+
+      var d2 = items.EndDate.split(' ');
+      var b1 = d2[0].split('/');
+      var b2 = d2[1].split(':');
+      var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+
+      if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N' ){
        num++
       }
       this.setState({numPresent: num})
    })
   }else if(this.state.numPresent){
        count = _.map((this.state.item.StaticLocation), (items) => {
-        
-       if(items.Is_FlashSale === 'N'){
+        var d1 = items.CurrentDateTime.split(' ');
+        var a1 = d1[0].split('/');
+        var a2 = d1[1].split(':');
+        var Ctime = new Date( a1[2],a1[1],a1[0],a2[0],a2[1],a2[2])
+    
+        var d2 = items.StartDate.split(' ');
+        var b1 = d2[0].split('/');
+        var b2 = d2[1].split(':');
+        var Stime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+
+        var d2 = items.EndDate.split(' ');
+        var b1 = d2[0].split('/');
+        var b2 = d2[1].split(':');
+        var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+       if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N'){
             return (
                     <View style={styles.content}>
                         <View style={{ flex: 6 }}>
@@ -150,16 +168,42 @@ export class FlashSalePromotion extends Component{
     let count = null;
     if(this.state.numComming === undefined){
     _.map((this.state.item.StaticLocation), (items) => {
-     // console.log(num)
-      if(items.Is_FlashSale === 'N'){
+      var d1 = items.CurrentDateTime.split(' ');
+      var a1 = d1[0].split('/');
+      var a2 = d1[1].split(':');
+      var Ctime = new Date( a1[2],a1[1],a1[0],a2[0],a2[1],a2[2])
+  
+      var d2 = items.StartDate.split(' ');
+      var b1 = d2[0].split('/');
+      var b2 = d2[1].split(':');
+      var Stime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+
+      var d2 = items.EndDate.split(' ');
+      var b1 = d2[0].split('/');
+      var b2 = d2[1].split(':');
+      var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+      if(Ctime <= Stime && items.Is_FlashSale === 'N'){
            num++ 
        }
        this.setState({numComming: num})
    })
   }else if(this.state.numComming){
        count = _.map((this.state.item.StaticLocation), (items) => {
-      // console.log(num)
-       if(items.Is_FlashSale === 'N'){
+        var d1 = items.CurrentDateTime.split(' ');
+        var a1 = d1[0].split('/');
+        var a2 = d1[1].split(':');
+        var Ctime = new Date( a1[2],a1[1],a1[0],a2[0],a2[1],a2[2])
+    
+        var d2 = items.StartDate.split(' ');
+        var b1 = d2[0].split('/');
+        var b2 = d2[1].split(':');
+        var Stime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+  
+        var d2 = items.EndDate.split(' ');
+        var b1 = d2[0].split('/');
+        var b2 = d2[1].split(':');
+        var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
+       if(Ctime <= Stime && items.Is_FlashSale === 'N'){
             num++
             return (
                     <View style={styles.content}>
@@ -254,15 +298,6 @@ export class FlashSalePromotion extends Component{
 
   render() {
     
-    // var d1 = '01/12/2018';
-    // var d2 = '10/12/2018';
-    // var d1 = new Date(d1);
-    // var d2 = new Date(d2);
-    // console.log(d1,'>',d2,'=',d1 >  d2); // false
-    // console.log(d1,'<',d2,'=',d1 <  d2); // True
-    // console.log(d1,'>=',d2,'=',d1 >=  d2); // false
-    // console.log(d1,'<=',d2,'=',d1 <=  d2); // false
-
     return (
             
             <View style={styles.container}>
