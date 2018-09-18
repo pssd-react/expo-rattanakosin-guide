@@ -62,7 +62,6 @@ class LoginForm extends Component {
     }
 
     onButtonToProfile(){
-        //this.props.navigation.popToTop()
         const reload = null
         this.props.navigation.navigate(
             'Main', {reload}
@@ -76,6 +75,7 @@ class LoginForm extends Component {
 
     onButtonRegister(){
         console.log('Register')
+        StoreGlobal({type: 'set', key: 'RegisterStatus', value: {"Status":"FromLogin"}})
         this.props.navigation.navigate('Register');
     }
 

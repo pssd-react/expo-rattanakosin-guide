@@ -81,7 +81,9 @@ class ProfileScreenMain extends Component{
     }
 
     onButtonRegister(){
+        StoreGlobal({type: 'set', key: 'RegisterStatus', value: {"Status":"FromProfile"}})
         this.props.navigation.navigate('Register')
+        
     }
 
     _renderUserPhone(userPhone){

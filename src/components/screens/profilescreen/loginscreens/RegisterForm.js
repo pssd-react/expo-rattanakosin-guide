@@ -57,17 +57,7 @@ export class RegisterForm extends Component {
             .catch((error) => {
                 console.log('axios error: '+ error )
             });
-        }
-        
-           /* if(response.data.ResponseDetail === 'Success'){
-                //StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
-               // console.log(response.data)
-                //this.onButtonRegisterOTP()
-            }else {
-                console.log(response.data.ResponseDetail)
-                
-            }*/
-        
+        }      
         
     }
 
@@ -145,14 +135,18 @@ export class RegisterForm extends Component {
                     ต่อไป
                 </Text>
             </View> 
-           /* <Button onPress={()=>this.onButtonRegisterOTP()} style={{backgroundColor: '#9f4289'}} textStyle={{color: '#fff'}}>
-                ต่อไป
-            </Button>*/
         );
     }
 
     onButtonGoBack(){
-        this.props.navigation.navigate('Login')
+       const Register = StoreGlobal({type: 'get', key: 'RegisterStatus'})
+       if(Register.Status === "FromProfile"){
+            StoreGlobal({type: 'set', key: 'RegisterStatus', value: null})
+            this.props.navigation.popToTop()
+       }else if(Register.Status === "FromLogin"){
+            StoreGlobal({type: 'set', key: 'RegisterStatus', value: null})
+            this.props.navigation.navigate('Login')
+       }
     }
 
     onButtonRegisterOTP(){
