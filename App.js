@@ -19,6 +19,7 @@ export default class App extends React.Component {
 
     I18n.locale = StoreGlobal({type:'get',key:'lang'})
   }
+
   render() {
     return (
         <AppBottomNavigator />

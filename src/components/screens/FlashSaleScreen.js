@@ -5,57 +5,33 @@ import {
     StyleSheet,
     Dimensions
 } from 'react-native'
-
-import { FlashSaleLightning,FlashSalePromotion,PromotionDetail } from './stackscreens'
+import FlashSale from './stackscreens/FlashSale'
+import PromotionDetail from './stackscreens/PromotionDetail'
 import {
-    createBottomTabNavigator,
     createStackNavigator,
-    HeaderBackButton
+    HeaderBackButton,
+    withNavigationFocus
 } from 'react-navigation';
 import { TabView, TabBar, SceneMap ,TabViewAnimated } from 'react-native-tab-view';
 import { Header } from '../common/Header'
-
-const INITAL_STATE = { 
-    index: 0,
-    routes: [
-      { key: 'first', title: 'โปรฟ้าผ่า' },
-      { key: 'second', title: 'โปรโมชั่น' },
-    ],
-};
+import {StoreGlobal} from './../config/GlobalState';
 
 class FlashSaleScreen extends Component{
     static navigationOptions = { header: null }
-    state = INITAL_STATE;
-    
-    renderHeader = () => {
-        //console.log(this.state.index);
-        if(this.state.index == '0'){
-            //console.log("เข้า IF");
-            return  <Header headerText="โปรฟ้าผ่า" 
-            backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
-            
-        }else { 
-            //console.log("เข้า Else");
-            return <Header headerText="โปรโมชั่น" 
-            backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
-            
+    renderHeaderScreen(){
+        if(this.props.isFocused){
+            return  <Header headerText={'Flash Sale'} 
+        backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
         }
-    }
-
+        else{
+            return null
+        }
+      }
     render(){
         return (
             <View style={styles.container}>
-                {this.renderHeader(this.state.index)}
-                <TabView
-                    style={styles.tabbar}
-                    navigationState={this.state}
-                    renderScene={SceneMap({
-                        first: FlashSaleLightning,
-                        second: FlashSalePromotion,
-                    })}
-                    onIndexChange={index => this.setState({ index })}
-                    initialLayout={{ width: Dimensions.get('window').width,height:Dimensions.get('window').height }}
-                />
+                {this.renderHeaderScreen()} 
+                <FlashSaleNavScreen />
             </View>
         )
     }
@@ -70,21 +46,13 @@ const styles = StyleSheet.create({
     }
 })
 
-
-const FlashSale = createStackNavigator({
-    Main: {
-        screen: FlashSaleScreen
+const FlashSaleNavScreen = createStackNavigator({
+    FlashSaleMain:{
+        screen : FlashSale, navigationOptions:{header:null}
     },
-    Promotion: {
-        screen: PromotionDetail, navigationOptions:{header:null}
-    },
-    FlashLight: {
-        screen: FlashSaleLightning
-    },
-    FlashPromotion: {
-        screen: FlashSalePromotion
-    },
+    PromotionDetailScreen:{
+        screen : PromotionDetail
+    }
 })
 
-
-export default FlashSale
+export default withNavigationFocus(FlashSaleScreen)

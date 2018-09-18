@@ -34,7 +34,7 @@ var config = {
 };
 
 
-export class FlashSaleLightning extends Component{
+class FlashSaleLightning extends Component{
   state = {
     item: '',
     activeSection: false,
@@ -91,8 +91,6 @@ export class FlashSaleLightning extends Component{
     )
   }
 
-
-
   renderPresent(){
     let num = 0;
     let count = null;
@@ -136,13 +134,13 @@ export class FlashSaleLightning extends Component{
         var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
        if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'Y'){
             return (
-                    <View style={styles.content}>
+                    <View style={styles.content} key={items.Name}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
-                                <View style={{ flex: 1 , border: 5 , marginBottom: 5}}>
+                                <View style={{ flex: 1, marginBottom: 5}}>
                                     <Text style = {{ fontWeight: 'bold' , fontSize: 20}}> {items.Name} </Text>
                                 </View>
-                                <View style={{ flex: 1, border: 5, flexDirection: 'row'}}>
+                                <View style={{ flex: 1, flexDirection: 'row'}}>
                                   <Image
                                   source={ require('../../images/drawable-hdpi/ic_clock_promotion.webp/') } 
                                   />
@@ -207,13 +205,13 @@ export class FlashSaleLightning extends Component{
        if(Ctime <= Stime && items.Is_FlashSale === 'Y'){
             num++
             return (
-                    <View style={styles.content}>
+                    <View style={styles.content} key={items.Name}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
-                                <View style={{ flex: 1 , border: 5 , marginBottom: 5}}>
+                                <View style={{ flex: 1, marginBottom: 5}}>
                                     <Text style = {{ fontWeight: 'bold' , fontSize: 20}}> {items.Name} </Text>
                                 </View>
-                                <View style={{ flex: 1, border: 5, flexDirection: 'row'}}>
+                                <View style={{ flex: 1, flexDirection: 'row'}}>
                                   <Image
                                   source={ require('../../images/drawable-hdpi/ic_clock_promotion.webp/') } 
                                   />
@@ -411,3 +409,5 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
+export default FlashSaleLightning

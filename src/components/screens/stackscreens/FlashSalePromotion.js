@@ -17,7 +17,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import { createStackNavigator } from 'react-navigation'
 import  PromotionDetail  from './PromotionDetail'
-
+import {StoreGlobal} from './../../config/GlobalState'
 
 
 var data = {
@@ -37,7 +37,7 @@ var config = {
 };
 
 
-export class FlashSalePromotion extends Component{
+class FlashSalePromotion extends Component{
   state = {
     item: '',
     activeSection: false,
@@ -94,7 +94,11 @@ export class FlashSalePromotion extends Component{
     )
   }
 
-
+  onPresentPress(){
+    // StoreGlobal({type:'set',key:'flashState',value:'false'})
+    // console.log(StoreGlobal({type:'get',key:'flashState'}))
+    this.props.navigation.navigate('PromotionDetailScreen')
+  }
 
   renderPresent(){
     let num = 0;
@@ -139,13 +143,13 @@ export class FlashSalePromotion extends Component{
         var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
        if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N'){
             return (
-                    <TouchableOpacity style={styles.content} >
+                    <TouchableOpacity style={styles.content} key={items.Name} onPress={()=> this.onPresentPress()}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
-                                <View style={{ flex: 1 , border: 5 , marginBottom: 5}}>
+                                <View style={{ flex: 1 , marginBottom: 5}}>
                                     <Text style = {{ fontWeight: 'bold' , fontSize: 20}}> {items.Name} </Text>
                                 </View>
-                                <View style={{ flex: 1, border: 5, flexDirection: 'row'}}>
+                                <View style={{ flex: 1, flexDirection: 'row'}}>
                                   <Image
                                   source={ require('../../images/drawable-hdpi/ic_clock_promotion.webp/') } 
                                   />
@@ -210,13 +214,13 @@ export class FlashSalePromotion extends Component{
        if(Ctime <= Stime && items.Is_FlashSale === 'N'){
             num++
             return (
-                    <View style={styles.content}>
+                    <View key={items.Name} style={styles.content}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
-                                <View style={{ flex: 1 , border: 5 , marginBottom: 5}}>
+                                <View style={{ flex: 1, marginBottom: 5}}>
                                     <Text style = {{ fontWeight: 'bold' , fontSize: 20}}> {items.Name} </Text>
                                 </View>
-                                <View style={{ flex: 1, border: 5, flexDirection: 'row'}}>
+                                <View style={{ flex: 1, flexDirection: 'row'}}>
                                   <Image
                                   source={ require('../../images/drawable-hdpi/ic_clock_promotion.webp/') } 
                                   />
@@ -413,3 +417,4 @@ const styles = StyleSheet.create({
   },
 });
 
+export default FlashSalePromotion

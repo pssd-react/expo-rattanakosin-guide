@@ -5,7 +5,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation'
 import MapScreen from './screens/MapScreen'
 import HomeMenu from './screens/HomeScreen'
 import {ProfileMenu} from './screens/ProfileScreenMain'
-import FlashSale from './screens/FlashSaleScreen'
+import FlashSaleScreen from './screens/FlashSaleScreen'
 import TripScreen from './screens/TripScreen'
 import {StoreGlobal} from './config/GlobalState'
 import I18n from './config/i18n'
@@ -14,7 +14,7 @@ const AppBottomNavigator = createMaterialTopTabNavigator(
     {
         Home : {screen: HomeMenu},
         Map:{screen: MapScreen},
-        Flash_Sale:{screen: FlashSale},
+        Flash_Sale:{screen: FlashSaleScreen},
         Trip: {screen: TripScreen},
         Profile : {screen: ProfileMenu}
     },{ 
