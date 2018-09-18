@@ -6,7 +6,7 @@ import {
     Dimensions
 } from 'react-native'
 
-import { FlashSaleLightning,FlashSalePromotion } from './stackscreens'
+import { FlashSaleLightning,FlashSalePromotion,PromotionDetail } from './stackscreens'
 import {
     createBottomTabNavigator,
     createStackNavigator,
@@ -23,8 +23,8 @@ const INITAL_STATE = {
     ],
 };
 
-export class FlashSaleScreen extends Component{
-
+class FlashSaleScreen extends Component{
+    static navigationOptions = { header: null }
     state = INITAL_STATE;
     
     renderHeader = () => {
@@ -64,11 +64,27 @@ export class FlashSaleScreen extends Component{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        
     },
     tabbar: {
         backgroundColor: '#fff',
     }
 })
 
-export default FlashSaleScreen
+
+const FlashSale = createStackNavigator({
+    Main: {
+        screen: FlashSaleScreen
+    },
+    Promotion: {
+        screen: PromotionDetail, navigationOptions:{header:null}
+    },
+    FlashLight: {
+        screen: FlashSaleLightning
+    },
+    FlashPromotion: {
+        screen: FlashSalePromotion
+    },
+})
+
+
+export default FlashSale

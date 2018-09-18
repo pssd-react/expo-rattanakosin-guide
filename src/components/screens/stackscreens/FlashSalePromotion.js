@@ -15,6 +15,10 @@ import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 import axios from 'axios'
 import _ from 'lodash'
+import { createStackNavigator } from 'react-navigation'
+import  PromotionDetail  from './PromotionDetail'
+
+
 
 var data = {
     "RqAppID":"1234",
@@ -135,7 +139,7 @@ export class FlashSalePromotion extends Component{
         var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
        if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N'){
             return (
-                    <View style={styles.content}>
+                    <TouchableOpacity style={styles.content} >
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
                                 <View style={{ flex: 1 , border: 5 , marginBottom: 5}}>
@@ -154,7 +158,7 @@ export class FlashSalePromotion extends Component{
                                 source={ require('../../images/drawable-hdpi/ic_arrow_right.webp/') } 
                             /> 
                         </View>
-                    </View>    
+                    </TouchableOpacity>    
             ) 
         }
     })
@@ -216,7 +220,7 @@ export class FlashSalePromotion extends Component{
                                   <Image
                                   source={ require('../../images/drawable-hdpi/ic_clock_promotion.webp/') } 
                                   />
-                                  <Text style = {{  fontSize: 18 , color: '#a6a6a6'}}> 09 เม.ย - 30 ก.ย. 2561 </Text>
+                                  {this.renderDate(items)}
                                 </View>
                           </View>
                         </View>
@@ -295,37 +299,55 @@ export class FlashSalePromotion extends Component{
   }
 
 
+  renderMain(){
+    if(this.state.numPresent === 0 && this.state.numComming === 0){
+      return(
+        <View style={styles.containerflex}>
+          <Image
+
+            source={ require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp') } 
+          /> 
+          <Text style={{ fontSize: 18 , color: '#a6a6a6'}} > ไม่มีรายการโปรโมชั่น</Text>
+        </View>
+      )
+    }else{
+      return(
+        <ScrollView>
+        <TouchableOpacity onPress={this.togglePresen}>
+            <View style={styles.header}>
+                {this.renderheaderPresent()}
+                {this.renderArrowPresen()}
+            </View>
+        </TouchableOpacity>
+        <Collapsible collapsed={this.state.collapsed} align="center">  
+            {this.renderPresent()}  
+        </Collapsible>
+        
+        <TouchableOpacity onPress={this.toggleComming}>
+            <View style={styles.header}>
+                {this.renderheaderComming()}
+                {this.renderArrowComming()}
+            </View>
+        </TouchableOpacity>
+
+        <Collapsible collapsed={this.state.collapsedC} align="center">
+            {this.renderComming()}  
+        </Collapsible>
+        
+      </ScrollView>
+      )
+    }
+  }
+
+
+
 
   render() {
     
     return (
-            
             <View style={styles.container}>
-                <ScrollView>
-                <TouchableOpacity onPress={this.togglePresen}>
-                    <View style={styles.header}>
-                        {this.renderheaderPresent()}
-                        {this.renderArrowPresen()}
-                    </View>
-                </TouchableOpacity>
-                 <Collapsible collapsed={this.state.collapsed} align="center">  
-                    {this.renderPresent()}  
-                </Collapsible>
-                
-                <TouchableOpacity onPress={this.toggleComming}>
-                    <View style={styles.header}>
-                        {this.renderheaderComming()}
-                        {this.renderArrowComming()}
-                    </View>
-                </TouchableOpacity>
-        
-                <Collapsible collapsed={this.state.collapsedC} align="center">
-                    {this.renderComming()}  
-                </Collapsible>
-                
-            </ScrollView>
-        </View>
-      
+              {this.renderMain()}
+            </View>
     );
   }
 }
@@ -333,7 +355,13 @@ export class FlashSalePromotion extends Component{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: '#f2f2f2',
+  },  
+  containerflex: {
+    flex: 1,
+    backgroundColor: '#f2f2f2',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   title: {
     textAlign: 'center',
@@ -343,7 +371,7 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-    backgroundColor: '#e6e6e6',
+    backgroundColor: '#f2f2f2',
     padding: 10,
     flexDirection: 'row'
   },
@@ -384,3 +412,4 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
+
