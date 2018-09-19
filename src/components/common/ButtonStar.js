@@ -35,8 +35,8 @@ const styles = {
         borderColor: '#333333',
         justifyContent: 'center',
         borderRadius: 5,
-        marginLeft: 5,
-        marginRight: 5,
+        marginLeft: 2,
+        marginRight: 2,
         borderWidth: 1
     },
 };

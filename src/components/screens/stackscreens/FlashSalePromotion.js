@@ -94,10 +94,13 @@ class FlashSalePromotion extends Component{
     )
   }
 
-  onPresentPress(){
+  onPresentPress(items){
     // StoreGlobal({type:'set',key:'flashState',value:'false'})
     // console.log(StoreGlobal({type:'get',key:'flashState'}))
-    this.props.navigation.navigate('PromotionDetailScreen')
+
+    this.props.navigation.navigate('PromotionDetailScreen' , {
+      items
+    })
   }
 
   renderPresent(){
@@ -143,7 +146,7 @@ class FlashSalePromotion extends Component{
         var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
        if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N'){
             return (
-                    <TouchableOpacity style={styles.content} key={items.Name} onPress={()=> this.onPresentPress()}>
+                    <TouchableOpacity style={styles.content} key={items.Name} onPress={()=> this.onPresentPress(items)}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
                                 <View style={{ flex: 1 , marginBottom: 5}}>
@@ -214,7 +217,7 @@ class FlashSalePromotion extends Component{
        if(Ctime <= Stime && items.Is_FlashSale === 'N'){
             num++
             return (
-                    <View key={items.Name} style={styles.content}>
+              <TouchableOpacity style={styles.content} key={items.Name} onPress={()=> this.onPresentPress(items)}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
                                 <View style={{ flex: 1, marginBottom: 5}}>
@@ -234,7 +237,7 @@ class FlashSalePromotion extends Component{
                                 source={ require('../../images/drawable-hdpi/ic_arrow_right.webp/') } 
                             /> 
                         </View>
-                    </View>    
+              </TouchableOpacity>   
             ) 
         }
     })

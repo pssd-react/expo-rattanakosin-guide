@@ -15,7 +15,9 @@ import Collapsible from 'react-native-collapsible';
 import Accordion from 'react-native-collapsible/Accordion';
 import axios from 'axios'
 import _ from 'lodash'
-
+import {StoreGlobal} from './../../config/GlobalState'
+import { createStackNavigator } from 'react-navigation'
+import  PromotionDetail  from './PromotionDetail'
 
 var data = {
     "RqAppID":"1234",
@@ -71,7 +73,15 @@ class FlashSaleLightning extends Component{
     this.setState({ collapsedC: !this.state.collapsedC });
   };
 
-  
+  onPresentPress(items){
+    // StoreGlobal({type:'set',key:'flashState',value:'false'})
+    // console.log(StoreGlobal({type:'get',key:'flashState'}))
+
+    this.props.navigation.navigate('PromotionDetailScreen' , {
+      items
+    })
+  }
+
 
   setSection = section => {
     this.setState({ activeSection: section });
@@ -134,7 +144,7 @@ class FlashSaleLightning extends Component{
         var Etime = new Date( b1[2],b1[1],b1[0],b2[0],b2[1],b2[2])
        if(Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'Y'){
             return (
-                    <View style={styles.content} key={items.Name}>
+              <TouchableOpacity style={styles.content} key={items.Name} onPress={()=> this.onPresentPress(items)}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
                                 <View style={{ flex: 1, marginBottom: 5}}>
@@ -153,7 +163,7 @@ class FlashSaleLightning extends Component{
                                 source={ require('../../images/drawable-hdpi/ic_arrow_right.webp/') } 
                             /> 
                         </View>
-                    </View>    
+                    </TouchableOpacity>    
             ) 
         }
     })
@@ -205,7 +215,7 @@ class FlashSaleLightning extends Component{
        if(Ctime <= Stime && items.Is_FlashSale === 'Y'){
             num++
             return (
-                    <View style={styles.content} key={items.Name}>
+              <TouchableOpacity style={styles.content} key={items.Name} onPress={()=> this.onPresentPress(items)}>
                         <View style={{ flex: 6 }}>
                             <View style={{ flexDirection: 'column'}}>
                                 <View style={{ flex: 1, marginBottom: 5}}>
@@ -225,7 +235,7 @@ class FlashSaleLightning extends Component{
                                 source={ require('../../images/drawable-hdpi/ic_arrow_right.webp/') } 
                             /> 
                         </View>
-                    </View>    
+                    </TouchableOpacity>    
             ) 
         }
     })

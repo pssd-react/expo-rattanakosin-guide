@@ -20,9 +20,9 @@ const FlashSale = createMaterialTopTabNavigator({
             const { routeName } = navigation.state;
             let labelName,textColor;
             if (routeName === 'FlashLight') {
-                labelName = I18n.t('home');
+                labelName = 'Flash Sale';
             } else if (routeName === 'FlashPromotion') {
-                labelName = I18n.t('livemap');
+                labelName = 'Promotion';
             }
 
             if(focused){
@@ -31,24 +31,24 @@ const FlashSale = createMaterialTopTabNavigator({
             }else{
                 textColor = 'black';
             }
-            return (<Text style={{fontSize:10, color:textColor}}>{labelName}</Text>);
+            return (<Text style={{fontSize:18, color:textColor}}>{labelName}</Text>);
         }
     }),
     tabBarOptions: {
       activeTintColor: 'white',
-      inactiveTintColor: 'black',
+      inactiveTintColor: 'white',
       indicatorStyle:{
         backgroundColor: 'black',
         height: null,
         top:0
       },
       pressColor: 'black',
-      showIcon: true,
       style: {
         backgroundColor: 'white',
+
       },
       tabStyle: {
-        height: 50,
+        height: 40,
       },
       labelStyle: {
         flex:1
