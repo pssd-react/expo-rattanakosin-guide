@@ -38,6 +38,7 @@ export class detail extends Component {
     constructor(props){
         super(props)
         this.state = {
+            isHidden: false,
             scrollY: new Animated.Value(0),
             fadeAnim: new Animated.Value(1),
             index: 0,
@@ -79,9 +80,9 @@ export class detail extends Component {
             extrapolate: 'clamp'
         })
 
-        const headerTitle = this.state.scrollY.interpolate({
-            inputRange : [0,BG_IMAGE_HEIGHT],
-            outputRange: [BG_IMAGE_HEIGHT,0],
+        const backHeader = this.state.scrollY.interpolate({
+            inputRange : [5,200],
+            outputRange: [5,BG_IMAGE_HEIGHT],
             extrapolate: 'clamp'
         })
 
@@ -90,7 +91,6 @@ export class detail extends Component {
             outputRange: ['absolute',null],
             extrapolate: 'clamp'
         })*/
-
         return (
             <View style={{flex: 1,}}>
                 
@@ -102,21 +102,22 @@ export class detail extends Component {
                   //  height: headerHeight,
                     alignItems: 'center',
                 }}> 
-                    <View style={{}}>
+                   {/*<View >
+                    
                         <Header headerText="ตั้งค่า" 
                             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
                             headerLeft={<HeaderBackButton tintColor='#fff' 
-                            onPress={() => this.onButtonGoBack()} />}/>
-                    </View>
+                            onPress={() => this.onButtonGoBack()} />}/> 
+                        
+                    </View>*/}
                 </Animated.View> 
-                   {/**/}
-
-               
+                  
                 <ScrollView style={{flex: 1, }}
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                     onScroll={Animated.event(
                       [ {nativeEvent:{ contentOffset:{y:this.state.scrollY}}}],
+                     
                     )}
                 >
                    <Animated.View style={{
@@ -124,8 +125,10 @@ export class detail extends Component {
                        width: BG_IMAGE_WIDTH,
                       //backgroundColor: "transparent"
                    }}>
+                   
                         <ImageBackground source={require('../../images/drawable-hdpi/bg_more.webp')}
-                            style={{ flex:1, width: null, height: null}} >
+                       style={{ flex:1, width: null, height: null}} >
+                   
                             <View style={{ justifyContent: 'flex-start', alignItems:'center',paddingTop: 5,marginLeft:10, marginTop:40, backgroundColor:'#000', opacity:0.5,  width: 30,height:30,borderRadius: 25}}>
                                 <TouchableOpacity onPress={() => this.onButtonGoBack()}>
                                     <Image source={require('../../images/drawable-hdpi/ic_arrow_back_black.webp')}  style={{tintColor:'#fff', width:20, height:20, alignItems: 'center'}}/>
@@ -137,20 +140,20 @@ export class detail extends Component {
                                 marginLeft: opacityImageHeight,
                                 marginRight: opacityImageHeight,}}>
                             <View style={{flex:3}}/>
-                            <View style={{ 
-                                flex:1, 
-                                backgroundColor:'#000', 
-                                alignItems: 'center', 
-                                opacity: 0.5, 
-                                width: '100%'}}>
+                                <View style={{ 
+                                    flex:1, 
+                                    backgroundColor:'#000', 
+                                    alignItems: 'center', 
+                                    opacity: 0.5, 
+                                    width: '100%'}}>
 
-                                <Text style={{ fontSize: 30, fontWeigth: 'bold',color: "#fff" }}>Text</Text>
-                             
-                            </View>
-                        </Animated.View>
+                                    <Text style={{ fontSize: 30, fontWeigth: 'bold',color: "#fff" }}>Text</Text>
+                                
+                                </View>
+                        </Animated.View> 
+                   
                         </ImageBackground>
                     </Animated.View>
-                    
                 {/*-------Navigation-------*/}
                     <View style={{flex: 1, height:BG_IMAGE_HEIGHT-110}}>
                         <TabView
@@ -165,7 +168,7 @@ export class detail extends Component {
                             initialLayout={{ width: Dimensions.get('window').width }}
                         />        
                     </View>
-
+                   
                 </ScrollView>
             </View>
         )

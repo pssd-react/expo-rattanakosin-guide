@@ -17,12 +17,15 @@ export class RegisterForm extends Component {
     onButtonPress(){
         console.log("Name: "+this.state.name+" Number: "+ this.state.phone + " Pass: "+this.state.password+ " com_Pass: "+this.state.confirm_password)
         if(this.state.password < 6 ){
+
             this.setState({alert_phone: "รหัสผ่าน ต้องมีความยาวไม่น้อยกว่า 6 ตัวอักษร"})
             this._toggleModal()
         }else if(this.state.confirm_password !== this.state.password){
             this.setState({alert_phone: "โปรดระบุรหัสผ่านให้ตรงกัน"})
             this._toggleModal()
         }else{
+            this.setState({loading:true})
+            this._activeModal()
             const data = { 
                 "RqAppID":"1234",
                 "Mobile": this.state.phone,
@@ -39,7 +42,8 @@ export class RegisterForm extends Component {
                 data, config)
             .then(response =>  {
                 console.log(response.data)
-
+                this.setState({loading:false})
+                this._deactiveModal()
                 if(response.data.ResponseStatus === '00'){
                     console.log(true, response.data.ResponseDetail)
                     StoreGlobal({type: 'set', key: 'RequestOTPService', value: {"DisplayName":this.state.name, 
@@ -61,51 +65,64 @@ export class RegisterForm extends Component {
         
     }
 
-    onLoginFail(){
-        this.setState({ error: 'Authentication Failed.', loading: false});
-    }
-
-    onLoginSuccess(){
-        this.setState({
-            email: '',
-            password: '',
-            loading: false,
-            error: ''
-        });
-    }
-
     //Modal
     renderModal(){
         return(
                 <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
-                    <View style={{ flex: 1, 
+                   {this.modalRender()}
+                </Modal>
+        )
+    }
+    
+    //ViewInModal
+    modalRender(){
+        if(this.state.loading === true){
+            return (
+                <View style={{ flex: 1, 
                     backgroundColor: '#fff', 
-                    marginBottom:130, 
-                    marginTop:100,
+                    marginBottom:270, 
+                    marginTop:270,
+                    marginLeft:140,
+                    marginRight:140,
                     borderRadius: 5,
                     shadowColor: '#000',
                     shadowOffset: { width: 5, height: 5 },
                     shadowRadius: 5,
                     flexDirection: 'column',
-                    justifyContent: 'space-between',}}>
-                        <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
-                            <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
-                                    style={{width: 70, height: 70}}/>
-                        </CardSection>
-                        <CardSection style={{paddingLeft:20}}>
-                            <Text style={{ fontSize: 22}}>ลงทะเบียนไม่สำเสร็จ</Text>
-                        </CardSection>
-                        <CardSection style={{paddingLeft:20, paddingRight: 20}}>
-                            <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
-                        </CardSection>
-                        <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
-                            <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
-                                onPress={() => this._deactiveModal()}>
-                                    <Text style={{ fontSize: 16}}>ปิด</Text>
-                            </TouchableOpacity>
-                        </CardSection>
-                    </View>
-                </Modal>
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                <Spinner/>
+            </View>
+            )
+        }
+        return(
+            <View style={{ flex: 1, 
+                backgroundColor: '#fff', 
+                marginBottom:130, 
+                marginTop:100,
+                borderRadius: 5,
+                shadowColor: '#000',
+                shadowOffset: { width: 5, height: 5 },
+                shadowRadius: 5,
+                flexDirection: 'column',
+                justifyContent: 'space-between',}}>
+                    <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
+                        <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
+                                style={{width: 70, height: 70}}/>
+                    </CardSection>
+                    <CardSection style={{paddingLeft:20}}>
+                        <Text style={{ fontSize: 22}}>ลงทะเบียนไม่สำเสร็จ</Text>
+                    </CardSection>
+                    <CardSection style={{paddingLeft:20, paddingRight: 20}}>
+                        <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
+                    </CardSection>
+                    <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                        <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                            onPress={() => this._deactiveModal()}>
+                                <Text style={{ fontSize: 16}}>ปิด</Text>
+                        </TouchableOpacity>
+                    </CardSection>
+                </View>
         )
     }
 
@@ -162,7 +179,7 @@ export class RegisterForm extends Component {
                 <Header headerText="ลงทะเบียน" 
                     backgroundImage= {require('../../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-                
+
                 <View style={viewStyle}>
                     <Text style={textStyle}> กรอกข้อมูลส่วนตัว </Text>
                 </View>

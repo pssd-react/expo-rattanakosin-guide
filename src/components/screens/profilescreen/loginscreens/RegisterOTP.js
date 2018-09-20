@@ -9,14 +9,12 @@ import OtpInputs from 'react-native-otp-inputs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TimerCountdown from 'react-native-timer-countdown';
 
-
 const config = {
     headers: {
         'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
         'Content-Type': 'application/json'
     }
 }
-
 
 export class RegisterOTP extends Component {
     static navigationOptions = {header: null}
@@ -27,80 +25,115 @@ export class RegisterOTP extends Component {
     _deactiveModal = () => this.setState({ isModalVisible: false });
     _successModalTrue = () => this.setState({ isModalSuccess: true });
     _successModalFalse = () => this.setState({ isModalSuccess: false });
-   
-    onLoginFail(){
-        this.setState({ error: 'Authentication Failed.', loading: false});
-    }
 
-    onLoginSuccess(){
-        this.setState({
-            email: '',
-            password: '',
-            loading: false,
-            error: ''
-        });
-    }
-
-    //Modal
-    renderModal(){
+     //Modal
+     renderModalAlert(){
         return(
                 <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
-                    <View style={{ flex: 1, 
-                    backgroundColor: '#fff', 
-                    marginBottom:130, 
-                    marginTop:100,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'space-between',}}>
-                        <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
-                            <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
-                                    style={{width: 70, height: 70}}/>
-                        </CardSection>
-                        <CardSection style={{paddingLeft:20}}>
-                            <Text style={{ fontSize: 22}}>ขอโทษค่ะ</Text>
-                        </CardSection>
-                        <CardSection style={{paddingLeft:20}}>
-                            <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
-                        </CardSection>
-                        <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
-                            <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
-                                onPress={() => this._deactiveModal()}>
-                                    <Text style={{ fontSize: 16}}>ปิด</Text>
-                            </TouchableOpacity>
-                        </CardSection>
-                    </View>
+                    {this.modalRender()}
                 </Modal>
         )
     }
-
     renderModalSuccess(){
         return(
                 <Modal isVisible={this.state.isModalSuccess} style={{flex:1}}>
-                    <View style={{ flex: 1, 
+                   {this.modalRenderSuccess()}
+                </Modal>
+        )
+    }
+    //ViewInModal
+    modalRender(){
+        if(this.state.loading === true){
+            return (
+                <View style={{ flex: 1, 
                     backgroundColor: '#fff', 
-                    marginBottom:130, 
-                    marginTop:100,
+                    marginBottom:270, 
+                    marginTop:270,
+                    marginLeft:140,
+                    marginRight:140,
                     borderRadius: 5,
                     shadowColor: '#000',
                     shadowOffset: { width: 5, height: 5 },
                     shadowRadius: 5,
                     flexDirection: 'column',
-                    justifyContent: 'space-between',}}>
-                        <CardSection style={{flex:5, alignItems:'center', justifyContent:'center', paddingRight:30}}>
-                            <Image source={require('../../../images/drawable-xxhdpi/ic_register_success.webp')}
-                                    style={{width: 130, height: 130}}/>
-                        </CardSection>
-                        <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
-                            <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center', backgroundColor:'#ffc94c', borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
-                                onPress={() => this.onButtonToProfile()}>
-                                    <Text style={{ fontSize: 16}}>เริ่มต้นการใช้งาน</Text>
-                            </TouchableOpacity>
-                        </CardSection>
-                    </View>
-                </Modal>
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                <Spinner/>
+            </View>
+            )
+        }
+        return(
+            <View style={{ flex: 1, 
+                backgroundColor: '#fff', 
+                marginBottom:130, 
+                marginTop:100,
+                borderRadius: 5,
+                shadowColor: '#000',
+                shadowOffset: { width: 5, height: 5 },
+                shadowRadius: 5,
+                flexDirection: 'column',
+                justifyContent: 'space-between',}}>
+                    <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
+                        <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
+                                style={{width: 70, height: 70}}/>
+                    </CardSection>
+                    <CardSection style={{paddingLeft:20}}>
+                        <Text style={{ fontSize: 22}}>ขอโทษค่ะ</Text>
+                    </CardSection>
+                    <CardSection style={{paddingLeft:20}}>
+                        <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
+                    </CardSection>
+                    <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                        <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                            onPress={() => this._deactiveModal()}>
+                                <Text style={{ fontSize: 16}}>ปิด</Text>
+                        </TouchableOpacity>
+                    </CardSection>
+                </View>
+        )
+    }
+    modalRenderSuccess(){
+        if(this.state.loading === true){
+            return (
+                <View style={{ flex: 1, 
+                    backgroundColor: '#fff', 
+                    marginBottom:270, 
+                    marginTop:270,
+                    marginLeft:140,
+                    marginRight:140,
+                    borderRadius: 5,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 5, height: 5 },
+                    shadowRadius: 5,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                <Spinner/>
+            </View>
+            )
+        }
+        return(
+            <View style={{ flex: 1, 
+                backgroundColor: '#fff', 
+                marginBottom:130, 
+                marginTop:100,
+                borderRadius: 5,
+                shadowColor: '#000',
+                shadowOffset: { width: 5, height: 5 },
+                shadowRadius: 5,
+                flexDirection: 'column',
+                justifyContent: 'space-between',}}>
+                    <CardSection style={{flex:5, alignItems:'center', justifyContent:'center', paddingRight:30}}>
+                        <Image source={require('../../../images/drawable-xxhdpi/ic_register_success.webp')}
+                                style={{width: 130, height: 130}}/>
+                    </CardSection>
+                    <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                        <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center', backgroundColor:'#ffc94c', borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                            onPress={() => this.onButtonToProfile()}>
+                                <Text style={{ fontSize: 16}}>เริ่มต้นการใช้งาน</Text>
+                        </TouchableOpacity>
+                    </CardSection>
+                </View>
         )
     }
 
@@ -139,7 +172,8 @@ export class RegisterOTP extends Component {
 
     onButtonToProfile(){
         const RequestOTPService = StoreGlobal({type: 'get', key: 'RequestOTPService'})
-
+        this.setState({loading:true})
+        this._successModalTrue()
         console.log("Number: "+ RequestOTPService.Phone + " Pass: "+ RequestOTPService.Password)
         const dataRegister = {
             "RqAppID":"1234",
@@ -163,13 +197,13 @@ export class RegisterOTP extends Component {
                axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/EmailLoginService',
                 dataLogin, config)
                 .then(response =>  {
+                    this.setState({loading:false})
+                    this._successModalFalse()
                     if(response.data.ResponseDetail === 'Success'){
                         StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
-                        this._successModalFalse
                         StoreGlobal({type: 'set', key: 'RequestOTPService', value: null})
-                        const reload = null
                         this.props.navigation.navigate(
-                            'Main', {reload}
+                            'Main'
                         )
                     }else{
                         console.log("Login Fail")
@@ -214,6 +248,8 @@ export class RegisterOTP extends Component {
     }
 
     onButtonConfirm(){
+        this.setState({loading:true})
+        this._activeModal()
         const RequestOTPService = StoreGlobal({type: 'get', key: 'RequestOTPService'})
         const data = { 
             "RqAppID":"1234",
@@ -226,6 +262,8 @@ export class RegisterOTP extends Component {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ValidateOTPService',
             data, config)
             .then(response =>  {
+                this.setState({loading:false})
+                this._deactiveModal()
                 console.log(response.data)
                 if(response.data.ResponseStatus === '00'){
                     console.log(true, response.data.ResponseDetail)
@@ -239,7 +277,7 @@ export class RegisterOTP extends Component {
     }
 
     renderButton(){
-        if(this.state.codeOTP.length === 6){
+        if(this.state.codeOTP.length !== ""){
             return (
                 <Button onPress={() => this.onButtonConfirm()} 
                     style={{backgroundColor: '#9f4289'}} 
@@ -290,7 +328,7 @@ export class RegisterOTP extends Component {
                             <Text style={{fontSize: 20,height:25}}>กรอกรหัสผ่าน OTP 6 หลัก</Text>
                                 <View style={{flex:1}}>
                                 <OtpInputs inputStyles={{flex: 1, width: 30, backgroundColor:'#fff',borderRadius:5,color:'#000', borderWidth:1, borderColor:'#aaa'}} 
-                                handleChange={code => this.setState({codeOTP:code})} 
+                                handleChange={code => (code.length === 6)?this.setState({codeOTP:code}):null} 
                                 numberOfInputs={6}
                                 focusedBorderColor={'#000'}
                                 />
@@ -307,7 +345,7 @@ export class RegisterOTP extends Component {
                         {this.renderButton()}
                     </CardSection>
                 </View>
-                {this.renderModal()}
+                {this.renderModalAlert()}
                 {this.renderModalSuccess()}
             </View>
         );

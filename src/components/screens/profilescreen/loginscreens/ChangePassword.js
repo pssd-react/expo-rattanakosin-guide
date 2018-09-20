@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import {HeaderBackButton } from 'react-navigation'
-import {LabelInput, Button, CardSection, Input, Spinner, Header} from '../../../common'
+import {LabelInput, Button, CardSection, Spinner, Header} from '../../../common'
 import OtpInputs from 'react-native-otp-inputs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TimerCountdown from 'react-native-timer-countdown'
@@ -25,12 +25,12 @@ export class ChangePassword extends Component {
             loading: false,
             statusOTP: false,
             onButtonOTP: false,
+            codeOTP:"",
             timer: false,
-            codeOTP: '',
             isModalVisible: false,
             isModalSuccess: false,
             alert_phone: '' };
-
+    
     _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
     _activeModal = () => this.setState({ isModalVisible: true });
     _deactiveModal = () => this.setState({ isModalVisible: false });
@@ -80,6 +80,8 @@ export class ChangePassword extends Component {
     }
 
     requireOTP(){
+        this.setState({loading:true}) 
+        this._activeModal()
         const data = { 
             "RqAppID":"1234",
             "Mobile": this.state.phone,
@@ -90,6 +92,8 @@ export class ChangePassword extends Component {
             data, config)
         .then(response =>  {
             console.log(response.data)
+            this.state.loading = false
+            this._deactiveModal()
             if(response.data.ResponseStatus === '00'){
                 console.log(true, response.data.ResponseDetail)
                 StoreGlobal({type: 'set', key: 'RequestOTPService', value: {"Phone":this.state.phone,
@@ -98,6 +102,7 @@ export class ChangePassword extends Component {
                                                                             "Reference": response.data.Reference,}})
                 this.setState({onButtonOTP:true})
             }else{
+                //this._deactiveModal()
                 console.log(false, response.data.ResponseDetail)
                 this.setState({alert_phone:response.data.ResponseDetail})
                 this._toggleModal()
@@ -106,13 +111,45 @@ export class ChangePassword extends Component {
         .catch((error) => {
             console.log('axios error: '+ error )
         });
-     
     }
 
     //Modal
-    renderModal(){
+    renderModalAlert(){
         return(
                 <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
+                    {this.modalRender()}
+                </Modal>
+        )
+    }
+    renderModalSuccess(){
+        return(
+                <Modal isVisible={this.state.isModalSuccess} style={{flex:1}}>
+                   {this.modalRenderSuccess()}
+                </Modal>
+        )
+    }
+    //ViewInModal
+    modalRender(){
+        if(this.state.loading === true){
+            return (
+                <View style={{ flex: 1, 
+                    backgroundColor: '#fff', 
+                    marginBottom:270, 
+                    marginTop:270,
+                    marginLeft:140,
+                    marginRight:140,
+                    borderRadius: 5,
+                    shadowColor: '#000',
+                    shadowOffset: { width: 5, height: 5 },
+                    shadowRadius: 5,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                <Spinner/>
+            </View>
+            )
+        }
+        return(
                     <View style={{ flex: 1, 
                     backgroundColor: '#fff', 
                     marginBottom:130, 
@@ -140,41 +177,57 @@ export class ChangePassword extends Component {
                             </TouchableOpacity>
                         </CardSection>
                     </View>
-                </Modal>
         )
     }
 
-    renderModalSuccess(){
-        return(
-                <Modal isVisible={this.state.isModalSuccess} style={{flex:1}}>
-                    <View style={{ flex: 1, 
+    modalRenderSuccess(){
+        if(this.state.loading === true){
+            return (
+                <View style={{ flex: 1, 
                     backgroundColor: '#fff', 
-                    marginBottom:130, 
-                    marginTop:100,
+                    marginBottom:270, 
+                    marginTop:270,
+                    marginLeft:140,
+                    marginRight:140,
                     borderRadius: 5,
                     shadowColor: '#000',
                     shadowOffset: { width: 5, height: 5 },
                     shadowRadius: 5,
                     flexDirection: 'column',
-                    justifyContent: 'space-between',}}>
-                        <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
-                            <Image source={require('../../../images/drawable-xxhdpi/ic_success_report.webp')}
-                                    style={{width: 70, height: 70}}/>
-                        </CardSection>
-                        <CardSection style={{paddingLeft:20}}>
-                            <Text style={{ fontSize: 22}}>เปลี่ยนรหัสผ่านสำเร็จ</Text>
-                        </CardSection>
-                        <CardSection style={{paddingLeft:20}}>
-                            <Text style={{ fontSize: 16}}>ระบบได้เปลี่ยนรหัสผ่านให้เรียบร้อยแล้ว</Text>
-                        </CardSection>
-                        <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
-                            <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
-                                onPress={() => this.onButtonGoBack()}>
-                                    <Text style={{ fontSize: 16, color:'#9f4289' }}>ปิด</Text>
-                            </TouchableOpacity>
-                        </CardSection>
-                    </View>
-                </Modal>
+                    justifyContent: 'center',
+                    alignItems: 'center'}}>
+                <Spinner/>
+            </View>
+            )
+        }
+        return(
+            <View style={{ flex: 1, 
+            backgroundColor: '#fff', 
+            marginBottom:130, 
+            marginTop:100,
+            borderRadius: 5,
+            shadowColor: '#000',
+            shadowOffset: { width: 5, height: 5 },
+            shadowRadius: 5,
+            flexDirection: 'column',
+            justifyContent: 'space-between',}}>
+                <CardSection style={{flex:3, alignItems:'center', justifyContent:'center'}}>
+                    <Image source={require('../../../images/drawable-xxhdpi/ic_success_report.webp')}
+                            style={{width: 70, height: 70}}/>
+                </CardSection>
+                <CardSection style={{paddingLeft:20}}>
+                    <Text style={{ fontSize: 22}}>เปลี่ยนรหัสผ่านสำเร็จ</Text>
+                </CardSection>
+                <CardSection style={{paddingLeft:20}}>
+                    <Text style={{ fontSize: 16}}>ระบบได้เปลี่ยนรหัสผ่านให้เรียบร้อยแล้ว</Text>
+                </CardSection>
+                <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
+                    <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
+                        onPress={() => this.onButtonGoBack()}>
+                            <Text style={{ fontSize: 16, color:'#9f4289' }}>ปิด</Text>
+                    </TouchableOpacity>
+                </CardSection>
+            </View>
         )
     }
 
@@ -247,7 +300,10 @@ export class ChangePassword extends Component {
     }
 
     onButtonConfirm(){
+        this.setState({loading:true}) 
+        this._successModalTrue()
         const RequestOTPService = StoreGlobal({type: 'get', key: 'RequestOTPService'})
+       
         console.log("Number: "+ RequestOTPService.Phone + " Pass: "+ RequestOTPService.Password+ " Confirm: "+ RequestOTPService.ConfirmPassword)
         const data = { 
             "RqAppID":"1234",
@@ -267,13 +323,20 @@ export class ChangePassword extends Component {
         }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ValidateOTPService',
             data, config)
-            .then(response =>  {
+            .then(response =>  { 
+                this.setState({loading:false}) 
+                this._successModalFalse()
                 console.log(response.data)
                 if(response.data.ResponseStatus === '00'){
                     console.log(true, response.data.ResponseDetail)
+                    this.setState({loading:true}) 
+                    this._successModalTrue()
                     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ResetPasswordService',
                     dataResetPass, config)
                     .then(response =>  {
+                        this.setState({loading:false}) 
+                        this._successModalFalse()
+                       // StoreGlobal({type: 'set', key: 'CodeOTP', value:null})
                         console.log(response.data)
                         if(response.data.ResponseStatus === '00'){
                             console.log(true, response.data.ResponseDetail)
@@ -294,7 +357,9 @@ export class ChangePassword extends Component {
     }
 
     renderButton(){
-        if(this.state.codeOTP.length === 6){
+      // const Code = StoreGlobal({type: 'get', key: 'CodeOTP'})
+       console.log(this.state.codeOTP )
+        if(this.state.codeOTP !== ""){
             return (
                 <Button onPress={() => this.onButtonConfirm()} 
                     style={{backgroundColor: '#ffc94c'}} 
@@ -327,6 +392,7 @@ export class ChangePassword extends Component {
     }
 
     renderButtonOTP(){
+
         if(this.state.onButtonOTP === true){
             return (
                 <View style={{flex:1}}>
@@ -335,7 +401,7 @@ export class ChangePassword extends Component {
                         <Text style={{fontSize: 20,height:25}}>กรอกรหัสผ่าน OTP 6 หลัก</Text>
                             <View style={{flex:1}}>
                             <OtpInputs inputStyles={{flex: 1, width: 30, backgroundColor:'#fff',borderRadius:5,color:'#000', borderWidth:1, borderColor:'#aaa'}} 
-                            handleChange={code => this.setState({codeOTP:code})} 
+                            handleChange={code => (code.length === 6)?this.setState({codeOTP:code}):null} 
                             numberOfInputs={6}
                             focusedBorderColor={'#000'}
                             />
@@ -398,7 +464,7 @@ export class ChangePassword extends Component {
                 </View>
             </View>
             {this.renderButtonOTP()}
-            {this.renderModal()}
+            {this.renderModalAlert()}
             {this.renderModalSuccess()}
         </View>
         );
