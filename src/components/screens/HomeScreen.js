@@ -11,35 +11,32 @@ import {
     StatusBar,
     TextInput,
     Dimensions,
-    ActivityIndicator
 } from 'react-native'
+import {
+    Restaurants,
+    Accommodation,
+    Bank,
+    Commercial_Areas,
+    Facilities,
+    Shop,
+    Schools_and_Government,
+    Services,
+    Travel
+} from './itemscreens'
+import {
+    EatScreen,
+    ShoppingScreen,
+    PlacesScreen,
+    StaysScreen
+} from './recommendedscreens'
 import Carousel from 'react-native-carousel-view'
-import { Button } from '../common/Button';
-import { Card } from '../common/Card';
-import { CardSection } from '../common/CardSection';
+import { CardSection } from '../common/CardSection'
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
 import _ from 'lodash'
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
-import { 
-    Restaurants, 
-    Accommodation, 
-    Bank, 
-    Commercial_Areas, 
-    Facilities, 
-    Shop, 
-    Schools_and_Government, 
-    Services, 
-    Travel 
-} from './itemscreens'
 import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
-import {
-    EatScreen, 
-    ShoppingScreen, 
-    PlacesScreen, 
-    StaysScreen
-} from './recommendedscreens'
 
 const data = {
     'RqAppID': '1234',
@@ -48,49 +45,53 @@ const data = {
     'Version': '1.1.4'
 }
 const config = {
-        headers: {
-            'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
-            'Content-Type': 'application/json'
-        }
-};
+    headers: {
+        'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+        'Content-Type': 'application/json'
+    }
+}
 
 class HomeScreen extends Component {
     static navigationOptions = { header: null }
     state = {
-        item: ''
-    };
+        state_item: ''
+    }
 
     componentWillMount() {
         this.startHeaderHeight = 80
         if (Platform.OS == 'android') {
             this.startHeaderHeight = 100 + StatusBar.currentHeight
         }
-
-        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
-            data, config)
-            .then(response => { this.setState({ item: response.data }) })
-            .catch((error) => {
-                console.log('axios error:', error);
-            });
-
+        this._renderService()
     }
 
-    renderItem() {
-        let i=0
-        const list = _.map((this.state), (items) => {
-            return (<ItemDetail key={i} items={items.MenuList} navigation={this.props.navigation}/>)
-            i++
+    _renderService() {
+        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
+            data, config)
+            .then(response => { this.setState({ state_item: response.data }) })
+            .catch((error) => {
+                console.log('axios error:', error)
+            })
+    }
 
+    _renderMenuDetail() {
+        let i = 0
+        const list = _.map((this.state), (_renderingItems) => {
+            i++
+            return (<ItemDetail
+                key={i}
+                _renderingItems={_renderingItems.MenuList}
+                navigation={this.props.navigation} />
+            )
         })
         return list
     }
 
-    renderHeader(){
+    _renderHeadBanner() {
         return (
             <ImageBackground
-            style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%' }}
-            source={require('../../components/images/drawable-hdpi/bg_platinum_main.webp')}
-            >
+                style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%' }}
+                source={require('../../components/images/drawable-hdpi/bg_platinum_main.webp')}>
                 <View style={{
                     width: '70%',
                     borderRadius: 8,
@@ -100,22 +101,23 @@ class HomeScreen extends Component {
                     shadowColor: 'black',
                     shadowOpacity: 0.2,
                     elevation: 1,
-                    marginTop: Platform.OS == 'android' ? 30 : null}}>
+                    marginTop: Platform.OS == 'android' ? 30 : null
+                }}>
                     <Icon name="search" size={20} style={{ marginRight: 10 }} />
                     <TextInput
                         underlineColorAndroid="transparent"
                         placeholder="ค้นหา ..."
                         placeholderTextColor="grey"
-                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }}/>
+                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} />
                 </View>
             </ImageBackground>
         )
     }
 
-    renderTopMenu(){
+    _renderFloatingMenu() {
         return (
-            <CardSection style={{flex:1,bottom: 40, flexDirection: 'row', justifyContent: 'center', alignItems:'center' }}>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')} >
+            <CardSection style={{ flex: 1, bottom: 40, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('restaurants')} >
                     <View style={styles.imgLeft}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -126,7 +128,7 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=> this.props.navigation.navigate('travel')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('travel')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -137,7 +139,7 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity  onPress={()=> this.props.navigation.navigate('shop')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('shop')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -148,32 +150,34 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={()=>this.props.navigation.navigate('Menu')} >
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')} >
                     <View style={styles.imgEnd}>
                         <Image
                             style={{ width: 70, height: 70 }}
                             source={require('../images/drawable-hdpi/ic_main_other.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            อื่นๆ   
+                            อื่นๆ
                         </Text>
                     </View>
                 </TouchableOpacity>
             </CardSection>
-        )}
+        )
+    }
 
     render() {
         return (
             <ScrollView>
                 <View style={{ flex: 1, backgroundColor: 'white' }}>
-                        {this.renderHeader()}
-                        {this.renderTopMenu()}
-                    <View style={{flex:4, bottom:40}}>
-                        {this.renderItem()}
+                    {this._renderHeadBanner()}
+                    {this._renderFloatingMenu()}
+                    <View style={{ flex: 4, bottom: 40 }}>
+                        {this._renderMenuDetail()}
                     </View>
                 </View>
-            </ScrollView>  
-        )}
+            </ScrollView>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
@@ -186,15 +190,15 @@ const styles = StyleSheet.create({
     },
     headerTextStyle: {
         fontSize: 14,
-        fontWeight:'bold'
-    },imgLeft: {
+        fontWeight: 'bold'
+    }, imgLeft: {
         flexDirection: 'column',
         paddingTop: 5,
         paddingBottom: 5,
         marginRight: '2.5%',
         marginTop: '5%',
         marginBottom: '5%',
-        flex:1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     }, imgRight: {
@@ -205,7 +209,7 @@ const styles = StyleSheet.create({
         marginRight: '2.5%',
         marginTop: '5%',
         marginBottom: '5%',
-        flex:1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     }, imgEnd: {
@@ -215,7 +219,7 @@ const styles = StyleSheet.create({
         marginLeft: '2.5%',
         marginTop: '5%',
         marginBottom: '5%',
-        flex:1,
+        flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
     }
@@ -223,22 +227,23 @@ const styles = StyleSheet.create({
     textLeft: {
         fontSize: 12
     },
-    recomNameText: { 
-        position:'absolute', 
-        bottom: 0, 
-        left:0, 
-        fontSize: 8, 
-        color: 'white', 
-        fontWeight:'bold',
-        textShadowColor:'black',
-        textShadowOffset:{width: 1, height: 1},
-        textShadowRadius:1
+    recomNameText: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        fontSize: 8,
+        color: 'white',
+        fontWeight: 'bold',
+        textShadowColor: 'black',
+        textShadowOffset: { width: 1, height: 1 },
+        textShadowRadius: 1
     },
-    recomBlog:{ flex:1, 
-        marginBottom:5, 
-        marginLeft:5,
-        shadowColor:'black',
-        shadowOffset:{width: 2, height: 2}
+    recomBlog: {
+        flex: 1,
+        marginBottom: 5,
+        marginLeft: 5,
+        shadowColor: 'black',
+        shadowOffset: { width: 2, height: 2 }
     }
 
 })
@@ -248,31 +253,27 @@ const {
     headerTextStyle,
     recomNameText,
     recomBlog
-} = styles;
+} = styles
 
 class ItemDetail extends Component {
-    state = {
-        item: []
-    }
 
-    renderImg(imgs) {
-        const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
-        let imgRes = ''
-        let i = 0
-        let banner = 'banner'
-        let imageF = 'imgF'
-        let imageH = 'imgH'
-        //console.log(imgs.Sequence);
-        if(imgs.Scale === 'F' && imgs.MenuType === '06' ){
-            imgRes = _.map(imgs.SliderList, imgSlider => {
+    _renderImageByCondition(_renderingImgs) {
+        const baseURL = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
+        let _imgResult = ''
+        let _renderingBanner = '_renderingBanner'
+        let _renderingImgFull = '_renderingImgFull'
+        let _renderingImgHalf = '_renderingImgHalf'
+        if (_renderingImgs.Scale === 'F' && _renderingImgs.MenuType === '06') {
+            _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
                     <ImageBackground
-                        key={imageF+'&&'+imgSlider.ImageURL}
-                        style={{ 
-                        width: 200, 
-                        height: 100, 
-                        marginRight: 10}}
-                        source={{ uri: base_url + imgSlider.ImageURL }}
+                        key={_renderingImgFull + '&&' + imgSlider.ImageURL}
+                        style={{
+                            width: 200,
+                            height: 100,
+                            marginRight: 10
+                        }}
+                        source={{ uri: baseURL + imgSlider.ImageURL }}
                     >
                         <View style={recomBlog}>
                             <Text style={recomNameText}>{imgSlider.Name}</Text>
@@ -287,21 +288,22 @@ class ItemDetail extends Component {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     >
-                        {imgRes}
+                        {_imgResult}
                     </ScrollView>
                 </CardSection>
             )
         }
-        else if(imgs.Scale === 'H' && imgs.MenuType === '06'){
-            imgRes =  _.map(imgs.SliderList, imgSlider => {
+        else if (_renderingImgs.Scale === 'H' && _renderingImgs.MenuType === '06') {
+            _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
                     <ImageBackground
-                        key={imageH+'&&'+imgSlider.ImageURL}
-                        style={{ 
-                        width: 150,
-                        height: 100, 
-                        marginRight: 10}}
-                        source={{ uri: base_url + imgSlider.ImageURL }}
+                        key={_renderingImgHalf + '&&' + imgSlider.ImageURL}
+                        style={{
+                            width: 150,
+                            height: 100,
+                            marginRight: 10
+                        }}
+                        source={{ uri: baseURL + imgSlider.ImageURL }}
                     >
                         <View style={recomBlog}>
                             <Text style={recomNameText}>{imgSlider.Name}</Text>
@@ -316,22 +318,21 @@ class ItemDetail extends Component {
                         horizontal={true}
                         showsHorizontalScrollIndicator={false}
                     >
-                        {imgRes}
+                        {_imgResult}
                     </ScrollView>
                 </CardSection>
             )
-        }else if(imgs.MenuType === '10'){
-            imgRes = _.map(imgs.SliderList, imgSlider => {
-                console.log(imgSlider.Sequence)
+        } else if (_renderingImgs.MenuType === '10') {
+            _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                <View key={banner+'&&'+imgSlider.ImageURL} style={{width: Dimensions.get('window').width, height: 150}} >
-                    <TouchableOpacity onPress={()=> this.viewBanner(imgSlider.Sequence)}>
-                    <Image
-                        style={{height:150}}
-                        source={{ uri: base_url + imgSlider.ImageURL }}
-                    />
-                    </TouchableOpacity>
-                </View>
+                    <View key={_renderingBanner + '&&' + imgSlider.ImageURL} style={{ width: Dimensions.get('window').width, height: 150 }} >
+                        <TouchableOpacity onPress={() => this.onBannerPress(imgSlider.Sequence)}>
+                            <Image
+                                style={{ height: 150 }}
+                                source={{ uri: baseURL + imgSlider.ImageURL }}
+                            />
+                        </TouchableOpacity>
+                    </View>
                 )
             })
 
@@ -341,72 +342,73 @@ class ItemDetail extends Component {
                     indicatorAtBottom={true}
                     indicatorSize={20}
                     indicatorColor="purple"
-                    width= {'100%'}
-                    height={150}
-                >
-                {imgRes}
+                    width={'100%'}
+                    height={150}>
+                    {_imgResult}
                 </Carousel>
             )
         }
 
-        
+
     }
 
 
-    viewBanner(key){
-        if(key === '1'){
-            console.log(key)
-        }else if(key === '2'){
+    onBannerPress(key) {
+        if (key === '1') {
+            //do something here
+        }
+        else if (key === '2') {
             this.props.navigation.navigate('giftVou')
         }
     }
 
 
-    viewAll(key){
-        // console.log(key)
-        if(key === '2'){
-           this.props.navigation.navigate('recomEat')
+    onRecommendedPress(key) {
+        if (key === '2') {
+            this.props.navigation.navigate('recomEat')
         }
-        else if(key === '3'){
+        else if (key === '3') {
             this.props.navigation.navigate('recomShop')
-         }
-        else if(key === '4'){
+        }
+        else if (key === '4') {
             this.props.navigation.navigate('recomPlaces')
-         }
-        else if(key === '5'){
+        }
+        else if (key === '5') {
             this.props.navigation.navigate('recomStays')
-         }
+        }
     }
 
-    renderText(item){
-        //console.log(item)
-        const base_url = 'https://djstorefrontprodblob.blob.core.windows.net/upload/'
-       if(item.MenuType === '06'){ 
-           return (
-            <CardSection style={{ flex: 1 }}>
-                <View style={headerContentStyle}>
-                    <CardSection style={{ flexDirection: 'row', flex: 1 , justifyContent: 'space-between'}}>
-                        <Text style={headerTextStyle} >{item.Name}</Text>
-                        <View style={{flexDirection:'row', justifyContent: 'space-around', alignItems:'center'}}>
-                        <TouchableOpacity onPress={()=> this.viewAll(item.Sequence)}>
-                        <Text style={{color:'green', fontSize: 14}}>ดูทั้งหมด</Text>
-                        </TouchableOpacity>
-                        <Image 
-                        style={{height:15, width:15, tintColor: 'green'}}
-                        source={ require('../images/drawable-hdpi/ic_arrow_right.webp/') } /> 
-                        </View>
-                    </CardSection>
-                </View>
-            </CardSection>
-        )}
-    }
-
-    renderData() {
-        return _.map(this.props.items, item => {
+    _renderSliderComposition(_renderingItem) {
+        if (_renderingItem.MenuType === '06') {
             return (
-                <View key={item.Sequence} style={{ flex: 1 }} navigation={this.props.navigation}>
-                        {this.renderText(item)}
-                        {this.renderImg(item)}
+                <CardSection style={{ flex: 1 }}>
+                    <View style={headerContentStyle}>
+                        <CardSection style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+                            <Text style={headerTextStyle} >{_renderingItem.Name}</Text>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
+                                <TouchableOpacity onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
+                                    <Text style={{ color: 'green', fontSize: 14 }}>ดูทั้งหมด</Text>
+                                </TouchableOpacity>
+                                <Image
+                                    style={{ height: 15, width: 15, tintColor: 'green' }}
+                                    source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
+                            </View>
+                        </CardSection>
+                    </View>
+                </CardSection>
+            )
+        }
+    }
+
+    _renderBottomComposition() {
+        return _.map(this.props._renderingItems, _renderingItem => {
+            return (
+                <View
+                    key={_renderingItem.Sequence}
+                    style={{ flex: 1 }}
+                    navigation={this.props.navigation}>
+                    {this._renderSliderComposition(_renderingItem)}
+                    {this._renderImageByCondition(_renderingItem)}
                 </View>
             )
         })
@@ -415,7 +417,7 @@ class ItemDetail extends Component {
     render() {
         return (
             <View>
-                {this.renderData()}
+                {this._renderBottomComposition()}
             </View>
         )
     }
@@ -426,53 +428,50 @@ const HomeMenu = createStackNavigator({
         screen: HomeScreen
     },
     Menu: {
-        screen: HomeMenuScreens, navigationOptions:{header:null}
+        screen: HomeMenuScreens, navigationOptions: { header: null }
     },
     restaurants: {
-        screen: Restaurants, navigationOptions:{header:null}
+        screen: Restaurants, navigationOptions: { header: null }
     },
     travel: {
-        screen: Travel, navigationOptions:{header:null}
+        screen: Travel, navigationOptions: { header: null }
     },
     shop: {
-        screen: Shop, navigationOptions:{header:null}
+        screen: Shop, navigationOptions: { header: null }
     },
     accommodation: {
-        screen: Accommodation, navigationOptions:{header:null}
+        screen: Accommodation, navigationOptions: { header: null }
     },
-    commercial_areas:{
-        screen: Commercial_Areas, navigationOptions:{header:null}
+    commercial_areas: {
+        screen: Commercial_Areas, navigationOptions: { header: null }
     },
-    bank:{
-        screen: Bank, navigationOptions:{header:null}
+    bank: {
+        screen: Bank, navigationOptions: { header: null }
     },
-    schools_and_government:{
-        screen: Schools_and_Government, navigationOptions:{header:null}
+    schools_and_government: {
+        screen: Schools_and_Government, navigationOptions: { header: null }
     },
-    services:{
-        screen: Services, navigationOptions:{header:null}
+    services: {
+        screen: Services, navigationOptions: { header: null }
     },
-    facilities:{
-        screen: Facilities, navigationOptions:{header:null}
+    facilities: {
+        screen: Facilities, navigationOptions: { header: null }
     },
-    recomEat:{
-        screen: EatScreen, navigationOptions:{header:null}
+    recomEat: {
+        screen: EatScreen, navigationOptions: { header: null }
     },
-    recomShop:{
-        screen: ShoppingScreen, navigationOptions:{header:null}
+    recomShop: {
+        screen: ShoppingScreen, navigationOptions: { header: null }
     },
-    recomPlaces:{
-        screen: PlacesScreen, navigationOptions:{header:null}
+    recomPlaces: {
+        screen: PlacesScreen, navigationOptions: { header: null }
     },
-    recomStays:{
-        screen: StaysScreen, navigationOptions:{header:null}
+    recomStays: {
+        screen: StaysScreen, navigationOptions: { header: null }
     },
-    giftVou:{
-        screen: GiftVoucherScreen, navigationOptions:{header:null}
+    giftVou: {
+        screen: GiftVoucherScreen, navigationOptions: { header: null }
     },
 })
-
-
-
 
 export default HomeMenu
