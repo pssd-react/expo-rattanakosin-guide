@@ -10,7 +10,7 @@ import {
     WebView,
     TouchableOpacity
 } from 'react-native'
-import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../common';
+import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../common'
 import firebase from 'firebase'
 import { SocialIcon } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation'
@@ -20,8 +20,8 @@ import { ChangePassword } from './profilescreen/loginscreens/ChangePassword'
 import { RegisterForm } from './profilescreen/loginscreens/RegisterForm'
 import { RegisterOTP } from './profilescreen/loginscreens/RegisterOTP'
 import LoginForm from './profilescreen/loginscreens/LoginForm'
-import { ScrollView } from '../../../node_modules/react-native-gesture-handler';
-import Modal from "react-native-modal";
+import { ScrollView } from '../../../node_modules/react-native-gesture-handler'
+import Modal from "react-native-modal"
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -31,13 +31,14 @@ const firebaseConfig = {
     projectId: "rattanakosin-5112f",
     storageBucket: "rattanakosin-5112f.appspot.com",
     messagingSenderId: "796800591279"
-};
+}
 
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig)
 
 const BACKGROUND_URI = require('../images/drawable-hdpi/bg_more.webp/')
 
 class ProfileScreenMain extends Component {
+    static navigationOptions = { header: null }
     state = {
         userInfo: '',
         dataSource: '',
@@ -45,35 +46,30 @@ class ProfileScreenMain extends Component {
         isModalVisible: false,
         user: '',
         userPhone: undefined
-        //status_login: false,
     }
-    static navigationOptions = { header: null }
 
     componentWillMount() {
-        this.setState({ isModalVisible: false });
+        this.setState({ isModalVisible: false })
     }
 
     componentDidMount() {
-        this.setState({ isModalVisible: false });
+        this.setState({ isModalVisible: false })
     }
 
-    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
-    _activeModal = () => this.setState({ isModalVisible: true });
-    _deactiveModal = () => this.setState({ isModalVisible: false });
+    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible })
+    _activeModal = () => this.setState({ isModalVisible: true })
+    _deactiveModal = () => this.setState({ isModalVisible: false })
 
     async loginWithFacebook() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
             ('1886750428085436', { permissions: ['public_profile'] })
 
         if (type === 'success') {
-            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`);
-            const userInfoFB = await response.json();
+            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`)
+            const userInfoFB = await response.json()
 
             StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
-            this.setState({ userInfoFB });
-            console.log('******')
-            console.log(this.state.userInfo)
-
+            this.setState({ userInfoFB })
         }
     }
 
@@ -87,197 +83,49 @@ class ProfileScreenMain extends Component {
 
     }
 
-    _renderUserPhone(userPhone) {
-        console.log('===userPhone===')
-        console.log(userPhone.UserDetail)
-        return (
-            <View style={{ alignItems: 'center' }}>
-                <CardSection style={{ justifyContent: 'center', marginTop: 20 }}>
-                </CardSection>
-                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
-                    <Image
-                        source={require('../images/drawable-xhdpi/placeholder_profile_item.webp')}
-                        style={{ width: 150, height: 150 }}
-                    />
-                </CardSection>
-                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
-                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{userPhone.UserDetail.DisplayName}</Text>
-                </CardSection>
-                <CardSection style={{ justifyContent: 'space-between', marginTop: 20 }}>
-                    <View style={{ flex: 1, alignItems: 'center', marginLeft: 20 }}>
-                        <TouchableOpacity onPress={null}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image style={{ width: 25, height: 30 }}
-                                    source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
-                                />
-                                <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
-                                    <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Image style={{ width: 22, height: 28 }}
-                                source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
-                            />
-                            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
-                            </View>
-                        </View>
-                    </View>
-                </CardSection>
-            </View>
-        )
-    }
-
-    _renderUserInfo(userInfoFB) {
-
-        return (
-            <View style={{ alignItems: 'center' }}>
-                <CardSection style={{ justifyContent: 'center', marginTop: 20 }}>
-                </CardSection>
-                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
-                    <Image
-                        source={{ uri: userInfoFB.picture.data.url }}
-                        style={{ width: 150, height: 150 }}
-                    />
-                </CardSection>
-                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
-                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{userInfoFB.name}</Text>
-                </CardSection>
-                <CardSection style={{ justifyContent: 'space-between', marginTop: 20 }}>
-                    <View style={{ flex: 1, alignItems: 'center', marginLeft: 20 }}>
-                        <TouchableOpacity onPress={null}>
-                            <View style={{ flexDirection: 'row' }}>
-                                <Image style={{ width: 25, height: 30 }}
-                                    source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
-                                />
-                                <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
-                                    <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
-                                </View>
-                            </View>
-                        </TouchableOpacity>
-                    </View>
-                    <View style={{ flex: 1, alignItems: 'center' }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <Image style={{ width: 22, height: 28 }}
-                                source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
-                            />
-                            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
-                            </View>
-                        </View>
-                    </View>
-                </CardSection>
-            </View>
-        );
-    }
-
-    _renderProfile() {
-        return (
-            <View>
-                <CardSection style={{ justifyContent: 'center', marginTop: 60 }}>
-                    <Text style={{ fontSize: 22, color: '#fff' }}>ยังไม่ได้เข้าสู่ระบบ</Text>
-                </CardSection>
-                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
-                    <Button onPress={() => this.onButtonLoginNumber()}
-                        style={{ backgroundColor: '#ffc94c' }}
-                        textStyle={{ color: '#000' }}>
-                        เข้าสู่ระบบด้วยหมายเลขโทรศัพท์
-                        </Button>
-                </CardSection>
-                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
-                    <SocialIcon style={{ flex: 1, borderRadius: 5 }}
-                        title='เข้าสู่ระบบด้วย Facebook'
-                        fontStyle={{ fontSize: 16 }}
-                        button
-                        type='facebook'
-                        onPress={() => this.loginWithFacebook()}
-                    />
-                </CardSection>
-                <CardSection style={{ justifyContent: 'center', marginTop: 18 }}>
-                    <TouchableOpacity onPress={() => this.onButtonRegister()}>
-                        <Text style={{ fontSize: 16, textDecorationLine: 'underline', color: '#fff', }}>ลงทะเบียน</Text>
-                    </TouchableOpacity >
-                </CardSection>
-            </View>
-        );
-    }
-
-    renderButtonFB() {
-        console.log('----renderButtonFB----')
-        this.state.userInfoFB = StoreGlobal({ type: 'get', key: 'userInfo' })
-        this.state.userPhone = StoreGlobal({ type: 'get', key: 'userPhone' })
-        console.log(this.state.userPhone)
-        if (this.state.userPhone) {
-            console.log('--เข้า---')
-            return (
-                this._renderUserPhone(this.state.userPhone)
-            )
-        }
-        else if ((!this.state.userInfoFB) || this.state.userInfoFB === "") {
-            return (
-                this._renderProfile()
-            )
-        }
-        else if (this.state.userInfoFB) {
-            return (
-                this._renderUserInfo(this.state.userInfoFB)
-            )
-        }
-
-    }
-
-    renderBlock() {
-        if (this.state.userInfoFB || this.state.userPhone) {
-            return (<View style={styles.viewBlockStyle} />)
-        }
-
-    }
-    renderButtonLogOut() {
-
-        if (this.state.userInfoFB || this.state.userPhone) {
-            return (
-                <TouchableOpacity onPress={() => this.onListLogOut()}>
-                    <View style={styles.listViewContainer}>
-                        <View style={styles.iconContainerStyle}>
-                            <Image style={{ width: 22, height: 22 }}
-                                source={require('../images/drawable-hdpi/ic_more_logout.webp')} />
-                        </View>
-                        <View style={styles.listViewTextContainer}>
-                            <Text style={styles.listViewTextStyle}>ออกจากระบบ</Text>
-                        </View>
-                        <View style={styles.chevronContainerStyle}>
-                            <Image
-                                source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
-                        </View>
-                    </View>
-                </TouchableOpacity>
-            );
-        } else {
-            return (<View></View>);
-        }
-
-    }
-
     onListSetting() {
-        this.props.navigation.navigate('Setting');
-    }
-    onListHowToUse() {
-        this.props.navigation.navigate('HowToUse');
-    }
-    onListAboutRattanakosin() {
-        this.props.navigation.navigate('AboutRattanakosin');
-    }
-    onListAboutApp() {
-        this.props.navigation.navigate('AboutApp');
+        this.props.navigation.navigate('Setting')
     }
 
-    modalRender() {
-        console.log('this is loading : ' + this.state.loading)
+    onListHowToUse() {
+        this.props.navigation.navigate('HowToUse')
+    }
+
+    onListAboutRattanakosin() {
+        this.props.navigation.navigate('AboutRattanakosin')
+    }
+
+    onListAboutApp() {
+        this.props.navigation.navigate('AboutApp')
+    }
+
+    onLogOutModal() {
+        this.state.loading = true
+        this._deactiveModal()
+        this._activeModal()
+        setTimeout(() => {
+            this._toggleModal(),
+                this.state.loading = false,
+                this.onLogoutSuccess()
+        }, 3000)
+    }
+
+    onListLogOut() {
+        this._activeModal()
+    }
+
+    onLogoutSuccess() {
+        StoreGlobal({ type: 'set', key: 'userInfo', value: null })
+        StoreGlobal({ type: 'set', key: 'userPhone', value: null })
+        this.state.userInfoFB = undefined
+        this.setState({ loading: false })
+    }
+
+    onLoginSuccess() {
+        this.setState({ loading: false })
+    }
+
+    onLogoutModalRender() {
         if (this.state.loading === true) {
             return (
                 <View style={{
@@ -336,54 +184,194 @@ class ProfileScreenMain extends Component {
 
             </View>
         )
+    }
+
+    _renderUserPhone(userPhone) {
+        return (
+            <View style={{ alignItems: 'center' }}>
+                <CardSection style={{ justifyContent: 'center', marginTop: 20 }}>
+                </CardSection>
+                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
+                    <Image
+                        source={require('../images/drawable-xhdpi/placeholder_profile_item.webp')}
+                        style={{ width: 150, height: 150 }}
+                    />
+                </CardSection>
+                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
+                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{userPhone.UserDetail.DisplayName}</Text>
+                </CardSection>
+                <CardSection style={{ justifyContent: 'space-between', marginTop: 20 }}>
+                    <View style={{ flex: 1, alignItems: 'center', marginLeft: 20 }}>
+                        <TouchableOpacity onPress={null}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Image style={{ width: 25, height: 30 }}
+                                    source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
+                                />
+                                <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
+                                    <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image style={{ width: 22, height: 28 }}
+                                source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
+                            />
+                            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
+                            </View>
+                        </View>
+                    </View>
+                </CardSection>
+            </View>
+        )
+    }
+
+    _renderUserInfo(userInfoFB) {
+        return (
+            <View style={{ alignItems: 'center' }}>
+                <CardSection style={{ justifyContent: 'center', marginTop: 20 }}>
+                </CardSection>
+                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
+                    <Image
+                        source={{ uri: userInfoFB.picture.data.url }}
+                        style={{ width: 150, height: 150 }}
+                    />
+                </CardSection>
+                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
+                    <Text style={{ fontSize: 22, color: '#fff', fontWeight: 'bold' }}>{userInfoFB.name}</Text>
+                </CardSection>
+                <CardSection style={{ justifyContent: 'space-between', marginTop: 20 }}>
+                    <View style={{ flex: 1, alignItems: 'center', marginLeft: 20 }}>
+                        <TouchableOpacity onPress={null}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <Image style={{ width: 25, height: 30 }}
+                                    source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
+                                />
+                                <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
+                                    <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
+                                </View>
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{ flex: 1, alignItems: 'center' }}>
+                        <View style={{ flexDirection: 'row' }}>
+                            <Image style={{ width: 22, height: 28 }}
+                                source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
+                            />
+                            <View style={{ flexDirection: 'column', marginLeft: 10 }}>
+                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
+                            </View>
+                        </View>
+                    </View>
+                </CardSection>
+            </View>
+        )
+    }
+
+    _renderProfile() {
+        return (
+            <View>
+                <CardSection style={{ justifyContent: 'center', marginTop: 60 }}>
+                    <Text style={{ fontSize: 22, color: '#fff' }}>ยังไม่ได้เข้าสู่ระบบ</Text>
+                </CardSection>
+                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
+                    <Button onPress={() => this.onButtonLoginNumber()}
+                        style={{ backgroundColor: '#ffc94c' }}
+                        textStyle={{ color: '#000' }}>
+                        เข้าสู่ระบบด้วยหมายเลขโทรศัพท์
+                        </Button>
+                </CardSection>
+                <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
+                    <SocialIcon style={{ flex: 1, borderRadius: 5 }}
+                        title='เข้าสู่ระบบด้วย Facebook'
+                        fontStyle={{ fontSize: 16 }}
+                        button
+                        type='facebook'
+                        onPress={() => this.loginWithFacebook()}
+                    />
+                </CardSection>
+                <CardSection style={{ justifyContent: 'center', marginTop: 18 }}>
+                    <TouchableOpacity onPress={() => this.onButtonRegister()}>
+                        <Text style={{ fontSize: 16, textDecorationLine: 'underline', color: '#fff', }}>ลงทะเบียน</Text>
+                    </TouchableOpacity >
+                </CardSection>
+            </View>
+        )
+    }
+
+    _renderFacebookButton() {
+        this.state.userInfoFB = StoreGlobal({ type: 'get', key: 'userInfo' })
+        this.state.userPhone = StoreGlobal({ type: 'get', key: 'userPhone' })
+        if (this.state.userPhone) {
+            return (
+                this._renderUserPhone(this.state.userPhone)
+            )
+        }
+        else if ((!this.state.userInfoFB) || this.state.userInfoFB === "") {
+            return (
+                this._renderProfile()
+            )
+        }
+        else if (this.state.userInfoFB) {
+            return (
+                this._renderUserInfo(this.state.userInfoFB)
+            )
+        }
 
     }
-    //LogOut
-    renderModalLogOut() {
+
+    _renderEmptyBlog() {
+        if (this.state.userInfoFB || this.state.userPhone) {
+            return (<View style={styles.viewBlockStyle} />)
+        }
+    }
+
+    _renderLogoutStack() {
+        if (this.state.userInfoFB || this.state.userPhone) {
+            return (
+                <TouchableOpacity onPress={() => this.onListLogOut()}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.iconContainerStyle}>
+                            <Image style={{ width: 22, height: 22 }}
+                                source={require('../images/drawable-hdpi/ic_more_logout.webp')} />
+                        </View>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>ออกจากระบบ</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image
+                                source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        } else {
+            return (<View></View>)
+        }
+
+    }
+
+    _renderLogoutModal() {
         return (
             <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
-                {this.modalRender()}
+                {this.onLogoutModalRender()}
             </Modal>
         )
     }
 
-    onLogOutModal() {
-        this.state.loading = true
-        this._deactiveModal()
-        this._activeModal()
-        setTimeout(() => {
-            this._toggleModal(),
-                this.state.loading = false,
-                this.onLogoutSuccess()
-        }, 3000)
-
-
-    }
-    onListLogOut() {
-        this._activeModal()
-    }
-
-    onLogoutSuccess() {
-        StoreGlobal({ type: 'set', key: 'userInfo', value: null })
-        StoreGlobal({ type: 'set', key: 'userPhone', value: null })
-        this.state.userInfoFB = undefined
-        this.setState({ loading: false })
-
-    }
-
-    onLoginSuccess() {
-        this.setState({ loading: false })
-    }
-
-    renderPage() {
+    render() {
         return (
             <View>
                 <ImageBackground
                     source={BACKGROUND_URI}
                     style={styles.thumbnailStyle}
                 >
-                    {this.renderModalLogOut()}
-                    {this.renderButtonFB()}
+                    {this._renderLogoutModal()}
+                    {this._renderFacebookButton()}
                 </ImageBackground>
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
@@ -451,16 +439,12 @@ class ProfileScreenMain extends Component {
                         </View>
                     </TouchableOpacity>
 
-                    {this.renderButtonLogOut()}
+                    {this._renderLogoutStack()}
                 </ScrollView>
-                {this.renderBlock()}
+                {this._renderEmptyBlog()}
 
             </View>
         )
-    }
-
-    render() {
-        return (this.renderPage());
     }
 }
 

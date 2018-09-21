@@ -3,16 +3,10 @@ import {
     View,
     Text, 
     StyleSheet,
-    TouchableOpacity,
-    Image,
-    ImageBackground,
     SafeAreaView,
     FlatList
 } from 'react-native'
-import { Card } from '../../common/Card'
-import { CardSection } from '../../common/CardSection'
-import { List, ListItem,SearchBar } from "react-native-elements";
-import { getUsers } from "../../../api/index";
+import { List, ListItem,SearchBar } from "react-native-elements"
 
 
 const INITAL_STATE = {
@@ -23,27 +17,27 @@ const INITAL_STATE = {
 
 class SearchScreen extends Component{
 
-    state = INITAL_STATE;
+    state = INITAL_STATE
 
    
     componentDidMount() {
-        this.makeRemoteRequest();
+        this.makeRemoteRequest()
     }
     
       makeRemoteRequest = () => {
-        this.setState({ loading: true });
+        this.setState({ loading: true })
     
         // getUsers()
         //   .then(users => {
         //     this.setState({
         //       loading: false,
         //       data: users
-        //     });
+        //     })
         //   })
         //   .catch(error => {
-        //     this.setState({ error, loading: false });
-        //   });
-      };
+        //     this.setState({ error, loading: false })
+        //   })
+      }
 
     renderSeparator = () => {
         return (
@@ -55,8 +49,8 @@ class SearchScreen extends Component{
               marginLeft: "14%"
             }}
           />
-        );
-      };
+        )
+      }
 
     renderHeader () {
         return <SearchBar
@@ -64,11 +58,11 @@ class SearchScreen extends Component{
             placeholder='Search'
             lightTheme
             onChangeText={(value) => this.renderState(value)}
-        />;
-    };
+        />
+    }
 
     renderFooter = () => {
-        if (!this.state.loading) return null;
+        if (!this.state.loading) return null
     
         return (
           <View
@@ -79,14 +73,14 @@ class SearchScreen extends Component{
           >
             <ActivityIndicator animating size="large" />
           </View>
-        );
-    };
+        )
+    }
 
     renderState  ( text ) {
-        console.log( text );
+        console.log( text )
         this.setState({
            text: 'คำที่ต้องการค้นหา'
-        });
+        })
     }
 
     
@@ -105,7 +99,7 @@ class SearchScreen extends Component{
                 <Text style= {styles.textStyle}> {this.state.text} </Text>
             </View>
           </SafeAreaView>
-        );
+        )
       }
 }
 const styles = StyleSheet.create({

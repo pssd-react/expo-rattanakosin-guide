@@ -1,29 +1,30 @@
-
-import React, { Component } from 'react';
-import { Text, View, Image, TouchableOpacity, Linking, } from 'react-native';
+import React, { Component } from 'react'
+import { Text, View, Image, TouchableOpacity, Linking, } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
-import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../../../common';
+import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../../../common'
 import { StoreGlobal } from '../../../config/GlobalState'
-import axios from 'axios';
-import Modal from "react-native-modal";
+import axios from 'axios'
+import Modal from "react-native-modal"
 
 export class RegisterForm extends Component {
     static navigationOptions = { header: null }
-    state = { name: '', phone: '', password: '', confirm_password: '', error: '', loading: false, isModalVisible: false, alert_phone: '' };
+    state = { name: '', phone: '', password: '', confirm_password: '', error: '', loading: false, isModalVisible: false, alert_phone: '' }
 
-    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
-    _activeModal = () => this.setState({ isModalVisible: true });
-    _deactiveModal = () => this.setState({ isModalVisible: false });
+    _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible })
+    _activeModal = () => this.setState({ isModalVisible: true })
+    _deactiveModal = () => this.setState({ isModalVisible: false })
 
     onButtonPress() {
-        console.log("Name: " + this.state.name + " Number: " + this.state.phone + " Pass: " + this.state.password + " com_Pass: " + this.state.confirm_password)
         if (this.state.password < 6) {
+
             this.setState({ alert_phone: "รหัสผ่าน ต้องมีความยาวไม่น้อยกว่า 6 ตัวอักษร" })
             this._toggleModal()
         } else if (this.state.confirm_password !== this.state.password) {
             this.setState({ alert_phone: "โปรดระบุรหัสผ่านให้ตรงกัน" })
             this._toggleModal()
         } else {
+            this.setState({ loading: true })
+            this._activeModal()
             const data = {
                 "RqAppID": "1234",
                 "Mobile": this.state.phone,
@@ -39,10 +40,9 @@ export class RegisterForm extends Component {
             axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/RequestOTPService',
                 data, config)
                 .then(response => {
-                    console.log(response.data)
-
+                    this.setState({ loading: false })
+                    this._deactiveModal()
                     if (response.data.ResponseStatus === '00') {
-                        console.log(true, response.data.ResponseDetail)
                         StoreGlobal({
                             type: 'set', key: 'RequestOTPService', value: {
                                 "DisplayName": this.state.name,
@@ -54,75 +54,101 @@ export class RegisterForm extends Component {
                         })
                         this.onButtonRegisterOTP()
                     } else {
-                        console.log(false, response.data.ResponseDetail)
                         this.setState({ alert_phone: response.data.ResponseDetail })
                         this._toggleModal()
                     }
                 })
                 .catch((error) => {
                     console.log('axios error: ' + error)
-                });
+                })
         }
-
     }
 
-    onLoginFail() {
-        this.setState({ error: 'Authentication Failed.', loading: false });
+    onButtonGoBack() {
+        const Register = StoreGlobal({ type: 'get', key: 'RegisterStatus' })
+        if (Register.Status === "FromProfile") {
+            StoreGlobal({ type: 'set', key: 'RegisterStatus', value: null })
+            this.props.navigation.popToTop()
+        } else if (Register.Status === "FromLogin") {
+            StoreGlobal({ type: 'set', key: 'RegisterStatus', value: null })
+            this.props.navigation.navigate('Login')
+        }
     }
 
-    onLoginSuccess() {
-        this.setState({
-            email: '',
-            password: '',
-            loading: false,
-            error: ''
-        });
+    onButtonRegisterOTP() {
+        this.props.navigation.navigate('RegisterOTP')
     }
 
-    //Modal
-    renderModal() {
-        return (
-            <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
+    onModalRender() {
+        if (this.state.loading === true) {
+            return (
                 <View style={{
                     flex: 1,
                     backgroundColor: '#fff',
-                    marginBottom: 130,
-                    marginTop: 100,
+                    marginBottom: 270,
+                    marginTop: 270,
+                    marginLeft: 140,
+                    marginRight: 140,
                     borderRadius: 5,
                     shadowColor: '#000',
                     shadowOffset: { width: 5, height: 5 },
                     shadowRadius: 5,
                     flexDirection: 'column',
-                    justifyContent: 'space-between',
+                    justifyContent: 'center',
+                    alignItems: 'center'
                 }}>
-                    <CardSection style={{ flex: 3, alignItems: 'center', justifyContent: 'center' }}>
-                        <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
-                            style={{ width: 70, height: 70 }} />
-                    </CardSection>
-                    <CardSection style={{ paddingLeft: 20 }}>
-                        <Text style={{ fontSize: 22 }}>ลงทะเบียนไม่สำเสร็จ</Text>
-                    </CardSection>
-                    <CardSection style={{ paddingLeft: 20, paddingRight: 20 }}>
-                        <Text style={{ fontSize: 16 }}>{this.state.alert_phone}</Text>
-                    </CardSection>
-                    <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
-                        <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
-                            onPress={() => this._deactiveModal()}>
-                            <Text style={{ fontSize: 16 }}>ปิด</Text>
-                        </TouchableOpacity>
-                    </CardSection>
+                    <Spinner />
                 </View>
+            )
+        }
+        return (
+            <View style={{
+                flex: 1,
+                backgroundColor: '#fff',
+                marginBottom: 130,
+                marginTop: 100,
+                borderRadius: 5,
+                shadowColor: '#000',
+                shadowOffset: { width: 5, height: 5 },
+                shadowRadius: 5,
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+            }}>
+                <CardSection style={{ flex: 3, alignItems: 'center', justifyContent: 'center' }}>
+                    <Image source={require('../../../images/drawable-xxhdpi/ic_failure_report.webp')}
+                        style={{ width: 70, height: 70 }} />
+                </CardSection>
+                <CardSection style={{ paddingLeft: 20 }}>
+                    <Text style={{ fontSize: 22 }}>ลงทะเบียนไม่สำเสร็จ</Text>
+                </CardSection>
+                <CardSection style={{ paddingLeft: 20, paddingRight: 20 }}>
+                    <Text style={{ fontSize: 16 }}>{this.state.alert_phone}</Text>
+                </CardSection>
+                <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
+                    <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
+                        onPress={() => this._deactiveModal()}>
+                        <Text style={{ fontSize: 16 }}>ปิด</Text>
+                    </TouchableOpacity>
+                </CardSection>
+            </View>
+        )
+    }
+
+    _renderModal() {
+        return (
+            <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
+                {this.onModalRender()}
             </Modal>
         )
     }
 
-    renderButton() {
+    _renderNextButton() {
         if (this.state.name !== '' && this.state.phone !== '' && this.state.password !== '' && this.state.confirm_password !== '') {
             return (
                 <Button onPress={() => this.onButtonPress()} style={{ backgroundColor: '#9f4289' }} textStyle={{ color: '#fff' }}>
                     ต่อไป
                 </Button>
-            );
+            )
         }
         return (
             <View style={{
@@ -145,27 +171,11 @@ export class RegisterForm extends Component {
                     ต่อไป
                 </Text>
             </View>
-        );
-    }
-
-    onButtonGoBack() {
-        const Register = StoreGlobal({ type: 'get', key: 'RegisterStatus' })
-        if (Register.Status === "FromProfile") {
-            StoreGlobal({ type: 'set', key: 'RegisterStatus', value: null })
-            this.props.navigation.popToTop()
-        } else if (Register.Status === "FromLogin") {
-            StoreGlobal({ type: 'set', key: 'RegisterStatus', value: null })
-            this.props.navigation.navigate('Login')
-        }
-    }
-
-    onButtonRegisterOTP() {
-        console.log('RegisterOTP')
-        this.props.navigation.navigate('RegisterOTP');
+        )
     }
 
     render() {
-        const { container, containerStyle, alignButton, signupTextCont, viewStyle, textStyle } = styles
+        const { signupTextCont, viewStyle, textStyle } = styles
 
         return (
             <View style={{ backgroundColor: "#fff", flex: 1 }}>
@@ -213,13 +223,13 @@ export class RegisterForm extends Component {
                             <SignButton label="I Agree to the " sign="Term of user" onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')} />
                         </View>
                         <View style={signupTextCont}>
-                            {this.renderButton()}
+                            {this._renderNextButton()}
                         </View>
                     </View>
                 </View>
-                {this.renderModal()}
+                {this._renderModal()}
             </View>
-        );
+        )
     }
 }
 
@@ -255,8 +265,6 @@ const styles = {
         marginTop: 60
     },
     alignButton: {
-        /*       flex: 1,
-              alignItems:'flex-end', */
         padding: 5,
         justifyContent: 'flex-end',
         flexDirection: 'row',

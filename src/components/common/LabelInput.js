@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppRegistry, Text, View, StatusBar, TextInput, Animated } from 'react-native';
+import { Text, View, StatusBar, TextInput, Animated } from 'react-native';
 
 class LabelInput extends Component {
   state ={

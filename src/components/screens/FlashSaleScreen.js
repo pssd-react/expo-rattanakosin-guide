@@ -1,36 +1,31 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import {
     View,
-    Text, 
     StyleSheet,
-    Dimensions
 } from 'react-native'
 import FlashSale from './stackscreens/FlashSale'
 import PromotionDetail from './stackscreens/PromotionDetail'
 import {
     createStackNavigator,
-    HeaderBackButton,
     withNavigationFocus
-} from 'react-navigation';
-import { TabView, TabBar, SceneMap ,TabViewAnimated } from 'react-native-tab-view';
+} from 'react-navigation'
 import { Header } from '../common/Header'
-import {StoreGlobal} from './../config/GlobalState';
 
-class FlashSaleScreen extends Component{
+class FlashSaleScreen extends Component {
     static navigationOptions = { header: null }
-    renderHeaderScreen(){
-        if(this.props.isFocused){
-            return  <Header headerText={'Flash Sale'} 
-        backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
+    _renderHeaderScreen() {
+        if (this.props.isFocused) {
+            return <Header headerText={'Flash Sale'}
+                backgroundImage={require('../../components/images/drawable-hdpi/bg_more.webp')} />
         }
-        else{
+        else {
             return null
         }
-      }
-    render(){
+    }
+    render() {
         return (
             <View style={styles.container}>
-                {this.renderHeaderScreen()} 
+                {this._renderHeaderScreen()}
                 <FlashSaleNavScreen />
             </View>
         )
@@ -38,8 +33,8 @@ class FlashSaleScreen extends Component{
 }
 
 const styles = StyleSheet.create({
-    container:{
-        flex:1,
+    container: {
+        flex: 1,
     },
     tabbar: {
         backgroundColor: '#fff',
@@ -47,11 +42,11 @@ const styles = StyleSheet.create({
 })
 
 const FlashSaleNavScreen = createStackNavigator({
-    FlashSaleMain:{
-        screen : FlashSale, navigationOptions:{header:null}
+    FlashSaleMain: {
+        screen: FlashSale, navigationOptions: { header: null }
     },
-    PromotionDetailScreen:{
-        screen : PromotionDetail
+    PromotionDetailScreen: {
+        screen: PromotionDetail
     }
 })
 
