@@ -71,6 +71,7 @@ class FlashSaleLightning extends Component {
   }
 
   _updateNumSoon() {
+    let num = 0
     _.map((this.state.item.StaticLocation), (items) => {
       var d1 = items.CurrentDateTime.split(' ')
       var a1 = d1[0].split('/')
