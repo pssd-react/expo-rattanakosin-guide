@@ -55,6 +55,7 @@ class PromotionDetail extends Component {
             if (shopID.ShopCategoryID === '264') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_food.webp')}
                     />
@@ -62,6 +63,7 @@ class PromotionDetail extends Component {
             } else if (shopID.ShopCategoryID === '268') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_category_place_travel.webp')}
                     />
@@ -70,6 +72,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '265') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_category_shop.webp')}
                     />
@@ -78,6 +81,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '267') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
                     />
@@ -86,6 +90,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '266') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
                     />
@@ -94,6 +99,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '459') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
                     />
@@ -102,6 +108,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '269') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_office.webp')}
                     />
@@ -110,6 +117,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '272') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_service.webp')}
                     />
@@ -118,6 +126,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '271') {
                 return (
                     <Image
+                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
                     />

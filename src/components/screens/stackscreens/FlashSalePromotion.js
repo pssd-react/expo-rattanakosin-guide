@@ -63,6 +63,12 @@ class FlashSalePromotion extends Component {
     this.setState({ activeSection: section })
   }
 
+  _dateFormating(date){
+      var a1 = date[0].split('/')
+      var a2 = date[1].split(':')
+      return new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+  }
+
   onPresentPress(items) {
     this.props.navigation.navigate('PromotionDetailScreen', {
       items
@@ -72,21 +78,14 @@ class FlashSalePromotion extends Component {
   _updateNumPresent() {
     let num = 0
     _.map((this.state.item.StaticLocation), (items) => {
-      var d1 = items.CurrentDateTime.split(' ')
-      var a1 = d1[0].split('/')
-      var a2 = d1[1].split(':')
-      var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+      var dateNow = items.CurrentDateTime.split(' ')
+      var Ctime = this._dateFormating(dateNow)
 
-      var d2 = items.StartDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+      var dateStart = items.StartDate.split(' ')
+      var Stime = this._dateFormating(dateStart)
 
-      var d2 = items.EndDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
-
+      var dateEnd = items.EndDate.split(' ')
+      var Etime = this._dateFormating(dateEnd)
       if (Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N') {
         num++
       }
@@ -97,20 +96,14 @@ class FlashSalePromotion extends Component {
   _updateNumSoon() {
     let num = 0
     _.map((this.state.item.StaticLocation), (items) => {
-      var d1 = items.CurrentDateTime.split(' ')
-      var a1 = d1[0].split('/')
-      var a2 = d1[1].split(':')
-      var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+      var dateNow = items.CurrentDateTime.split(' ')
+      var Ctime = this._dateFormating(dateNow)
 
-      var d2 = items.StartDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+      var dateStart = items.StartDate.split(' ')
+      var Stime = this._dateFormating(dateStart)
 
-      var d2 = items.EndDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+      var dateEnd = items.EndDate.split(' ')
+      var Etime = this._dateFormating(dateEnd)
       if (Ctime <= Stime && items.Is_FlashSale === 'N') {
         num++
       }
@@ -119,11 +112,9 @@ class FlashSalePromotion extends Component {
   }
 
   _renderNowHeader() {
-
     return (
       <Text style={styles.headerText}>ปัจจุบัน ({this.state.numPresent})</Text>
     )
-
   }
 
   _renderSoonHeader() {
@@ -138,23 +129,17 @@ class FlashSalePromotion extends Component {
       this._updateNumPresent()
     } else if (this.state.numPresent) {
       count = _.map((this.state.item.StaticLocation), (items) => {
-        var d1 = items.CurrentDateTime.split(' ')
-        var a1 = d1[0].split('/')
-        var a2 = d1[1].split(':')
-        var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
-
-        var d2 = items.StartDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
-
-        var d2 = items.EndDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+        var dateNow = items.CurrentDateTime.split(' ')
+        var Ctime = this._dateFormating(dateNow)
+  
+        var dateStart = items.StartDate.split(' ')
+        var Stime = this._dateFormating(dateStart)
+  
+        var dateEnd = items.EndDate.split(' ')
+        var Etime = this._dateFormating(dateEnd)
         if (Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N') {
           return (
-            <TouchableOpacity style={styles.content} key={items.Name} onPress={() => this.onPresentPress(items)}>
+            <TouchableOpacity style={styles.content} key={items.Name+'_'+items.ShopID} onPress={() => this.onPresentPress(items)}>
               <View style={{ flex: 6 }}>
                 <View style={{ flexDirection: 'column' }}>
                   <View style={{ flex: 1, marginBottom: 5 }}>
@@ -188,20 +173,14 @@ class FlashSalePromotion extends Component {
       this._updateNumSoon()
     } else if (this.state.numComming) {
       count = _.map((this.state.item.StaticLocation), (items) => {
-        var d1 = items.CurrentDateTime.split(' ')
-        var a1 = d1[0].split('/')
-        var a2 = d1[1].split(':')
-        var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
-
-        var d2 = items.StartDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
-
-        var d2 = items.EndDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+        var dateNow = items.CurrentDateTime.split(' ')
+        var Ctime = this._dateFormating(dateNow)
+  
+        var dateStart = items.StartDate.split(' ')
+        var Stime = this._dateFormating(dateStart)
+  
+        var dateEnd = items.EndDate.split(' ')
+        var Etime = this._dateFormating(dateEnd)
         if (Ctime <= Stime && items.Is_FlashSale === 'N') {
           num++
           return (
@@ -233,7 +212,6 @@ class FlashSalePromotion extends Component {
   }
 
   _renderNowChev() {
-
     if (this.state.collapsed === true) {
       return (
         <Image style={{ width: 15, height: 10, right: 0 }}
