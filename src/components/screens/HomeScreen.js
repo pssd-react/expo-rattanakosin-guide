@@ -37,6 +37,7 @@ import _ from 'lodash'
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
+import { ShopDetailScreen } from './ShopDetailScreen'
 
 const data = {
     'RqAppID': '1234',
@@ -266,19 +267,22 @@ class ItemDetail extends Component {
         if (_renderingImgs.Scale === 'F' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <ImageBackground
-                        key={_renderingImgFull + '&&' + imgSlider.ImageURL}
-                        style={{
-                            width: 200,
-                            height: 100,
-                            marginRight: 10
-                        }}
-                        source={{ uri: baseURL + imgSlider.ImageURL }}
-                    >
-                        <View style={recomBlog}>
-                            <Text style={recomNameText}>{imgSlider.Name}</Text>
-                        </View>
-                    </ImageBackground>
+                    <View key={_renderingImgFull + '&&' + imgSlider.ImageURL} style={{flex:1}}>
+                        <TouchableOpacity onPress={()=> this.onImgSlidePress(imgSlider.SlideParam)}>
+                            <ImageBackground
+                                style={{
+                                    width: 200,
+                                    height: 100,
+                                    marginRight: 10
+                                }}
+                                source={{ uri: baseURL + imgSlider.ImageURL }}
+                            >
+                                <View style={recomBlog}>
+                                    <Text style={recomNameText}>{imgSlider.Name}</Text>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
                 )
             })
 
@@ -296,19 +300,22 @@ class ItemDetail extends Component {
         else if (_renderingImgs.Scale === 'H' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <ImageBackground
-                        key={_renderingImgHalf + '&&' + imgSlider.ImageURL}
-                        style={{
-                            width: 150,
-                            height: 100,
-                            marginRight: 10
-                        }}
-                        source={{ uri: baseURL + imgSlider.ImageURL }}
-                    >
-                        <View style={recomBlog}>
-                            <Text style={recomNameText}>{imgSlider.Name}</Text>
-                        </View>
-                    </ImageBackground>
+                    <View key={_renderingImgHalf + '&&' + imgSlider.ImageURL} style={{flex:1}}>
+                        <TouchableOpacity onPress={()=> this.onImgSlidePress(imgSlider.SlideParam)}>
+                            <ImageBackground
+                                style={{
+                                    width: 150,
+                                    height: 100,
+                                    marginRight: 10
+                                }}
+                                source={{ uri: baseURL + imgSlider.ImageURL }}
+                            >
+                                <View style={recomBlog}>
+                                    <Text style={recomNameText}>{imgSlider.Name}</Text>
+                                </View>
+                            </ImageBackground>
+                        </TouchableOpacity>
+                    </View>
                 )
             })
 
@@ -352,7 +359,6 @@ class ItemDetail extends Component {
 
     }
 
-
     onBannerPress(key) {
         if (key === '1') {
             //do something here
@@ -362,6 +368,9 @@ class ItemDetail extends Component {
         }
     }
 
+    onImgSlidePress(key){
+        this.props.navigation.navigate('shopDetail', {key})
+    }
 
     onRecommendedPress(key) {
         if (key === '2') {
@@ -472,6 +481,9 @@ const HomeMenu = createStackNavigator({
     giftVou: {
         screen: GiftVoucherScreen, navigationOptions: { header: null }
     },
+    shopDetail: {
+        screen: ShopDetailScreen, navigationOptions: { header: null }
+    }
 })
 
 export default HomeMenu
