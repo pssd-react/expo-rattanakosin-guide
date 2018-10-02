@@ -1,5 +1,6 @@
 export * from './Button';
 export * from './Card';
+export * from './CardSectionDetail';
 export * from './CardSection';
 export * from './Header';
 export * from './Input';
@@ -11,3 +12,5 @@ export * from './ButtonLogin';
 export * from './SignButton';
 export * from './ButtonFollow';
 export * from './LabelInput';
+
+
