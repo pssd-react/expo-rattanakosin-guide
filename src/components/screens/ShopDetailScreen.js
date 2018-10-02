@@ -15,18 +15,14 @@ import _ from 'lodash'
 import { Spinner, Card, CardSection } from '../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../common/Header'
+import { ShopTap } from './shopdetailscreens/ShopTap';
 
 var data = {
     "RqAppID": "1234",
     "UserLanguage": "EN",
-    "ViewType": "05",
-    "RowNum": "0",
-    "Keyword": "",
-    "ShopCategory": "",
+    "ShopID": "",
     "UserID": "1",
-    "MarketID": "3",
-    "CouponType": "",
-    "CouponSubType": ""
+    "MarketID": "3"
 }
 
 var config = {
@@ -56,11 +52,14 @@ export class ShopDetailScreen extends Component {
 
     componentDidMount() {
         const shopID = this.props.navigation.getParam('key', 'none')
-        this._renderingItem()
+        data.ShopID = shopID
         this.setState({
             loading: true,
             shopID: shopID
-        })
+        }, ()=>{
+            this._renderingItem()
+        })        
+        
         Animated.timing(
             this.state.fadeAnim,
             {
@@ -75,7 +74,7 @@ export class ShopDetailScreen extends Component {
     }
 
     _renderingItem() {
-        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
+        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryShopDetailService',
             data, config)
             .then(response => {
                 this.setState({
@@ -91,7 +90,7 @@ export class ShopDetailScreen extends Component {
     _renderingPage() {
         var locate = ''
         var count = 0
-
+        var isSkip = false
         let { fadeAnim } = this.state;
 
         const headerHeight = this.state.scrollY.interpolate({
@@ -115,11 +114,16 @@ export class ShopDetailScreen extends Component {
             locate = (<Spinner size={'large'} />)
         }
         else if (this.state.item !== undefined) {
-            _.map((this.state), (items) => {
-                _.map((items.StaticLocation), (loca) => {
-                    if (loca.ShopID.toString() === this.state.shopID.toString()) {
-                        console.log('IM HERE ITS EQUAL!! ' + loca.ShopID + '===' + this.state.shopID)
-                        count = 1
+            _.each(this.state, skipCheck=>{
+                if(skipCheck.ShopDetail === null){
+                    isSkip = true
+                }
+            })
+
+            _.map((this.state.item), (items) => {
+                //console.log(items.ImageUrl)
+                if(!isSkip && items.ShopId !== undefined){
+                    count = 1
                         locate = (
                             <ScrollView style={{ flex: 1, }}
                                 scrollEventThrottle={16}
@@ -133,7 +137,7 @@ export class ShopDetailScreen extends Component {
                                     width: BG_IMAGE_WIDTH,
                                     //backgroundColor: "transparent"
                                 }}>
-                                    <ImageBackground source={{uri: loca.ImageUrl}}
+                                    <ImageBackground source={{uri: items.ImageUrl}}
                                         backfaceVisibility={'hidden'}
                                         style={{ flex: 1, width: null, height: null }} >
                                         <View style={{ justifyContent: 'flex-start', alignItems: 'center', paddingTop: 5, marginLeft: 10, marginTop: 40, backgroundColor: '#000', opacity: 0.5, width: 30, height: 30, borderRadius: 25 }}>
@@ -155,18 +159,17 @@ export class ShopDetailScreen extends Component {
                                                 opacity: 0.5,
                                                 width: '100%'
                                             }}>
-                                                <Text style={{ fontSize: 30, fontWeight: 'bold', color: "#9c9595" }}>{loca.LocationName}</Text>
+                                                <Text style={{ fontSize: 30, fontWeight: 'bold', color: "#9c9595" }}>{items.ShopName}</Text>
                                             </View>
                                         </Animated.View>
                                     </ImageBackground>
                                 </Animated.View>
                                 <View style={{ flex: 1, height: BG_IMAGE_HEIGHT - 110 }}>
-                                  <Text>{loca.LocationName}</Text>
+                                  <ShopTap/>
                                 </View>
                             </ScrollView>
                         )
-                    }
-                })
+                }
                 if (count === 0) {
                     locate =
                         (<Card style={{ flex: 1 }}>
@@ -195,7 +198,6 @@ export class ShopDetailScreen extends Component {
                     //  height: headerHeight,
                     alignItems: 'center'
                 }}>
-                {this._renderHeader()}
                 </Animated.View> 
                 {this._renderingPage()}
             </View>
