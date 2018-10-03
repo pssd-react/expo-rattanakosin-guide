@@ -165,7 +165,7 @@ export class ShopDetailScreen extends Component {
                                     </ImageBackground>
                                 </Animated.View>
                                 <View style={{ flex: 1, height: BG_IMAGE_HEIGHT - 110 }}>
-                                  <ShopTap/>
+                                  <ShopTap screenProps={{items : items}}/>
                                 </View>
                             </ScrollView>
                         )
@@ -178,16 +178,12 @@ export class ShopDetailScreen extends Component {
                             </CardSection>
                         </Card>)
                 }
-
-
             })
             return locate
-
         }
     }
 
     render() {
-
         return (
             <View style={{ flex: 1 }}>
                 <Animated.View style={{
@@ -201,8 +197,6 @@ export class ShopDetailScreen extends Component {
                 </Animated.View> 
                 {this._renderingPage()}
             </View>
-
-
         )
     }
 }
@@ -210,7 +204,6 @@ export class ShopDetailScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-
     }
 })
 
