@@ -6,7 +6,7 @@ import {
     TouchableOpacity,
     Image,
     Dimensions,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
 } from 'react-native'
 import axios from 'axios'
 import { Spinner } from '../../common';
@@ -235,16 +235,12 @@ class ShopDescriptionScreen extends Component {
         
     }
 
-    renderPage() {
+    renderScollMain(){
         return (
             <ScrollView
-            nestedScrollEnabled={true}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
             scrollEnabled={true}
-            contentContainerStyle={{ 
-                flex: 1 , 
-                maxHeight:Dimensions.get('window').height}}
+            nestedScrollEnabled={true}
+            contentContainerStyle={{flex:1,height:Dimensions.get('window').height - 20}}
             >
             <View style={{ height: 300, marginTop: 20 }}>
                 {this.renderImgSlider()}
@@ -307,12 +303,16 @@ class ShopDescriptionScreen extends Component {
             <Text>sadasdkwqjfkgjalkgskadf</Text>
             </View>
             </ScrollView>
-       )
+        )
     }
 
     render() {
         //console.log(this.props.screenProps.items)
-        return this.renderPage()
+        return (
+            <View style={{flex:1}}>    
+            {this.renderScollMain()}
+            </View>
+            )
     }
 }
 

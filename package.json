@@ -33,7 +33,7 @@
     "react": "^16.4.1",
     "react-image-filter": "^0.1.2",
     "react-moment": "^0.7.9",
-    "react-native": "~0.55.2",
+    "react-native": "^0.55.2",
     "react-native-carousel-view": "^0.5.1",
     "react-native-collapsible": "^0.13.0",
     "react-native-color-matrix-image-filters": "^1.0.6",
