@@ -8,46 +8,46 @@ import {
     Dimensions,
     Animated,
     Image,
+    Platform,
     TouchableOpacity
     } from 'react-native'
-import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../common';
+import { Header } from '../../common';
 import { HeaderBackButton } from 'react-navigation'
 import { DetailScreen, ProScreen, MapScreen, ReviewScreen } from './navigationDetail'    
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
+import AnimatedHeader from '../../common/react-native-animated-header'
 
-HEADER_MAX_HEIGHT = 120
-HEADER_MIN_HEIGHT = 60
-BG_IMAGE_HEIGHT = Dimensions.get('window').height-20
-BG_IMAGE_WIDTH = Dimensions.get('window').width
+const ios = Platform.OS === 'ios';
+const {width, height} = Dimensions.get('window');
+// from native-base
+const isIphoneX = ios && (height === 812 || width === 812);
+const iphoneXTopInset = 24;
+const initToolbarHeight = ios ? 46 : 60;
 
-
-/*const INITAL_STATE = { 
-    index: 0,
-    routes: [
-        { key: 'first',  title: 'รายละเอียด' },
-        { key: 'second', title: 'โปรโมชัน'},
-        { key: 'third',  title: 'แผนที่'},
-        { key: 'four',   title: 'รีวิว'}
-    ],
-};*/
+const paddingTop = ios ? 18 : 0;
+const topInset =  isIphoneX ? iphoneXTopInset : 0;
+const headerHeight = height;
+const toolbarHeight = initToolbarHeight + topInset + paddingTop;
 
 export class detail extends Component {
     static navigationOptions = {header: null}
-   // state = INITAL_STATE;
-
     constructor(props){
         super(props)
         this.state = {
-            isHidden: false,
             scrollY: new Animated.Value(0),
-            fadeAnim: new Animated.Value(1),
+            bottomSize: 250,
             index: 0,
-    routes: [
-        { key: 'first',  title: 'รายละเอียด' },
-        { key: 'second', title: 'โปรโมชัน'},
-        { key: 'third',  title: 'แผนที่'},
-        { key: 'four',   title: 'รีวิว'}
-    ],
+            fontSize: 60,
+            opacityBox: 20,
+            marginTopBox:230,
+            statusButton: false,
+            statusIcon: false,
+            routes: [
+                { key: 'first',  title: 'รายละเอียด' },
+                { key: 'second', title: 'โปรโมชัน'},
+                { key: 'third',  title: 'แผนที่'},
+                { key: 'four',   title: 'รีวิว'}
+            ],
         }
     }
 
@@ -55,107 +55,158 @@ export class detail extends Component {
         this.props.navigation.popToTop()
     }
 
-    componentDidMount(){
-        Animated.timing(
-            this.state.fadeAnim,
-            {
-                toValue:0,
-                duration:5000,
+    _getBackButton(){
+        if(this.state.statusButton === true){
+            return (
+                <View style={{flex:1, flexDirection:"column", justifyContent: 'flex-end'}}>
+                    <HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()}
+                        style={{position: 'absolute'}} />
+                </View>
+            )
+        }
+    }
+
+    _getTitleHeader(){
+        const { titleStyle } = this.props;
+        if(this.state.statusButton === true){
+            return (
+                <View style={{flex:3, justifyContent: 'center', alignItems:'center'}}> 
+                    <Animated.Text style={[titleStyle, {
+                        position: 'absolute',
+                        //left: this.state.leftSize,
+                        justifyContent: 'center', 
+                        alignItems:'center',
+                        bottom: this.state.bottomSize,
+                        fontSize:this.state.fontSize,
+                        color: "#fff"
+                    }]}>
+                        Text
+                    </Animated.Text>
+                </View>
+            )
+        }
+        return (
+            <View style={{flex:3}}> 
+                <Animated.Text style={[titleStyle, {
+                    position: 'absolute',
+                    left: 20,
+                    justifyContent: 'center', 
+                    alignItems:'center',
+                    bottom: this.state.bottomSize,
+                    fontSize:this.state.fontSize,
+                    color: "#fff"
+                }]}>
+                    Text
+                </Animated.Text>
+            </View>
+        )
+    }
+
+    _getIconButton(){
+        if(this.state.statusIcon === false){
+            return (
+                <View style={{flex:1, marginTop: 20, justifyContent: "center", flexDirection: "row", }}></View>
+            )
+       }else{
+            if(this.state.statusButton === true){
+                return (
+                    <View style={{flex:1, marginRight:15, marginTop: 175, justifyContent: "center", flexDirection: "row", }}>
+                        <TouchableOpacity>
+                            <Image style={{width:25,height:30}} source={require('../../images/drawable-xhdpi/ic_fav_trip_unselected.webp')}/>
+                        </TouchableOpacity>
+                        <TouchableOpacity style={{marginLeft:10,}}>
+                            <Image style={{width:21,height:30}} source={require('../../images/drawable-xhdpi/ic_share_merchant.webp')}/>
+                        </TouchableOpacity>
+                    </View>
+                )
             }
-        ).start();
+            return (
+                <View style={{flex:1, marginTop: 20, justifyContent: "center", flexDirection: "row", }}>
+                    <TouchableOpacity>
+                        <Image style={{width:25,height:30}} source={require('../../images/drawable-xhdpi/ic_fav_trip_unselected.webp')}/>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{marginLeft:10,}}>
+                        <Image style={{width:21,height:30}} source={require('../../images/drawable-xhdpi/ic_share_merchant.webp')}/>
+                    </TouchableOpacity>
+                </View>
+            )
+       }
+        
     }
 
     render(){
-        let {fadeAnim} = this.state;
-
-        const headerHeight = this.state.scrollY.interpolate({
-            inputRange : [0,BG_IMAGE_HEIGHT],
-            outputRange: [BG_IMAGE_HEIGHT,HEADER_MIN_HEIGHT],
-            extrapolate: 'clamp'
-        })
-
-        const opacityImageHeight = this.state.scrollY.interpolate({
-            inputRange : [0,20],
-            outputRange: [20,0],
-            extrapolate: 'clamp'
-        })
-
-        const backHeader = this.state.scrollY.interpolate({
-            inputRange : [5,200],
-            outputRange: [5,BG_IMAGE_HEIGHT],
-            extrapolate: 'clamp'
-        })
-
-        /*const positionHeader = this.state.scrollY.interpolate({
-            inputRange : [null,'absolute'],
-            outputRange: ['absolute',null],
-            extrapolate: 'clamp'
-        })*/
         return (
             <View style={{flex: 1,}}>
-                
                 <Animated.View style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     right: 0,
-                  //  height: headerHeight,
                     alignItems: 'center',
                 }}> 
-                   {/*<View >
-                    
-                        <Header headerText="ตั้งค่า" 
-                            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
-                            headerLeft={<HeaderBackButton tintColor='#fff' 
-                            onPress={() => this.onButtonGoBack()} />}/> 
-                        
-                    </View>*/}
-                </Animated.View> 
+               </Animated.View> 
                   
                 <ScrollView style={{flex: 1, }}
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                     onScroll={Animated.event(
                       [ {nativeEvent:{ contentOffset:{y:this.state.scrollY}}}],
-                     
+                      {
+                        //useNativeDriver: true,
+                        listener: event => {
+                         const offsetY = event.nativeEvent.contentOffset.y
+                          console.log(offsetY)
+                          if(offsetY <= 300){
+                            this.setState({fontSize:60, bottomSize:250, statusButton:false, opacityBox: 20, marginTopBox:230, statusIcon: false});
+                          }else if(offsetY >= 550){
+                            console.log("Yes")
+                            this.setState({fontSize:20, bottomSize:15, statusButton:true, opacityBox: 0, marginTopBox:350, statusIcon: true});
+
+                          }else{
+                            this.setState({fontSize:50, bottomSize:150, statusButton:false, opacityBox: 0, marginTopBox:350, statusIcon: true});
+                          }
+                        },
+                      },
                     )}
                 >
                    <Animated.View style={{
-                       height: BG_IMAGE_HEIGHT,
-                       width: BG_IMAGE_WIDTH,
-                      //backgroundColor: "transparent"
+                       height: height,
+                       width: width,
                    }}>
-                   
                         <ImageBackground source={require('../../images/drawable-hdpi/bg_more.webp')}
-                       style={{ flex:1, width: null, height: null}} >
-                   
+                            style={{ flex:1, width: null, height: null}} >
                             <View style={{ justifyContent: 'flex-start', alignItems:'center',paddingTop: 5,marginLeft:10, marginTop:40, backgroundColor:'#000', opacity:0.5,  width: 30,height:30,borderRadius: 25}}>
                                 <TouchableOpacity onPress={() => this.onButtonGoBack()}>
                                     <Image source={require('../../images/drawable-hdpi/ic_arrow_back_black.webp')}  style={{tintColor:'#fff', width:20, height:20, alignItems: 'center'}}/>
                                 </TouchableOpacity>
                             </View>
-                         <Animated.View style={{
+                            <Animated.View style={{
                                 flex:1, 
                                 justifyContent: 'flex-end',
-                                marginLeft: opacityImageHeight,
-                                marginRight: opacityImageHeight,}}>
-                            <View style={{flex:3}}/>
-                                <View style={{ 
+                                marginLeft: this.state.opacityBox,
+                                marginRight: this.state.opacityBox,
+                                marginTop: this.state.marginTopBox
+                            }}>
+                                <Animated.View style={{ 
                                     flex:1, 
                                     backgroundColor:'#000', 
-                                    alignItems: 'center', 
                                     opacity: 0.5, 
-                                    width: '100%'}}>
-
-                                    <Text style={{ fontSize: 30, fontWeigth: 'bold',color: "#fff" }}>Text</Text>
-                                
-                                </View>
+                                    width: '100%',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                }}>
+                                 
+                                    {this._getBackButton()}
+                                    {this._getTitleHeader()}
+                                    {this._getIconButton()}
+                                    
+                                </Animated.View>
                         </Animated.View> 
                    
                         </ImageBackground>
                     </Animated.View>
-                {/*-------Navigation-------*/}
-                    <View style={{flex: 1, height:BG_IMAGE_HEIGHT-110}}>
+             
+                    <View style={{flex: 1, height:height-130}}>
                         <TabView
                             navigationState={this.state}
                             renderScene={SceneMap({
@@ -183,3 +234,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     }
   })
+
+Header.defaultProps = {
+    opacityStyle: {margin: 20, opacity: 0.5, },
+    titleStyle: { fontSize: 50, fontWeigth: 'bold',color: "#fff", },
+    backTextStyle:{fontSize: 20, color: "#fff"},
+}

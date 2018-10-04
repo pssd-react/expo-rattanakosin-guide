@@ -2,17 +2,35 @@ import React, {Component} from 'react'
 import {
     View,
     Text, 
-    StyleSheet} from 'react-native'
+    StyleSheet,
+    ScrollView} from 'react-native'
 
 export class DetailScreen extends Component{
-  
+    getListItems = count => {
+        const items = [];
+        let i = 0;
+      
+        while (i < count) {
+          i++;
+          items.push(
+            <View key={i} style={{ backgroundColor: i % 2 === 0 ? '#eee5ff' : '#ceebfd', height: 64 }}>
+              <Text style={{ color: '#999' }}>{`List Item ${i}`}</Text>
+            </View>
+          );
+        }
+      
+        return items;
+      };
 
     render(){
         return (
             
-            <View style={styles.container}>
-                <Text>DetailScreen</Text>
-            </View>
+   <View style={styles.container}>
+                <ScrollView> 
+                    
+          {this.getListItems(20)}
+        </ScrollView>
+         </View>
         )
     }
 }
