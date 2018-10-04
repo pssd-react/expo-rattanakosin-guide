@@ -39,147 +39,136 @@ export class EatScreen extends Component {
 
     state = {
         item: ''
-    }
+    };
 
     componentWillMount() {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
-            .then(response => { this.setState({ item: response.data }) })
+            .then(response => { this.setState({ item: response.data}) })
             .catch((error) => {
-                console.log('axios error:', error)
-            })
+                console.log('axios error:', error);
+        });
     }
 
-    onButtonGoBack() {
+    onButtonGoBack(){
         this.props.navigation.popToTop()
     }
-
-    _renderLocationList() {
-        let loKey = 0
-        const CardItem = _.map((this.state), (items) => {
-            loKey++
-            return (<ItemDetail key={'location_' + loKey} items={items.StaticLocation} />)
+    
+    renderItem() {
+        return _.map((this.state.item.StaticLocation), (items) => {
+            return(
+                <View>
+                    {this.renderCardData(items)}
+                </View>
+            )
         })
-        return CardItem
     }
 
-    render() {
+    renderCardData(items){
         return (
-            <View style={{ flex: 1 }}>
-                <Header headerText="Recommended Eats"
-                    backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
-                    headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
-                <Card>
-                    <ScrollView>
-                        {this._renderLocationList()}
-                        <View style={{ height: 100 }} />
-                    </ScrollView>
-                </Card>
-            </View>
-        )
-    }
-}
-
-class ItemDetail extends Component {
-
-    state = {
-        item: []
-    }
-
-    onViewMorePress(onPress) {
-        return (
-            <Text onPress={onPress} style={{ color: 'blue' }}>Show more...</Text>
-        )
-    }
-    onViewLessPress(onPress) {
-        return (
-            <Text onPress={onPress} style={{ color: 'blue' }}>Show less</Text>
-        )
-    }
-
-    onImgSlidePress(key){
-        this.props.navigation.navigate('shopDetail', {key})
-    }
-
-
-    _renderLocationDetail() {
-        return _.map(this.props.items, item => {
-            if (item.HighlightShop === 'Y') {
-                return (
-                    <TouchableOpacity key={item.CategoryName + '_' + item.ShopID} style={{ flex: 1 }} onPress={()=> this.onImgSlidePress(item.ShopID)} >
-                        <CardSection style={{ height: 40 }}>
-                            <View style={{
-                                flex: 4,
-                                justifyContent: 'flex-start', flexDirection: 'row', alignSelf: 'center'
-                            }}>
-                                <Image style={{ width: 30, height: 30, marginRight: 15 }}
-                                    source={require('../../images/drawable-hdpi/ic_type_category_food.webp')}
-                                />
-                                <Text style={styles.ViewTextStyle}> {item.LocationName} </Text>
+            <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+                <CardSection style={{height:40}}> 
+                            <View style={{flex:4,
+                                    justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
+                            <Image style={{width:30, height:30,marginRight:15}}
+                                source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
+                            /> 
+                                <Text style={styles.ViewTextStyle}> {items.LocationName} </Text>
                             </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end' }}>
+                            <View style={{flex:1,alignItems:'flex-end'}}>
                                 <Image
-                                    style={{ width: 20, height: 20 }}
+                                    style={{width:20, height:20 }}
                                     source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
                                 />
                             </View>
-                        </CardSection>
-                        <CardSection style={{ flex: 1, borderBottomWidth: 1, borderColor: '#ddd' }}>
-                            <View style={styles.ViewContainer}>
-                                <View style={{ flex: 1 }}>
-                                    <Image style={{ width: 100, height: 130 }}
-                                        source={{ uri: item.ImageUrl }}
-                                    />
+                </CardSection>
+                <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
+                        <View style={styles.ViewContainer}>
+                                <View style={{flex: 1  }}>
+                                <Image style={{width:100, height:130}}
+                                    source={{ uri: items.ImageUrl}} 
+                                /> 
                                 </View>
-                                <View style={{ flex: 2, flexDirection: 'column' }}>
-                                    <View style={{ flexDirection: 'row', height: 40 }}>
-                                        <View style={{ flex: 1, marginRight: 15 }}>
+                                
+                                <View style={{ flex: 2 ,flexDirection: 'column'}}>
+                                    <View style= {{ flexDirection: 'row' , height: 40}}>
+                                        <View style={{ flex: 1 , marginRight: 15} }>
                                             <ButtonStar style={styles.buttonStarStyle}
-                                            >
-                                                {item.Rating}
+                                            > 
+                                            {items.Rating}
                                             </ButtonStar>
                                         </View>
-                                        <View style={{ flex: 2, marginLeft: 8 }}>
+                                        <View style={{ flex: 2, marginLeft: 5}}>
                                             <ButtonLocal style={styles.buttonLocalStyle}
-                                            >
+                                            > 
                                                 8.03
-                                                    </ButtonLocal>
+                                            </ButtonLocal>
                                         </View>
                                         <View style={{ flex: 1 }}>
                                             <ButtonHighlight style={styles.buttonHightLightStyle}>
                                             </ButtonHighlight>
                                         </View>
-                                        <View style={{ flex: 3 }} />
+                                        <View  style={{ flex: 3}}/>
+
                                     </View>
-                                    <View style={{ flex: 1 }}>
+                                 
+                                    <View style= {{ flex: 1  }}>
                                         <Text />
                                         <ViewMoreText
                                             numberOfLines={3}
-                                            onViewMorePress={this.onViewMorePress}
-                                            onViewLessPress={this.onViewLessPress}
+                                            renderViewMore={this.renderViewMore}
+                                            renderViewLess={this.renderViewLess}
                                         >
                                             <Text>
-                                                {item.ShopDescription}
+                                                {items.ShopDescription}
                                             </Text>
                                         </ViewMoreText>
                                     </View>
                                 </View>
-                            </View>
-                        </CardSection>
-                    </TouchableOpacity>
-                )
-            }
-        })
+                        </View>
+                </CardSection>
+            </TouchableOpacity>
+           
+    
+        )
     }
 
-    render() {
+    renderViewMore(onPress){
+        return(
+          <Text onPress={onPress} style={{color:'blue'}}>Show more...</Text>
+        )
+    }
+    renderViewLess(onPress){
+        return(
+          <Text onPress={onPress} style={{color:'blue'}}>Show less</Text>
+        )
+    }
+
+    onImgSlidePress(key){
+        console.log( key )
+        this.props.navigation.navigate('shopDetail', {key})
+    }
+
+
+    render(){
+        
         return (
-            <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-                {this._renderLocationDetail()}
+            <View style={{flex:1}}>
+            <Header headerText="Recommend Eat" 
+            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+                    <Card>
+                        <ScrollView>
+                            {this.renderItem()}
+                            <View style={{ height: 100 ,backgroundColor: '#ffffff',}} />
+                        </ScrollView>
+                    </Card>
             </View>
         )
     }
 }
+
+
 
 const styles = StyleSheet.create({
     container: {

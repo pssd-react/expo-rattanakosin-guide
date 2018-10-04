@@ -172,13 +172,13 @@ class PromotionDetail extends Component {
     }
 
     onImgSlidePress(key){
+        console.log(key)
         this.props.navigation.navigate('shopDetail', {key})
     }
 
     _renderStore() {
         const { navigation } = this.props
         const items = navigation.getParam('items')
-        console.log(items.ShopID)
         return (
             <TouchableOpacity style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }} onPress={()=> this.onImgSlidePress(items.ShopID)}>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
