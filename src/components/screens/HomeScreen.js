@@ -14,14 +14,14 @@ import {
 } from 'react-native'
 import {
     Restaurants,
-    Accommodation,
     Bank,
     Commercial_Areas,
     Facilities,
     Shop,
     Schools_and_Government,
     Services,
-    Travel
+    Travel,
+    AccommodationNav
 } from './itemscreens'
 import {
     EatScreen,
@@ -449,7 +449,7 @@ const HomeMenu = createStackNavigator({
         screen: Shop, navigationOptions: { header: null }
     },
     accommodation: {
-        screen: Accommodation, navigationOptions: { header: null }
+        screen: AccommodationNav, navigationOptions: { header: null }
     },
     commercial_areas: {
         screen: Commercial_Areas, navigationOptions: { header: null }

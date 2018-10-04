@@ -10,6 +10,8 @@ import {
     withNavigationFocus
 } from 'react-navigation'
 import { Header } from '../common/Header'
+import { ShopDetailScreen } from './ShopDetailScreen'
+
 
 class FlashSaleScreen extends Component {
     static navigationOptions = { header: null }
@@ -47,7 +49,11 @@ const FlashSaleNavScreen = createStackNavigator({
     },
     PromotionDetailScreen: {
         screen: PromotionDetail
+    },
+    shopDetail: {
+        screen: ShopDetailScreen, navigationOptions: { header: null }
     }
+    
 })
 
 export default withNavigationFocus(FlashSaleScreen)
