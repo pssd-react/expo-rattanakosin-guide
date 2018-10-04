@@ -53,7 +53,7 @@ const FlashSaleNavScreen = createStackNavigator({
     shopDetail: {
         screen: ShopDetailScreen, navigationOptions: { header: null }
     }
-    
 })
 
 export default withNavigationFocus(FlashSaleScreen)
+

@@ -11,7 +11,6 @@ import { CardSection } from '../../common/CardSection';
 import { Icon} from 'react-native-elements'
 import { createStackNavigator, HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
-import { ShopDetailScreen } from '../ShopDetailScreen'
 // Import Item Screens 
 
 
@@ -194,14 +193,3 @@ const styles = StyleSheet.create({
     }
 })
 
-
-
-
-
-const HomeDetailMenu = createStackNavigator({
-    Main: {
-        screen: HomeMenuScreens
-    }
-})
-
-export default HomeMenuScreens

@@ -21,7 +21,7 @@ import {
     Schools_and_Government,
     Services,
     Travel,
-    AccommodationNav
+    Accommodation
 } from './itemscreens'
 import {
     EatScreen,
@@ -449,7 +449,7 @@ const HomeMenu = createStackNavigator({
         screen: Shop, navigationOptions: { header: null }
     },
     accommodation: {
-        screen: AccommodationNav, navigationOptions: { header: null }
+        screen: Accommodation, navigationOptions: { header: null }
     },
     commercial_areas: {
         screen: Commercial_Areas, navigationOptions: { header: null }
