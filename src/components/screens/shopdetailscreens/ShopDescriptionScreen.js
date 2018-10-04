@@ -237,14 +237,8 @@ class ShopDescriptionScreen extends Component {
 
     renderPage() {
         return (
-            <ScrollView
-            nestedScrollEnabled={true}
-            horizontal={false}
-            showsVerticalScrollIndicator={false}
-            scrollEnabled={true}
-            contentContainerStyle={{ 
-                flex: 1 , 
-                maxHeight:Dimensions.get('window').height}}
+            <View
+            style={{flex:1}}
             >
             <View style={{ height: 300, marginTop: 20 }}>
                 {this.renderImgSlider()}
@@ -306,7 +300,7 @@ class ShopDescriptionScreen extends Component {
             }}>
             <Text>sadasdkwqjfkgjalkgskadf</Text>
             </View>
-            </ScrollView>
+            </View>
        )
     }
 
