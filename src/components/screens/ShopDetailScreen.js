@@ -39,7 +39,8 @@ const INITAIL_STATE = {
     isHidden: false,
     scrollY: new Animated.Value(0),
     fadeAnim: new Animated.Value(1),
-    index: 0
+    index: 0,
+    content: {}
 }
 
 HEADER_MAX_HEIGHT = 120
@@ -125,7 +126,8 @@ export class ShopDetailScreen extends Component {
                 if(!isSkip && items.ShopId !== undefined){
                     count = 1
                         locate = (
-                            <ScrollView style={{ flex: 1, }}
+                            <ScrollView 
+                                nestedScrollEnabled={true}
                                 scrollEventThrottle={16}
                                 showsVerticalScrollIndicator={false}
                                 onScroll={Animated.event(
@@ -164,9 +166,7 @@ export class ShopDetailScreen extends Component {
                                         </Animated.View>
                                     </ImageBackground>
                                 </Animated.View>
-                                <View style={{ flex: 1, height: BG_IMAGE_HEIGHT - 110 }}>
-                                  <ShopTap screenProps={{items : items}}/>
-                                </View>
+                                   <ShopTap screenProps={{items : items}}/>
                             </ScrollView>
                         )
                 }

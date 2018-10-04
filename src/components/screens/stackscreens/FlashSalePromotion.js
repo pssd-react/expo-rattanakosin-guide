@@ -11,6 +11,7 @@ import moment from 'moment'
 import Collapsible from 'react-native-collapsible'
 import axios from 'axios'
 import _ from 'lodash'
+import { Spinner } from '../../common';
 
 var data = {
   "RqAppID": "1234",
@@ -45,7 +46,12 @@ class FlashSalePromotion extends Component {
   componentWillMount() {
     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
       data, config)
-      .then(response => { this.setState({ item: response.data }) })
+      .then(response => { this.setState({ 
+        item: response.data
+       },()=>{
+        this._updateNumPresent()
+        this._updateNumSoon()
+      }) })
       .catch((error) => {
         console.log('axios error:', error)
       })
@@ -126,7 +132,7 @@ class FlashSalePromotion extends Component {
   _renderOngoingPromotion() {
     let count = null
     if (this.state.numPresent === undefined) {
-      this._updateNumPresent()
+      return <Spinner size={'large'}/>
     } else if (this.state.numPresent) {
       count = _.map((this.state.item.StaticLocation), (items) => {
         var dateNow = items.CurrentDateTime.split(' ')
@@ -170,7 +176,7 @@ class FlashSalePromotion extends Component {
     let num = 0
     let count = null
     if (this.state.numComming === undefined) {
-      this._updateNumSoon()
+      return <Spinner size={'large'}/>
     } else if (this.state.numComming) {
       count = _.map((this.state.item.StaticLocation), (items) => {
         var dateNow = items.CurrentDateTime.split(' ')

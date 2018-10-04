@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { 
-    View, 
-    Text, 
-    ScrollView, 
-    TouchableOpacity, 
+import {
+    View,
+    Text,
+    ScrollView,
+    TouchableOpacity,
     Image,
-    Dimensions
- } from 'react-native'
+    Dimensions,
+    TouchableWithoutFeedback
+} from 'react-native'
 import axios from 'axios'
 import { Spinner } from '../../common';
 import _ from 'lodash'
@@ -179,9 +180,9 @@ class ShopDescriptionScreen extends Component {
         if (this.state.loadingDetailService) {
             return <Spinner size={'large'} />
         } else {
-            
+
             _.map(this.state.detailSec, detailShop => {
-                if(detailShop.ShopDescription !== undefined){
+                if (detailShop.ShopDescription !== undefined) {
                     shopDescription = detailShop.ShopDescription
                 }
             })
@@ -194,27 +195,119 @@ class ShopDescriptionScreen extends Component {
         }
     }
 
+    renderContact() {
+        let shopPhone = ''
+        _.map(this.state.detailSec, items => {
+            // console.log(items.ShopDescription);
+            if (items.ShopPhone !== undefined) {
+                shopPhone = items.ShopPhone
+            }
+        })
+        if(shopPhone !== ''){
+            return (
+
+                <View style={{ flexDirection: 'row' }}>
+                    <Image
+                        style={{ width: 20, height: 20 }}
+                        source={require('../../../components/images/drawable-hdpi/ic_phone.webp')}
+                    />
+                    <TouchableOpacity onPress={() => null}>
+                        <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
+                            {shopPhone}
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+
+            )
+        }else{
+            return (
+                <View style={{ flexDirection: 'row' }}>
+                    <Image
+                        style={{ width: 20, height: 20 }}
+                        source={require('../../../components/images/drawable-hdpi/ic_phone.webp')}
+                    />
+                        <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
+                            -
+                        </Text>
+                </View>
+            )
+        }
+        
+    }
 
     renderPage() {
-        return (<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        return (
+            <ScrollView
+            nestedScrollEnabled={true}
+            horizontal={false}
+            showsVerticalScrollIndicator={false}
+            scrollEnabled={true}
+            contentContainerStyle={{ 
+                flex: 1 , 
+                maxHeight:Dimensions.get('window').height}}
+            >
             <View style={{ height: 300, marginTop: 20 }}>
                 {this.renderImgSlider()}
             </View>
-            <View 
-            style={{ 
-                width: Dimensions.get('window').width , 
-                height: 150, 
-                marginTop: 20, 
-                borderWidth: 1, 
+            <View
+                style={{
+                    width: Dimensions.get('window').width,
+                    height: 150,
+                    marginTop: 10,
+                    borderWidth: 1,
+                    borderColor: '#dddddd',
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                    backgroundColor: 'white'
+                }}>
+
+                {this.renderDecription()}
+                <TouchableWithoutFeedback onPress={() => null}>
+                    <View>
+                        <Text style={{ color: 'purple', textAlign: 'center' }}>
+                            Read more
+                   </Text>
+                    </View>
+                </TouchableWithoutFeedback>
+            </View>
+            <View style={{
+                width: Dimensions.get('window').width,
+                height: 50,
+                marginTop: 10,
+                borderWidth: 1,
                 borderColor: '#dddddd',
                 paddingLeft: 20,
                 paddingRight: 20,
-                backgroundColor: 'white' }}>
-
-                {this.renderDecription()}
+                backgroundColor: 'white'
+            }}>
+                {this.renderContact()}
             </View>
+            <View style={{
+                width: Dimensions.get('window').width,
+                height: 300,
+                marginTop: 10,
+                borderWidth: 1,
+                borderColor: '#dddddd',
+                paddingLeft: 20,
+                paddingRight: 20,
+                backgroundColor: 'white'
+            }}>
             {this.renderRecommend()}
-        </View>)
+            </View>
+            <View style={{
+                width: Dimensions.get('window').width,
+                height: 300,
+                marginTop: 10,
+                borderWidth: 1,
+                borderColor: '#dddddd',
+                paddingLeft: 20,
+                paddingRight: 20,
+                backgroundColor: 'white'
+            }}>
+            <Text>sadasdkwqjfkgjalkgskadf</Text>
+            </View>
+            </ScrollView>
+       )
     }
 
     render() {
