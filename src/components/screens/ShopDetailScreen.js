@@ -127,6 +127,7 @@ export class ShopDetailScreen extends Component {
                     count = 1
                         locate = (
                             <ScrollView 
+                                nestedScrollEnabled={true}
                                 scrollEventThrottle={16}
                                 showsVerticalScrollIndicator={false}
                                 onScroll={Animated.event(
@@ -165,10 +166,7 @@ export class ShopDetailScreen extends Component {
                                         </Animated.View>
                                     </ImageBackground>
                                 </Animated.View>
-                               
-                                <View style={{ flex: 1, height: BG_IMAGE_HEIGHT*2}}>
                                    <ShopTap screenProps={{items : items}}/>
-                                </View>
                             </ScrollView>
                         )
                 }
@@ -209,4 +207,3 @@ const styles = StyleSheet.create({
     }
 })
 
-export default ShopDetailScreen
