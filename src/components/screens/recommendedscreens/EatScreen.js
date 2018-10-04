@@ -4,7 +4,7 @@ import {
     Text,
     StyleSheet,
     Image,
-    ScrollView
+    ScrollView,TouchableOpacity
 } from 'react-native'
 import { Card } from '../../common/Card'
 import { CardSection } from '../../common/CardSection'
@@ -96,11 +96,17 @@ class ItemDetail extends Component {
             <Text onPress={onPress} style={{ color: 'blue' }}>Show less</Text>
         )
     }
+
+    onImgSlidePress(key){
+        this.props.navigation.navigate('shopDetail', {key})
+    }
+
+
     _renderLocationDetail() {
         return _.map(this.props.items, item => {
             if (item.HighlightShop === 'Y') {
                 return (
-                    <View key={item.CategoryName + '_' + item.ShopID} style={{ flex: 1 }}>
+                    <TouchableOpacity key={item.CategoryName + '_' + item.ShopID} style={{ flex: 1 }} onPress={()=> this.onImgSlidePress(item.ShopID)} >
                         <CardSection style={{ height: 40 }}>
                             <View style={{
                                 flex: 4,
@@ -160,7 +166,7 @@ class ItemDetail extends Component {
                                 </View>
                             </View>
                         </CardSection>
-                    </View>
+                    </TouchableOpacity>
                 )
             }
         })

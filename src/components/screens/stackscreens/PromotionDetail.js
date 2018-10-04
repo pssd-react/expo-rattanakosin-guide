@@ -3,6 +3,7 @@ import {
     View,
     Text,
     Image,
+    TouchableOpacity
 } from 'react-native'
 import { Button, } from 'react-native-elements'
 import _ from 'lodash'
@@ -170,11 +171,16 @@ class PromotionDetail extends Component {
         )
     }
 
+    onImgSlidePress(key){
+        this.props.navigation.navigate('shopDetail', {key})
+    }
+
     _renderStore() {
         const { navigation } = this.props
         const items = navigation.getParam('items')
+        console.log(items.ShopID)
         return (
-            <View style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }}>
+            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }} onPress={()=> this.onImgSlidePress(items.ShopID)}>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                     <View style={{ flex: 1 }}>
                         <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
@@ -217,7 +223,7 @@ class PromotionDetail extends Component {
                 <View style={{ flex: 1 }}>
 
                 </View>
-            </View>
+            </TouchableOpacity>
         )
     }
 
@@ -245,6 +251,7 @@ class PromotionDetail extends Component {
         )
     }
 }
+
 
 export default PromotionDetail
 

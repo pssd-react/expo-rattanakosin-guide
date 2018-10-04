@@ -3,9 +3,9 @@ import {
     View, 
     Text,
     StyleSheet,
-    TouchableOpacity,
     Image,
-    ScrollView
+    ScrollView,
+    TouchableOpacity
 } from 'react-native'
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
@@ -16,7 +16,8 @@ import ViewMoreText from 'react-native-view-more-text';
 import { ButtonStar,ButtonLocal } from '../../common';
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
-
+import { ShopDetailScreen } from '../ShopDetailScreen'
+import { createStackNavigator } from 'react-navigation'
 
 var data = {
 	"RqAppID":"1234",
@@ -39,10 +40,7 @@ var config = {
 };
 
 
-
-
-
-export class Accommodation extends Component {
+class Accommodation extends Component {
     state = {
         item: ''
     };
@@ -155,11 +153,16 @@ class ItemDetail extends Component {
           <Text onPress={onPress} style={{color:'blue'}}>Show less</Text>
         )
     }
+
+    onImgSlidePress(key){
+        console.log( key )
+        this.props.navigation.navigate('Detail', {key})
+    }
+
     renderData() {
         return _.map(this.props.items, item => {
-       //    console.log( item.ImageUrl )
             return (
-                <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
+                <TouchableOpacity style={{flex:1}} onPress={()=> this.onImgSlidePress(item.ShopID)}>
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
@@ -205,9 +208,9 @@ class ItemDetail extends Component {
                                         <View style= {{ flex: 1  }}>
                                             <Text />
                                             <ViewMoreText
-                                            numberOfLines={3}
-                                            renderViewMore={this.renderViewMore}
-                                            renderViewLess={this.renderViewLess}
+                                                numberOfLines={3}
+                                                renderViewMore={this.renderViewMore}
+                                                renderViewLess={this.renderViewLess}
                                             >
                                                 <Text>
                                                     {item.ShopDescription}
@@ -217,7 +220,7 @@ class ItemDetail extends Component {
                                     </View>
                             </View>
                     </CardSection>
-                </View>
+                </TouchableOpacity>
                
         
             )
@@ -233,3 +236,15 @@ class ItemDetail extends Component {
         )
     }           
 }
+
+
+const AccommodationNav = createStackNavigator({
+    Main: {
+        screen: Accommodation, navigationOptions: { header: null }
+    },
+    Detail: {
+        screen: ShopDetailScreen, navigationOptions: { header: null }
+    }
+})
+
+export  { AccommodationNav } 
