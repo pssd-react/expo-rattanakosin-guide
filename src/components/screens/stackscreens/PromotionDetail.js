@@ -268,21 +268,6 @@ class PromotionDetail extends Component {
                 {this._renderHeaderScreen()}
                 {this._renderImg()}
                 {this._renderStore()}
-                <View>
-                    <Button
-                        title={'Back'}
-                        onPress={() => this.onButtonGoBack()}
-                        containerViewStyle={{ position: 'absolute', bottom: 10, right: 0, }}
-                        buttonStyle={{
-                            backgroundColor: "#999999",
-                            width: 60,
-                            height: 50,
-                            borderColor: "transparent",
-                            borderWidth: 0,
-                            borderRadius: 5
-                        }}
-                    />
-                </View>
             </View>
         )
     }
