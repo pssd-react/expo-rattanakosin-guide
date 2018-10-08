@@ -267,8 +267,8 @@ class ItemDetail extends Component {
         if (_renderingImgs.Scale === 'F' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <View key={_renderingImgFull + '&&' + imgSlider.ImageURL} style={{flex:1}}>
-                        <TouchableOpacity onPress={()=> this.onImgSlidePress(imgSlider.SlideParam)}>
+                    <View key={_renderingImgFull + '&&' + imgSlider.ImageURL} style={{ flex: 1 }}>
+                        <TouchableOpacity onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
                             <ImageBackground
                                 style={{
                                     width: 200,
@@ -300,8 +300,8 @@ class ItemDetail extends Component {
         else if (_renderingImgs.Scale === 'H' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <View key={_renderingImgHalf + '&&' + imgSlider.ImageURL} style={{flex:1}}>
-                        <TouchableOpacity onPress={()=> this.onImgSlidePress(imgSlider.SlideParam)}>
+                    <View key={_renderingImgHalf + '&&' + imgSlider.ImageURL} style={{ flex: 1 }}>
+                        <TouchableOpacity onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
                             <ImageBackground
                                 style={{
                                     width: 150,
@@ -368,8 +368,14 @@ class ItemDetail extends Component {
         }
     }
 
-    onImgSlidePress(key){
-        this.props.navigation.navigate('shopDetail', {key})
+    onImgSlidePress(key) {
+        this.props.navigation.navigate({
+            routeName: 'shopDetail',
+            params: {
+                key: key
+            },
+            key: 'shopDetail_' + key
+        })
     }
 
     onRecommendedPress(key) {

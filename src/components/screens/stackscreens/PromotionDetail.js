@@ -6,14 +6,29 @@ import {
     TouchableOpacity
 } from 'react-native'
 import { Button, } from 'react-native-elements'
+import { HeaderBackButton } from 'react-navigation'
 import _ from 'lodash'
 import moment from 'moment'
-import { ButtonStar, ButtonLocal } from '../../common'
+import { ButtonStar, ButtonLocal, Header } from '../../common'
+
+const INITIAL_STATE = {
+    isFocused: true
+}
 
 class PromotionDetail extends Component {
     static navigationOptions = { header: null }
+    state = INITIAL_STATE
+
+    toggleHeaderPromotionStatus() {
+        if (this.state.isFocused === true) {
+            this.setState({ isFocused: false })
+        } else {
+            this.setState({ isFocused: true })
+        }
+    }
 
     onButtonGoBack() {
+        this.props.screenProps.headerStatusUpdate(true)
         this.props.navigation.navigate('FlashSaleMain')
     }
 
@@ -56,7 +71,7 @@ class PromotionDetail extends Component {
             if (shopID.ShopCategoryID === '264') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_food.webp')}
                     />
@@ -64,7 +79,7 @@ class PromotionDetail extends Component {
             } else if (shopID.ShopCategoryID === '268') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_category_place_travel.webp')}
                     />
@@ -73,7 +88,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '265') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_category_shop.webp')}
                     />
@@ -82,7 +97,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '267') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
                     />
@@ -91,7 +106,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '266') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
                     />
@@ -100,7 +115,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '459') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
                     />
@@ -109,7 +124,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '269') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_office.webp')}
                     />
@@ -118,7 +133,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '272') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_service.webp')}
                     />
@@ -127,7 +142,7 @@ class PromotionDetail extends Component {
             else if (shopID.ShopCategoryID === '271') {
                 return (
                     <Image
-                        key={shopID.CategoryName+'_'+shopID.ShopCategoryID}
+                        key={shopID.CategoryName + '_' + shopID.ShopCategoryID}
                         style={{ width: 30, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
                     />
@@ -171,16 +186,23 @@ class PromotionDetail extends Component {
         )
     }
 
-    onImgSlidePress(key){
+    onImgSlidePress(key) {
         console.log(key)
-        this.props.navigation.navigate('shopDetail', {key})
+        this.toggleHeaderPromotionStatus()
+        this.props.navigation.navigate({
+            routeName: 'shopDetail',
+            params: {
+                key: key,
+                toggleHeaderPromotionStatus: this.toggleHeaderPromotionStatus.bind(this)
+            }
+        })
     }
 
     _renderStore() {
         const { navigation } = this.props
         const items = navigation.getParam('items')
         return (
-            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }} onPress={() => this.onImgSlidePress(items.ShopID)}>
                 <View style={{ flexDirection: 'row', flex: 1 }}>
                     <View style={{ flex: 1 }}>
                         <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
@@ -227,9 +249,23 @@ class PromotionDetail extends Component {
         )
     }
 
+    _renderHeaderScreen() {
+        const { navigation } = this.props
+        const items = navigation.getParam('items')
+        if (this.state.isFocused === true) {
+            return <Header headerText={items.Name}
+                backgroundImage={require('../../../components/images/drawable-hdpi/bg_more.webp')}
+                headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
+        }
+        else {
+            return null
+        }
+    }
+
     render() {
         return (
             <View style={{ flex: 1 }}>
+                {this._renderHeaderScreen()}
                 {this._renderImg()}
                 {this._renderStore()}
                 <View>

@@ -122,8 +122,8 @@ class ShopDescriptionScreen extends Component {
                         onPress={() => null}>
                         <View
                             style={{
-                                height: 300,
-                                width: 200,
+                                height: 150,
+                                width: 100,
                                 marginLeft: 20,
                                 borderWidth: 0.5,
                                 borderColor: '#dddddd',
@@ -133,7 +133,7 @@ class ShopDescriptionScreen extends Component {
                         >
                             <Image
                                 style={{
-                                    flex: 2,
+                                    flex: 3,
                                     width: null,
                                     height: null,
                                     resizeMode: 'cover',
@@ -144,7 +144,7 @@ class ShopDescriptionScreen extends Component {
                                     borderTopRightRadius: 5
                                 }}
                                 source={{ uri: proHighlight.thumbnailUrl }}
-                            /><Text style={{ flex: 1, fontSize: 18, marginTop: 10, marginLeft: 10 }}
+                            /><Text style={{ flex: 1, fontSize: 18, marginTop: 5, marginLeft: 10 }}
                                 numberOfLines={1}
                                 ellipsizeMode="tail"
                             >
@@ -203,7 +203,7 @@ class ShopDescriptionScreen extends Component {
                 shopPhone = items.ShopPhone
             }
         })
-        if(shopPhone !== ''){
+        if (shopPhone !== '') {
             return (
 
                 <View style={{ flexDirection: 'row' }}>
@@ -219,54 +219,52 @@ class ShopDescriptionScreen extends Component {
                 </View>
 
             )
-        }else{
+        } else {
             return (
                 <View style={{ flexDirection: 'row' }}>
                     <Image
                         style={{ width: 20, height: 20 }}
                         source={require('../../../components/images/drawable-hdpi/ic_phone.webp')}
                     />
-                        <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
-                            -
+                    <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
+                        -
                         </Text>
                 </View>
             )
         }
-        
+
     }
 
-    renderScollMain(){
+    renderScollMain() {
         return (
-            <ScrollView
-            scrollEnabled={true}
-            nestedScrollEnabled={true}
-            contentContainerStyle={{flex:1,height:Dimensions.get('window').height - 20}}
-            >
-            <View style={{ height: 300, marginTop: 20 }}>
-                {this.renderImgSlider()}
-            </View>
             <View
-                style={{
-                    width: Dimensions.get('window').width,
-                    height: 150,
-                    marginTop: 10,
-                    borderWidth: 1,
-                    borderColor: '#dddddd',
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                    backgroundColor: 'white'
-                }}>
+                style={{ flex: 1 }}
+            >
+                <View style={{ height: 150, marginTop: 20 }}>
+                    {this.renderImgSlider()}
+                </View>
+                <View
+                    style={{
+                        width: Dimensions.get('window').width,
+                        height: 150,
+                        marginTop: 10,
+                        borderWidth: 1,
+                        borderColor: '#dddddd',
+                        paddingLeft: 20,
+                        paddingRight: 20,
+                        backgroundColor: 'white'
+                    }}>
 
-                {this.renderDecription()}
-                <TouchableWithoutFeedback onPress={() => null}>
-                    <View>
-                        <Text style={{ color: 'purple', textAlign: 'center' }}>
-                            Read more
+                    {this.renderDecription()}
+                    <TouchableWithoutFeedback onPress={() => null}>
+                        <View>
+                            <Text style={{ color: 'purple', textAlign: 'center' }}>
+                                Read more
                    </Text>
-                    </View>
-                </TouchableWithoutFeedback>
-            </View>
-            <View style={{
+                        </View>
+                    </TouchableWithoutFeedback>
+                </View>
+                {/* <View style={{
                 width: Dimensions.get('window').width,
                 height: 50,
                 marginTop: 10,
@@ -277,42 +275,30 @@ class ShopDescriptionScreen extends Component {
                 backgroundColor: 'white'
             }}>
                 {this.renderContact()}
+            </View> */}
+                <View style={{
+                    width: Dimensions.get('window').width,
+                    height: 300,
+                    marginTop: 10,
+                    borderWidth: 1,
+                    borderColor: '#dddddd',
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                    backgroundColor: 'white'
+                }}>
+                    {this.renderRecommend()}
+                </View>
             </View>
-            <View style={{
-                width: Dimensions.get('window').width,
-                height: 300,
-                marginTop: 10,
-                borderWidth: 1,
-                borderColor: '#dddddd',
-                paddingLeft: 20,
-                paddingRight: 20,
-                backgroundColor: 'white'
-            }}>
-            {this.renderRecommend()}
-            </View>
-            <View style={{
-                width: Dimensions.get('window').width,
-                height: 300,
-                marginTop: 10,
-                borderWidth: 1,
-                borderColor: '#dddddd',
-                paddingLeft: 20,
-                paddingRight: 20,
-                backgroundColor: 'white'
-            }}>
-            <Text>sadasdkwqjfkgjalkgskadf</Text>
-            </View>
-            </ScrollView>
         )
     }
 
     render() {
         //console.log(this.props.screenProps.items)
         return (
-            <View style={{flex:1}}>    
-            {this.renderScollMain()}
+            <View style={{ flex: 1 }}>
+                {this.renderScollMain()}
             </View>
-            )
+        )
     }
 }
 

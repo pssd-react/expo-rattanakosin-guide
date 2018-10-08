@@ -6,14 +6,14 @@ const Header = (props) => {
     return (
         <ImageBackground
             source={ props.backgroundImage }
-            style={thumbnailStyle}
+            style={[thumbnailStyle, props.containerStyle]}
             > 
             <View style={[viewStyle, props.headerContent]}>
                 <View style={{justifyContent: 'flex-start', flex:1}}>
                  {props.headerLeft}
                 </View>
                 <View style={{justifyContent: 'center', alignItems:'center', flex:2 }}>
-                    <Text style={[textStyle, props.fontStyle]}> {props.headerText} </Text>
+                    <Text style={[textStyle, props.fontStyle]} numberOfLines={props.numberOfLines} ellipsizeMode={props.ellipsizeMode}> {props.headerText} </Text>
                 </View>
                 <View style={{justifyContent: 'flex-end', flex:1 }}/>
                 

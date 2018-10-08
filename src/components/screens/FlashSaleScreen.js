@@ -12,11 +12,28 @@ import {
 import { Header } from '../common/Header'
 import { ShopDetailScreen } from './ShopDetailScreen'
 
+const INITIAL_STATE = {
+    isFocused: true
+}
 
 class FlashSaleScreen extends Component {
     static navigationOptions = { header: null }
+    state = INITIAL_STATE
+    constructor(props) {
+        super(props)
+
+        this.headerStatusUpdate = this.headerStatusUpdate.bind(this)
+    }
+
+    headerStatusUpdate(status) {
+        if (status === true) {
+            this.setState({ isFocused: true })
+        } else {
+            this.setState({ isFocused: false })
+        }
+    }
     _renderHeaderScreen() {
-        if (this.props.isFocused) {
+        if (this.state.isFocused === true) {
             return <Header headerText={'Flash Sale'}
                 backgroundImage={require('../../components/images/drawable-hdpi/bg_more.webp')} />
         }
@@ -28,7 +45,7 @@ class FlashSaleScreen extends Component {
         return (
             <View style={styles.container}>
                 {this._renderHeaderScreen()}
-                <FlashSaleNavScreen />
+                <FlashSaleNavScreen screenProps={{ headerStatusUpdate: this.headerStatusUpdate }} />
             </View>
         )
     }

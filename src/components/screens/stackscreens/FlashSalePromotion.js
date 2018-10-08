@@ -46,12 +46,14 @@ class FlashSalePromotion extends Component {
   componentWillMount() {
     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
       data, config)
-      .then(response => { this.setState({ 
-        item: response.data
-       },()=>{
-        this._updateNumPresent()
-        this._updateNumSoon()
-      }) })
+      .then(response => {
+        this.setState({
+          item: response.data
+        }, () => {
+          this._updateNumPresent()
+          this._updateNumSoon()
+        })
+      })
       .catch((error) => {
         console.log('axios error:', error)
       })
@@ -69,13 +71,14 @@ class FlashSalePromotion extends Component {
     this.setState({ activeSection: section })
   }
 
-  _dateFormating(date){
-      var a1 = date[0].split('/')
-      var a2 = date[1].split(':')
-      return new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+  _dateFormating(date) {
+    var a1 = date[0].split('/')
+    var a2 = date[1].split(':')
+    return new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
   }
 
   onPresentPress(items) {
+    this.props.screenProps.headerStatusUpdate(false)
     this.props.navigation.navigate('PromotionDetailScreen', {
       items
     })
@@ -131,21 +134,19 @@ class FlashSalePromotion extends Component {
 
   _renderOngoingPromotion() {
     let count = null
-    if (this.state.numPresent === undefined) {
-      return <Spinner size={'large'}/>
-    } else if (this.state.numPresent) {
+    if (this.state.numPresent) {
       count = _.map((this.state.item.StaticLocation), (items) => {
         var dateNow = items.CurrentDateTime.split(' ')
         var Ctime = this._dateFormating(dateNow)
-  
+
         var dateStart = items.StartDate.split(' ')
         var Stime = this._dateFormating(dateStart)
-  
+
         var dateEnd = items.EndDate.split(' ')
         var Etime = this._dateFormating(dateEnd)
         if (Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N') {
           return (
-            <TouchableOpacity style={styles.content} key={items.Name+'_'+items.ShopID} onPress={() => this.onPresentPress(items)}>
+            <TouchableOpacity style={styles.content} key={items.Name + '_' + items.ShopID} onPress={() => this.onPresentPress(items)}>
               <View style={{ flex: 6 }}>
                 <View style={{ flexDirection: 'column' }}>
                   <View style={{ flex: 1, marginBottom: 5 }}>
@@ -175,16 +176,14 @@ class FlashSalePromotion extends Component {
   _renderSoonPromotion() {
     let num = 0
     let count = null
-    if (this.state.numComming === undefined) {
-      return <Spinner size={'large'}/>
-    } else if (this.state.numComming) {
+    if (this.state.numComming) {
       count = _.map((this.state.item.StaticLocation), (items) => {
         var dateNow = items.CurrentDateTime.split(' ')
         var Ctime = this._dateFormating(dateNow)
-  
+
         var dateStart = items.StartDate.split(' ')
         var Stime = this._dateFormating(dateStart)
-  
+
         var dateEnd = items.EndDate.split(' ')
         var Etime = this._dateFormating(dateEnd)
         if (Ctime <= Stime && items.Is_FlashSale === 'N') {

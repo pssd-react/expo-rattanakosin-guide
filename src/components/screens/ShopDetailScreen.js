@@ -9,7 +9,8 @@ import {
     Animated,
     Image,
     Platform,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native'
 import axios from 'axios'
 import _ from 'lodash'
@@ -72,6 +73,10 @@ export class ShopDetailScreen extends Component {
     }
 
     onButtonGoBack() {
+        const toggleHeaderPromotionStatus = this.props.navigation.getParam('toggleHeaderPromotionStatus', 'none')
+        if (toggleHeaderPromotionStatus !== 'none') {
+            toggleHeaderPromotionStatus()
+        }
         this.props.navigation.goBack()
     }
 
@@ -100,8 +105,8 @@ export class ShopDetailScreen extends Component {
                         fontSize: this.state.fontSize,
                         color: "#fff"
                     }]}
-                    numberOfLines={1}
-                    ellipsizeModel="tail"
+                        numberOfLines={1}
+                        ellipsizeModel="tail"
                     >
                         {title}
                     </Animated.Text>
@@ -174,7 +179,7 @@ export class ShopDetailScreen extends Component {
 
     _renderingPage() {
         let count = 0
-        let isSkip=false
+        let isSkip = false
         if (this.state.loading === true) {
             locate = (<Spinner size={'large'} />)
         }
@@ -202,6 +207,7 @@ export class ShopDetailScreen extends Component {
 
                             <ScrollView style={{ flex: 1, }}
                                 scrollEventThrottle={16}
+                                nestedScrollEnabled={true}
                                 showsVerticalScrollIndicator={false}
                                 onScroll={Animated.event(
                                     [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
@@ -227,7 +233,7 @@ export class ShopDetailScreen extends Component {
                                     height: height,
                                     width: width,
                                 }}>
-                                    <ImageBackground source={require('../../components/images/drawable-hdpi/bg_more.webp')}
+                                    <ImageBackground source={{ uri: items.ImageUrl }}
                                         style={{ flex: 1, width: null, height: null }} >
                                         <View style={{ justifyContent: 'flex-start', alignItems: 'center', paddingTop: 5, marginLeft: 10, marginTop: 40, backgroundColor: '#000', opacity: 0.5, width: 30, height: 30, borderRadius: 25 }}>
                                             <TouchableOpacity onPress={() => this.onButtonGoBack()}>
@@ -260,9 +266,9 @@ export class ShopDetailScreen extends Component {
                                     </ImageBackground>
                                 </Animated.View>
 
-                                <View style={{ flex: 1, height: height - 130 }}>
+                                <Animated.View style={{ flex: 1, height: height - 130 }}>
                                     <ShopTap screenProps={{ items: items }} />
-                                </View>
+                                </Animated.View>
 
                             </ScrollView>
                         </View>
