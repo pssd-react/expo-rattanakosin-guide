@@ -152,7 +152,6 @@ class ShopDescriptionScreen extends Component {
                             </Text>
                         </View>
                     </TouchableOpacity>
-
                 )
             })
             return (
@@ -171,7 +170,55 @@ class ShopDescriptionScreen extends Component {
         if (this.state.loadingRecomService) {
             return <Spinner size={'large'} />
         } else {
-            return <Text>zzz</Text>
+            let imgSlide = _.map(this.state.recomSlide.RecommendedShop, recom => {
+                return (
+                    <TouchableOpacity
+                        key={recom.ShopID}
+                        onPress={() => null}>
+                        <View
+                            style={{
+                                height: 120,
+                                width: 100,
+                                marginLeft: 20,
+                                borderWidth: 0.5,
+                                borderColor: '#dddddd',
+                                backgroundColor: 'white',
+                                borderRadius: 5
+                            }}
+                        >
+                            <Image
+                                style={{
+                                    flex: 3,
+                                    width: null,
+                                    height: null,
+                                    resizeMode: 'cover',
+                                    shadowOffset: { width: 20, height: 20, },
+                                    shadowColor: 'black',
+                                    shadowOpacity: 1.0,
+                                    borderTopLeftRadius: 5,
+                                    borderTopRightRadius: 5
+                                }}
+                                source={recom.ImageUrl !== '' ? { uri: recom.ImageUrl } : require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
+                            /><Text style={{ flex: 1, fontSize: 14, marginTop: 5, marginLeft: 10 }}
+                                numberOfLines={1}
+                                ellipsizeMode="tail"
+                            >
+                                {recom.ShopName}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+
+                )
+            })
+            return (
+
+                <ScrollView
+                    horizontal={true}
+                    showsHorizontalScrollIndicator={false}
+                >
+                    {imgSlide}
+                </ScrollView>
+            )
         }
     }
 
@@ -187,7 +234,7 @@ class ShopDescriptionScreen extends Component {
                 }
             })
 
-            return (<Text numberOfLines={5}
+            return (<Text numberOfLines={3}
                 ellipsizeMode="tail"
                 style={{ color: 'black', fontSize: 16 }}>
                 {shopDescription}
@@ -246,12 +293,13 @@ class ShopDescriptionScreen extends Component {
                 <View
                     style={{
                         width: Dimensions.get('window').width,
-                        height: 150,
+                        height: 120,
                         marginTop: 10,
                         borderWidth: 1,
                         borderColor: '#dddddd',
                         paddingLeft: 20,
                         paddingRight: 20,
+                        paddingTop: 20,
                         backgroundColor: 'white'
                     }}>
 
@@ -259,8 +307,8 @@ class ShopDescriptionScreen extends Component {
                     <TouchableWithoutFeedback onPress={() => null}>
                         <View>
                             <Text style={{ color: 'purple', textAlign: 'center' }}>
-                                Read more
-                   </Text>
+                                More detail...
+                            </Text>
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
@@ -276,16 +324,10 @@ class ShopDescriptionScreen extends Component {
             }}>
                 {this.renderContact()}
             </View> */}
-                <View style={{
-                    width: Dimensions.get('window').width,
-                    height: 300,
-                    marginTop: 10,
-                    borderWidth: 1,
-                    borderColor: '#dddddd',
-                    paddingLeft: 20,
-                    paddingRight: 20,
-                    backgroundColor: 'white'
-                }}>
+            <View style={{ height: 20, marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
+                    <Text style={{fontSize: 20, fontWeight:'bold'}}>Similar Places</Text>
+                </View>
+                <View style={{ height: 150, marginTop: 10 }}>
                     {this.renderRecommend()}
                 </View>
             </View>
