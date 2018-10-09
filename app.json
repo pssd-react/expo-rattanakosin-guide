@@ -7,6 +7,7 @@
     "version" : "0.0.1",
     "sdkVersion": "27.0.0",
     "privacy": "public",
+    "orientation": "portrait",
     "githubUrl":"https://github.com/pssd-react/expo-rattanakosin-guide",
     "ios": {
       "bundleIdentifier": "co.th.pssd-react.testcreaternapp"
