@@ -267,7 +267,7 @@ export class ShopDetailScreen extends Component {
                                 </Animated.View>
 
                                 <Animated.View style={{ flex: 1, height: height - 130 }}>
-                                    <ShopTap screenProps={{ items: items }} />
+                                    <ShopTap screenProps={{ items: items, navigation: this.props.navigation }} />
                                 </Animated.View>
 
                             </ScrollView>

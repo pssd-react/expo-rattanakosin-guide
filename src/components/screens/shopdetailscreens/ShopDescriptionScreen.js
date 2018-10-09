@@ -179,6 +179,17 @@ class ShopDescriptionScreen extends Component {
         }
     }
 
+    onRecommendPress(key){
+        console.log(key)
+        this.props.screenProps.navigation.navigate({
+            routeName: 'shopDetail',
+            params: {
+                key: key
+            },
+            key: 'shopDetail' + key
+        })
+    }
+
     renderRecommend() {
         if (this.state.loadingRecomService) {
             return <Spinner size={'large'} />
@@ -189,7 +200,7 @@ class ShopDescriptionScreen extends Component {
                 return (
                     <TouchableOpacity
                         key={recom.ShopID}
-                        onPress={() => null}>
+                        onPress={() => this.onRecommendPress(recom.ShopID)}>
                         <View
                             style={{
                                 height: 120,
@@ -311,16 +322,13 @@ class ShopDescriptionScreen extends Component {
                         style={{
                             flex: 1,
                             backgroundColor: '#fff',
-                            marginBottom: 130,
-                            marginTop: 100,
                             borderRadius: 5,
                             shadowColor: '#000',
                             shadowOffset: { width: 5, height: 5 },
                             shadowRadius: 5,
                             flexDirection: 'column',
                             justifyContent: 'space-between',
-                            width: Dimensions.get('window').width,
-                            height: 500
+                            width: Dimensions.get('window').width*0.9
                         }}
                     >
                         <Image
@@ -353,6 +361,7 @@ class ShopDescriptionScreen extends Component {
                 horizontal={true}
                 showsHorizontalScrollIndicator={false}
                 ref={scrollView  => this._scrollView = scrollView }
+                style={{flex:1}}
             >
                 {imgSlide}
             </ScrollView>
@@ -362,24 +371,23 @@ class ShopDescriptionScreen extends Component {
 
     renderModal() {
         return (
-          <View style={{ flex: 1 }}>
-            <Modal isVisible={this.state.isModalVisible} style={styles.modal}>
-              <View style={{ width: 100, height: 100, right: 0, position: 'absolute', marginTop: 20 }}>
+            <Modal isVisible={this.state.isModalVisible} style={{
+                flex:1
+            }}>
+              <View style={{height: 100, width: 100, alignSelf: 'flex-end'}}>
                 <Button
-                  style={{ flex: 1, alignSelf: 'flex-end' }}
+                  style={{width: 100, height: 100, right: 0, position: 'absolute', marginTop: 20 }}
                   title="X"
                   fontSize={20}
                   color='white'
                   onPress={() => this._toggleModal()} />
               </View>
               <View style={{
-                height: 500,
-                justifyContent: 'center'
+                flex:1,
               }}>
                 {this.renderTextModal()}
               </View>
             </Modal>
-          </View>
         )
     }
 
@@ -446,13 +454,5 @@ class ShopDescriptionScreen extends Component {
     }
 }
 
-const styles = StyleSheet.create({
- modal: {
-      backgroundColor: 'black',
-      margin: 0, // This is the important style you need to set
-      alignItems: undefined,
-      justifyContent: undefined,
-    }
-  })
 
 export { ShopDescriptionScreen }

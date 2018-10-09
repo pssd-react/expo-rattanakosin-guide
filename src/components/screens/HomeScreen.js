@@ -374,7 +374,7 @@ class ItemDetail extends Component {
             params: {
                 key: key
             },
-            key: 'shopDetail_' + key
+            key: 'shopDetail' + key
         })
     }
 
