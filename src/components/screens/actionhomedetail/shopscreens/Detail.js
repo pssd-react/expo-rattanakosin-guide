@@ -68,7 +68,7 @@ class Detail extends Component {
 
   _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible });
 
-  componentWillMount() {
+  componentDidMount() {
     // console.disableYellowBox = true;
 
     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryShopDetailService',
@@ -158,7 +158,7 @@ class Detail extends Component {
   renderImg() {
     //console.log(this.state.recom);
     let img = _.map(this.state.img.ProductHighlight, imgs => {
-      console.log(imgs.thumbnailUrl)
+      // console.log(imgs.thumbnailUrl)
       return (
         <TouchableOpacity key={imgs} onPress={() => this.onSlidePress(imgs)}>
           <View style={{ height: 200, width: 150, marginLeft: 20, borderWidth: 0.5, borderColor: '#dddddd', }}>
