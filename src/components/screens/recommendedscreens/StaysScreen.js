@@ -14,6 +14,7 @@ import ViewMoreText from 'react-native-view-more-text'
 import { ButtonStar, ButtonLocal, ButtonHighlight } from '../../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
+import geolib from 'geolib'
 
 const data = {
     "RqAppID": "1234",
@@ -38,9 +39,28 @@ const config = {
 
 
 export class StaysScreen extends Component {
-    state = {
-        item: ''
-    };
+    constructor() {
+        super()
+        this.state = {
+            item: '',
+            lat: undefined,
+            long: undefined
+        }
+      }
+
+    componentDidMount(){
+         navigator.geolocation.getCurrentPosition(
+        (position) => {
+            this.setState({lat: position.coords.latitude, long: position.coords.longitude});
+        },
+
+        (error) => {alert("there was an error getting location")},
+
+        {enableHighAccuracy: true}
+
+        );
+        console.log('component',this.state.lat,this.state.long)
+    }
 
     componentWillMount() {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
@@ -64,7 +84,26 @@ export class StaysScreen extends Component {
             )
         })
     }
-
+    _renderLocation(items){
+        console.log('Location',this.state.lat,this.state.long)
+        var distance = '';
+        if(this.state.lat === undefined){
+        return(
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00</ButtonLocal>
+        )
+        }else{
+            distance = geolib.getDistanceSimple(
+                {latitude: this.state.lat, longitude: this.state.long},
+                {latitude: items.Latitude, longitude: items.Longitude}
+            );
+           distance = distance / 1000
+           console.log(distance , 'Km')
+           distance = distance.toFixed(2);
+           return(
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance}</ButtonLocal>
+           )
+        }
+    }
     renderCardData(items){
         return (
             <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
@@ -100,10 +139,7 @@ export class StaysScreen extends Component {
                                             </ButtonStar>
                                         </View>
                                         <View style={{ flex: 2, marginLeft: 5}}>
-                                            <ButtonLocal style={styles.buttonLocalStyle}
-                                            > 
-                                                8.03
-                                            </ButtonLocal>
+                                        {this._renderLocation(items)}
                                         </View>
                                         <View style={{ flex: 1 }}>
                                             <ButtonHighlight style={styles.buttonHightLightStyle}>

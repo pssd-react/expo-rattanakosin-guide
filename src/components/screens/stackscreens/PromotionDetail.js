@@ -12,7 +12,7 @@ import { HeaderBackButton } from 'react-navigation'
 import _ from 'lodash'
 import moment from 'moment'
 import { ButtonStar, ButtonLocal, Header, ButtonProduct , ButtonPromotion } from '../../common'
-
+import geolib from 'geolib'
 
 
 
@@ -28,10 +28,9 @@ class PromotionDetail extends Component {
         }
       }
 
-    async componentDidMount(){
-        await navigator.geolocation.getCurrentPosition(
+    componentDidMount(){
+         navigator.geolocation.getCurrentPosition(
         (position) => {
-            alert("state of lat in callback is "+position.coords.latitude);
             this.setState({lat: position.coords.latitude, long: position.coords.longitude});
         },
 
@@ -40,6 +39,7 @@ class PromotionDetail extends Component {
         {enableHighAccuracy: true}
 
         );
+        console.log('component',this.state.lat,this.state.long)
     }
       
     toggleHeaderPromotionStatus() {
@@ -224,9 +224,28 @@ class PromotionDetail extends Component {
 
 
     _renderLocation(){
+        console.log('Location',this.state.lat,this.state.long)
+        const { navigation } = this.props
+        const items = navigation.getParam('items')
+        console.log('Items: ',items.Latitude,items.Longitude)
+        var distance = '';
+        if(this.state.lat === undefined){
+        return(
+            <ButtonLocal style={{ width: 70 }}> 0.00 </ButtonLocal>
+        )
+        }else{
+            distance = geolib.getDistanceSimple(
+                {latitude: this.state.lat, longitude: this.state.long},
+                {latitude: items.Latitude, longitude: items.Longitude}
+            );
 
-        console.log(this.state.lat,this.state.long)
-      
+           distance = distance / 1000
+           distance = distance.toFixed(2);
+           console.log(distance , 'Km')
+           return(
+                <ButtonLocal style={{ width: 70 }}> {distance} </ButtonLocal>
+           )
+        }
     }
 
 
@@ -262,7 +281,7 @@ class PromotionDetail extends Component {
                                 <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
                             </View>
                             <View style={{ height: 40 }}>
-                                <ButtonLocal style={{ width: 70 }}> 8.00 </ButtonLocal>
+                                {this._renderLocation()}
                             </View>
                             <View style={{ height: 40 }}>
                                 <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
@@ -300,7 +319,6 @@ class PromotionDetail extends Component {
                 {this._renderHeaderScreen()}
                 {this._renderImg()}
                 {this._renderStore()}
-                {this._renderLocation()}
             </View>
         )
     }
