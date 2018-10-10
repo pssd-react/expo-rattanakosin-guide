@@ -3,22 +3,45 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity
+    TouchableOpacity,
+    Dimensions,
+    Geolocation
 } from 'react-native'
 import { Button, } from 'react-native-elements'
 import { HeaderBackButton } from 'react-navigation'
 import _ from 'lodash'
 import moment from 'moment'
-import { ButtonStar, ButtonLocal, Header } from '../../common'
+import { ButtonStar, ButtonLocal, Header, ButtonProduct , ButtonPromotion } from '../../common'
 
-const INITIAL_STATE = {
-    isFocused: true
-}
+
+
 
 class PromotionDetail extends Component {
     static navigationOptions = { header: null }
-    state = INITIAL_STATE
+    
+    constructor() {
+        super()
+        this.state = {
+            isFocused: true,
+            lat: undefined,
+            long: undefined
+        }
+      }
 
+    async componentDidMount(){
+        await navigator.geolocation.getCurrentPosition(
+        (position) => {
+            alert("state of lat in callback is "+position.coords.latitude);
+            this.setState({lat: position.coords.latitude, long: position.coords.longitude});
+        },
+
+        (error) => {alert("there was an error getting location")},
+
+        {enableHighAccuracy: true}
+
+        );
+    }
+      
     toggleHeaderPromotionStatus() {
         if (this.state.isFocused === true) {
             this.setState({ isFocused: false })
@@ -197,6 +220,15 @@ class PromotionDetail extends Component {
             }
         })
     }
+    
+
+
+    _renderLocation(){
+
+        console.log(this.state.lat,this.state.long)
+      
+    }
+
 
     _renderStore() {
         const { navigation } = this.props
@@ -233,10 +265,10 @@ class PromotionDetail extends Component {
                                 <ButtonLocal style={{ width: 70 }}> 8.00 </ButtonLocal>
                             </View>
                             <View style={{ height: 40 }}>
-                                <ButtonStar style={{ width: 50 }}>  </ButtonStar>
+                                <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
                             </View>
                             <View style={{ height: 40 }}>
-                                <ButtonStar style={{ width: 50 }}> </ButtonStar>
+                                <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
                             </View>
 
                         </View>
@@ -268,6 +300,7 @@ class PromotionDetail extends Component {
                 {this._renderHeaderScreen()}
                 {this._renderImg()}
                 {this._renderStore()}
+                {this._renderLocation()}
             </View>
         )
     }
