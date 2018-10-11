@@ -11,7 +11,7 @@ const Button = (props) => {
             <Ionicons 
             name = {props.name}
             size = {20}
-            color = {'#3b5998'}
+            color = {'#0d0d0d'}
             />{props.children}
             </Text>
         </TouchableOpacity>
@@ -22,7 +22,7 @@ const Button = (props) => {
 const styles = {
     textStyle: {
         alignSelf: 'center',
-        color: '#007aff',
+        color: '#0d0d0d',
         fontSize: 16,
         fontWeight: '600',
         paddingTop: 10 ,
@@ -37,7 +37,8 @@ const styles = {
         //borderColor: '#007aff',
         marginLeft: 5,
         marginRight: 5,
-        height: 50
+        height: 50,
+        justifyContent: 'center'
     },
 };
 

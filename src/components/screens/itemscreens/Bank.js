@@ -5,7 +5,8 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
-    ScrollView
+    ScrollView,
+    Dimensions
 } from 'react-native'
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
@@ -13,10 +14,11 @@ import { Icon } from 'react-native-elements'
 import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
-import { ButtonStar,ButtonLocal } from '../../common';
+import { ButtonStar,ButtonLocal,Button } from '../../common';
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
 import geolib from 'geolib'
+
 
 var data = {
 	"RqAppID":"1234",
@@ -45,7 +47,8 @@ export class Bank extends Component {
         this.state = {
             item: '',
             lat: undefined,
-            long: undefined
+            long: undefined,
+            sortby: undefined
         }
       }
 
@@ -62,6 +65,7 @@ export class Bank extends Component {
         );
      console.log('component',this.state.lat,this.state.long)
     }
+
     componentWillMount() {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
@@ -76,23 +80,40 @@ export class Bank extends Component {
     }
     
     renderItem() {
-        return _.map((this.state.item.StaticLocation), (items) => {
-            return(
-                <View>
-                    {this.renderCardData(items)}
-                </View>
-            )
-        })
+        if(this.state.sortby === undefined){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                return(
+                    <View>
+                        {this.renderCardData(items)}
+                    </View>
+                )
+            })
+        }else if(this.state.sortby === true){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                return(
+                    <View>
+                        {this.renderCardData(items)}
+                    </View>
+                )
+            })
+        }else if(this.state.sortby === false){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                return(
+                    <View>
+                        {this.renderCardDataSort(items)}
+                    </View>
+                )
+                console.log(items)
+            })
+        }
     }
-
-
     
     _renderLocation(items){
         console.log('Location',this.state.lat,this.state.long)
         var distance = '';
         if(this.state.lat === undefined){
         return(
-            <ButtonLocal style={styles.buttonLocalStyle}>  0.00</ButtonLocal>
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 ก.ม</ButtonLocal>
         )
         }else{
             distance = geolib.getDistanceSimple(
@@ -100,12 +121,26 @@ export class Bank extends Component {
                 {latitude: items.Latitude, longitude: items.Longitude}
             );
            distance = distance / 1000
-           distance = distance.toFixed(2);
            console.log(distance , 'Km')
+           distance = distance.toFixed(2);
            return(
-                <ButtonLocal style={styles.buttonLocalStyle}>  {distance}</ButtonLocal>
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} ก.ม</ButtonLocal>
            )
         }
+    }
+
+
+    renderCardDataSort(items){
+        const myData = [].concat(items)
+        .sort((a, b) => a.Rating > b.Rating)
+        .map((item, i) => (itemss) => {
+            return(
+                <View>
+                    {this.renderCardData(itemss)}
+                </View>
+            )
+        })
+        console.log(myData)
     }
 
 
@@ -116,9 +151,9 @@ export class Bank extends Component {
                 <CardSection style={{height:40}}> 
                             <View style={{flex:4,
                                     justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
-                            <Image style={{width:30, height:30,marginRight:15}}
-                                source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')} 
-                            /> 
+                                    <Image style={{width:30, height:30,marginRight:15}}
+                                         source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')} 
+                                    /> 
                                 <Text style={styles.ViewTextStyle}> {items.LocationName} </Text>
                             </View>
                             <View style={{flex:1,alignItems:'flex-end'}}>
@@ -138,16 +173,15 @@ export class Bank extends Component {
                                 
                                 <View style={{ flex: 2 ,flexDirection: 'column'}}>
                                     <View style= {{ flexDirection: 'row' , height: 40}}>
-                                        <View style={{ flex: 1 , marginRight: 15} }>
+                                       <View style={{ flex: 1 , marginRight: 20} }>
                                             <ButtonStar style={styles.buttonStarStyle}
                                             > 
                                             {items.Rating}
                                             </ButtonStar>
                                         </View>
-                                        <View style={{ flex: 2, marginLeft: 5}}>
-                                             {this._renderLocation(items)}   
+                                        <View style={{ flex: 2, marginLeft: 5 , marginRight: 15}}>
+                                        {this._renderLocation(items)}
                                         </View>
-
                                         <View  style={{ flex: 3}}/>
 
                                     </View>
@@ -189,20 +223,43 @@ export class Bank extends Component {
         this.props.navigation.navigate('shopDetail', {key})
     }
 
+    changeStatusSortDistance(){
+        this.setState({ sortby: true })
+        console.log(this.state.sortby)
+    }
+
+    changeStatusSortScore(){
+        this.setState({ sortby: false })
+        console.log(this.state.sortby)
+    }
 
     render(){
-        
         return (
             <View style={{flex:1}}>
             <Header headerText="Bank" 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-                    <Card>
+                    <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
+                        <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
+                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
+                        </View>
+                        <View style = {{ flex: 2 , height: 30 , width: 80,marginTop: 15}}>
+                            <Button style = {{ backgroundColor: '#d9d9d9',borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
+                                ระยะทาง
+                            </Button>
+                        </View>
+                        <View style = {{ flex: 2 ,height: 30 , width: 80,marginTop: 15 }}>
+                            <Button style = {{ backgroundColor: '#d9d9d9' ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
+                                ความนิยม
+                            </Button>
+                        </View>
+                    </View>
+                    <View>
                         <ScrollView>
                             {this.renderItem()}
-                            <View style={{ height: 100}} />
+                            <View style={{ height: 100 ,backgroundColor: '#ffffff',}} />
                         </ScrollView>
-                    </Card>
+                    </View>
             </View>
         )
     }
@@ -253,6 +310,6 @@ const styles = StyleSheet.create({
     },
     buttonLocalStyle: {
         backgroundColor: '#ffffff',
-        width: 60,
+        width: 85,
     },
 })

@@ -4,14 +4,16 @@ import {
     Text,
     StyleSheet,
     Image,
-    ScrollView,TouchableOpacity
+    ScrollView,
+    TouchableOpacity,
+    Dimensions
 } from 'react-native'
 import { Card } from '../../common/Card'
 import { CardSection } from '../../common/CardSection'
 import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text'
-import { ButtonStar, ButtonLocal, ButtonHighlight } from '../../common'
+import { ButtonStar, ButtonLocal, ButtonHighlight ,Button } from '../../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
 import geolib from 'geolib'
@@ -44,9 +46,10 @@ export class StaysScreen extends Component {
         this.state = {
             item: '',
             lat: undefined,
-            long: undefined
+            long: undefined,
+            sortby: undefined
         }
-      }
+    }
 
     componentDidMount(){
          navigator.geolocation.getCurrentPosition(
@@ -75,21 +78,52 @@ export class StaysScreen extends Component {
         this.props.navigation.popToTop()
     }
     
-    renderItem() {
-        return _.map((this.state.item.StaticLocation), (items) => {
-            return(
-                <View>
-                    {this.renderCardData(items)}
-                </View>
-            )
-        })
+    changeStatusSortDistance(){
+        this.setState({ sortby: true })
+        console.log(this.state.sortby)
     }
+
+    changeStatusSortScore(){
+        this.setState({ sortby: false })
+        console.log(this.state.sortby)
+    }
+
+      renderItem() {
+
+        if(this.state.sortby === undefined){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                return(
+                    <View>
+                        {this.renderCardData(items)}
+                    </View>
+                )
+            })
+        }else if(this.state.sortby === true){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                return(
+                    <View>
+                        {this.renderCardData(items)}
+                    </View>
+                )
+            })
+        }else if(this.state.sortby === false){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                return(
+                    <View>
+                        {this.renderCardDataSort(items)}
+                    </View>
+                )
+                console.log(items)
+            })
+        }
+    }
+
     _renderLocation(items){
         console.log('Location',this.state.lat,this.state.long)
         var distance = '';
         if(this.state.lat === undefined){
         return(
-            <ButtonLocal style={styles.buttonLocalStyle}>  0.00</ButtonLocal>
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 ก.ม</ButtonLocal>
         )
         }else{
             distance = geolib.getDistanceSimple(
@@ -97,12 +131,25 @@ export class StaysScreen extends Component {
                 {latitude: items.Latitude, longitude: items.Longitude}
             );
            distance = distance / 1000
-           console.log(distance , 'Km')
+        //    console.log(distance , 'Km')
            distance = distance.toFixed(2);
            return(
-                <ButtonLocal style={styles.buttonLocalStyle}>  {distance}</ButtonLocal>
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} ก.ม</ButtonLocal>
            )
         }
+    } 
+    
+    renderCardDataSort(items){
+        const myData = [].concat(items)
+        .sort((a, b) => a.Rating > b.Rating)
+        .map((item, i) => (itemss) => {
+            return(
+                <View>
+                    {this.renderCardData(itemss)}
+                </View>
+            )
+        })
+        console.log(myData)
     }
     renderCardData(items){
         return (
@@ -132,21 +179,20 @@ export class StaysScreen extends Component {
                                 
                                 <View style={{ flex: 2 ,flexDirection: 'column'}}>
                                     <View style= {{ flexDirection: 'row' , height: 40}}>
-                                        <View style={{ flex: 1 , marginRight: 15} }>
+                                        <View style={{ flex: 1 , marginRight: 20} }>
                                             <ButtonStar style={styles.buttonStarStyle}
                                             > 
                                             {items.Rating}
                                             </ButtonStar>
                                         </View>
-                                        <View style={{ flex: 2, marginLeft: 5}}>
-                                        {this._renderLocation(items)}
+                                        <View style={{ flex: 2, marginLeft: 5 , marginRight: 15}}>
+                                            {this._renderLocation(items)}
                                         </View>
-                                        <View style={{ flex: 1 }}>
+                                        <View style={{ flex: 1 ,marginLeft: 5 }}>
                                             <ButtonHighlight style={styles.buttonHightLightStyle}>
                                             </ButtonHighlight>
                                         </View>
                                         <View  style={{ flex: 3}}/>
-
                                     </View>
                                  
                                     <View style= {{ flex: 1  }}>
@@ -186,7 +232,6 @@ export class StaysScreen extends Component {
         this.props.navigation.navigate('shopDetail', {key})
     }
 
-
     render(){
         
         return (
@@ -194,12 +239,27 @@ export class StaysScreen extends Component {
             <Header headerText="Recommend Stay" 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-                    <Card>
+                    <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
+                        <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
+                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
+                        </View>
+                        <View style = {{ flex: 2 , height: 30 , width: 80,marginTop: 15}}>
+                            <Button style = {{ backgroundColor: '#d9d9d9',borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
+                                ระยะทาง
+                            </Button>
+                        </View>
+                        <View style = {{ flex: 2 ,height: 30 , width: 80,marginTop: 15 }}>
+                            <Button style = {{ backgroundColor: '#d9d9d9' ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
+                                ความนิยม
+                            </Button>
+                        </View>
+                    </View>
+                    <View>
                         <ScrollView>
                             {this.renderItem()}
                             <View style={{ height: 100 ,backgroundColor: '#ffffff',}} />
                         </ScrollView>
-                    </Card>
+                    </View>
             </View>
         )
     }
@@ -249,7 +309,7 @@ const styles = StyleSheet.create({
     },
     buttonLocalStyle: {
         backgroundColor: '#ffffff',
-        width: 60,
+        width: 80,
     },
     buttonHightLightStyle: {
         backgroundColor: '#ffffff',
