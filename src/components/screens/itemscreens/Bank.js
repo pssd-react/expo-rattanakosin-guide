@@ -113,7 +113,7 @@ export class Bank extends Component {
         var distance = '';
         if(this.state.lat === undefined){
         return(
-            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 ก.ม</ButtonLocal>
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 กม.</ButtonLocal>
         )
         }else{
             distance = geolib.getDistanceSimple(
@@ -124,7 +124,7 @@ export class Bank extends Component {
            console.log(distance , 'Km')
            distance = distance.toFixed(2);
            return(
-                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} ก.ม</ButtonLocal>
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} กม.</ButtonLocal>
            )
         }
     }
@@ -173,7 +173,7 @@ export class Bank extends Component {
                                 
                                 <View style={{ flex: 2 ,flexDirection: 'column'}}>
                                     <View style= {{ flexDirection: 'row' , height: 40}}>
-                                       <View style={{ flex: 1 , marginRight: 20} }>
+                                       <View style={{ flex: 1 , marginRight: 15} }>
                                             <ButtonStar style={styles.buttonStarStyle}
                                             > 
                                             {items.Rating}
@@ -310,6 +310,6 @@ const styles = StyleSheet.create({
     },
     buttonLocalStyle: {
         backgroundColor: '#ffffff',
-        width: 85,
+        width: 90,
     },
 })

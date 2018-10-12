@@ -53,7 +53,8 @@ export class Restaurants extends Component {
             item: '',
             lat: undefined,
             long: undefined,
-            sortby: undefined
+            sortby: undefined,
+            sort: ''
         }
       }
 
@@ -94,31 +95,100 @@ export class Restaurants extends Component {
                 )
             })
         }else if(this.state.sortby === true){
-            return _.map((this.state.item.StaticLocation), (items) => {
+            var distance = '';
+            var array = [];
+            var i = 0;
+             _.map((this.state.item.StaticLocation), (items) => {
+                distance = geolib.getDistanceSimple(
+                    {latitude: this.state.lat, longitude: this.state.long},
+                    {latitude: items.Latitude, longitude: items.Longitude}
+                );
+                distance = distance / 1000
+                distance = distance.toFixed(2);
+
+                array[i] = { 
+                "CategoryID": items.CategoryID,
+                "LocationID": items.LocationID,
+                "ShopID": items.ShopID,
+                "CategoryName": items.CategoryName,
+                "LocationName": items.LocationName,
+                "Address": items.Address,
+                "Latitude": items.Latitude,
+                "Longitude": items.Longitude,
+                "Section": items.Section,
+                "Soi": items.Soi,
+                "Rating": items.Rating,
+                "TotalReview": items.TotalReview,
+                "HighlightShop":items.HighlightShop,
+                "IsPromotion": items.IsPromotion,
+                "IsFlashSale": items.IsFlashSale,
+                "ShopDescription":items.ShopDescription,
+                "Zone": items.Zone,
+                "Class": items.Class,
+                "Moo": items.Moo,
+                "Building": items.Building,
+                "Road": items.Road,
+                "Sub_District":items.Sub_District,
+                "District": items.District,
+                "City": items.City,
+                "Room": items.Room,
+                "ProductHighlight":items.ProductHighlight,
+                "ImageUrl": items.ImageUrl,
+                "IsMyTrip": items.IsMyTrip,
+                "CouponType": items.CouponType,
+                "Distance": distance
+                }
+              
+                i++;
+            })
+
+            for(var j = 0 ; j < array.length ; j++){
+                array.sort(function(a, b){return a.Distance - b.Distance});  
+                console.log(array[i])
+            }
+
+            return _.map((array), (items) => {
+                //console.log(items)
                 return(
                     <View>
                         {this.renderCardData(items)}
                     </View>
                 )
             })
+
+
         }else if(this.state.sortby === false){
-            return _.map((this.state.item.StaticLocation), (items) => {
+            var array = [];
+            var sortItem = [];
+            var i = 0;
+            _.map((this.state.item.StaticLocation), (items) => {
+                // array = items;
+                sortItem[i] = items;
+                i++
+            })
+           for(var j = 0 ; j < sortItem.length ; j++){
+                sortItem.sort(function(a, b){return b.Rating - a.Rating});
+                //console.log(sortItem[j]);   
+           }
+          
+            return _.map((sortItem), (items) => {
+                console.log(items)
                 return(
                     <View>
-                        {this.renderCardDataSort(items)}
+                        {this.renderCardData(items)}
                     </View>
                 )
-                console.log(items)
             })
+
         }
     }
     
     _renderLocation(items){
-        console.log('Location',this.state.lat,this.state.long)
+        //console.log('Location',this.state.lat,this.state.long)
         var distance = '';
         if(this.state.lat === undefined){
         return(
-            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 ก.ม</ButtonLocal>
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 กม.</ButtonLocal>
         )
         }else{
             distance = geolib.getDistanceSimple(
@@ -126,28 +196,13 @@ export class Restaurants extends Component {
                 {latitude: items.Latitude, longitude: items.Longitude}
             );
            distance = distance / 1000
-           console.log(distance , 'Km')
+           //console.log(distance , 'Km')
            distance = distance.toFixed(2);
            return(
-                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} ก.ม</ButtonLocal>
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} กม.</ButtonLocal>
            )
         }
     }
-
-
-    renderCardDataSort(items){
-        const myData = [].concat(items)
-        .sort((a, b) => a.Rating > b.Rating)
-        .map((item, i) => (itemss) => {
-            return(
-                <View>
-                    {this.renderCardData(itemss)}
-                </View>
-            )
-        })
-        console.log(myData)
-    }
-
 
 
     renderCardData(items){
@@ -178,7 +233,7 @@ export class Restaurants extends Component {
                                 
                                 <View style={{ flex: 2 ,flexDirection: 'column'}}>
                                     <View style= {{ flexDirection: 'row' , height: 40}}>
-                                       <View style={{ flex: 1 , marginRight: 20} }>
+                                       <View style={{ flex: 1 , marginRight: 15} }>
                                             <ButtonStar style={styles.buttonStarStyle}
                                             > 
                                             {items.Rating}
@@ -315,7 +370,7 @@ const styles = StyleSheet.create({
     },
     buttonLocalStyle: {
         backgroundColor: '#ffffff',
-        width: 85,
+        width: 90,
     },
 })
 
