@@ -32,7 +32,7 @@ export class HomeMenuScreens extends Component {
     renderBlogContent(){
         return (
             
-            <View style={{ flex:5,alignItems:'center',justifyContent:'space-around'}}>
+            <View style={{ flex:6,alignItems:'center',justifyContent:'space-around'}}>
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
                   
                     
@@ -121,9 +121,9 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')}
                                 />
-                                <View style={{flexDirection:'column', alignItems:'center'}}>
+                                <View style={{flexDirection:'column', alignItems:'center',justifyContent: 'center'}}>
                                     <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Schools and Government offices 
+                                         Schools and Government offices 
                                     </Text> 
                                 </View> 
                         </TouchableOpacity>
@@ -166,10 +166,10 @@ export class HomeMenuScreens extends Component {
                 <Header headerText="" 
                 backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
                 headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-                <Card style={{flex:1,backgroundColor: '#ffffff'}}>
+                <View style={{flex:1,backgroundColor: '#ffffff'}}>
                     {this.renderHeadingText()}
                     {this.renderBlogContent()}
-                </Card>
+                </View>
             </View>
         )
     }

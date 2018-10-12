@@ -6,7 +6,9 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Dimensions
+    Dimensions,
+    Platform,
+    StatusBar
 } from 'react-native'
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
@@ -32,6 +34,11 @@ const config = {
         }
 };
 
+const MyStatusBar = ({backgroundColor, ...props}) => (
+    <View style={[styles.statusBar, { backgroundColor }]}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+);
 
 export class GiftVoucherScreen extends Component {
   
@@ -177,3 +184,19 @@ class ItemDetail extends Component {
         )
     }
 }
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#F5FCFF',
+    },
+    statusBar: {
+        height: STATUSBAR_HEIGHT,
+    },
+    appBar: {
+        backgroundColor:'#52BDE8',
+        height: APPBAR_HEIGHT,
+  },
+});

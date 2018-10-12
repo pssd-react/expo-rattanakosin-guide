@@ -69,7 +69,7 @@ export class Restaurants extends Component {
         {enableHighAccuracy: true}
 
         );
-     console.log('component',this.state.lat,this.state.long)
+    // console.log('component',this.state.lat,this.state.long)
     }
 
     componentWillMount() {
@@ -144,7 +144,7 @@ export class Restaurants extends Component {
 
             for(var j = 0 ; j < array.length ; j++){
                 array.sort(function(a, b){return a.Distance - b.Distance});  
-                console.log(array[i])
+               // console.log(array[i])
             }
 
             return _.map((array), (items) => {
@@ -172,7 +172,7 @@ export class Restaurants extends Component {
            }
           
             return _.map((sortItem), (items) => {
-                console.log(items)
+                //console.log(items)
                 return(
                     <View>
                         {this.renderCardData(items)}
@@ -279,18 +279,18 @@ export class Restaurants extends Component {
     }
 
     onImgSlidePress(key){
-        console.log( key )
+        //console.log( key )
         this.props.navigation.navigate('shopDetail', {key})
     }
 
     changeStatusSortDistance(){
         this.setState({ sortby: true })
-        console.log(this.state.sortby)
+       // console.log(this.state.sortby)
     }
 
     changeStatusSortScore(){
         this.setState({ sortby: false })
-        console.log(this.state.sortby)
+      //  console.log(this.state.sortby)
     }
 
     render(){
