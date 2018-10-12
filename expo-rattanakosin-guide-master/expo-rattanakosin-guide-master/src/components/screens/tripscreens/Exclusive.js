@@ -8,7 +8,7 @@ import {
 import { Card } from '../../common/Card'
 import { CardSection } from '../../common/CardSection'
 import { TripImg } from '../../common/TripImg'
-export class Exclusive extends Component{
+class Exclusive extends Component{
   
 
         render(){
@@ -20,7 +20,8 @@ export class Exclusive extends Component{
                         </View>
                     </CardSection>
                     <View style={styles.container}>
-                        <Text style={styles.text} >Comming Soon </Text>
+                        {/* <Text style={styles.text} > </Text> */}
+                        <Image ></Image>
                     </View>
                 </Card>
                 
@@ -40,3 +41,5 @@ const styles = StyleSheet.create({
         fontSize : 20
     }
 })
+
+export default Exclusive

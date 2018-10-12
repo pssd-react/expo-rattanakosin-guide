@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {AppRegistry, Text, View, StatusBar, TextInput, Animated } from 'react-native';
+import { Text, View, StatusBar, TextInput, Animated } from 'react-native';
 
 class LabelInput extends Component {
   state ={
@@ -29,11 +29,11 @@ class LabelInput extends Component {
       left: 0,
       top: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange:[30, 0]
+        outputRange:[26, 0]
       }),
       fontSize: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
-        outputRange: [20, 16]
+        outputRange: [20, 14]
       }),
       color: this._animatedIsFocused.interpolate({
         inputRange: [0, 1],
@@ -71,10 +71,10 @@ const styles = {
     },
     containerStyle: {
       flex: 1,
-      paddingTop: 18,
+      paddingTop: 16,
     },
     inputBox: {
-      height: 60, 
+      height: 50, 
       fontSize: 20, 
       color: '#000', 
       borderBottomColor: '#555',
