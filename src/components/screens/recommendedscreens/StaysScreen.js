@@ -93,11 +93,13 @@ export class StaysScreen extends Component {
 
         if(this.state.sortby === undefined){
             return _.map((this.state.item.StaticLocation), (items) => {
-                return(
-                    <View>
-                        {this.renderCardData(items)}
-                    </View>
-                )
+                if(items.HighlightShop === 'Y'){
+                    return(
+                        <View>
+                            {this.renderCardData(items)}
+                        </View>
+                    )
+                }
             })
         }else if(this.state.sortby === true){
             var distance = '';
@@ -154,11 +156,13 @@ export class StaysScreen extends Component {
 
             return _.map((array), (items) => {
                 //console.log(items)
-                return(
-                    <View>
-                        {this.renderCardData(items)}
-                    </View>
-                )
+                if(items.HighlightShop === 'Y'){
+                    return(
+                        <View>
+                            {this.renderCardData(items)}
+                        </View>
+                    )
+                }
             })
         }else if(this.state.sortby === false){
             var array = [];
@@ -176,11 +180,13 @@ export class StaysScreen extends Component {
           
             return _.map((sortItem), (items) => {
                 //console.log(items)
-                return(
-                    <View>
-                        {this.renderCardData(items)}
-                    </View>
-                )
+                if(items.HighlightShop === 'Y'){
+                    return(
+                        <View>
+                            {this.renderCardData(items)}
+                        </View>
+                    )
+                }
             })
         }
     }
