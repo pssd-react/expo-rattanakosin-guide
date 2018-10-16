@@ -179,6 +179,15 @@ class ShopDescriptionScreen extends Component {
         }
     }
 
+    onViewMorePress(){
+        this.props.screenProps.navigation.navigate({
+            routeName: 'moreDescription',
+            params: {
+                detailSec: this.state.detailSec
+            }
+        })
+    }
+
     onRecommendPress(key){
         console.log(key)
         this.props.screenProps.navigation.navigate({
@@ -266,46 +275,6 @@ class ShopDescriptionScreen extends Component {
                 {shopDescription}
             </Text>)
         }
-    }
-
-    renderContact() {
-        let shopPhone = ''
-        _.map(this.state.detailSec, items => {
-            // console.log(items.ShopDescription);
-            if (items.ShopPhone !== undefined) {
-                shopPhone = items.ShopPhone
-            }
-        })
-        if (shopPhone !== '') {
-            return (
-
-                <View style={{ flexDirection: 'row' }}>
-                    <Image
-                        style={{ width: 20, height: 20 }}
-                        source={require('../../../components/images/drawable-hdpi/ic_phone.webp')}
-                    />
-                    <TouchableOpacity onPress={() => null}>
-                        <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
-                            {shopPhone}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-
-            )
-        } else {
-            return (
-                <View style={{ flexDirection: 'row' }}>
-                    <Image
-                        style={{ width: 20, height: 20 }}
-                        source={require('../../../components/images/drawable-hdpi/ic_phone.webp')}
-                    />
-                    <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
-                        -
-                        </Text>
-                </View>
-            )
-        }
-
     }
 
     renderTextModal() {
@@ -413,7 +382,7 @@ class ShopDescriptionScreen extends Component {
                     }}>
 
                     {this.renderDecription()}
-                    <TouchableWithoutFeedback onPress={() => null}>
+                    <TouchableWithoutFeedback onPress={() => this.onViewMorePress()}>
                         <View>
                             <Text style={{ color: 'purple', textAlign: 'center' }}>
                                 More detail...
