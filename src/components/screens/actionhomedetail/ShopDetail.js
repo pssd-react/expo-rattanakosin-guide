@@ -17,6 +17,7 @@ import { DetailMenu, Promotion, GoogleMap, ReviewMenu } from './shopscreens'
 import axios from 'axios'
 import _ from 'lodash'
 import { Rating } from 'react-native-ratings';
+import StarRating from 'react-native-star-rating';
 
 var data = {
   "RqAppID": "1234",
@@ -39,7 +40,7 @@ class ShopDetail extends Component {
     item: []
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.startHeaderHeight = 80
     if (Platform.OS == 'android') {
       this.startHeaderHeight = 100 + StatusBar.currentHeight
@@ -83,15 +84,16 @@ class ShopDetail extends Component {
               </Text>
             </View>
             <View style={{ flexDirection: 'row' }}>
-              <Text>
+              <Text style={{color: 'yellow'}}>
                 {items.Rating}
               </Text>
-              <Rating
-                style={{ marginLeft: 10 }}
-                showReadOnlyText
-                imageSize={20}
-                readonly
-                startingValue={items.Rating}
+              <StarRating
+                disabled={true}
+                containerStyle={{ width: 100, }}
+                maxStars={5}
+                rating={items.Rating}
+                fullStarColor={'yellow'}
+                starSize={20}
               />
               <Text style={{ marginLeft: 10 }}>
                 ({items.TotalReview})
