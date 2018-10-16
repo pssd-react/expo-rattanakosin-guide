@@ -47,6 +47,10 @@ class ShopMoreDescriptionScreen extends Component {
     })
 
     if (shopPhone !== '') {
+        
+        let stThreeDigits = shopPhone.substr(0, 3)
+        let ndThreeDigits = shopPhone.substr(3, 3)
+        let lastFourDigits = shopPhone.substr(6, 4)
         return (
             <ScrollView>
         <Text
@@ -73,7 +77,7 @@ class ShopMoreDescriptionScreen extends Component {
                 />
                 <TouchableOpacity onPress={() => Communications.phonecall(shopPhone, true)}>
                     <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
-                        Tel. {shopPhone}
+                        Tel. {shopPhone.includes('-') ? shopPhone : stThreeDigits+'-'+ndThreeDigits+'-'+lastFourDigits}
                     </Text>
                 </TouchableOpacity>
             </View>
