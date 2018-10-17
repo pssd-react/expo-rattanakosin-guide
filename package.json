@@ -33,6 +33,7 @@
     "react-native-collapsing-toolbar": "^1.0.0-beta.9",
     "react-native-collapsingtoolbar": "^1.0.3",
     "react-native-communications": "^2.2.1",
+    "react-native-directed-scrollview": "^1.3.7",
     "react-native-elements": "^0.19.1",
     "react-native-firebase": "^4.3.8",
     "react-native-modal": "^6.5.0",

@@ -16,7 +16,6 @@ import { HeaderBackButton } from 'react-navigation'
 import { DetailScreen, ProScreen, MapScreen, ReviewScreen } from './navigationDetail'    
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import AnimatedHeader from '../../common/react-native-animated-header'
-
 const ios = Platform.OS === 'ios';
 const {width, height} = Dimensions.get('window');
 // from native-base
@@ -35,6 +34,7 @@ export class detail extends Component {
         super(props)
         this.state = {
             scrollY: new Animated.Value(0),
+            content: {},
             bottomSize: 250,
             index: 0,
             fontSize: 60,
@@ -147,6 +147,7 @@ export class detail extends Component {
                </Animated.View> 
                   
                 <ScrollView style={{flex: 1, }}
+                    contentContainerStyle={this.state.content}
                     scrollEventThrottle={16}
                     showsVerticalScrollIndicator={false}
                     onScroll={Animated.event(
@@ -207,6 +208,7 @@ export class detail extends Component {
                     </Animated.View>
              
                     <View style={{flex: 1, height:height-130}}>
+                    {/*
                         <TabView
                             navigationState={this.state}
                             renderScene={SceneMap({
@@ -217,7 +219,23 @@ export class detail extends Component {
                             })}
                             onIndexChange={index => this.setState({ index })}
                             initialLayout={{ width: Dimensions.get('window').width }}
-                        />        
+                        />        */}
+                        <ScrollView scrollDirection={'vertical'}>
+                            <View style={{ height: 200, backgroundColor: 'blue' }} />
+                            <View style={{ height: 200, backgroundColor: 'pink' }} />
+                            <View style={{ height: 200, backgroundColor: 'blue' }} />
+                            <View style={{ height: 200, backgroundColor: 'pink' }} />
+                            <View style={{ height: 200, backgroundColor: 'blue' }} />
+                            <View style={{ height: 200, backgroundColor: 'pink' }} />
+                            <View style={{ height: 200, backgroundColor: 'blue' }} />
+                            <View style={{ height: 200, backgroundColor: 'pink' }} />
+                            <View style={{ height: 200, backgroundColor: 'blue' }} />
+                            <View style={{ height: 200, backgroundColor: 'pink' }} />
+                            <View style={{ height: 200, backgroundColor: 'blue' }} />
+                            <View style={{ height: 200, backgroundColor: 'pink' }} />
+                        </ScrollView>
+								
+							
                     </View>
                    
                 </ScrollView>

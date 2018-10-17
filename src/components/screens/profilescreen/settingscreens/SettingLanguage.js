@@ -13,63 +13,125 @@ import {HeaderBackButton } from 'react-navigation'
 import {LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header} from '../../../common';
 import { SocialIcon } from 'react-native-elements'
 
-
-const listData = [
-    {'id': '1', 'section':'ไทย', 'language': 'ไทย', 'image': require('../../../images/drawable-hdpi/ic_correct_lang.webp')},
-    {'id': '2', 'section':'English', 'language': 'English', 'image': null},
-    {'id': '3', 'section':'中文', 'language': '中文', 'image': null},
-]
-
 class SettingLanguage extends Component{
     static navigationOptions = {header: null}
+    
     constructor(){
         super()
-        const ds = new ListView.DataSource({rowHasChanged: (r1, r2)=> r1 !== r2})
-
         this.state = {
-            dataSource : ds.cloneWithRows(listData),
+            setLanguage : "EN"
         }
     }
+
     onButtonGoBack(){
         this.props.navigation.popToTop()
     }
 
-    onRowPress(rowData){
-        if(rowData.id === '1'){
-           // this.props.navigation.navigate('Setting');
-        }else if(rowData.id === '2'){
-           // this.props.navigation.navigate('HowToUse');
-        }else if(rowData.id === '3'){
-           // this.props.navigation.navigate('AboutRattanakosin');
+    onLanguageTH(){
+        if(this.state.setLanguage === "TH"){
+            return (
+                <TouchableOpacity onPress={() => this.setState({setLanguage : "TH"}) }>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>ไทย</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ require('../../../images/drawable-hdpi/ic_correct_lang.webp') } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        }else{
+            return (
+                <TouchableOpacity onPress={() => this.setState({setLanguage : "TH"}) }>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>ไทย</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ null } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+        
+    }
+
+    onLanguageENG(){
+        if(this.state.setLanguage === "EN"){
+            return (
+                <TouchableOpacity onPress={() => this.setState({setLanguage : "EN"})}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>English</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image 
+                            source={ require('../../../images/drawable-hdpi/ic_correct_lang.webp') } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity> 
+            )
+        }else{
+            return(
+                <TouchableOpacity onPress={() => this.setState({setLanguage : "EN"}) }>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>English</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image source={ null } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
         }
     }
 
+    onLanguageCHAIN(){
+        if(this.state.setLanguage === "CHAIN"){
+            return (
+                <TouchableOpacity onPress={() => this.setState({setLanguage : "CHAIN"}) }>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>中文</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image source={ require('../../../images/drawable-hdpi/ic_correct_lang.webp') } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        }else{
+            return (
+                <TouchableOpacity onPress={() => this.setState({setLanguage : "CHAIN"}) }>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>中文</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image source={ null } /> 
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+        
+    }
+
     render(){
+        console.log(this.state.setLanguage)
         return (
             <View>
             <Header headerText="ภาษา" 
                 backgroundImage= {require('../../../images/drawable-hdpi/bg_more.webp')}
                 headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-            <ListView
-            dataSource={this.state.dataSource}
-            renderRow={(rowData) => {
-            
-                return (
-                <TouchableOpacity onPress={()=>this.onRowPress(rowData)}>
-                    <View style={styles.listViewContainer}>
-                        <View style={styles.listViewTextContainer}>
-                            <Text style={styles.listViewTextStyle}>{rowData.language}</Text>
-                        </View>
-                        <View style={styles.chevronContainerStyle}>
-                            <Image 
-                            source={ rowData.image } /> 
-                        </View>
-                    </View>
-                </TouchableOpacity>
-                )
-            }}
-            contentContainerStyle={{width:'100%', backgroundColor: '#DDDDDD'}}
-            />
+                {this.onLanguageTH()}
+                {this.onLanguageENG()}
+                {this.onLanguageCHAIN()}
             <View style={styles.viewBlockStyle}/>
             </View>
             

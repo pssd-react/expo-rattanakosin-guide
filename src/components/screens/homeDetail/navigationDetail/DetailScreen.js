@@ -6,6 +6,12 @@ import {
     ScrollView} from 'react-native'
 
 export class DetailScreen extends Component{
+    constructor() {
+		super();
+		this.state = {
+			content: {}
+		};
+	}
     getListItems = count => {
         const items = [];
         let i = 0;
@@ -24,13 +30,15 @@ export class DetailScreen extends Component{
 
     render(){
         return (
-            
-   <View style={styles.container}>
-                <ScrollView> 
+            <View style={styles.container}>
+                <ScrollView
+                	onTouchStart={(ev) => { this.setState({ content: { flex: 1 } }); }}
+                    onMomentumScrollEnd={(e) => { this.setState({ content: {} }); }}
+                    onScrollEndDrag={(e) => { this.setState({ content: {} }); }}> 
                     
-          {this.getListItems(20)}
-        </ScrollView>
-         </View>
+                {this.getListItems(20)}
+                </ScrollView>
+            </View>
         )
     }
 }
