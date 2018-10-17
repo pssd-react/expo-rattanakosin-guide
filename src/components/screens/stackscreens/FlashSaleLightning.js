@@ -279,7 +279,7 @@ class FlashSaleLightning extends Component {
           <Image
             source={require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
           />
-          <Text style={{ fontSize: 18, color: '#a6a6a6' }} > ไม่มีรายการโปรฟ้าฝ่า </Text>
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }} > ไม่มีรายการโปรฟ้าผ่า </Text>
         </View>
       )
     } else {

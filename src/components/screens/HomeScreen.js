@@ -38,6 +38,7 @@ import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
 import { ShopDetailScreen } from './ShopDetailScreen'
+import { ShopMoreDescriptionScreen } from './shopdetailscreens/ShopMoreDescriptionScreen';
 
 const data = {
     'RqAppID': '1234',
@@ -489,6 +490,9 @@ const HomeMenu = createStackNavigator({
     },
     shopDetail: {
         screen: ShopDetailScreen, navigationOptions: { header: null }
+    },
+    moreDescription: {
+        screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
     }
 })
 

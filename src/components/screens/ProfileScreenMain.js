@@ -62,7 +62,7 @@ class ProfileScreenMain extends Component {
 
     async loginWithFacebook() {
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
-            ('1886750428085436', { permissions: ['public_profile'] })
+            ('287789215160486', { permissions: ['public_profile'] })
 
         if (type === 'success') {
             const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`)

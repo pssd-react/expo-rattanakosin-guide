@@ -276,11 +276,21 @@ export class ShopDetailScreen extends Component {
                 }
                 if (count === 0) {
                     locate =
-                        (<Card style={{ flex: 1 }}>
-                            <CardSection>
-                                <Text>NONE OF IT EXIST!!!!!!</Text>
-                            </CardSection>
-                        </Card>)
+                        (<View style={{ flex: 1 }}>
+                            <Header headerText="ไม่พบข้อมูล"
+                                backgroundImage={require('../../components/images/drawable-hdpi/bg_more.webp')}
+                                headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
+                        <View style={{ flex: 1, justifyContent:'center', flexDirection:'row' }}>
+                            <View style={{ flex: 1, justifyContent:'center', alignItems:'center'}}>
+                                <Image
+                                    source={require('../../components/images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
+                                />
+                                <Text style={{fontSize: 18, marginTop: 20,color: '#a6a6a6'}}>
+                                ขออภัย ไม่มีข้อมูลของสถานที่นี้
+                            </Text>
+                            </View>
+                        </View>
+                        </View>)
                 }
             })
             return locate
