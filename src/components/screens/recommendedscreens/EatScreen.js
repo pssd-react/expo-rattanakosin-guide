@@ -47,7 +47,9 @@ export class EatScreen extends Component {
             lat: undefined,
             long: undefined,
             sortby: undefined,
-            sort: ''
+            sort: '',
+            bt_sort: '#ffffff',
+            bt_non: '#ffffff'
         }
       }
 
@@ -284,14 +286,35 @@ export class EatScreen extends Component {
     }
 
     changeStatusSortDistance(){
+        this.setState({ bt_non: '#d9d9d9' , bt_sort: '#ffffff' })
         this.setState({ sortby: true })
         console.log(this.state.sortby)
     }
 
     changeStatusSortScore(){
+        this.setState({ bt_sort: '#d9d9d9', bt_non: '#ffffff'  })
         this.setState({ sortby: false })
         console.log(this.state.sortby)
     }
+
+
+    buttonDistance(){
+        
+        return(
+        <Button style = {{ backgroundColor: this.state.bt_non ,borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
+             ระยะทาง
+        </Button>
+        )
+    }
+
+    buttonScore(){
+        return(
+        <Button style = {{ backgroundColor: this.state.bt_sort ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
+            ความนิยม
+        </Button>
+        )
+    }
+
 
     render(){
         
@@ -302,23 +325,19 @@ export class EatScreen extends Component {
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                     <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
                         <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
-                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
+                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 16}}> เรียงตาม </Text>
                         </View>
                         <View style = {{ flex: 2 , height: 30 , width: 80,marginTop: 15}}>
-                            <Button style = {{ backgroundColor: '#d9d9d9',borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
-                                ระยะทาง
-                            </Button>
+                            {this.buttonDistance()}
                         </View>
                         <View style = {{ flex: 2 ,height: 30 , width: 80,marginTop: 15 }}>
-                            <Button style = {{ backgroundColor: '#d9d9d9' ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
-                                ความนิยม
-                            </Button>
+                            {this.buttonScore()}
                         </View>
                     </View>
                     <View>
                         <ScrollView>
                             {this.renderItem()}
-                            <View style={{ height: 100 ,backgroundColor: '#ffffff',}} />
+                            <View style={{ height: 150 ,backgroundColor: '#ffffff',}} />
                         </ScrollView>
                     </View>
             </View>
