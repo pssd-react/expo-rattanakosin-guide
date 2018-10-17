@@ -26,7 +26,7 @@ const styles = {
         alignSelf: 'center',
         color: '#000000',
         fontSize: 16,
-        fontWeight: '600'
+        fontWeight: '300'
     },
     buttonStyle:{
         flex: 1,

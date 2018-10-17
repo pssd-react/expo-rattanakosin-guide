@@ -41,6 +41,7 @@ import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
 import { ShopDetailScreen } from './ShopDetailScreen'
 import { ShopMoreDescriptionScreen } from './shopdetailscreens/ShopMoreDescriptionScreen';
 import SearchScreen from './SearchScreen'
+import { SearchResultScreen } from './SearchResultScreen';
 
 const data = {
     'RqAppID': '1234',
@@ -503,6 +504,9 @@ const HomeMenu = createStackNavigator({
         screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
     },searchScreen: {
         screen: SearchScreen , navigationOptions: {header : null}
+    },
+    searchResultScreen: {
+        screen: SearchResultScreen, navigationOptions: {header: null}
     }
 })
 

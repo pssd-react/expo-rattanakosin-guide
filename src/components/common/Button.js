@@ -24,7 +24,7 @@ const styles = {
         alignSelf: 'center',
         color: '#0d0d0d',
         fontSize: 16,
-        fontWeight: '600',
+        fontWeight: '300',
         paddingTop: 10 ,
         paddingBottom: 10
     },

@@ -2,7 +2,8 @@ import React from 'react'
 import AppBottomNavigator from './src/components/AppBottomNavigator'
 import { StoreGlobal } from './src/components/config/GlobalState'
 import I18n from './src/components/config/i18n'
-
+import { SearchResultScreen } from './src/components/screens/SearchResultScreen'
+import { createStackNavigator } from 'react-navigation'
 INITIAL_STATE = {
   lang: 'th'
 }
@@ -20,7 +21,16 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <AppBottomNavigator />
+      <MainStack />
     )
   }
 }
+
+const MainStack = createStackNavigator({
+  mainApp : {
+    screen: AppBottomNavigator, navigationOptions: { header: null }
+  },
+  resSearchScreen : {
+    screen: SearchResultScreen, navigationOptions: { header: null }
+  }
+})
