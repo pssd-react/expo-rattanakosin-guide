@@ -11,6 +11,7 @@ import {
     StatusBar,
     TextInput,
     Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import {
     Restaurants,
@@ -39,6 +40,7 @@ import { createStackNavigator } from 'react-navigation'
 import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
 import { ShopDetailScreen } from './ShopDetailScreen'
 import { ShopMoreDescriptionScreen } from './shopdetailscreens/ShopMoreDescriptionScreen';
+import SearchScreen from './SearchScreen'
 
 const data = {
     'RqAppID': '1234',
@@ -57,6 +59,10 @@ class HomeScreen extends Component {
     static navigationOptions = { header: null }
     state = {
         state_item: ''
+    }
+
+    onSearchbarPress(){
+        this.props.navigation.navigate('searchScreen')
     }
 
     componentWillMount() {
@@ -91,9 +97,11 @@ class HomeScreen extends Component {
 
     _renderHeadBanner() {
         return (
+
             <ImageBackground
                 style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%' }}
                 source={require('../../components/images/drawable-hdpi/bg_platinum_main.webp')}>
+                <TouchableWithoutFeedback onPress={()=> this.onSearchbarPress()}>
                 <View style={{
                     width: '70%',
                     borderRadius: 8,
@@ -106,12 +114,12 @@ class HomeScreen extends Component {
                     marginTop: Platform.OS == 'android' ? 30 : null
                 }}>
                     <Icon name="search" size={20} style={{ marginRight: 10 }} />
-                    <TextInput
-                        underlineColorAndroid="transparent"
-                        placeholder="ค้นหา ..."
-                        placeholderTextColor="grey"
-                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} />
+                    <Text
+                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} >
+                        ค้นหา ...
+                        </Text>
                 </View>
+                </TouchableWithoutFeedback>
             </ImageBackground>
         )
     }
@@ -493,6 +501,8 @@ const HomeMenu = createStackNavigator({
     },
     moreDescription: {
         screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
+    },searchScreen: {
+        screen: SearchScreen , navigationOptions: {header : null}
     }
 })
 
