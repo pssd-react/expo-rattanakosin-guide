@@ -10,6 +10,11 @@ class SearchScreen extends Component {
     onButtonGoBack() {
         this.props.navigation.goBack()
     }
+    onClearPress(){
+        this.setState({
+            searchText: ''
+        })
+    }
 
     renderHeader() {
         return (
@@ -72,10 +77,12 @@ class SearchScreen extends Component {
                             alignItems: 'center',
                             flex: 1
                         }}>
+                        <TouchableWithoutFeedback onPress={()=> this.onClearPress()}>
                             <Image
                                 source={require('../images/drawable-hdpi/ic_clear_text_searc.webp')}
                                 style={{ height: 20, width: 20 }}
                             />
+                            </TouchableWithoutFeedback>
                         </View>
 
                     </View>

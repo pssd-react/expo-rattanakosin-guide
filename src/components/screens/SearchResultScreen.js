@@ -395,9 +395,17 @@ export class SearchResultScreen extends Component {
             )
         }else if(this.state.ndHeaderStatus === false){
             return (
-                <View>
-                    <Text>ไม่พบอะไรสักอย่าง ไอ้กากเอ้ย</Text>
-                </View>
+                <View style={{
+                    flex: 1,
+                    backgroundColor: '#f2f2f2',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                <Image
+                  source={require('../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
+                />
+                <Text style={{ fontSize: 18, color: '#a6a6a6' }} > ไม่พบข้อมูลที่ค้นหา </Text>
+              </View>
             )
         }
     }
@@ -406,9 +414,11 @@ export class SearchResultScreen extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText={this.state.searchText} 
+            <Header 
+            headerText={this.state.searchText} 
             backgroundImage= {require('../images/drawable-hdpi/bg_more.webp')}
-            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}
+            textContainerStyle={{flex:4, alignItems:'flex-start'}}/>
                     {this.renderSecondHeader()}
                     <View style={{height: '10%', position: 'absolute', bottom:0}}></View>
             </View>

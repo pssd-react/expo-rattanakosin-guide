@@ -4,6 +4,7 @@ import { StoreGlobal } from './src/components/config/GlobalState'
 import I18n from './src/components/config/i18n'
 import { SearchResultScreen } from './src/components/screens/SearchResultScreen'
 import { createStackNavigator } from 'react-navigation'
+import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
   lang: 'th'
 }
@@ -27,6 +28,9 @@ export default class App extends React.Component {
 }
 
 const MainStack = createStackNavigator({
+  introScreen : {
+    screen: IntroductionScreen, navigationOptions: { header: null }
+  },
   mainApp : {
     screen: AppBottomNavigator, navigationOptions: { header: null }
   },
