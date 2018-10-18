@@ -33,7 +33,9 @@ class SettingScreen extends Component {
 
     onRowPress(rowData) {
         if (rowData.id === '1') {
-            this.props.navigation.navigate('Language')
+            this.props.navigation.navigate({
+                routeName: 'Language'
+            })
         }
     }
 

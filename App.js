@@ -19,7 +19,7 @@ import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
   lang: 'th',
-  alreadyAccessed: false
+  alreadyAccessed: false,
 }
 
 export default class App extends React.Component {
@@ -40,6 +40,15 @@ export default class App extends React.Component {
     I18n.locale = StoreGlobal({ type: 'get', key: 'lang' })
   }
 
+  langSet =(lang)=>{
+    console.log(lang)
+    I18n.locale = lang
+    this.setState({
+      alreadyAccessed: false,
+      lang : lang
+    })
+  }
+
   renderIntroduction(){
     if(this.state.alreadyAccessed === false){
       return (
@@ -47,7 +56,7 @@ export default class App extends React.Component {
       )
     }else{
       return (
-        <MainStack />
+        <MainStack screenProps={{ langSet:this.langSet , lang : this.state.lang}} />
       )
     }
   }

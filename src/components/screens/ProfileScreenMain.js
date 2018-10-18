@@ -84,7 +84,10 @@ class ProfileScreenMain extends Component {
     }
 
     onListSetting() {
-        this.props.navigation.navigate('Setting')
+        
+        this.props.navigation.navigate({
+            routeName: 'Setting'
+        })
     }
 
     onListHowToUse() {

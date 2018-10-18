@@ -10,10 +10,25 @@ import {
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../../common'
 
-const listData = [
-    { 'id': '1', 'section': 'ไทย', 'language': 'ไทย', 'image': require('../../../images/drawable-hdpi/ic_correct_lang.webp') },
-    { 'id': '2', 'section': 'English', 'language': 'English', 'image': null },
-    { 'id': '3', 'section': '中文', 'language': '中文', 'image': null },
+var listData = [
+    {
+        'id': '1',
+        'section': 'ไทย',
+        'language': 'ไทย',
+        'code': 'th'
+    },
+    {
+        'id': '2',
+        'section': 'English',
+        'language': 'English',
+        'code': 'en'
+    },
+    {
+        'id': '3',
+        'section': '中文',
+        'language': '中文',
+        'code': 'ch'
+    },
 ]
 
 class SettingLanguage extends Component {
@@ -23,17 +38,21 @@ class SettingLanguage extends Component {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
         this.state = {
-            dataSource: ds.cloneWithRows(listData),
+            dataSource: ds.cloneWithRows(listData)
         }
     }
+
     onButtonGoBack() {
         this.props.navigation.popToTop()
     }
 
     onRowPress(rowData) {
         if (rowData.id === '1') {
+            this.props.screenProps.langSet('th')
         } else if (rowData.id === '2') {
+            this.props.screenProps.langSet('en')
         } else if (rowData.id === '3') {
+            this.props.screenProps.langSet('ch')
         }
     }
 
@@ -55,7 +74,9 @@ class SettingLanguage extends Component {
                                     </View>
                                     <View style={styles.chevronContainerStyle}>
                                         <Image
-                                            source={rowData.image} />
+                                            source={
+                                                rowData.code === this.props.screenProps.lang ? require('../../../images/drawable-hdpi/ic_correct_lang.webp') : null
+                                            } />
                                     </View>
                                 </View>
                             </TouchableOpacity>
