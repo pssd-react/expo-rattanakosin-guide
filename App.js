@@ -7,11 +7,19 @@ import { Accommodation } from './src/components/screens/itemscreens/Accommodatio
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
-  lang: 'th'
+  lang: 'th',
+  alreadyAccessed: false
 }
 
 export default class App extends React.Component {
   state = INITIAL_STATE
+
+  changeAccessingState =() =>{
+    this.setState({
+      alreadyAccessed: true
+    })
+  }
+
   componentWillMount() {
     this._defaultLangSetting(this.state.lang)
   }
@@ -21,17 +29,24 @@ export default class App extends React.Component {
     I18n.locale = StoreGlobal({ type: 'get', key: 'lang' })
   }
 
+  renderIntroduction(){
+    if(this.state.alreadyAccessed === false){
+      return (
+      <IntroductionScreen changeAccessingState={this.changeAccessingState} />
+      )
+    }else{
+      return (
+        <MainStack />
+      )
+    }
+  }
+
   render() {
-    return (
-      <MainStack />
-    )
+    return this.renderIntroduction()
   }
 }
 
 const MainStack = createStackNavigator({
-  introScreen : {
-    screen: IntroductionScreen, navigationOptions: { header: null }
-  },
   mainApp : {
     screen: AppBottomNavigator, navigationOptions: { header: null }
   },

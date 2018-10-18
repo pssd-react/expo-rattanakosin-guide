@@ -9,7 +9,7 @@ import {
 class IntroductionScreen extends Component{
     componentDidMount(){
         setTimeout(()=>{
-            this.props.navigation.navigate('mainApp')
+            this.props.changeAccessingState()
         },2000)
     }
 
