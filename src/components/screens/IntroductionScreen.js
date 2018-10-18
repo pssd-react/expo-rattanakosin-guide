@@ -5,7 +5,7 @@ class IntroductionScreen extends Component{
     componentDidMount(){
         setTimeout(()=>{
             this.props.navigation.navigate('mainApp')
-        },5000)
+        },2000)
     }
 
     render(){
