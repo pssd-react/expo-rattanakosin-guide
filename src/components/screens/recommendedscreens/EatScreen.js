@@ -237,21 +237,20 @@ export class EatScreen extends Component {
                                     
                                     <View style={{ flex: 2 ,flexDirection: 'column'}}>
                                         <View style= {{ flexDirection: 'row' , height: 40}}>
-                                            <View style={{ flex: 3} }>
+                                            <View style={{ flex: 5} }>
                                                 <ButtonStar style={styles.buttonStarStyle}
                                                 > 
                                                 {items.Rating}
                                                 </ButtonStar>
                                             </View>
-                                            <View style={{flex:0.4}}></View>
-                                            <View style={{ flex: 5, marginLeft: 5 }}>
+                                            <View style={{ flex: 7 }}>
                                                 {this._renderLocation(items)}
                                             </View>
-                                            <View style={{ flex: 3 ,marginLeft: 5 }}>
+                                            <View style={{ flex: 2 }}>
                                                 <ButtonHighlight style={styles.buttonHightLightStyle}>
                                                 </ButtonHighlight>
                                             </View>
-                                            <View  style={{ flex: 5}}/>
+                                            <View  style={{ flex: 6}}/>
 
                                         </View>
                                     
