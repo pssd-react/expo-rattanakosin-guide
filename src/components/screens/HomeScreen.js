@@ -374,7 +374,7 @@ class ItemDetail extends Component {
             //do something here
         }
         else if (key === '2') {
-            this.props.navigation.navigate('giftVou')
+            this.props.navigation.navigate('resGiftVoucherScreen')
         }
     }
 
@@ -390,16 +390,16 @@ class ItemDetail extends Component {
 
     onRecommendedPress(key) {
         if (key === '2') {
-            this.props.navigation.navigate('recomEat')
+            this.props.navigation.navigate('resEatScreen')
         }
         else if (key === '3') {
-            this.props.navigation.navigate('recomShop')
+            this.props.navigation.navigate('resShoppingScreen')
         }
         else if (key === '4') {
-            this.props.navigation.navigate('recomPlaces')
+            this.props.navigation.navigate('resPlacesScreen')
         }
         else if (key === '5') {
-            this.props.navigation.navigate('recomStays')
+            this.props.navigation.navigate('resStaysScreen')
         }
     }
 

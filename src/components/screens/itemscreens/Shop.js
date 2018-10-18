@@ -20,7 +20,7 @@ import {
     Button,
     Spinner,
     CardSection,
-    Header 
+    Header
 } from '../../common';
 
 var data = {
