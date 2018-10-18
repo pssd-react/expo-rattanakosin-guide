@@ -1,5 +1,10 @@
 import React, {Component} from 'react'
-import {View, Image, ImageBackground, Dimensions} from 'react-native'
+import {
+    View, 
+    Image, 
+    ImageBackground, 
+    Dimensions,
+    Text} from 'react-native'
 
 class IntroductionScreen extends Component{
     componentDidMount(){
@@ -18,7 +23,19 @@ class IntroductionScreen extends Component{
                 }}
                 source={require('./../images/drawable-hdpi/bg_welcome_splash.webp')}
                 >
-
+                    <View style={styles.imageContainerStyle}>
+                        <Image
+                        style={{
+                            aspectRatio: 0.75, 
+                            resizeMode: 'contain',}}
+                        source={require('./../images/drawable-hdpi/ic_splash_platinum.webp')}
+                        />
+                        <Text
+                        style={{fontSize:30, fontWeight:'bold', color:'white',}}
+                        >
+                            SERN Trip Guide</Text>
+                    </View>
+                    <Text style={{position:'absolute', bottom:10, alignSelf:'center',color:'white',}}>Powered By Digital Ventures.</Text>
                 </ImageBackground>
             </View>
         )
