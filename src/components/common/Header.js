@@ -2,7 +2,7 @@ import React from 'react';
 import { Text, View, ImageBackground } from 'react-native';
 
 const Header = (props) => {
-    const{ textStyle, viewStyle, thumbnailStyle } = styles;
+    const{ textStyle, viewStyle, thumbnailStyle, textContainerStyle } = styles;
     return (
         <ImageBackground
             source={ props.backgroundImage }
@@ -12,7 +12,7 @@ const Header = (props) => {
                 <View style={{justifyContent: 'flex-start', flex:1}}>
                  {props.headerLeft}
                 </View>
-                <View style={{justifyContent: 'center', alignItems:'center', flex:2 }}>
+                <View style={[textContainerStyle, props.textContainerStyle]}>
                     <Text style={[textStyle, props.fontStyle]} numberOfLines={props.numberOfLines} ellipsizeMode={props.ellipsizeMode}> {props.headerText} </Text>
                 </View>
                 <View style={{justifyContent: 'flex-end', flex:1 }}/>
@@ -45,6 +45,11 @@ const styles = {
         width:'100%'
         
     },
+    textContainerStyle:{
+        justifyContent: 'center', 
+        alignItems:'center',
+        flex:2 
+    }
 };
 
 //Make the component available to other parts of the app
