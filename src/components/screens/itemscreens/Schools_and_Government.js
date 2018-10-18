@@ -330,13 +330,13 @@ export class Schools_and_Government extends Component {
             return (
                 <View style={{flex:1}}>
                     <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
-                        <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
-                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
+                        <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20}}>
+                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> เรียงตาม </Text>
                         </View>
-                        <View style = {{ flex: 2 , height: 30 , width: 80,marginTop: 15}}>
+                        <View style = {{  flex: 3 , height: 30 , width: 80,marginTop: 15 }}>
                             {this.buttonDistance()}
                         </View>
-                        <View style = {{ flex: 2 ,height: 30 , width: 80,marginTop: 15 }}>
+                        <View style = {{ flex: 3 ,height: 30 , width: 80,marginTop: 15}}>
                             {this.buttonScore()}
                         </View>
                     </View>

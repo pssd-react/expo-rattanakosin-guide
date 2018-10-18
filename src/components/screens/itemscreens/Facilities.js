@@ -327,24 +327,24 @@ export class Facilities extends Component {
         else{
             return (
                 <View style={{flex:1}}>
-                    <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
-                        <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
-                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
-                        </View>
-                        <View style = {{ flex: 2 , height: 30 , width: 80,marginTop: 15}}>
-                            {this.buttonDistance()}
-                        </View>
-                        <View style = {{ flex: 2 ,height: 30 , width: 80,marginTop: 15 }}>
-                            {this.buttonScore()}
-                        </View>
+                <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
+                    <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20}}>
+                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> เรียงตาม </Text>
                     </View>
-                    <View>
-                        <ScrollView>
-                            {this.renderItem()}
-                            <View style={{ height: 50 ,backgroundColor: '#ffffff',}} />
-                        </ScrollView>
+                    <View style = {{  flex: 3 , height: 30 , width: 80,marginTop: 15 }}>
+                        {this.buttonDistance()}
+                    </View>
+                    <View style = {{ flex: 3 ,height: 30 , width: 80,marginTop: 15}}>
+                        {this.buttonScore()}
                     </View>
                 </View>
+                <View>
+                    <ScrollView>
+                        {this.renderItem()}
+                        <View style={{ height: 50 ,backgroundColor: '#ffffff',}} />
+                    </ScrollView>
+                </View>
+            </View>
             )
         }
     }
