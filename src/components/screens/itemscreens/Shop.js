@@ -317,6 +317,7 @@ export class Shop extends Component {
         </Button>
         )
     }
+    
     renderPageView(){
         if(this.state.loading === true){
             return (

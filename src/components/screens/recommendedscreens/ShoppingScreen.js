@@ -13,7 +13,7 @@ import { CardSection } from '../../common/CardSection'
 import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text'
-import { ButtonStar, ButtonLocal, ButtonHighlight ,Button } from '../../common'
+import { ButtonStar, ButtonLocal, ButtonHighlight ,Button, Spinner } from '../../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
 import geolib from 'geolib'
@@ -51,14 +51,15 @@ export class ShoppingScreen extends Component {
             sortby: undefined,
             sort: '',
             bt_sort: '#ffffff',
-            bt_non: '#ffffff'
+            bt_non: '#ffffff',
+            loading: true
         }
       }
 
     componentDidMount(){
          navigator.geolocation.getCurrentPosition(
         (position) => {
-            this.setState({lat: position.coords.latitude, long: position.coords.longitude});
+            this.setState({lat: position.coords.latitude, long: position.coords.longitude ,loading : false});
         },
 
         (error) => {alert("there was an error getting location")},
@@ -72,14 +73,14 @@ export class ShoppingScreen extends Component {
     componentWillMount() {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
-            .then(response => { this.setState({ item: response.data}) })
+            .then(response => { this.setState({ item: response.data ,   loading: true}) })
             .catch((error) => {
                 console.log('axios error:', error);
         });
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.goBack()
     }
 
     changeStatusSortDistance(){
@@ -239,66 +240,70 @@ export class ShoppingScreen extends Component {
     renderCardData(items){
         return (
             <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
-                <CardSection style={{height:40}}> 
-                            <View style={{flex:4,
-                                    justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
-                            <Image style={{width:30, height:30,marginRight:15}}          
-                                source={require('../../images/drawable-hdpi/ic_category_shop.webp')}
+            <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
+                <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
+                        <Image style={{width:30, height:30,marginRight:15}}
+                            source={ require('../../images/drawable-hdpi/ic_category_shop.webp')} 
+                        /> 
+                </View>
+                <View style={{flex:10}}>
+                <Text 
+                    style={styles.ViewTextStyle} 
+                    numberOfLines={1}
+                    ellipsizeMode={'tail'}
+                    > {items.LocationName} </Text>
+                </View>
+                <View style={{flex:1,}}>
+                    <Image
+                        style={{width:25, height:30,}}
+                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                    />
+                </View>
+            </CardSection>
+            <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
+                    <View style={styles.ViewContainer}>
+                            <View style={{flex: 1 }}>
+                            <Image style={{width:110, height:150}}
+                                source={{ uri: items.ImageUrl}} 
                             /> 
-                                <Text style={styles.ViewTextStyle}> {items.LocationName} </Text>
                             </View>
-                            <View style={{flex:1,alignItems:'flex-end'}}>
-                                <Image
-                                    style={{width:20, height:20 }}
-                                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                />
-                            </View>
-                </CardSection>
-                <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
-                        <View style={styles.ViewContainer}>
-                                <View style={{flex: 1  }}>
-                                <Image style={{width:100, height:130}}
-                                    source={{ uri: items.ImageUrl}} 
-                                /> 
-                                </View>
-                                
-                                <View style={{ flex: 2 ,flexDirection: 'column'}}>
-                                    <View style= {{ flexDirection: 'row' , height: 40}}>
-                                        <View style={{ flex: 1 , marginRight: 20} }>
-                                            <ButtonStar style={styles.buttonStarStyle}
-                                            > 
-                                            {items.Rating}
-                                            </ButtonStar>
-                                        </View>
-                                        <View style={{ flex: 2, marginLeft: 5 , marginRight: 15}}>
-                                            {this._renderLocation(items)}
-                                        </View>
-                                        <View style={{ flex: 1 ,marginLeft: 5 }}>
-                                            <ButtonHighlight style={styles.buttonHightLightStyle}>
-                                            </ButtonHighlight>
-                                        </View>
-                                        <View  style={{ flex: 3}}/>
+                            
+                            <View style={{ flex: 2 ,flexDirection: 'column'}}>
+                                <View style= {{ flexDirection: 'row' , height: 40}}>
+                                    <View style={{ flex: 3} }>
+                                        <ButtonStar style={styles.buttonStarStyle}
+                                        > 
+                                        {items.Rating}
+                                        </ButtonStar>
+                                    </View>
+                                    <View style={{flex:0.4}}></View>
+                                    <View style={{ flex: 5, marginLeft: 5 }}>
+                                        {this._renderLocation(items)}
+                                    </View>
+                                    <View style={{ flex: 3 ,marginLeft: 5 }}>
+                                        <ButtonHighlight style={styles.buttonHightLightStyle}>
+                                        </ButtonHighlight>
+                                    </View>
+                                    <View  style={{ flex: 5}}/>
 
-                                    </View>
-                                 
-                                    <View style= {{ flex: 1  }}>
-                                        <Text />
-                                        <ViewMoreText
-                                            numberOfLines={3}
-                                            renderViewMore={this.renderViewMore}
-                                            renderViewLess={this.renderViewLess}
-                                        >
-                                            <Text>
-                                                {items.ShopDescription}
-                                            </Text>
-                                        </ViewMoreText>
-                                    </View>
                                 </View>
-                        </View>
-                </CardSection>
-            </TouchableOpacity>
-           
-    
+                            
+                                <View style= {{ flex: 1 }}>
+                                    <Text />
+                                    <ViewMoreText
+                                        numberOfLines={3}
+                                        renderViewMore={this.renderViewMore}
+                                        renderViewLess={this.renderViewLess}
+                                    >
+                                        <Text>
+                                            {items.ShopDescription}
+                                        </Text>
+                                    </ViewMoreText>
+                                </View>
+                            </View>
+                    </View>
+            </CardSection>
+        </TouchableOpacity>
         )
     }
 
@@ -318,6 +323,37 @@ export class ShoppingScreen extends Component {
         this.props.navigation.navigate('shopDetail', {key})
     }
 
+    renderPageView(){
+        if(this.state.loading === true){
+            return (
+                <Spinner/>
+            )
+        }
+        else{
+            return (
+                <View style={{flex:1}}>
+                <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
+                    <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20}}>
+                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> เรียงตาม </Text>
+                    </View>
+                    <View style = {{  flex: 3 , height: 30 , width: 80,marginTop: 15 }}>
+                        {this.buttonDistance()}
+                    </View>
+                    <View style = {{ flex: 3 ,height: 30 , width: 80,marginTop: 15}}>
+                        {this.buttonScore()}
+                    </View>
+                </View>
+                <View>
+                    <ScrollView>
+                        {this.renderItem()}
+                        <View style={{ height: 50 ,backgroundColor: '#ffffff',}} />
+                    </ScrollView>
+                </View>
+            </View>
+            )
+        }
+    }
+
 
     render(){
         return (
@@ -325,23 +361,7 @@ export class ShoppingScreen extends Component {
             <Header headerText="Recommend Shop" 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
-                    <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
-                        <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
-                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
-                        </View>
-                        <View style = {{ flex: 2 , height: 30 , width: 80,marginTop: 15}}>
-                            {this.buttonDistance()}
-                        </View>
-                        <View style = {{ flex: 2 ,height: 30 , width: 80,marginTop: 15 }}>
-                            {this.buttonScore()}
-                        </View>
-                    </View>
-                    <View>
-                        <ScrollView>
-                            {this.renderItem()}
-                            <View style={{ height: 150 ,backgroundColor: '#ffffff',}} />
-                        </ScrollView>
-                    </View>
+                {this.renderPageView()}
             </View>
         )
     }
