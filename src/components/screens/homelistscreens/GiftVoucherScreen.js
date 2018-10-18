@@ -60,7 +60,7 @@ export class GiftVoucherScreen extends Component {
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.goBack()
     }
 
     

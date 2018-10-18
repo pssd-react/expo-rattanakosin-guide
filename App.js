@@ -15,6 +15,13 @@ import {
   Accommodation
 } from './src/components/screens/itemscreens/'
 import  PromotionDetail  from './src/components/screens/stackscreens/PromotionDetail'
+import { GiftVoucherScreen } from './src/components/screens/homelistscreens/GiftVoucherScreen'
+import {
+  EatScreen,
+  ShoppingScreen,
+  StaysScreen,
+  PlacesScreen
+} from './src/components/screens/recommendedscreens/'
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
@@ -102,5 +109,20 @@ const MainStack = createStackNavigator({
   },
   resPromotionDetail : {
     screen: PromotionDetail , navigationOptions: { header: null }
+  },
+  resGiftVoucherScreen : {
+    screen: GiftVoucherScreen , navigationOptions: { header: null }
+  },
+  resEatScreen : {
+    screen: EatScreen , navigationOptions: { header: null }
+  },
+  resShoppingScreen : {
+    screen: ShoppingScreen , navigationOptions: { header: null }
+  },
+  resStaysScreen : {
+    screen: StaysScreen , navigationOptions: { header: null }
+  },
+  resPlacesScreen : {
+    screen: PlacesScreen , navigationOptions: { header: null }
   }
 })

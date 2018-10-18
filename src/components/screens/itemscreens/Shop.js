@@ -20,7 +20,7 @@ import {
     Button,
     Spinner,
     CardSection,
-    Header 
+    Header
 } from '../../common';
 
 var data = {
@@ -317,6 +317,7 @@ export class Shop extends Component {
         </Button>
         )
     }
+    
     renderPageView(){
         if(this.state.loading === true){
             return (
