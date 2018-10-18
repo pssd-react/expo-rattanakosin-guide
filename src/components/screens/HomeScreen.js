@@ -464,9 +464,9 @@ const HomeMenu = createStackNavigator({
     shop: {
         screen: Shop, navigationOptions: { header: null }
     },
-    accommodation: {
-        screen: Accommodation, navigationOptions: { header: null }
-    },
+    // accommodation: {
+    //     screen: Accommodation, navigationOptions: { header: null }
+    // },
     commercial_areas: {
         screen: Commercial_Areas, navigationOptions: { header: null }
     },
@@ -502,7 +502,8 @@ const HomeMenu = createStackNavigator({
     },
     moreDescription: {
         screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
-    },searchScreen: {
+    }
+    ,searchScreen: {
         screen: SearchScreen , navigationOptions: {header : null}
     },
     searchResultScreen: {

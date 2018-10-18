@@ -3,6 +3,7 @@ import AppBottomNavigator from './src/components/AppBottomNavigator'
 import { StoreGlobal } from './src/components/config/GlobalState'
 import I18n from './src/components/config/i18n'
 import { SearchResultScreen } from './src/components/screens/SearchResultScreen'
+import { Accommodation } from './src/components/screens/itemscreens/Accommodation'
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
@@ -36,5 +37,8 @@ const MainStack = createStackNavigator({
   },
   resSearchScreen : {
     screen: SearchResultScreen, navigationOptions: { header: null }
+  },
+  resAccommondation : {
+    screen: Accommodation, navigationOptions: { header: null }
   }
 })

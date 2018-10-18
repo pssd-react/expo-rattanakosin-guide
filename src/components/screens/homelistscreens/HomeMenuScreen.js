@@ -75,7 +75,7 @@ export class HomeMenuScreens extends Component {
                 
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
 
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('accommodation')} 
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resAccommondation')} 
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >
                                 <Image
