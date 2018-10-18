@@ -36,7 +36,7 @@ export class HomeMenuScreens extends Component {
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
                   
                     
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('restaurants')}
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resRestaurants')}
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >
                                 <Image
@@ -48,7 +48,7 @@ export class HomeMenuScreens extends Component {
                                 </Text>
                         </TouchableOpacity>
                    
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('travel')}  
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resTravel')}  
                          style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                          >
                                 <Image
@@ -60,7 +60,7 @@ export class HomeMenuScreens extends Component {
                                 </Text>
                         </TouchableOpacity>
                   
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('shop')}
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resShop')}
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >
                                 <Image
@@ -87,7 +87,7 @@ export class HomeMenuScreens extends Component {
                                 </Text>
                         </TouchableOpacity>
                  
-                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('commercial_areas')} 
+                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('resCommercial_Areas')} 
                          style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                          >
                                 <Image
@@ -99,7 +99,7 @@ export class HomeMenuScreens extends Component {
                                 </Text>
                         </TouchableOpacity>
                    
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('bank')}
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resBank')}
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >           
                                 <Image
@@ -114,7 +114,7 @@ export class HomeMenuScreens extends Component {
 
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
 
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('schools_and_government')} 
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resSchools_and_Government')} 
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >     
                                 <Image
@@ -130,7 +130,7 @@ export class HomeMenuScreens extends Component {
                    
 
                     
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('services')} 
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resServices')} 
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >       
                                 <Image
@@ -143,7 +143,7 @@ export class HomeMenuScreens extends Component {
                            
                         </TouchableOpacity>
 
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('facilities')} 
+                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resFacilities')} 
                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
                         >
                                 <Image

@@ -8,19 +8,20 @@ import {
     ScrollView,
     Dimensions
 } from 'react-native'
-import { Card  } from '../../common/Card';
-import { CardSection } from '../../common/CardSection';
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
-import { ButtonStar,ButtonLocal,Button } from '../../common';
 import { HeaderBackButton } from 'react-navigation'
-import { Header } from '../../common';
 import geolib from 'geolib'
-
-
-
+import { 
+    ButtonStar,
+    ButtonLocal,
+    Button,
+    Spinner,
+    CardSection,
+    Header 
+} from '../../common';
 
 var data = {
 	"RqAppID":"1234",
@@ -56,14 +57,15 @@ export class Restaurants extends Component {
             sortby: undefined,
             sort: '',
             bt_sort: '#ffffff',
-            bt_non: '#ffffff'
+            bt_non: '#ffffff',
+            loading: true
         }
       }
 
     componentDidMount(){
         navigator.geolocation.getCurrentPosition(
         (position) => {
-            this.setState({lat: position.coords.latitude, long: position.coords.longitude});
+            this.setState({lat: position.coords.latitude, long: position.coords.longitude,  loading : false});
         },
 
         (error) => {alert("there was an error getting location")},
@@ -77,14 +79,14 @@ export class Restaurants extends Component {
     componentWillMount() {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
-            .then(response => { this.setState({ item: response.data}) })
+            .then(response => { this.setState({ item: response.data,loading : true}) })
             .catch((error) => {
                 console.log('axios error:', error);
         });
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.goBack()
     }
     
     renderItem() {
@@ -206,66 +208,71 @@ export class Restaurants extends Component {
         }
     }
 
+    
 
     renderCardData(items){
         return (
             <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
-                <CardSection style={{height:40}}> 
-                            <View style={{flex:4,
-                                    justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
-                            <Image style={{width:30, height:30,marginRight:15}}
-                                source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
-                            /> 
-                                <Text style={styles.ViewTextStyle}> {items.LocationName} </Text>
-                            </View>
-                            <View style={{flex:1,alignItems:'flex-end'}}>
-                                <Image
-                                    style={{width:20, height:20 }}
-                                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                />
-                            </View>
-                </CardSection>
-                <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
-                        <View style={styles.ViewContainer}>
-                                <View style={{flex: 1  }}>
-                                <Image style={{width:100, height:130}}
-                                    source={{ uri: items.ImageUrl}} 
+            <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
+                        <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
+                                <Image style={{width:30, height:30,marginRight:15}}
+                                    source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
                                 /> 
-                                </View>
-                                
-                                <View style={{ flex: 2 ,flexDirection: 'column'}}>
-                                    <View style= {{ flexDirection: 'row' , height: 40}}>
-                                       <View style={{ flex: 1 , marginRight: 15} }>
-                                            <ButtonStar style={styles.buttonStarStyle}
-                                            > 
-                                            {items.Rating}
-                                            </ButtonStar>
-                                        </View>
-                                        <View style={{ flex: 2, marginLeft: 5 , marginRight: 15}}>
-                                        {this._renderLocation(items)}
-                                        </View>
-                                        <View  style={{ flex: 3}}/>
-
-                                    </View>
-                                 
-                                    <View style= {{ flex: 1  }}>
-                                        <Text />
-                                        <ViewMoreText
-                                            numberOfLines={3}
-                                            renderViewMore={this.renderViewMore}
-                                            renderViewLess={this.renderViewLess}
-                                        >
-                                            <Text>
-                                                {items.ShopDescription}
-                                            </Text>
-                                        </ViewMoreText>
-                                    </View>
-                                </View>
                         </View>
-                </CardSection>
-            </TouchableOpacity>
-           
-    
+                        <View style={{flex:10}}>
+                        <Text 
+                            style={styles.ViewTextStyle} 
+                            numberOfLines={1}
+                            ellipsizeMode={'tail'}
+                            > {items.LocationName} </Text>
+                        </View>
+                        <View style={{flex:1,}}>
+                            <Image
+                                style={{width:25, height:30,}}
+                                source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                            />
+                        </View>
+            </CardSection>
+            <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
+                    <View style={styles.ViewContainer}>
+                            <View style={{flex: 1 }}>
+                            <Image style={{width:110, height:150}}
+                                source={{ uri: items.ImageUrl}} 
+                            /> 
+                            </View>
+                            
+                            <View style={{ flex: 2 ,flexDirection: 'column'}}>
+                                <View style= {{ flexDirection: 'row' , height: 40}}>
+                                   <View style={{ flex: 5} }>
+                                        <ButtonStar style={styles.buttonStarStyle}
+                                        > 
+                                        {items.Rating}
+                                        </ButtonStar>
+                                    </View>
+                                    <View style={{flex:0.3}}></View>
+                                    <View style={{ flex: 11, marginLeft: 5 , marginRight: 15}}>
+                                    {this._renderLocation(items)}
+                                    </View>
+                                    <View  style={{ flex: 5}}/>
+
+                                </View>
+                             
+                                <View style= {{ flex: 1 }}>
+                                    <Text />
+                                    <ViewMoreText
+                                        numberOfLines={3}
+                                        renderViewMore={this.renderViewMore}
+                                        renderViewLess={this.renderViewLess}
+                                    >
+                                        <Text>
+                                            {items.ShopDescription}
+                                        </Text>
+                                    </ViewMoreText>
+                                </View>
+                            </View>
+                    </View>
+            </CardSection>
+        </TouchableOpacity>
         )
     }
 
@@ -314,13 +321,15 @@ export class Restaurants extends Component {
         </Button>
         )
     }
-
-    render(){
-        return (
-            <View style={{flex:1}}>
-            <Header headerText="Restaurant" 
-            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
-            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+    renderPageView(){
+        if(this.state.loading === true){
+            return (
+                <Spinner/>
+            )
+        }
+        else{
+            return (
+                <View style={{flex:1}}>
                     <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
                         <View style = {{ flex: 1 , justifyContent: 'center' , marginLeft: 20 }}>
                             <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18}}> เรียงตาม </Text>
@@ -335,9 +344,20 @@ export class Restaurants extends Component {
                     <View>
                         <ScrollView>
                             {this.renderItem()}
-                            <View style={{ height: 150 ,backgroundColor: '#ffffff',}} />
+                            <View style={{ height: 50 ,backgroundColor: '#ffffff',}} />
                         </ScrollView>
                     </View>
+                </View>
+            )
+        }
+    }
+    render(){
+        return (
+            <View style={{flex:1}}>
+            <Header headerText="Restaurant" 
+            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+                {this.renderPageView()}
             </View>
         )
     }

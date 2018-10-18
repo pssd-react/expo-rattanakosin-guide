@@ -128,7 +128,7 @@ class HomeScreen extends Component {
     _renderFloatingMenu() {
         return (
             <CardSection style={{ flex: 1, bottom: 40, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('restaurants')} >
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('resRestaurants')} >
                     <View style={styles.imgLeft}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -139,7 +139,7 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('travel')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('resTravel')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -150,7 +150,7 @@ class HomeScreen extends Component {
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('shop')}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('resShop')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -454,33 +454,6 @@ const HomeMenu = createStackNavigator({
     },
     Menu: {
         screen: HomeMenuScreens, navigationOptions: { header: null }
-    },
-    restaurants: {
-        screen: Restaurants, navigationOptions: { header: null }
-    },
-    travel: {
-        screen: Travel, navigationOptions: { header: null }
-    },
-    shop: {
-        screen: Shop, navigationOptions: { header: null }
-    },
-    // accommodation: {
-    //     screen: Accommodation, navigationOptions: { header: null }
-    // },
-    commercial_areas: {
-        screen: Commercial_Areas, navigationOptions: { header: null }
-    },
-    bank: {
-        screen: Bank, navigationOptions: { header: null }
-    },
-    schools_and_government: {
-        screen: Schools_and_Government, navigationOptions: { header: null }
-    },
-    services: {
-        screen: Services, navigationOptions: { header: null }
-    },
-    facilities: {
-        screen: Facilities, navigationOptions: { header: null }
     },
     recomEat: {
         screen: EatScreen, navigationOptions: { header: null }

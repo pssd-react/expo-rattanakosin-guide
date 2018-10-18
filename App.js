@@ -3,7 +3,18 @@ import AppBottomNavigator from './src/components/AppBottomNavigator'
 import { StoreGlobal } from './src/components/config/GlobalState'
 import I18n from './src/components/config/i18n'
 import { SearchResultScreen } from './src/components/screens/SearchResultScreen'
-import { Accommodation } from './src/components/screens/itemscreens/Accommodation'
+import {
+  Restaurants,
+  Bank,
+  Commercial_Areas,
+  Facilities,
+  Shop,
+  Schools_and_Government,
+  Services,
+  Travel,
+  Accommodation
+} from './src/components/screens/itemscreens/'
+import  PromotionDetail  from './src/components/screens/stackscreens/PromotionDetail'
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
@@ -40,5 +51,32 @@ const MainStack = createStackNavigator({
   },
   resAccommondation : {
     screen: Accommodation, navigationOptions: { header: null }
+  },
+  resFacilities : {
+    screen: Facilities, navigationOptions: { header: null }
+  },
+  resCommercial_Areas : {
+    screen: Commercial_Areas, navigationOptions: { header: null }
+  },
+  resShop: {
+    screen: Shop, navigationOptions: { header: null }
+  },
+  resSchools_and_Government : {
+    screen: Schools_and_Government, navigationOptions: { header: null }
+  },
+  resServices: {
+    screen: Services, navigationOptions: { header: null }
+  },
+  resTravel : {
+    screen: Travel, navigationOptions: { header: null }
+  },
+  resRestaurants : {
+    screen: Restaurants, navigationOptions: { header: null }
+  },
+  resBank : {
+    screen: Bank, navigationOptions: { header: null }
+  },
+  resPromotionDetail : {
+    screen: PromotionDetail , navigationOptions: { header: null }
   }
 })
