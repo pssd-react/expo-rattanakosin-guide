@@ -13,7 +13,7 @@ import { CardSection } from '../../common/CardSection'
 import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text'
-import { ButtonStar, ButtonLocal, ButtonHighlight ,Button , Spinner} from '../../common'
+import { ButtonStar, ButtonLocal, ButtonHighlight ,Button , Spinner , Heartload} from '../../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
 import geolib from 'geolib'
@@ -322,7 +322,7 @@ export class EatScreen extends Component {
     renderPageView(){
         if(this.state.loading === true){
             return (
-                <Spinner/>
+                <Heartload  />
             )
         }
         else{

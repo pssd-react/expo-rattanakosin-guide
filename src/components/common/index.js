@@ -16,3 +16,4 @@ export * from './ButtonStar';
 export * from './ButtonHighlight';
 export * from './ButtonProduct';
 export * from './ButtonPromotion';
+export * from './Heartload';
