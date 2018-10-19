@@ -36,18 +36,20 @@ class Review extends Component {
 
   constructor(props) {
     super(props);
+    console.log(props)
     this.state = {
-      refreshing: false,
+
     };
   }
-
   state = {
     item: '',
     isModalVisible: false,
     loading: false,
     keyReview: '',
-    isModalVisibleDeleteSuccess: false
+    isModalVisibleDeleteSuccess: false,
+
   };
+  
   componentWillMount(){
       this.setState({
           loading: true
@@ -63,8 +65,14 @@ class Review extends Component {
 
 
   fetchData() {
+      const data2 ={
+        "RqAppID": data.RqAppID,
+        "UserLanguage": data.UserLanguage,
+        "ShopID": this.props.screenProps.items.ShopId,
+        "UserID": data.UserID
+      }
     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryShopReviewService',
-      data, config)
+    data2, config)
       .then(response => { 
         this.setState({ 
           item: response.data,
@@ -89,6 +97,7 @@ class Review extends Component {
         routeName:'writeReviewUpdate', 
         params : { 
             returnData: this.returnData.bind(this),
+            shopId : this.props.screenProps.items.ShopId,
             reviewId: reviewId, 
             ratings: ratings, 
             reviewContent: reviewContent }});
@@ -103,7 +112,7 @@ class Review extends Component {
       "RqAppID": "1234",
       "ReviewID": this.state.keyReview,
       "UserID": "1",
-      "ShopID": "108428",
+      "ShopID": this.props.screenProps.items.ShopId,
       "SessionToken": ""
     }
     this.setState({
@@ -114,10 +123,10 @@ class Review extends Component {
         .then(response => {
           if (response.data.ResponseDetail === 'Success') {
             console.log('Delete Successsssssss')
-            this.fetchData()
             this.setState({ 
                 isModalVisible: false,
-                isModalVisibleDeleteSuccess: true
+                isModalVisibleDeleteSuccess: true,
+                loading:false
             })
             
           }
@@ -166,7 +175,10 @@ class Review extends Component {
       this.setState({
           loading: true
       },()=> {
-        this.props.navigation.navigate('writeReview', { returnData: this.returnData.bind(this) });
+        this.props.navigation.navigate('writeReview', { 
+            returnData: this.returnData.bind(this),
+            shopId : this.props.screenProps.items.ShopId
+         });
       })
     
   }
@@ -183,7 +195,7 @@ class Review extends Component {
   renderModalDelete() {
     //console.log("key renderModalLogOut ",key)
     return (
-      <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
+      <Modal isVisible={this.state.isModalVisible}>
         {this.modalRenderDelete()}
       </Modal>
     )
@@ -191,28 +203,6 @@ class Review extends Component {
 
 
   modalRenderDelete() {
-    if (this.state.loading === true) {
-      return (
-        <View style={{
-          flex: 1,
-          backgroundColor: '#fff',
-          marginBottom: 270,
-          marginTop: 270,
-          marginLeft: 140,
-          marginRight: 140,
-          borderRadius: 5,
-          shadowColor: '#000',
-          shadowOffset: { width: 5, height: 5 },
-          shadowRadius: 5,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
-
-
-        </View>
-      )
-    }
     return (
       <View style={{
         flex: 1,
@@ -238,7 +228,9 @@ class Review extends Component {
         </CardSection>
         <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
-            onPress={() => this.setState({ isModalVisible: false })}>
+            onPress={() => this.setState({ isModalVisible: false },()=>{
+                this.props.screenProps.forceUpdate()
+            })}>
             <Text style={{ fontSize: 16 }}>ยกเลิก</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderLeftWidth: 0.5, borderColor: '#aaa', height: 50 }}
@@ -277,9 +269,8 @@ class Review extends Component {
     // console.log(this.state.item);
     let resultMapping = ''
     _.map(this.state, items => {
-        console.log(items)
         resultMapping = _.map(items.Reviews, reviews => {
-        // console.log(reviews.ReviewID);
+        //console.log(reviews);
         let reviewId = ''
         reviewId = reviews.ReviewID
         return (
@@ -360,7 +351,7 @@ class Review extends Component {
         )
       })
     })
-
+        console.log(resultMapping.toString())
     return resultMapping
   }
 
@@ -373,28 +364,6 @@ class Review extends Component {
   }
 
   modalRenderDeleteSuccess() {
-    if (this.state.loading === true) {
-      return (
-        <View style={{
-          flex: 1,
-          backgroundColor: '#fff',
-          marginBottom: 270,
-          marginTop: 270,
-          marginLeft: 140,
-          marginRight: 140,
-          borderRadius: 5,
-          shadowColor: '#000',
-          shadowOffset: { width: 5, height: 5 },
-          shadowRadius: 5,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center'
-        }}>
-
-
-        </View>
-      )
-    }
     return (
       <View style={{
         flex: 1,
@@ -420,7 +389,12 @@ class Review extends Component {
         </CardSection>
         <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
-            onPress={() => this.setState({ isModalVisibleDeleteSuccess: false })}>
+            onPress={() => this.setState({ 
+                isModalVisibleDeleteSuccess: false,
+                loading : true
+             },()=> {
+                    this.props.screenProps.forceUpdate()
+            })}>
             <Text style={{ fontSize: 16 }}>ปิด</Text>
           </TouchableOpacity>
         </CardSection>
@@ -460,10 +434,6 @@ class Review extends Component {
               >        
              {this.renderReview()}
               </ScrollView>
-                  
-              {this.renderModalDelete()}
-              {this.renderModalDeleteSuccess()}
-      
             </View>
           );
       }
@@ -471,7 +441,12 @@ class Review extends Component {
 
   render() {
     // console.log(this.state.item);
-    return this.renderPage()
+    return    ( <View style={{flex:1, backgroundColor:'white'}}>
+    {this.renderPage()}
+                  {this.renderModalDelete()}
+              {this.renderModalDeleteSuccess()}
+    </View>)
+    
   }
 }
 

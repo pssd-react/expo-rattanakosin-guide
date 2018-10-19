@@ -131,6 +131,18 @@ export class ShopDetailScreen extends Component {
         )
     }
 
+    randomUpdate(){
+        this.setState({
+            loading: true
+        },()=>{
+            setTimeout(()=>{
+                this.setState({
+                    loading:false
+                })
+            },500)
+        })
+    }
+
     _getIconButton() {
         if (this.state.statusIcon === false) {
             return (
@@ -267,7 +279,7 @@ export class ShopDetailScreen extends Component {
                                 </Animated.View>
 
                                 <Animated.View style={{ flex: 1, height: height - 130 }}>
-                                    <ShopTap screenProps={{ items: items, navigation: this.props.navigation }} />
+                                    <ShopTap screenProps={{ items: items, navigation: this.props.navigation, forceUpdate: this.randomUpdate.bind(this) }} />
                                 </Animated.View>
 
                             </ScrollView>

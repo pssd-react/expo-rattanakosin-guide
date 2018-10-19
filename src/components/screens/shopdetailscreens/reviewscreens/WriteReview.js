@@ -12,16 +12,22 @@ class writereviwe extends Component {
         super(props);
         this.state = {
             starCount: 0,
-            ReviewContent: ''
+            ReviewContent: '',
+            shopId: ''
         };
     }
 
+    componentDidMount(){
+        this.setState({
+            shopId : this.props.navigation.getParam('shopId', '')
+        })
+    }
  
     onPost() {
         console.log(this.state)
         const data = {
             "RqAppID": "1234",
-            "ShopID": "108428",
+            "ShopID": this.state.shopId,
             "UserID": "1",
             "Rating": this.state.starCount,
             "DisplayName": "test",

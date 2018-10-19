@@ -11,7 +11,8 @@ class writereviweUpdate extends Component {
         state = {
             starCount: '',
             ReviewContent: '',
-            reviewId: ''
+            reviewId: '',
+            shopId: ''
         }
 
 
@@ -20,12 +21,16 @@ class writereviweUpdate extends Component {
     }
 
     fetDataUpdate(){
+        const shopId = this.props.navigation.getParam('shopId', '')
         const reviewId = this.props.navigation.getParam('reviewId', 'none');
         const starCount = this.props.navigation.getParam('ratings', 0.0);
         const ReviewContent = this.props.navigation.getParam('reviewContent', 'none');
-        this.setState({ reviewId })
-        this.setState({ starCount })
-        this.setState({ ReviewContent })
+
+        this.setState({ 
+            reviewId:reviewId,
+            starCount:starCount,
+            ReviewContent:ReviewContent,
+            shopId: shopId})
 
         console.log(reviewId,starCount,ReviewContent)
         console.log("this.state",this.state)
@@ -35,7 +40,7 @@ class writereviweUpdate extends Component {
 
         const data = {
             "RqAppID": "1234",
-            "ShopID": "108428",
+            "ShopID": this.state.shopId,
             "UserID": "1",
             "Rating": this.state.starCount,
             "ReviewID": this.state.reviewId,
