@@ -125,7 +125,7 @@ class HomeScreen extends Component {
                     <Icon name="search" size={20} style={{ marginRight: 10 }} />
                     <Text
                         style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} >
-                        ค้นหา ...
+                        {I18n.t('searching')} ...   
                         </Text>
                 </View>
                 </TouchableWithoutFeedback>
