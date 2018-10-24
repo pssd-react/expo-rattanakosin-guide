@@ -12,15 +12,9 @@ import Collapsible from 'react-native-collapsible'
 import axios from 'axios'
 import _ from 'lodash'
 import { Spinner } from '../../common';
+import I18n from '../../config/i18n'
 
-var data = {
-  "RqAppID": "1234",
-  "UserLanguage": "TH",
-  "UserID": "",
-  "ClientTime": "",
-  "MarketID": "3",
-  "ShopPromotionType": "A"
-}
+
 
 var config = {
   headers: {
@@ -44,6 +38,14 @@ class FlashSalePromotion extends Component {
   }
 
   componentWillMount() {
+    var data = {
+      "RqAppID": "1234",
+      "UserLanguage": I18n.t('userlanguage'),
+      "UserID": "",
+      "ClientTime": "",
+      "MarketID": "3",
+      "ShopPromotionType": "A"
+    }
     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
       data, config)
       .then(response => {
@@ -122,13 +124,13 @@ class FlashSalePromotion extends Component {
 
   _renderNowHeader() {
     return (
-      <Text style={styles.headerText}>ปัจจุบัน ({this.state.numPresent})</Text>
+      <Text style={styles.headerText}> {I18n.t('flashsale_tab_1')} ({this.state.numPresent})</Text>
     )
   }
 
   _renderSoonHeader() {
     return (
-      <Text style={styles.headerText}>เร็วๆ นี้ ({this.state.numComming})</Text>
+      <Text style={styles.headerText}> {I18n.t('flashsale_tab_2')} ({this.state.numComming})</Text>
     )
   }
 
@@ -279,7 +281,7 @@ class FlashSalePromotion extends Component {
           <Image
             source={require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
           />
-          <Text style={{ fontSize: 18, color: '#a6a6a6' }} > ไม่มีรายการโปรโมชั่น</Text>
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }} > {I18n.t('promotiondetail')} </Text>
         </View>
       )
     } else {

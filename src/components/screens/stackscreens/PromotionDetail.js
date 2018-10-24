@@ -13,7 +13,7 @@ import _ from 'lodash'
 import moment from 'moment'
 import { ButtonStar, ButtonLocal, Header, ButtonProduct , ButtonPromotion } from '../../common'
 import geolib from 'geolib'
-
+import I18n from '../../config/i18n'
 
 
 class PromotionDetail extends Component {
