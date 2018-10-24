@@ -17,19 +17,10 @@ import { ButtonStar, ButtonLocal, ButtonHighlight ,Button , Spinner, ModalSpinne
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
 import geolib from 'geolib'
+import I18n from '../../config/i18n'
 
-const data = {
-    "RqAppID": "1234",
-    "UserLanguage": "EN",
-    "ViewType": "04",
-    "RowNum": "0",
-    "Keyword": "",
-    "ShopCategory": "268,266",
-    "UserID": "1",
-    "MarketID": "3",
-    "CouponType": "",
-    "CouponSubType": ""
-}
+
+
 
 const config = {
     headers: {
@@ -71,6 +62,18 @@ export class PlacesScreen extends Component {
     }
 
     componentWillMount() {
+        var data = {
+            "RqAppID": "1234",
+            "UserLanguage": I18n.t('userlanguage') ,
+            "ViewType": "04",
+            "RowNum": "0",
+            "Keyword": "",
+            "ShopCategory": "268,266",
+            "UserID": "1",
+            "MarketID": "3",
+            "CouponType": "",
+            "CouponSubType": ""
+        }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
             .then(response => { this.setState({ item: response.data ,  loading: true}) })
@@ -191,7 +194,7 @@ export class PlacesScreen extends Component {
         var distance = '';
         if(this.state.lat === undefined){
         return(
-            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 กม.</ButtonLocal>
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 {I18n.t('km')}</ButtonLocal>
         )
         }else{
             distance = geolib.getDistanceSimple(
@@ -202,7 +205,7 @@ export class PlacesScreen extends Component {
            //console.log(distance , 'Km')
            distance = distance.toFixed(2);
            return(
-                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} กม.</ButtonLocal>
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} {I18n.t('km')}</ButtonLocal>
            )
         }
     }
@@ -312,7 +315,7 @@ export class PlacesScreen extends Component {
         
         return(
         <Button style = {{ backgroundColor: this.state.bt_non ,borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
-             ระยะทาง
+        {I18n.t('distan')}
         </Button>
         )
     }
@@ -320,7 +323,7 @@ export class PlacesScreen extends Component {
     buttonScore(){
         return(
         <Button style = {{ backgroundColor: this.state.bt_sort ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
-            ความนิยม
+        {I18n.t('score')}
         </Button>
         )
     }
@@ -338,7 +341,7 @@ export class PlacesScreen extends Component {
                 <View style={{flex:1}}>
                 <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
                     <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20}}>
-                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> เรียงตาม </Text>
+                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}>  {I18n.t('sort')}  </Text>
                     </View>
                     <View style = {{  flex: 3 , height: 30 , width: 80,marginTop: 15 }}>
                         {this.buttonDistance()}
@@ -366,7 +369,7 @@ export class PlacesScreen extends Component {
         
         return (
             <View style={{flex:1}}>
-            <Header headerText="Recommend Places" 
+            <Header headerText= {I18n.t('recomplace')} 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                  {this.renderPageView()}

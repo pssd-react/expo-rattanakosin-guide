@@ -42,13 +42,14 @@ import { ShopDetailScreen } from './ShopDetailScreen'
 import { ShopMoreDescriptionScreen } from './shopdetailscreens/ShopMoreDescriptionScreen';
 import SearchScreen from './SearchScreen'
 import { SearchResultScreen } from './SearchResultScreen';
+import I18n from '../config/i18n'
 
-const data = {
-    'RqAppID': '1234',
-    'UserLanguage': 'EN',
-    'MarketID': '3',
-    'Version': '1.1.4'
-}
+// const data = {
+//     'RqAppID': '1234',
+//     'UserLanguage': I18n.t('userlanguage'),
+//     'MarketID': '3',
+//     'Version': '1.1.4'
+// }
 const config = {
     headers: {
         'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
@@ -67,6 +68,7 @@ class HomeScreen extends Component {
     }
 
     componentWillMount() {
+    
         this.startHeaderHeight = 80
         if (Platform.OS == 'android') {
             this.startHeaderHeight = 100 + StatusBar.currentHeight
@@ -75,6 +77,12 @@ class HomeScreen extends Component {
     }
 
     _renderService() {
+        var data = {
+            'RqAppID': '1234',
+            'UserLanguage': I18n.t('userlanguage'),
+            'MarketID': '3',
+            'Version': '1.1.4'
+        }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
             data, config)
             .then(response => { this.setState({ state_item: response.data }) })
@@ -117,7 +125,7 @@ class HomeScreen extends Component {
                     <Icon name="search" size={20} style={{ marginRight: 10 }} />
                     <Text
                         style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} >
-                        ค้นหา ...
+                        {I18n.t('searching')} ...   
                         </Text>
                 </View>
                 </TouchableWithoutFeedback>
@@ -135,7 +143,7 @@ class HomeScreen extends Component {
                             source={require('../images/drawable-hdpi/ic_main_food.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            กิน
+                             { I18n.t('eat') }
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -146,7 +154,7 @@ class HomeScreen extends Component {
                             source={require('../images/drawable-hdpi/ic_main_travel.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            เที่ยว
+                            { I18n.t('travel') }
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -157,18 +165,18 @@ class HomeScreen extends Component {
                             source={require('../images/drawable-hdpi/ic_main_shop.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            ช้อป
+                        { I18n.t('shop') }
                         </Text>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')} >
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('resHomedetail')} >
                     <View style={styles.imgEnd}>
                         <Image
                             style={{ width: 70, height: 70 }}
                             source={require('../images/drawable-hdpi/ic_main_other.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            อื่นๆ
+                        { I18n.t('etc') }
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -412,7 +420,7 @@ class ItemDetail extends Component {
                             <Text style={headerTextStyle} >{_renderingItem.Name}</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
                                 <TouchableOpacity onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
-                                    <Text style={{ color: 'green', fontSize: 14 }}>ดูทั้งหมด</Text>
+                                    <Text style={{ color: 'green', fontSize: 14 }}>{ I18n.t('seeall') }</Text>
                                 </TouchableOpacity>
                                 <Image
                                     style={{ height: 15, width: 15, tintColor: 'green' }}

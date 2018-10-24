@@ -22,6 +22,7 @@ import {
   StaysScreen,
   PlacesScreen
 } from './src/components/screens/recommendedscreens/'
+import { HomeMenuScreens } from './src/components/screens/homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
 INITIAL_STATE = {
@@ -124,5 +125,8 @@ const MainStack = createStackNavigator({
   },
   resPlacesScreen : {
     screen: PlacesScreen , navigationOptions: { header: null }
+  },
+  resHomedetail : {
+    screen: HomeMenuScreens , navigationOptions: { header: null }
   }
 })
