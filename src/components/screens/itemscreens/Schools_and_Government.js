@@ -356,7 +356,7 @@ export class Schools_and_Government extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Schools_and_Government" 
+            <Header headerText= {I18n.t('cat7')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

@@ -354,7 +354,7 @@ export class Services extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Services" 
+            <Header headerText= {I18n.t('cat8')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

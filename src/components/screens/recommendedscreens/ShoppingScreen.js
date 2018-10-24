@@ -359,7 +359,7 @@ export class ShoppingScreen extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Recommend Shop" 
+            <Header headerText= {I18n.t('recomshop')}  
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

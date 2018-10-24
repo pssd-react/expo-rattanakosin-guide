@@ -357,7 +357,7 @@ export class EatScreen extends Component {
         
         return (
             <View style={{flex:1}}>
-            <Header headerText="Recommend Eat" 
+            <Header headerText= {I18n.t('recomeat')}  
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                  {this.renderPageView()}

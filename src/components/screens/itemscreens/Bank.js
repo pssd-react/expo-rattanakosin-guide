@@ -369,7 +369,7 @@ export class Bank extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Bank" 
+            <Header headerText={I18n.t('cat6')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

@@ -357,7 +357,7 @@ export class Restaurants extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Restaurant" 
+            <Header headerText={I18n.t('cat1')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

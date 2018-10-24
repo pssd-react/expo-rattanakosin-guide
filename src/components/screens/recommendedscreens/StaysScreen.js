@@ -360,7 +360,7 @@ export class StaysScreen extends Component {
         
         return (
             <View style={{flex:1}}>
-            <Header headerText="Recommend Stay" 
+            <Header headerText= {I18n.t('recomstay')} 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

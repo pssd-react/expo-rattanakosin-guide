@@ -354,7 +354,7 @@ export class Shop extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Shop" 
+            <Header headerText= {I18n.t('shop')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

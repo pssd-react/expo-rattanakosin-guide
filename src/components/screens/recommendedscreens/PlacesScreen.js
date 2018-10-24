@@ -369,7 +369,7 @@ export class PlacesScreen extends Component {
         
         return (
             <View style={{flex:1}}>
-            <Header headerText="Recommend Places" 
+            <Header headerText= {I18n.t('recomplace')} 
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                  {this.renderPageView()}

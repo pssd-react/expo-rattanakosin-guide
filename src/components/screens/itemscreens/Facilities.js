@@ -354,7 +354,7 @@ export class Facilities extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Facilities" 
+            <Header headerText= {I18n.t('cat9')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

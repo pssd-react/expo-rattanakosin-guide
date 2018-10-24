@@ -354,7 +354,7 @@ export class Commercial_Areas extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Commercial_Areas" 
+            <Header headerText= {I18n.t('cat5')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}
