@@ -20,7 +20,8 @@ import {
     Button,
     Spinner,
     CardSection,
-    Header 
+    Header, 
+    ModalSpinner
 } from '../../common';
 var data = {
 	"RqAppID":"1234",
@@ -320,7 +321,7 @@ export class Services extends Component {
     renderPageView(){
         if(this.state.loading === true){
             return (
-                <Spinner/>
+                <ModalSpinner loading={this.state.loading}  />
             )
         }
         else{

@@ -20,7 +20,8 @@ import {
     Button,
     Spinner,
     CardSection,
-    Header 
+    Header, 
+    ModalSpinner
 } from '../../common';
 
 var data = {
@@ -326,7 +327,7 @@ export class Accommodation extends Component {
     renderPageView(){
         if(this.state.loading === true){
             return (
-                <Spinner/>
+                <ModalSpinner loading={this.state.loading}  />
             )
         }
         else{

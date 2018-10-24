@@ -14,7 +14,7 @@ import Modal from "react-native-modal";
 // import Tooltip from 'rn-tooltip';
 // import ReactNativeTooltipMenu from 'react-native-tooltip-menu';
 import PopoverTooltip from 'react-native-popover-tooltip';
-import { Spinner } from '../../common';
+import { Spinner, ModalSpinner } from '../../common';
 
 
 
@@ -297,7 +297,7 @@ class Review extends Component {
                   style={
                     { width: 65, height: 65, borderRadius: 150 / 2 }
                   }
-                  source={{ uri: reviews.ReviewerImage }}
+                  source={reviews.ReviewerImage !== '' ? { uri: reviews.ReviewerImage } : require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
                 />
               </View>
               <View style={{ flex: 3, marginLeft: 20 }}>
@@ -407,7 +407,7 @@ class Review extends Component {
 
   renderPage(){
       if(this.state.loading === true){
-          return <Spinner/>
+          return <ModalSpinner loading={this.state.loading}  />
       }
       else{
         //   console.log(this.state.item)
