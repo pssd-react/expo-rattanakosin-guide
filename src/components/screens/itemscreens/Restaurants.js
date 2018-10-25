@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Dimensions
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
@@ -27,15 +28,13 @@ import I18n from '../../config/i18n'
 
 
 
+
 var config = {
     headers: {
         'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
         'Content-Type': 'application/json'
     }
 };
-
-
-
 
 
 export class Restaurants extends Component {
@@ -49,7 +48,8 @@ export class Restaurants extends Component {
             sort: '',
             bt_sort: '#ffffff',
             bt_non: '#ffffff',
-            loading: true
+            loading: true,
+            status: false,
         }
       }
 
@@ -213,10 +213,38 @@ export class Restaurants extends Component {
     }
 
     
+    renderButton(key){
+        console.log(key.IsMyTrip)
+        if(key.IsMyTrip === '0'){
+            return (
+                <TouchableOpacity style={{flex:1}} onPress={()=> this.onButtonPress()}>
+                    <Image
+                        style={{width:25, height:30}}
+                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                    />
+                </TouchableOpacity>
+            )
+        }else{
+            return (
+                <TouchableOpacity style={{flex:1}} onPress={()=> this.onButtonPress()}>
+                    <Image
+                        style={{width:25, height:30}}
+                        source={require('../../images/drawable-hdpi/ic_fav_trip_selected.webp')}
+                    />
+                </TouchableOpacity>
+            )
+        }
+    };
+
+    onButtonPress(){
+        
+    }
+    
 
     renderCardData(items){
         return (
-            <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <View style={{flex:1 ,  backgroundColor: '#ffffff',}} >
             <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
                         <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
                                 <Image style={{width:30, height:30,marginRight:15}}
@@ -230,12 +258,7 @@ export class Restaurants extends Component {
                             ellipsizeMode={'tail'}
                             > {items.LocationName} </Text>
                         </View>
-                        <View style={{flex:1,}}>
-                            <Image
-                                style={{width:25, height:30,}}
-                                source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                            />
-                        </View>
+                        {this.renderButton(items)}
             </CardSection>
             <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
                     <View style={styles.ViewContainer}>
@@ -276,7 +299,8 @@ export class Restaurants extends Component {
                             </View>
                     </View>
             </CardSection>
-        </TouchableOpacity>
+            </View>
+        </TouchableWithoutFeedback>
         )
     }
 
@@ -299,13 +323,13 @@ export class Restaurants extends Component {
     changeStatusSortDistance(){
         this.setState({ bt_non: '#d9d9d9' , bt_sort: '#ffffff' })
         this.setState({ sortby: true })
-        console.log(this.state.sortby)
+        //console.log(this.state.sortby)
     }
 
     changeStatusSortScore(){
         this.setState({ bt_sort: '#d9d9d9', bt_non: '#ffffff'  })
         this.setState({ sortby: false })
-        console.log(this.state.sortby)
+        //console.log(this.state.sortby)
     }
 
 

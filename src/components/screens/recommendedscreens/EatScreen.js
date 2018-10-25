@@ -6,7 +6,8 @@ import {
     Image,
     ScrollView,
     TouchableOpacity,
-    Dimensions
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Card } from '../../common/Card'
 import { CardSection } from '../../common/CardSection'
@@ -208,7 +209,8 @@ export class EatScreen extends Component {
 
     renderCardData(items){
         return (
-                <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <View style={{flex:1 ,  backgroundColor: '#ffffff'}} >
                     <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
                         <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
                                 <Image style={{width:30, height:30,marginRight:15}}
@@ -271,7 +273,8 @@ export class EatScreen extends Component {
                                     </View>
                             </View>
                     </CardSection>
-                </TouchableOpacity>
+                </View>
+                </TouchableWithoutFeedback>
         )
     }
 
