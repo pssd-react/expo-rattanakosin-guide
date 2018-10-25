@@ -6,6 +6,13 @@ import {StoreGlobal} from '../../../config/GlobalState'
 import axios from 'axios'
 import Modal from "react-native-modal"
 
+const config = {
+    headers: {
+        'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+        'Content-Type': 'application/json'
+    }
+}
+
 class LoginForm extends Component {
     static navigationOptions = { header: null }
     state ={ name: '', phone: '', password: '', confirm_password: '', error: '', loading: false,  userInfo: '', user: '', isModalVisible: false, alert_phone: '' }
@@ -15,15 +22,56 @@ class LoginForm extends Component {
     _deactiveModal = () => this.setState({ isModalVisible: false })
 
     async loginWithFacebook(){
+        const data = {
+            "RqAppID":"1234",
+            "FacebookID":"",
+            "NickName":"",
+            "FirstName":"",
+            "LastName":"",
+            "ProfilePicture":"",
+            "Email":"",
+            "SessionToken":"287789215160486",
+            "UserLanguage":"EN",
+            "MarketID":"3"
+             }
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
-        ('1886750428085436', { permissions: ['public_profile'] })
+            ( data.SessionToken, { permissions: ['public_profile'] })
 
-        if(type === 'success'){
-            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`)
-            const userInfo = await response.json()
-            StoreGlobal({type: 'set', key: 'userInfo', value: userInfo})
-            this.setState({ userInfo })
-            this.onButtonToProfile()
+        if (type === 'success') {
+            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),short_name,email`)
+            const userInfoFB = await response.json()
+            const fullName = userInfoFB.name.split(' ')
+            const firstName = fullName[0]
+            const lastName = fullName[1]
+
+            let userData ={
+                "RqAppID": data.RqAppID,
+                "FacebookID":userInfoFB.id,
+                "NickName":userInfoFB.short_name,
+                "FirstName":firstName,
+                "LastName":lastName,
+                "ProfilePicture":userInfoFB.picture.data.url,
+                "Email":userInfoFB.email,
+                "SessionToken": data.SessionToken,
+                "UserLanguage": data.UserLanguage,
+                "MarketID": data.MarketID
+            }
+            axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/FacebookLoginService',
+            userData, config)
+            .then(response => {
+               this.props.screenProps.loginMeth(
+                   response.data.UserDetail.UserID,
+                   response.data.UserDetail.DisplayName,
+                   data.SessionToken )
+               StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
+                this.setState({ 
+                    userInfoFB
+                 },()=>{
+                    this.onButtonToProfile()})
+            })
+            .catch((error) => {
+                console.log('axios error:', error);
+            });
         }
     }
 

@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../common'
 import firebase from 'firebase'
+import axios from 'axios'
 import { SocialIcon } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation'
 import { SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen } from './profilescreen'
@@ -22,6 +23,13 @@ import { RegisterOTP } from './profilescreen/loginscreens/RegisterOTP'
 import LoginForm from './profilescreen/loginscreens/LoginForm'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler'
 import Modal from "react-native-modal"
+
+const config = {
+    headers: {
+        'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+        'Content-Type': 'application/json'
+    }
+}
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -61,15 +69,55 @@ class ProfileScreenMain extends Component {
     _deactiveModal = () => this.setState({ isModalVisible: false })
 
     async loginWithFacebook() {
+        const data = {
+            "RqAppID":"1234",
+            "FacebookID":"",
+            "NickName":"",
+            "FirstName":"",
+            "LastName":"",
+            "ProfilePicture":"",
+            "Email":"",
+            "SessionToken":"287789215160486",
+            "UserLanguage":"EN",
+            "MarketID":"3"
+             }
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
-            ('287789215160486', { permissions: ['public_profile'] })
+            ( data.SessionToken, { permissions: ['public_profile'] })
 
         if (type === 'success') {
-            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`)
+            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),short_name,email`)
             const userInfoFB = await response.json()
+            const fullName = userInfoFB.name.split(' ')
+            const firstName = fullName[0]
+            const lastName = fullName[1]
 
-            StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
-            this.setState({ userInfoFB })
+            let userData ={
+                "RqAppID": data.RqAppID,
+                "FacebookID":userInfoFB.id,
+                "NickName":userInfoFB.short_name,
+                "FirstName":firstName,
+                "LastName":lastName,
+                "ProfilePicture":userInfoFB.picture.data.url,
+                "Email":userInfoFB.email,
+                "SessionToken": data.SessionToken,
+                "UserLanguage": data.UserLanguage,
+                "MarketID": data.MarketID
+            }
+            axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/FacebookLoginService',
+            userData, config)
+            .then(response => {
+               this.props.screenProps.loginMeth(
+                   response.data.UserDetail.UserID,
+                   response.data.UserDetail.DisplayName,
+                   data.SessionToken )
+               StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
+                this.setState({ userInfoFB })
+            })
+            .catch((error) => {
+                console.log('axios error:', error);
+            });
+
+            
         }
     }
 
@@ -110,7 +158,7 @@ class ProfileScreenMain extends Component {
             this._toggleModal(),
                 this.state.loading = false,
                 this.onLogoutSuccess()
-        }, 3000)
+        }, 2000)
     }
 
     onListLogOut() {
@@ -120,6 +168,7 @@ class ProfileScreenMain extends Component {
     onLogoutSuccess() {
         StoreGlobal({ type: 'set', key: 'userInfo', value: null })
         StoreGlobal({ type: 'set', key: 'userPhone', value: null })
+        this.props.screenProps.logoutMeth()
         this.state.userInfoFB = undefined
         this.setState({ loading: false })
     }

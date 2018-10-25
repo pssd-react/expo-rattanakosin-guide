@@ -25,9 +25,15 @@ import {
 import { HomeMenuScreens } from './src/components/screens/homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
+import ShopDetailScreen from './src/components/screens/ShopDetailScreen';
+import writereviwe from './src/components/screens/shopdetailscreens/reviewscreens/WriteReview';
+import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
+  userId: 'none',
+  userDisplay: '',
+  token: ''
 }
 
 export default class App extends React.Component {
@@ -48,6 +54,21 @@ export default class App extends React.Component {
     I18n.locale = StoreGlobal({ type: 'get', key: 'lang' })
   }
 
+  loginMeth =(userId, userDisplay, token)=>{
+    this.setState({
+      userId: userId,
+      userDisplay: userDisplay,
+      token: token
+    })
+  }
+
+  logoutMeth =()=>{
+    this.setState({
+      userId: 'none',
+      userDisplay: ''
+    })
+  }
+
   langSet =(lang)=>{
     console.log(lang)
     I18n.locale = lang
@@ -64,7 +85,15 @@ export default class App extends React.Component {
       )
     }else{
       return (
-        <MainStack screenProps={{ langSet:this.langSet , lang : this.state.lang}} />
+        <MainStack screenProps={{ 
+          langSet:this.langSet , 
+          lang : this.state.lang,
+          loginMeth : this.loginMeth,
+          logoutMeth : this.logoutMeth,
+          userId : this.state.userId,
+          userDisplay : this.state.userDisplay,
+          token : this.state.token
+        }} />
       )
     }
   }
@@ -128,5 +157,14 @@ const MainStack = createStackNavigator({
   },
   resHomedetail : {
     screen: HomeMenuScreens , navigationOptions: { header: null }
-  }
+  },
+  shopDetail: {
+    screen: ShopDetailScreen, navigationOptions: { header: null }
+},
+writeReview: {
+  screen: writereviwe,navigationOptions: { header: null }
+},
+writeReviewUpdate: {
+  screen: writereviweUpdate,navigationOptions: { header: null }
+}
 })

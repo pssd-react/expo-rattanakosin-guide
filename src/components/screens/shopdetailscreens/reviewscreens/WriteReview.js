@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
+import { HeaderBackButton } from 'react-navigation'
 import StarRating from 'react-native-star-rating';
 import  { LabelInput } from '../../../../components/common/LabelInput';
 import { Button } from 'react-native-elements';
 import axios from 'axios'
 import _ from 'lodash'
+import { Header } from '../../../common';
 
 class writereviwe extends Component {
 
@@ -13,26 +15,34 @@ class writereviwe extends Component {
         this.state = {
             starCount: 0,
             ReviewContent: '',
-            shopId: ''
+            shopId: '',
+            userId: 'none',
+            userDisplay: '',
+            token: ''
         };
     }
 
     componentDidMount(){
         this.setState({
-            shopId : this.props.navigation.getParam('shopId', '')
+            shopId : this.props.navigation.getParam('shopId', ''),
+            userId : this.props.navigation.getParam('userId', 'none'),
+            userDisplay : this.props.navigation.getParam('userDisplay', ''),
+            token : this.props.navigation.getParam('token', '')
         })
     }
  
     onPost() {
-        console.log(this.state)
+        if(this.state.userId === 'none'){
+            this.props.navigation.goBack()
+        }
         const data = {
             "RqAppID": "1234",
             "ShopID": this.state.shopId,
-            "UserID": "1",
+            "UserID": this.state.userId,
             "Rating": this.state.starCount,
-            "DisplayName": "test",
+            "DisplayName": this.state.userDisplay,
             "ReviewContent": this.state.ReviewContent,
-            "SessionToken": ""
+            "SessionToken": this.state.token
         }
         const config = {
             headers: {
@@ -49,8 +59,6 @@ class writereviwe extends Component {
                     this.props.navigation.state.params.returnData()
                     this.props.navigation.goBack()
                 }
-
-            
             })
             .catch((error) => {
                 console.log('axios error:', error);
@@ -79,6 +87,11 @@ class writereviwe extends Component {
     render() {
         return (
             <View style={{ flex: 1 }}>
+            <Header 
+            headerText={'Write Review'} 
+            backgroundImage= {require('../../../images/drawable-hdpi/bg_more.webp')}
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.props.navigation.goBack()} />}
+            textContainerStyle={{flex:4, alignItems:'flex-start'}}/>
                 <View style={{ flexDirection: 'column', height: '30%', backgroundColor: '#595959' }}>
                     <View style={{ flex: 1 }}>
                         <View style={{ height: 20, flexDirection: 'column', flex: 1, marginTop: '5%' }}>

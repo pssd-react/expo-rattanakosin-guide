@@ -66,6 +66,7 @@ export class ShopDetailScreen extends Component {
         const shopID = this.props.navigation.getParam('key', 'none')
         const fromOverView = this.props.navigation.getParam('fromOverView', false)
         data.ShopID = shopID
+        //console.log(this.props.screenProps.userId)
         this.setState({
             loading: true,
             fromOverView: fromOverView,
@@ -230,11 +231,11 @@ export class ShopDetailScreen extends Component {
                                         //useNativeDriver: true,
                                         listener: event => {
                                             const offsetY = event.nativeEvent.contentOffset.y
-                                            console.log(offsetY)
+                                            //console.log(offsetY)
                                             if (offsetY <= 300) {
                                                 this.setState({ fontSize: 60, bottomSize: 250, statusButton: false, opacityBox: 20, marginTopBox: 230, statusIcon: false });
                                             } else if (offsetY >= 550) {
-                                                console.log("Yes")
+                                                //console.log("Yes")
                                                 this.setState({ fontSize: 20, bottomSize: 15, statusButton: true, opacityBox: 0, marginTopBox: 350, statusIcon: true });
 
                                             } else {
@@ -281,12 +282,16 @@ export class ShopDetailScreen extends Component {
                                     </ImageBackground>
                                 </Animated.View>
 
-                                <Animated.View style={{ flex: 1, height: height - 130 }}>
+                                <Animated.View style={{ flex: 1, height: height*0.9 }}>
                                     <ShopTap screenProps={{ 
                                         items: items, 
                                         navigation: this.props.navigation, 
                                         forceUpdate: this.randomUpdate.bind(this),
-                                        fromOverView: this.state.fromOverView }} />
+                                        fromOverView: this.state.fromOverView,
+                                        userId : this.props.screenProps.userId,
+                                        userDisplay : this.props.screenProps.userDisplay,
+                                        token : this.props.screenProps.token
+                                        }} />
                                 </Animated.View>
 
                             </ScrollView>

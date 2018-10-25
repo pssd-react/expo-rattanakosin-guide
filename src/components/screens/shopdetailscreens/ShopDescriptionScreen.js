@@ -139,8 +139,8 @@ class ShopDescriptionScreen extends Component {
                         onPress={() => this.imgSlidePress(index-1)}>
                         <View
                             style={{
-                                height: 150,
-                                width: 100,
+                                height: 160,
+                                width: 110,
                                 marginLeft: 20,
                                 borderWidth: 0.5,
                                 borderColor: '#dddddd',
@@ -193,7 +193,7 @@ class ShopDescriptionScreen extends Component {
     }
 
     onRecommendPress(key){
-        console.log(key)
+        //console.log(key)
         this.props.screenProps.navigation.navigate({
             routeName: 'shopDetail',
             params: {
@@ -216,8 +216,8 @@ class ShopDescriptionScreen extends Component {
                         onPress={() => this.onRecommendPress(recom.ShopID)}>
                         <View
                             style={{
-                                height: 120,
-                                width: 100,
+                                height: 160,
+                                width: 110,
                                 marginLeft: 20,
                                 borderWidth: 0.5,
                                 borderColor: '#dddddd',
@@ -369,7 +369,7 @@ class ShopDescriptionScreen extends Component {
             <View
                 style={{ flex: 1 }}
             >
-                <View style={{ height: 150, marginTop: 20 }}>
+                <View style={{ height: 160, marginTop: 20 }}>
                     {this.renderImgSlider()}
                 </View>
                 <View
@@ -394,22 +394,10 @@ class ShopDescriptionScreen extends Component {
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
-                {/* <View style={{
-                width: Dimensions.get('window').width,
-                height: 50,
-                marginTop: 10,
-                borderWidth: 1,
-                borderColor: '#dddddd',
-                paddingLeft: 20,
-                paddingRight: 20,
-                backgroundColor: 'white'
-            }}>
-                {this.renderContact()}
-            </View> */}
             <View style={{ height: 20, marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{fontSize: 20, fontWeight:'bold'}}>Similar Places</Text>
                 </View>
-                <View style={{ height: 150, marginTop: 10 }}>
+                <View style={{ height: 160, marginTop: 10 }}>
                     {this.renderRecommend()}
                 </View>
             </View>
