@@ -11,7 +11,8 @@ import { CardSection } from '../../common/CardSection';
 import { Icon} from 'react-native-elements'
 import { createStackNavigator, HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common';
-// Import Item Screens 
+import I18n from '../../config/i18n'
+
 
 
 
@@ -20,7 +21,7 @@ export class HomeMenuScreens extends Component {
     renderHeadingText(){
         return (
             <View style={styles.headerStyle}>   
-                <Text style={styles.textStyle} > Categories </Text>
+                <Text style={styles.textStyle} > { I18n.t('catagories') } </Text>
             </View>
         )
     }
@@ -43,8 +44,8 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')}
                                 />
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Restaurants
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                    { I18n.t('cat1') }
                                 </Text>
                         </TouchableOpacity>
                    
@@ -55,8 +56,8 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_place_travel.webp')}
                                 />  
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Points of Interest
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                    { I18n.t('cat2') }
                                 </Text>
                         </TouchableOpacity>
                   
@@ -67,8 +68,8 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_shop.webp')}
                                 />
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Shops
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                { I18n.t('cat3') }
                                 </Text>
                         </TouchableOpacity>
                 </CardSection>
@@ -82,8 +83,8 @@ export class HomeMenuScreens extends Component {
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
                                 />
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Accommodation
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                { I18n.t('cat4') }
                                 </Text>
                         </TouchableOpacity>
                  
@@ -94,8 +95,8 @@ export class HomeMenuScreens extends Component {
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
                                 />  
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Commercial Areas
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                { I18n.t('cat5') }
                                 </Text>
                         </TouchableOpacity>
                    
@@ -106,8 +107,8 @@ export class HomeMenuScreens extends Component {
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
                                 />
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                    Bank
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                { I18n.t('cat6') }
                                 </Text>
                         </TouchableOpacity> 
                 </CardSection>
@@ -121,11 +122,11 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')}
                                 />
-                                <View style={{flexDirection:'column', alignItems:'center',justifyContent: 'center'}}>
-                                    <Text style={{fontSize: 12, alignItems:'center'}} >
-                                         Schools and Government offices 
+                                
+                                    <Text style={{fontSize: 14, alignItems:'center'}} >
+                                    { I18n.t('cat7') }
                                     </Text> 
-                                </View> 
+                               
                         </TouchableOpacity>
                    
 
@@ -137,8 +138,8 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_service.webp')}
                                 />  
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                Services
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                { I18n.t('cat8') }
                                 </Text>
                            
                         </TouchableOpacity>
@@ -150,8 +151,8 @@ export class HomeMenuScreens extends Component {
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
                                 />
-                                <Text style={{fontSize: 12, alignItems:'center'}} >
-                                Facilities
+                                <Text style={{fontSize: 14, alignItems:'center'}} >
+                                { I18n.t('cat9') }
                                 </Text>
                            
                         </TouchableOpacity>

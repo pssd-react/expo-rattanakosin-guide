@@ -451,7 +451,6 @@ export class ChangePassword extends Component {
                                 secureTextEntry
                                 value={this.state.password}
                                 onChangeText={this.onChangeInput.bind(this, 'password')}
-                                blurOnSubmit={false}
                             />
                         </CardSection>
                         <CardSection>

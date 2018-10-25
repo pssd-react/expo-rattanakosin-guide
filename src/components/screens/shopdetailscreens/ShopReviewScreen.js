@@ -14,7 +14,7 @@ import Modal from "react-native-modal";
 // import Tooltip from 'rn-tooltip';
 // import ReactNativeTooltipMenu from 'react-native-tooltip-menu';
 import PopoverTooltip from 'react-native-popover-tooltip';
-import { Spinner } from '../../common';
+import { Spinner, ModalSpinner } from '../../common';
 
 
 
@@ -32,11 +32,11 @@ var config = {
   }
 };
 
-class Review extends Component {
+class ShopReviewScreen extends Component {
 
   constructor(props) {
     super(props);
-    console.log(props)
+    //console.log(props)
     this.state = {
 
     };
@@ -90,18 +90,16 @@ class Review extends Component {
   }
 
   _onPressUpdate(reviewId, ratings, reviewContent) {
-    this.setState({
-        loading: true
-    }, ()=>{
-         this.props.navigation.navigate({
+        this.props.screenProps.navigation.navigate({
         routeName:'writeReviewUpdate', 
         params : { 
             returnData: this.returnData.bind(this),
             shopId : this.props.screenProps.items.ShopId,
             reviewId: reviewId, 
             ratings: ratings, 
-            reviewContent: reviewContent }});
-    })
+            reviewContent: reviewContent,
+            userId : this.props.screenProps.userId,
+            token : this.props.screenProps.token }});
    
 
   }
@@ -122,7 +120,7 @@ class Review extends Component {
         data2, config)
         .then(response => {
           if (response.data.ResponseDetail === 'Success') {
-            console.log('Delete Successsssssss')
+            //console.log('Delete Successsssssss')
             this.setState({ 
                 isModalVisible: false,
                 isModalVisibleDeleteSuccess: true,
@@ -172,15 +170,14 @@ class Review extends Component {
 
   }
   onPressWriteReview() {
-      this.setState({
-          loading: true
-      },()=> {
-        this.props.navigation.navigate('writeReview', { 
+    console.log(this.props.screenProps)
+        this.props.screenProps.navigation.navigate('writeReview', { 
             returnData: this.returnData.bind(this),
-            shopId : this.props.screenProps.items.ShopId
+            shopId : this.props.screenProps.items.ShopId,
+            userId : this.props.screenProps.userId,
+            userDisplay : this.props.screenProps.userDisplay,
+            token : this.props.screenProps.token
          });
-      })
-    
   }
 
   toggleModal(key) {
@@ -245,7 +242,6 @@ class Review extends Component {
   }
 
   CreatedDate(key) {
-
     // console.log("Date", key)
     const res = key.substring(0, 10)
     const resT = key.substring(11, 16)
@@ -255,14 +251,44 @@ class Review extends Component {
     const DateAfter = DateBefore[2] + '-' + DateBefore[1] + '-' + DateBefore[0]
     const formattedData = moment(DateAfter).format("D MMM YYYY")
     // console.log("Date formattedData", formattedData);
-
     return (
         <Text style={{fontSize: 12, fontWeight:'300'}}>
           {formattedData} เวลา {resT} น.
         </Text>
-    
     )
+  }
 
+  renderTooltip(reviewId, rating, content, userId){
+    if(userId === this.props.screenProps.userId){
+      return (
+        <PopoverTooltip
+                  ref='tooltip4'
+                  buttonComponent={
+                    <View style={{ width: 50, height: 50, alignItems: 'center' }}>
+                      <Image
+                        style={{ 
+                            aspectRatio: 0.25, 
+                            resizeMode: 'center' }}
+                        source={require('../../../components/images/drawable-xxxhdpi/ic_other_review.png')}
+                      />
+                    </View>
+                  }
+                  items={[
+                    {
+                      label: 'Edit',
+                      onPress: () => this._onPressUpdate(reviewId, rating, content)
+                    },
+                    {
+                      label: 'Delete',
+                      onPress: () => this.toggleModal(reviewId)
+                    }
+                  ]}
+
+                  labelContainerStyle={{ backgroundColor: '#ffffff', width: 120, marginRight: 20 }}
+                  labelSeparatorColor='#1BD1A5'
+                />
+      )
+    }
   }
 
   renderReview() {
@@ -270,7 +296,7 @@ class Review extends Component {
     let resultMapping = ''
     _.map(this.state, items => {
         resultMapping = _.map(items.Reviews, reviews => {
-        //console.log(reviews);
+        console.log(reviews);
         let reviewId = ''
         reviewId = reviews.ReviewID
         return (
@@ -297,7 +323,7 @@ class Review extends Component {
                   style={
                     { width: 65, height: 65, borderRadius: 150 / 2 }
                   }
-                  source={{ uri: reviews.ReviewerImage }}
+                  source={reviews.ReviewerImage !== '' ? { uri: reviews.ReviewerImage } : require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
                 />
               </View>
               <View style={{ flex: 3, marginLeft: 20 }}>
@@ -314,32 +340,7 @@ class Review extends Component {
                 </View>
               </View>
               <View style={{ flex: 1, alignItems: 'flex-end', marginRight: 20 }}>
-                <PopoverTooltip
-                  ref='tooltip4'
-                  buttonComponent={
-                    <View style={{ width: 50, height: 50, alignItems: 'center' }}>
-                      <Image
-                        style={{ 
-                            aspectRatio: 0.25, 
-                            resizeMode: 'center' }}
-                        source={require('../../../components/images/drawable-xxxhdpi/ic_other_review.png')}
-                      />
-                    </View>
-                  }
-                  items={[
-                    {
-                      label: 'Edit',
-                      onPress: () => this._onPressUpdate(reviews.ReviewID, reviews.Rating, reviews.ReviewContent)
-                    },
-                    {
-                      label: 'Delete',
-                      onPress: () => this.toggleModal(reviewId)
-                    }
-                  ]}
-
-                  labelContainerStyle={{ backgroundColor: '#ffffff', width: 120, marginRight: 20 }}
-                  labelSeparatorColor='#1BD1A5'
-                />
+                {this.renderTooltip(reviews.ReviewID, reviews.Rating, reviews.ReviewContent, reviews.UserID)}
               </View>
             </View>
             <View style={{ marginLeft: 5,marginRight: 20,borderTopWidth:1, borderColor:'#cdcdcd', borderLeftWidth:1, borderTopLeftRadius:5 }}>
@@ -351,7 +352,7 @@ class Review extends Component {
         )
       })
     })
-        console.log(resultMapping.toString())
+        //console.log(resultMapping.toString())
     return resultMapping
   }
 
@@ -407,7 +408,7 @@ class Review extends Component {
 
   renderPage(){
       if(this.state.loading === true){
-          return <Spinner/>
+          return <ModalSpinner loading={this.state.loading}  />
       }
       else{
         //   console.log(this.state.item)
@@ -469,17 +470,11 @@ const styles = {
   },
 };
 
-const ShopReviewScreen = createStackNavigator({
-  Main: {
-    screen: Review, navigationOptions: { header: null }
-  },
-  writeReview: {
-    screen: WriteReview,
-  },
-  writeReviewUpdate: {
-    screen: WriteReviewUpdate,
-  }
-})
+// const ShopReviewScreen = createStackNavigator({
+//   Main: {
+//     screen: Review, navigationOptions: { header: null }
+//   }
+// })
 
 
 export { ShopReviewScreen }

@@ -8,6 +8,7 @@ import {
 import axios from 'axios'
 import _ from 'lodash'
 import { MapView } from 'expo'
+import { Spinner } from '../../common';
 
 const data = {
     'RqAppID': '1234',
@@ -31,27 +32,41 @@ const config = {
 class ShopLocateScreen extends Component {
     state = {
         _data: '',
-        marginBottom: 1
+        marginBottom: 1,
+        curLat: '',
+        curLong: '',
+        curTitle: '',
+        curDes: '',
+        curIcon: ''
     }
 
     componentWillMount() {
-        this._renderService()
+        this.setState({
+            loading : true
+        },()=>{
+            this._renderService()
+        })
+        
     }
 
 
     _renderService() {
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
-            .then(response => { this.setState({ _data: response.data }) })
+            .then(response => { this.setState({ 
+                _data: response.data,
+                },()=>{
+                    this.getCurrentData()
+                }) })
             .catch((error) => {
                 console.log('axios error:', error)
             })
     }
 
-    _renderMarker() {
+    getCurrentData(){
         let _renderingIconType = ''
         let _iconName = ''
-        return _.map((this.state._data.StaticLocation), _renderingData => {
+         _.map((this.state._data.StaticLocation), _renderingData => {
             _renderingIconType = _.map((_renderingData.ShopCategory), _renderingCategory => {
                 return _renderingCategory.ShopCategoryID
             })
@@ -84,33 +99,48 @@ class ShopLocateScreen extends Component {
             }
             
             if(this.props.screenProps.items.ShopId === _renderingData.ShopID){
-            return (
-                <MapView.Marker
-                    key={_renderingData.LocationID + '' + _renderingData.ShopID}
-                    title={_renderingData.LocationName}
-                    description={_renderingData.ShopDescription}
-                    coordinate={{
-                        latitude: parseFloat(_renderingData.Latitude),
-                        longitude: parseFloat(_renderingData.Longitude)
-                    }}
-                >
-                    <Image
-                        style={{ width: 40, height: 40 }}
-                        source={_iconName} />
-                </MapView.Marker>
-            )    
+                this.setState({
+                    curTitle:_renderingData.LocationName,
+                    curDes:_renderingData.ShopDescription,
+                    curLat: _renderingData.Latitude,
+                    curLong: _renderingData.Longitude,
+                    curIcon: _iconName,
+                    loading : false 
+                })
+               
             }
             
         })
     }
-    render() {
-        return (
-            <MapView
+
+    _renderMarker() {
+        
+            return (
+                <MapView.Marker
+                    title={this.state.curTitle}
+                    description={this.state.curDes}
+                    coordinate={{
+                        latitude: parseFloat(this.state.curLat),
+                        longitude: parseFloat(this.state.curLong)
+                    }}
+                >
+                    <Image
+                        style={{ width: 40, height: 40 }}
+                        source={this.state.curIcon} />
+                </MapView.Marker>
+            )    
+    }
+    renderMap(){
+        if(this.state.loading === true){
+            return <Spinner />
+        }else {
+            return (
+                <MapView
                 style={{ flex: 1, marginBottom: this.state.marginBottom }}
                 onMapReady={() => this.setState({ marginBottom: 0 })}
                 initialRegion={{
-                    latitude: 13.754658,
-                    longitude: 100.494037,
+                    latitude: parseFloat(this.state.curLat),
+                    longitude: parseFloat(this.state.curLong),
                     latitudeDelta: 0.0222,
                     longitudeDelta: 0.0122,
                 }}
@@ -130,7 +160,12 @@ class ShopLocateScreen extends Component {
                 ]}>
                 {this._renderMarker()}
             </MapView>
-        )
+            )
+        }
+    }
+
+    render() {
+        return this.renderMap()
     }
 }
 

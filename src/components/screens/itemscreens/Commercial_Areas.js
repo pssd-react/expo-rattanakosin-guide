@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Dimensions
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
@@ -20,22 +21,12 @@ import {
     Button,
     Spinner,
     CardSection,
-    Header 
+    Header, 
+    ModalSpinner
 } from '../../common';
+import I18n from '../../config/i18n'
 
 
-var data = {
-	"RqAppID":"1234",
-	"UserLanguage":"EN",
-	"ViewType":"04",
-	"RowNum":"0",
-	"Keyword":"",
-	"ShopCategory":"266",
-	"UserID":"1",
-	"MarketID":"3",
-	"CouponType":"",
-	"CouponSubType":""
-}
 
 var config = {
     headers: {
@@ -76,6 +67,20 @@ export class Commercial_Areas extends Component {
     }
 
     componentWillMount() {
+
+        var data = {
+            "RqAppID":"1234",
+            "UserLanguage": I18n.t('userlanguage'),
+            "ViewType":"04",
+            "RowNum":"0",
+            "Keyword":"",
+            "ShopCategory":"266",
+            "UserID":"1",
+            "MarketID":"3",
+            "CouponType":"",
+            "CouponSubType":""
+        }
+        
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
             .then(response => { this.setState({ item: response.data,loading : true}) })
@@ -188,7 +193,7 @@ export class Commercial_Areas extends Component {
         var distance = '';
         if(this.state.lat === undefined){
         return(
-            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 กม.</ButtonLocal>
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 {I18n.t('km')}</ButtonLocal>
         )
         }else{
             distance = geolib.getDistanceSimple(
@@ -199,7 +204,7 @@ export class Commercial_Areas extends Component {
            console.log(distance , 'Km')
            distance = distance.toFixed(2);
            return(
-                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} กม.</ButtonLocal>
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} {I18n.t('km')}</ButtonLocal>
            )
         }
     }
@@ -208,7 +213,8 @@ export class Commercial_Areas extends Component {
 
     renderCardData(items){
         return (
-            <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
+                <View style={{flex:1 ,  backgroundColor: '#ffffff'}} >
                 <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
                             <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
                                     <Image style={{width:30, height:30,marginRight:15}}
@@ -268,7 +274,8 @@ export class Commercial_Areas extends Component {
                                 </View>
                         </View>
                 </CardSection>
-            </TouchableOpacity>
+                </View>
+                </TouchableWithoutFeedback>
         )
     }
 
@@ -305,7 +312,7 @@ export class Commercial_Areas extends Component {
         
         return(
         <Button style = {{ backgroundColor: this.state.bt_non ,borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
-             ระยะทาง
+        {I18n.t('distan')}
         </Button>
         )
     }
@@ -313,14 +320,14 @@ export class Commercial_Areas extends Component {
     buttonScore(){
         return(
         <Button style = {{ backgroundColor: this.state.bt_sort ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
-            ความนิยม
+        {I18n.t('score')}
         </Button>
         )
     }
     renderPageView(){
         if(this.state.loading === true){
             return (
-                <Spinner/>
+                <ModalSpinner loading={this.state.loading}  />
             )
         }
         else{
@@ -328,7 +335,7 @@ export class Commercial_Areas extends Component {
                 <View style={{flex:1}}>
                 <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
                     <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20}}>
-                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> เรียงตาม </Text>
+                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> {I18n.t('sort')} </Text>
                     </View>
                     <View style = {{  flex: 3 , height: 30 , width: 80,marginTop: 15 }}>
                         {this.buttonDistance()}
@@ -351,7 +358,7 @@ export class Commercial_Areas extends Component {
     render(){
         return (
             <View style={{flex:1}}>
-            <Header headerText="Commercial_Areas" 
+            <Header headerText= {I18n.t('cat5')}
             backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
             headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                 {this.renderPageView()}

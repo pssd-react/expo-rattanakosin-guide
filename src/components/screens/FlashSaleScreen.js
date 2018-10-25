@@ -11,6 +11,7 @@ import {
 } from 'react-navigation'
 import { Header } from '../common/Header'
 import { ShopDetailScreen } from './ShopDetailScreen'
+import I18n from '../config/i18n'
 
 const INITIAL_STATE = {
     isFocused: true
@@ -34,7 +35,7 @@ class FlashSaleScreen extends Component {
     }
     _renderHeaderScreen() {
         if (this.state.isFocused === true) {
-            return <Header headerText={'Flash Sale'}
+            return <Header headerText={ I18n.t('text_flashsale') }
                 backgroundImage={require('../../components/images/drawable-hdpi/bg_more.webp')} />
         }
         else {
