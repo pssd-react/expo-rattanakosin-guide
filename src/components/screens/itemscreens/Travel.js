@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Dimensions
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
@@ -211,7 +212,8 @@ export class Travel extends Component {
 
     renderCardData(items){
         return (
-            <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+            <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
+                <View style={{flex:1 ,  backgroundColor: '#ffffff'}} >
             <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
                         <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
                                 <Image style={{width:30, height:30,marginRight:15}}
@@ -271,7 +273,8 @@ export class Travel extends Component {
                             </View>
                     </View>
             </CardSection>
-        </TouchableOpacity>
+            </View>
+            </TouchableWithoutFeedback>
         )
     }
 

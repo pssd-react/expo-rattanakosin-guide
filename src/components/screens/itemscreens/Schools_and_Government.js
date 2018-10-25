@@ -6,7 +6,8 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Dimensions
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Icon } from 'react-native-elements'
 import axios from 'axios'
@@ -215,67 +216,69 @@ export class Schools_and_Government extends Component {
 
     renderCardData(items){
         return (
-            <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
-                <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
-                            <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
-                                    <Image style={{width:30, height:30,marginRight:15}}
-                                        source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')} 
+            <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
+                <View style={{flex:1 ,  backgroundColor: '#ffffff'}} >
+                    <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
+                                <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
+                                        <Image style={{width:30, height:30,marginRight:15}}
+                                            source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')} 
+                                        /> 
+                                </View>
+                                <View style={{flex:10}}>
+                                <Text 
+                                    style={styles.ViewTextStyle} 
+                                    numberOfLines={1}
+                                    ellipsizeMode={'tail'}
+                                    > {items.LocationName} </Text>
+                                </View>
+                                <View style={{flex:1,}}>
+                                    <Image
+                                        style={{width:25, height:30,}}
+                                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                                    />
+                                </View>
+                    </CardSection>
+                    <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
+                            <View style={styles.ViewContainer}>
+                                    <View style={{flex: 1 }}>
+                                    <Image style={{width:110, height:150}}
+                                        source={{ uri: items.ImageUrl}} 
                                     /> 
-                            </View>
-                            <View style={{flex:10}}>
-                            <Text 
-                                style={styles.ViewTextStyle} 
-                                numberOfLines={1}
-                                ellipsizeMode={'tail'}
-                                > {items.LocationName} </Text>
-                            </View>
-                            <View style={{flex:1,}}>
-                                <Image
-                                    style={{width:25, height:30,}}
-                                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                />
-                            </View>
-                </CardSection>
-                <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
-                        <View style={styles.ViewContainer}>
-                                <View style={{flex: 1 }}>
-                                <Image style={{width:110, height:150}}
-                                    source={{ uri: items.ImageUrl}} 
-                                /> 
-                                </View>
-                                
-                                <View style={{ flex: 2 ,flexDirection: 'column'}}>
-                                    <View style= {{ flexDirection: 'row' , height: 40}}>
-                                       <View style={{ flex: 5} }>
-                                            <ButtonStar style={styles.buttonStarStyle}
-                                            > 
-                                            {items.Rating}
-                                            </ButtonStar>
-                                        </View>
-                                        <View style={{flex:0.3}}></View>
-                                        <View style={{ flex: 11, marginLeft: 5 , marginRight: 15}}>
-                                        {this._renderLocation(items)}
-                                        </View>
-                                        <View  style={{ flex: 5}}/>
+                                    </View>
+                                    
+                                    <View style={{ flex: 2 ,flexDirection: 'column'}}>
+                                        <View style= {{ flexDirection: 'row' , height: 40}}>
+                                        <View style={{ flex: 5} }>
+                                                <ButtonStar style={styles.buttonStarStyle}
+                                                > 
+                                                {items.Rating}
+                                                </ButtonStar>
+                                            </View>
+                                            <View style={{flex:0.3}}></View>
+                                            <View style={{ flex: 11, marginLeft: 5 , marginRight: 15}}>
+                                            {this._renderLocation(items)}
+                                            </View>
+                                            <View  style={{ flex: 5}}/>
 
+                                        </View>
+                                    
+                                        <View style= {{ flex: 1 }}>
+                                            <Text />
+                                            <ViewMoreText
+                                                numberOfLines={3}
+                                                renderViewMore={this.renderViewMore}
+                                                renderViewLess={this.renderViewLess}
+                                            >
+                                                <Text>
+                                                    {items.ShopDescription}
+                                                </Text>
+                                            </ViewMoreText>
+                                        </View>
                                     </View>
-                                 
-                                    <View style= {{ flex: 1 }}>
-                                        <Text />
-                                        <ViewMoreText
-                                            numberOfLines={3}
-                                            renderViewMore={this.renderViewMore}
-                                            renderViewLess={this.renderViewLess}
-                                        >
-                                            <Text>
-                                                {items.ShopDescription}
-                                            </Text>
-                                        </ViewMoreText>
-                                    </View>
-                                </View>
-                        </View>
-                </CardSection>
-            </TouchableOpacity>
+                            </View>
+                    </CardSection>
+                </View>
+            </TouchableWithoutFeedback>
         )
     }
 
