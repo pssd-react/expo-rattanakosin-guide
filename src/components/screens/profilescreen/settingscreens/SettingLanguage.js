@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../../common'
+import I18n from '../../../config/i18n'
 
 var listData = [
     {
@@ -59,7 +60,7 @@ class SettingLanguage extends Component {
     render() {
         return (
             <View>
-                <Header headerText="ภาษา"
+                <Header headerText={I18n.t('Language')}
                     backgroundImage={require('../../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
                 <ListView

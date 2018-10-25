@@ -10,61 +10,39 @@ import {
 import { createStackNavigator, HeaderBackButton } from 'react-navigation'
 import SettingLanguage from './settingscreens/SettingLanguage'
 import { Header } from '../../common'
+import I18n from '../../config/i18n'
 
-const listData = [
-    { 'id': '1', 'section': 'ภาษา', 'language': 'ไทย' },
-]
-
-INITIAL_STATE = {
-    dataSource: '',
-}
 
 class SettingScreen extends Component {
-    state = INITIAL_STATE
-
-    componentWillMount() {
-        const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
-        this.setState({ dataSource: ds.cloneWithRows(listData) })
-    }
 
     onButtonGoBack() {
         this.props.navigation.popToTop()
     }
 
-    onRowPress(rowData) {
-        if (rowData.id === '1') {
-            this.props.navigation.navigate({
-                routeName: 'Language'
-            })
-        }
+    onChangeLanguage(){
+        this.props.navigation.navigate({
+            routeName: 'Language'
+        })
     }
 
     render() {
         return (
             <View>
-                <Header headerText="ตั้งค่า"
+                <Header headerText={I18n.t('titleSetting')}
                     backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
-                <ListView
-                    dataSource={this.state.dataSource}
-                    renderRow={(rowData) => {
-                        return (
-                            <TouchableOpacity onPress={() => this.onRowPress(rowData)}>
-                                <View style={styles.listViewContainer}>
-                                    <View style={styles.listViewTextContainer}>
-                                        <Text style={styles.listViewTextStyle}>{rowData.section}</Text>
-                                    </View>
-                                    <View style={styles.chevronContainerStyle}>
-                                        <Text style={[styles.listViewTextStyle, style = { color: '#aaa' }]}>{rowData.language}</Text>
-                                        <Image
-                                            source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
-                                    </View>
-                                </View>
-                            </TouchableOpacity>
-                        )
-                    }}
-                    contentContainerStyle={{ width: '100%', backgroundColor: '#DDDDDD' }}
-                />
+                    <TouchableOpacity onPress={() => this.onChangeLanguage()}>
+                        <View style={styles.listViewContainer}>
+                            <View style={styles.listViewTextContainer}>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('Language')}</Text>
+                            </View>
+                            <View style={styles.chevronContainerStyle}>
+                                <Text style={[styles.listViewTextStyle, style = { color: '#aaa' }]}>{I18n.t('changelanguage')}</Text>
+                                <Image
+                                    source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
+                            </View>
+                        </View>
+                    </TouchableOpacity>
                 <View style={styles.viewBlockStyle} />
             </View>
         )
@@ -109,7 +87,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     chevronContainerStyle: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'flex-end',
         alignItems: 'flex-end',
         flexDirection: 'row'

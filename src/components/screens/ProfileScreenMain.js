@@ -3,25 +3,18 @@ import {
     View,
     Text,
     StyleSheet,
-    ListView,
     Image,
     ImageBackground,
-    Linking,
-    WebView,
     TouchableOpacity
 } from 'react-native'
-import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../common'
+import { Button, CardSection, Spinner, } from '../common'
 import firebase from 'firebase'
 import { SocialIcon } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation'
-import { SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen } from './profilescreen'
 import { StoreGlobal } from '../config/GlobalState'
-import { ChangePassword } from './profilescreen/loginscreens/ChangePassword'
-import { RegisterForm } from './profilescreen/loginscreens/RegisterForm'
-import { RegisterOTP } from './profilescreen/loginscreens/RegisterOTP'
-import LoginForm from './profilescreen/loginscreens/LoginForm'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler'
 import Modal from "react-native-modal"
+import I18n from '../config/i18n'
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -169,19 +162,19 @@ class ProfileScreenMain extends Component {
                         style={{ width: 70, height: 70 }} />
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 24 }}>ออกจากระบบ</Text>
+                    <Text style={{ fontSize: 24 }}>{I18n.t('listSignOut')}</Text>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 16 }}>ต้องการออกจากระบบหรือไม่</Text>
+                    <Text style={{ fontSize: 16 }}>{I18n.t('logoutDetail')}</Text>
                 </CardSection>
                 <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this._deactiveModal()}>
-                        <Text style={{ fontSize: 16 }}>ยกเลิก</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('buttonCancel')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderLeftWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this.onLogOutModal()}>
-                        <Text style={{ fontSize: 16 }}>ยืนยัน</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('buttonConfirm')}</Text>
                     </TouchableOpacity>
                 </CardSection>
 
@@ -211,7 +204,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
                                 />
                                 <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
+                                    <Text style={{ fontSize: 16, color: '#fff' }}>{I18n.t('textreviewHistory')}</Text>
                                     <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
                                 </View>
                             </View>
@@ -223,7 +216,7 @@ class ProfileScreenMain extends Component {
                                 source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
                             />
                             <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
+                                <Text style={{ fontSize: 16, color: '#fff' }} >{I18n.t('textCoupon')}</Text>
                             </View>
                         </View>
                     </View>
@@ -254,7 +247,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
                                 />
                                 <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
+                                    <Text style={{ fontSize: 16, color: '#fff' }}>{I18n.t('textreviewHistory')}</Text>
                                     <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
                                 </View>
                             </View>
@@ -266,7 +259,7 @@ class ProfileScreenMain extends Component {
                                 source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
                             />
                             <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
+                                <Text style={{ fontSize: 16, color: '#fff' }} >{I18n.t('textCoupon')}</Text>
                             </View>
                         </View>
                     </View>
@@ -279,18 +272,18 @@ class ProfileScreenMain extends Component {
         return (
             <View>
                 <CardSection style={{ justifyContent: 'center', marginTop: 60 }}>
-                    <Text style={{ fontSize: 22, color: '#fff' }}>ยังไม่ได้เข้าสู่ระบบ</Text>
+                    <Text style={{ fontSize: 22, color: '#fff' }}>{I18n.t('titleNotLogin')}</Text>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
                     <Button onPress={() => this.onButtonLoginNumber()}
                         style={{ backgroundColor: '#ffc94c' }}
                         textStyle={{ color: '#000' }}>
-                        เข้าสู่ระบบด้วยหมายเลขโทรศัพท์
+                        {I18n.t('loginWithEmail')}
                         </Button>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
                     <SocialIcon style={{ flex: 1, borderRadius: 5 }}
-                        title='เข้าสู่ระบบด้วย Facebook'
+                        title={I18n.t('loginWithFacebook')}
                         fontStyle={{ fontSize: 16 }}
                         button
                         type='facebook'
@@ -299,7 +292,7 @@ class ProfileScreenMain extends Component {
                 </CardSection>
                 <CardSection style={{ justifyContent: 'center', marginTop: 18 }}>
                     <TouchableOpacity onPress={() => this.onButtonRegister()}>
-                        <Text style={{ fontSize: 16, textDecorationLine: 'underline', color: '#fff', }}>ลงทะเบียน</Text>
+                        <Text style={{ fontSize: 16, textDecorationLine: 'underline', color: '#fff', }}>{I18n.t('titleRegister')}</Text>
                     </TouchableOpacity >
                 </CardSection>
             </View>
@@ -343,7 +336,7 @@ class ProfileScreenMain extends Component {
                                 source={require('../images/drawable-hdpi/ic_more_logout.webp')} />
                         </View>
                         <View style={styles.listViewTextContainer}>
-                            <Text style={styles.listViewTextStyle}>ออกจากระบบ</Text>
+                            <Text style={styles.listViewTextStyle}>{I18n.t('listSignOut')}</Text>
                         </View>
                         <View style={styles.chevronContainerStyle}>
                             <Image
@@ -385,7 +378,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_more_setting.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>ตั้งค่า</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listSetting')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
@@ -401,7 +394,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_more_how_to_use.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>วิธีการใช้งาน</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listHowToUse')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
@@ -417,7 +410,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_more_about_jj.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>เกี่ยวกับรัตนโกสินทร์</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listAboutGuide')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
@@ -433,7 +426,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_about_jj.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>เกี่่ยวกับแอปพลิเคชัน</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listAboutThisApp')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
@@ -501,29 +494,4 @@ export const ProfileMenu = createStackNavigator({
     Main: {
         screen: ProfileScreenMain
     },
-    Setting: {
-        screen: LanguageMenu, navigationOptions: { header: null }
-    },
-    HowToUse: {
-        screen: HowToUseScreen
-    },
-    AboutRattanakosin: {
-        screen: AboutRattanakosinScreen
-    },
-    AboutApp: {
-        screen: AboutAppScreen
-    },
-    Login: {
-        screen: LoginForm, navigationOptions: { header: null }
-    },
-    Register: {
-        screen: RegisterForm
-    },
-    ChangePass: {
-        screen: ChangePassword
-    },
-    RegisterOTP: {
-        screen: RegisterOTP
-    },
-
 })

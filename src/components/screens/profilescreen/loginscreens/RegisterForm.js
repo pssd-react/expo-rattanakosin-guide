@@ -5,6 +5,7 @@ import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Head
 import { StoreGlobal } from '../../../config/GlobalState'
 import axios from 'axios'
 import Modal from "react-native-modal"
+import I18n from '../../../config/i18n'
 
 export class RegisterForm extends Component {
     static navigationOptions = { header: null }
@@ -15,12 +16,14 @@ export class RegisterForm extends Component {
     _deactiveModal = () => this.setState({ isModalVisible: false })
 
     onButtonPress() {
-        if (this.state.password < 6) {
-
-            this.setState({ alert_phone: "รหัสผ่าน ต้องมีความยาวไม่น้อยกว่า 6 ตัวอักษร" })
+        if(this.state.phone.length < 10){
+            this.setState({ alert_phone: I18n.t('aleartInvalidPhone') })
+            this._toggleModal()
+        }else if (this.state.password.length < 6) {
+            this.setState({ alert_phone: I18n.t('aleartPasswordthan_6_number') })
             this._toggleModal()
         } else if (this.state.confirm_password !== this.state.password) {
-            this.setState({ alert_phone: "โปรดระบุรหัสผ่านให้ตรงกัน" })
+            this.setState({ alert_phone: I18n.t('aleartPasswordInvalidConfirm') })
             this._toggleModal()
         } else {
             this.setState({ loading: true })
@@ -29,7 +32,7 @@ export class RegisterForm extends Component {
                 "RqAppID": "1234",
                 "Mobile": this.state.phone,
                 "Type": "1",
-                "UserLanguage": "TH"
+                "UserLanguage": I18n.t('serviceLang')
             }
             const config = {
                 headers: {
@@ -119,7 +122,7 @@ export class RegisterForm extends Component {
                         style={{ width: 70, height: 70 }} />
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 22 }}>ลงทะเบียนไม่สำเสร็จ</Text>
+                    <Text style={{ fontSize: 22 }}>{I18n.t('registerFaild')}</Text>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20, paddingRight: 20 }}>
                     <Text style={{ fontSize: 16 }}>{this.state.alert_phone}</Text>
@@ -127,7 +130,7 @@ export class RegisterForm extends Component {
                 <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this._deactiveModal()}>
-                        <Text style={{ fontSize: 16 }}>ปิด</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('buttonClose')}</Text>
                     </TouchableOpacity>
                 </CardSection>
             </View>
@@ -146,7 +149,7 @@ export class RegisterForm extends Component {
         if (this.state.name !== '' && this.state.phone !== '' && this.state.password !== '' && this.state.confirm_password !== '') {
             return (
                 <Button onPress={() => this.onButtonPress()} style={{ backgroundColor: '#9f4289' }} textStyle={{ color: '#fff' }}>
-                    ต่อไป
+                    {I18n.t('buttonNext')}
                 </Button>
             )
         }
@@ -168,7 +171,7 @@ export class RegisterForm extends Component {
                     paddingTop: 10,
                     paddingBottom: 10
                 }}>
-                    ต่อไป
+                    {I18n.t('buttonNext')}
                 </Text>
             </View>
         )
@@ -179,18 +182,18 @@ export class RegisterForm extends Component {
 
         return (
             <View style={{ backgroundColor: "#fff", flex: 1 }}>
-                <Header headerText="ลงทะเบียน"
+                <Header headerText={I18n.t('titleRegister')}
                     backgroundImage={require('../../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
 
                 <View style={viewStyle}>
-                    <Text style={textStyle}> กรอกข้อมูลส่วนตัว </Text>
+                    <Text style={textStyle}> {I18n.t('personalInformation')} </Text>
                 </View>
-                <View style={{ justifyContent: 'center', marginTop: 5 }}>
-                    <View style={{ marginLeft: 30, marginRight: 30 }}>
+                <View style={{ flex:1, justifyContent: 'center', marginTop: 10 }}>
+                    <View style={{flex:1, marginLeft: 30, marginRight: 30 }}>
                         <CardSection>
                             <LabelInput
-                                label="ชื่อผู้ใช้งาน"
+                                label={I18n.t('placeholderUsername')}
                                 value={this.state.name}
                                 onChangeText={name => this.setState({ name })}
                                 autoFocus={true}
@@ -198,14 +201,14 @@ export class RegisterForm extends Component {
                         </CardSection>
                         <CardSection>
                             <LabelInput
-                                label="หมายเลขโทรศัพท์"
+                                label={I18n.t('placeholderPhone')}
                                 value={this.state.phone}
                                 onChangeText={phone => this.setState({ phone })}
                             />
                         </CardSection>
                         <CardSection>
                             <LabelInput
-                                label="รหัสผ่าน"
+                                label={I18n.t('placeholderPassword')}
                                 secureTextEntry
                                 value={this.state.password}
                                 onChangeText={password => this.setState({ password })}
@@ -213,14 +216,14 @@ export class RegisterForm extends Component {
                         </CardSection>
                         <CardSection>
                             <LabelInput
-                                label="ยืนยันรหัสผ่าน"
+                                label={I18n.t('placeholderConfirmPassword')}
                                 secureTextEntry
                                 value={this.state.confirm_password}
                                 onChangeText={confirm_password => this.setState({ confirm_password })}
                             />
                         </CardSection>
-                        <View  >
-                            <SignButton label="I Agree to the " sign="Term of user" onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')} />
+                        <View style={{flex:1,}}>
+                            <SignButton label={I18n.t('registerAgree')} sign={I18n.t('registerTerm')} onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')} />
                         </View>
                         <View style={signupTextCont}>
                             {this._renderNextButton()}
@@ -250,12 +253,11 @@ const styles = {
 
     },
     signupTextCont: {
-        flexGrow: 1,
+        flex: 1,
         alignItems: 'flex-end',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         paddingVertical: 16,
         flexDirection: 'row',
-        marginTop: 40
     },
     containerStyle: {
         padding: 5,
