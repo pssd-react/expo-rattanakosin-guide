@@ -16,7 +16,6 @@ import { StoreGlobal } from '../config/GlobalState'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler'
 import Modal from "react-native-modal"
 import I18n from '../config/i18n'
-import { ModalSpinner } from '../common/ModalSpinner';
 
 const config = {
     headers: {
