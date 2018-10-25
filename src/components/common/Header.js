@@ -48,7 +48,7 @@ const styles = {
     textContainerStyle:{
         justifyContent: 'center', 
         alignItems:'center',
-        flex:2 
+        flex:3 
     }
 };
 

@@ -8,6 +8,7 @@ import Modal from "react-native-modal"
 import OtpInputs from 'react-native-otp-inputs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TimerCountdown from 'react-native-timer-countdown'
+import I18n from '../../../config/i18n'
 
 const config = {
     headers: {
@@ -67,7 +68,7 @@ export class RegisterOTP extends Component {
                         style={{ width: 70, height: 70 }} />
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 22 }}>ขอโทษค่ะ</Text>
+                    <Text style={{ fontSize: 22 }}>{I18n.t('commonError')}</Text>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
                     <Text style={{ fontSize: 16 }}>{this.state.alert_phone}</Text>
@@ -75,7 +76,7 @@ export class RegisterOTP extends Component {
                 <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this._deactiveModal()}>
-                        <Text style={{ fontSize: 16 }}>ปิด</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('buttonClose')}</Text>
                     </TouchableOpacity>
                 </CardSection>
             </View>
@@ -123,7 +124,7 @@ export class RegisterOTP extends Component {
                 <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffc94c', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this.onButtonToProfile()}>
-                        <Text style={{ fontSize: 16 }}>เริ่มต้นการใช้งาน</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('getStarted')}</Text>
                     </TouchableOpacity>
                 </CardSection>
             </View>
@@ -137,14 +138,14 @@ export class RegisterOTP extends Component {
                     <TouchableOpacity style={{ flexDirection: 'row' }}
                         onPress={() => this.onRefreshOTP()}>
                         <Ionicons name={'ios-sync'} size={20} color={'blue'} />
-                        <Text style={{ fontSize: 16, marginLeft: 8 }}>ขอรหัสผ่าน OTP</Text>
+                        <Text style={{ fontSize: 16, marginLeft: 8 }}>{I18n.t('buttonOTP')}</Text>
                     </TouchableOpacity>
                 </View>
             )
         } else {
             return (
                 <View style={{ backgroundColor: '#CDC9C9', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'row' }}>
-                    <Text style={{ marginRight: 5, fontSize: 16, color: 'blue' }}>ขอรหัสผ่านใหม่ได้ในอีก</Text>
+                    <Text style={{ marginRight: 5, fontSize: 16, color: 'blue' }}>{I18n.t('textOTPminute')}</Text>
                     <TimerCountdown
                         initialSecondsRemaining={500 * 60}
                         onTimeElapsed={() => this.setState({ timer: true })}
@@ -172,13 +173,13 @@ export class RegisterOTP extends Component {
             "Password": RequestOTPService.Password,
             "ConfirmPassword": RequestOTPService.ConfirmPassword,
             "DisplayName": RequestOTPService.DisplayName,
-            "UserLanguage": "TH"
+            "UserLanguage": I18n.t('serviceLang')
         }
         const dataLogin = {
             "RqAppID": "1234",
             "Email": RequestOTPService.Phone,
             "Password": RequestOTPService.Password,
-            "UserLanguage": "TH",
+            "UserLanguage": I18n.t('serviceLang'),
             "MarketID": "1"
         }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/EmailRegisterService',
@@ -219,7 +220,7 @@ export class RegisterOTP extends Component {
             "RqAppID": "1234",
             "Mobile": RequestOTPService.Phone,
             "Type": "1",
-            "UserLanguage": "TH"
+            "UserLanguage": I18n.t('serviceLang')
         }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/RequestOTPService',
             data, config)
@@ -247,7 +248,7 @@ export class RegisterOTP extends Component {
             "RqAppID": "1234",
             "Mobile": RequestOTPService.Phone,
             "Type": "1",
-            "UserLanguage": "TH",
+            "UserLanguage": I18n.t('serviceLang'),
             "OTP": this.state.codeOTP,
             "Reference": RequestOTPService.Reference
         }
@@ -286,7 +287,7 @@ export class RegisterOTP extends Component {
                 <Button onPress={() => this.onButtonConfirm()}
                     style={{ backgroundColor: '#9f4289' }}
                     textStyle={{ color: '#fff' }}>
-                    ยืนยัน
+                    {I18n.t('buttonConfirm')}
                 </Button>
             )
         } else {
@@ -308,7 +309,7 @@ export class RegisterOTP extends Component {
                         paddingTop: 10,
                         paddingBottom: 10
                     }}>
-                        ยืนยัน
+                        {I18n.t('buttonConfirm')}
                     </Text>
                 </View>
             )
@@ -317,21 +318,21 @@ export class RegisterOTP extends Component {
 
     render() {
         const { viewStyle, textStyle } = styles
-
+        const RequestOTPService = StoreGlobal({ type: 'get', key: 'RequestOTPService' })
         return (
             <View style={{ backgroundColor: "#fff", flex: 1 }}>
-                <Header headerText="ลงทะเบียน"
+                <Header headerText={I18n.t('titleRegister')}
                     backgroundImage={require('../../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
 
                 <View style={viewStyle}>
-                    <Text style={textStyle}> ยืนยัน OTP </Text>
+                    <Text style={textStyle}>{I18n.t('buttonConfirmOTP')}</Text>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'space-between', marginTop: 5 }}>
 
                     <CardSection style={{ marginLeft: 10, marginRight: 10, flex: 3, flexDirection: 'column', }}>
                         <View style={{ backgroundColor: '#CDC9C9', flex: 3, justifyContent: 'space-between', alignItems: 'center', flexDirection: 'column', }}>
-                            <Text style={{ fontSize: 20, height: 25 }}>กรอกรหัสผ่าน OTP 6 หลัก</Text>
+                            <Text style={{ fontSize: 20, height: 25 }}>{I18n.t('placeholderOTP')}</Text>
                             <View style={{ flex: 1 }}>
                                 <OtpInputs inputStyles={{ flex: 1, width: 30, backgroundColor: '#fff', borderRadius: 5, color: '#000', borderWidth: 1, borderColor: '#aaa' }}
                                     handleChange={code => (code.length === 6) ? this.setState({ codeOTP: code }) : null}
@@ -341,7 +342,7 @@ export class RegisterOTP extends Component {
                             </View>
                         </View>
                         <View style={{ backgroundColor: '#CDC9C9', flex: 1, justifyContent: 'center', alignItems: 'center', flexDirection: 'column' }}>
-                            <Text style={{ fontSize: 14 }}>เลขที่อ้างอิง BYFA, OTP จะหมดอายุภายใน 5 นาที</Text>
+                            <Text style={{ fontSize: 14 }}>{I18n.t('numberRefer')}{RequestOTPService.Reference}{I18n.t('OTP_5_minute')}</Text>
                         </View>
                         {this.onOTPButtonPressed()}
                     </CardSection>

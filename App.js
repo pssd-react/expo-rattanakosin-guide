@@ -25,6 +25,11 @@ import {
 import { HomeMenuScreens } from './src/components/screens/homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import IntroductionScreen from './src/components/screens/IntroductionScreen';
+import { AboutRattanakosinScreen, LanguageMenu, HowToUseScreen, AboutAppScreen } from './src/components/screens/profilescreen';
+import LoginForm from './src/components/screens/profilescreen/loginscreens/LoginForm';
+import { RegisterForm } from './src/components/screens/profilescreen/loginscreens/RegisterForm';
+import { ChangePassword } from './src/components/screens/profilescreen/loginscreens/ChangePassword';
+import { RegisterOTP } from './src/components/screens/profilescreen/loginscreens/RegisterOTP';
 import ShopDetailScreen from './src/components/screens/ShopDetailScreen';
 import writereviwe from './src/components/screens/shopdetailscreens/reviewscreens/WriteReview';
 import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
@@ -154,6 +159,30 @@ const MainStack = createStackNavigator({
   },
   resPlacesScreen : {
     screen: PlacesScreen , navigationOptions: { header: null }
+  },
+  Setting: {
+    screen: LanguageMenu, navigationOptions: { header: null }
+  },
+  HowToUse: {
+      screen: HowToUseScreen, navigationOptions: { header: null }
+  },
+  AboutRattanakosin: {
+    screen: AboutRattanakosinScreen, navigationOptions: { header: null }
+  },
+  AboutApp: {
+    screen: AboutAppScreen, navigationOptions: { header: null }
+  },
+  Login: {
+    screen: LoginForm, navigationOptions: { header: null }
+  },
+  Register: {
+    screen: RegisterForm, navigationOptions: { header: null }
+  },
+  ChangePass: {
+    screen: ChangePassword, navigationOptions: { header: null }
+  },
+  RegisterOTP: {
+    screen: RegisterOTP, navigationOptions: { header: null }
   },
   resHomedetail : {
     screen: HomeMenuScreens , navigationOptions: { header: null }

@@ -10,15 +10,7 @@ import {
 } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
-
-const listData = [
-    { 'id': '1', 'section': 'วิธีค้นหาสถานที่และหมวดหมู่ของร้านค้า', 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/th/index.html' },
-    { 'id': '2', 'section': 'วิธีเข้าสู่สถานที่จากหน้าแผนที่', 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/th/help2.html' },
-    { 'id': '3', 'section': 'วิธีการรีวิวอละจัดการรีวิว', 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/th/help3.html' },
-    { 'id': '4', 'section': 'วิธีการสร้างทริป', 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/th/help4.html' },
-    { 'id': '5', 'section': 'วิธีการปักหมุดตำแหน่งที่ตั้ง', 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/th/help5.html' },
-    { 'id': '6', 'section': 'วิธีการตั้งค่าแอปพลิเคชัน', 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/th/help6.html' },
-]
+import I18n from '../../config/i18n'
 
 INITIAL_STATE = {
     dataSource: '',
@@ -30,6 +22,14 @@ export class HowToUseScreen extends Component {
     state = INITIAL_STATE
 
     componentWillMount() {
+        listData = [
+            { 'id': '1', 'section': I18n.t('howToSearch'), 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/'+I18n.t('linkLang')+'/index.html' },
+            { 'id': '2', 'section': I18n.t('howToMap'), 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/'+I18n.t('linkLang')+'/help2.html' },
+            { 'id': '3', 'section': I18n.t('howToReview'), 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/'+I18n.t('linkLang')+'/help3.html' },
+            { 'id': '4', 'section': I18n.t('howToTrip'), 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/'+I18n.t('linkLang')+'/help4.html' },
+            { 'id': '5', 'section': I18n.t('howToCreatePin'), 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/'+I18n.t('linkLang')+'/help5.html' },
+            { 'id': '6', 'section': I18n.t('howToSettingApp'), 'url': 'https://uat-shop.digitalventures.co.th/rattanakosin/'+I18n.t('linkLang')+'/help6.html' },
+        ]
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
         this.setState({ dataSource: ds.cloneWithRows(listData) })
     }
@@ -42,7 +42,7 @@ export class HowToUseScreen extends Component {
 
         return (
             <View>
-                <Header headerText="วิธีการใช้งาน"
+                <Header headerText={I18n.t('titleHowToUse')}
                     backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
                 <ListView

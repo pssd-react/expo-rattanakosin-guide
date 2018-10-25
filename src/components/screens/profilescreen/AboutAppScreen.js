@@ -9,6 +9,7 @@ import {
 } from 'react-native'
 import { Header } from '../../common'
 import { HeaderBackButton } from 'react-navigation'
+import I18n from '../../config/i18n'
 
 export class AboutAppScreen extends Component {
 
@@ -22,13 +23,13 @@ export class AboutAppScreen extends Component {
 
         return (
             <View>
-                <Header headerText="เกี่ยวกับแอปพลิเคชัน"
+                <Header headerText={I18n.t('titleAboutThisApp')}
                     backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
                 <TouchableOpacity onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')}>
                     <View style={styles.listViewContainer}>
                         <View style={styles.listViewTextContainer}>
-                            <Text style={styles.listViewTextStyle}>ข้อกำหนดและเงื่อนไขการใช้งาน</Text>
+                            <Text style={styles.listViewTextStyle}>{I18n.t('textTermsOfUse')}</Text>
                         </View>
                         <View style={styles.chevronContainerStyle}>
                             <Image
@@ -38,7 +39,7 @@ export class AboutAppScreen extends Component {
                 </TouchableOpacity>
                 <View style={styles.listViewContainer}>
                     <View style={styles.listViewTextContainer}>
-                        <Text style={styles.listViewTextStyle}>เวอร์ชัน</Text>
+                        <Text style={styles.listViewTextStyle}>{I18n.t('textVersion')}</Text>
                     </View>
                     <View style={styles.chevronContainerStyle}>
                         <Text style={{ color: '#aaa' }}>0.0.1</Text>

@@ -5,6 +5,7 @@ import { SocialIcon } from 'react-native-elements'
 import {StoreGlobal} from '../../../config/GlobalState'
 import axios from 'axios'
 import Modal from "react-native-modal"
+import I18n from '../../../config/i18n'
 
 const config = {
     headers: {
@@ -83,7 +84,7 @@ class LoginForm extends Component {
             "RqAppID":"1234",
             "Email": this.state.phone,
             "Password": this.state.password,
-            "UserLanguage":"TH",
+            "UserLanguage": I18n.t('serviceLang'),
             "MarketID":"1"
         }
         const config = {
@@ -101,6 +102,12 @@ class LoginForm extends Component {
                 console.log(this.props.screenProps)
                 StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
                 this.onButtonToProfile()
+            }else if(response.data.ResponseDetail === ' Email is Require Or Not Empty  ,  Password is Require Or Not Empty ' || response.data.ResponseDetail === ' Email is Require Or Not Empty '){
+                this.setState({alert_phone:I18n.t('aleartPhone')})
+                this._toggleModal()
+            }else if(response.data.ResponseDetail === ' Password is Require Or Not Empty '){
+                this.setState({alert_phone:I18n.t('aleartPassword')})
+                this._toggleModal()
             }else{
                 this.setState({alert_phone:response.data.ResponseDetail})
                 this._toggleModal()
@@ -164,7 +171,7 @@ class LoginForm extends Component {
                                 style={{width: 70, height: 70}}/>
                     </CardSection>
                     <CardSection style={{paddingLeft:20}}>
-                        <Text style={{ fontSize: 22}}>ขอโทษค่ะ</Text>
+                        <Text style={{ fontSize: 22}}>{I18n.t('commonError')}</Text>
                     </CardSection>
                     <CardSection style={{paddingLeft:20,  paddingRight: 20}}>
                         <Text style={{ fontSize: 16}}>{this.state.alert_phone}</Text>
@@ -172,7 +179,7 @@ class LoginForm extends Component {
                     <CardSection style={{flex:1, justifyContent: 'flex-end', padding: 0, marginTop:60}}>
                         <TouchableOpacity style={{flex: 1, justifyContent:'center', alignItems:'center',  borderTopWidth: 1, borderRightWidth: 0.5, borderColor:'#aaa', height: 50}} 
                             onPress={() => this._deactiveModal()}>
-                                <Text style={{ fontSize: 16}}>ปิด</Text>
+                                <Text style={{ fontSize: 16}}>{I18n.t('buttonClose')}</Text>
                         </TouchableOpacity>
                     </CardSection>
                 </View>
@@ -193,63 +200,66 @@ class LoginForm extends Component {
             source={ require('../../../images/drawable-hdpi/bg_welcome.webp') }
             style={{width: '100%', height: '100%'}}
             > 
-            <View style={{justifyContent: 'center'}}>
-                <View style={{ marginLeft: 30, marginRight: 30 }}>
-                    <CardSection style={{ justifyContent: 'center', marginTop: 60}}>
-                        <Text style={{  fontSize: 40, fontWeight: 'bold' }}>เข้าสู่ระบบ</Text>
-                    </CardSection>
-                    <CardSection >
-                        <LabelInput 
-                            label="หมายเลขโทรศัพท์"
-                            value={this.state.phone}
-                            onChangeText={phone => this.setState({ phone })}
-                            autoFocus={true}
+                <View style={{justifyContent: 'center', flex:1}}>
+                    <View style={{ marginLeft: 30, marginRight: 30 , flex:1}}>
+                        <CardSection style={{ justifyContent: 'center', marginTop: 60}}>
+                            <Text style={{  fontSize: 40, fontWeight: 'bold' }}>{I18n.t('titleLogin')}</Text>
+                        </CardSection>
+                        <CardSection >
+                            <LabelInput 
+                                label={I18n.t('placeholderPhone')}
+                                value={this.state.phone}
+                                onChangeText={phone => this.setState({ phone })}
+                                autoFocus={true}
+        
+                                /> 
+                        </CardSection>
+                        <CardSection>
+                            <LabelInput 
+            
+                                label={I18n.t('placeholderPassword')}
+                                secureTextEntry
+                                value={this.state.password}
+                                onChangeText={password => this.setState({ password })}
+                        
                             /> 
-                    </CardSection>
-                    <CardSection>
-                        <LabelInput 
-          
-                            label={"รหัสผ่าน"}
-                            secureTextEntry
-                            value={this.state.password}
-                            onChangeText={password => this.setState({ password })}
-                    
-                          /> 
-                    </CardSection>
-                    <CardSection>
-                        <Button onPress={() => this.onButtonLogin()} 
-                            style={{backgroundColor: '#ffc94c'}} 
-                            textStyle={{color: '#000'}}>
-                            เข้าสู่ระบบ
-                        </Button>
-                    </CardSection>
-                    <CardSection style={{ justifyContent: 'center'}}>
-                        <Text style={{  fontSize: 18 }}>หรือ</Text>
-                    </CardSection>
-                    <CardSection >
-                        <SocialIcon style={{ flex: 1, borderRadius: 5 }}
-                        title='เข้าสู่ระบบด้วย Facebook'
-                        fontStyle={{fontSize:16 }}
-                        button
-                        type='facebook'
-                        onPress={() => this.loginWithFacebook()}
-                        />
-                    </CardSection>
-                    <CardSection style={{ justifyContent: 'center'}}>
-                        <TouchableOpacity onPress={() => this.onButtonToProfile()}>
-                            <Text style={{  fontSize: 20, textDecorationLine: 'underline', color:'#9932CC', }}>ใช้งานแบบไม่ login</Text>
-                        </TouchableOpacity >
-                    </CardSection>
-                </View>
-                    <CardSection style={{ marginTop: 35, justifyContent: 'space-between' }}>
-                        <TouchableOpacity onPress={() => this.onButtonChangePass()}>
-                            <Text style={{  fontSize: 20, color:'#9932CC', }}>ลืมรหัสผ่าน</Text>
+                        </CardSection>
+                        <CardSection>
+                            <Button onPress={() => this.onButtonLogin()} 
+                                style={{backgroundColor: '#ffc94c'}} 
+                                textStyle={{color: '#000'}}>
+                                {I18n.t('buttonLogin')}
+                            </Button>
+                        </CardSection>
+                        <CardSection style={{ justifyContent: 'center'}}>
+                            <Text style={{  fontSize: 18 }}>{I18n.t('titleOR')}</Text>
+                        </CardSection>
+                        <CardSection >
+                            <SocialIcon style={{ flex: 1, borderRadius: 5 }}
+                            title={I18n.t('loginWithFacebook')}
+                            fontStyle={{fontSize:16 }}
+                            button
+                            type='facebook'
+                            onPress={() => this.loginWithFacebook()}
+                            />
+                        </CardSection>
+                        <CardSection style={{ justifyContent: 'center'}}>
+                            <TouchableOpacity onPress={() => this.onButtonToProfile()}>
+                                <Text style={{  fontSize: 20, textDecorationLine: 'underline', color:'#9932CC', }}>{I18n.t('titleSkip')}</Text>
                             </TouchableOpacity >
-                        <TouchableOpacity onPress={() => this.onButtonRegister()}>
-                            <Text style={{  fontSize: 20, color:'#9932CC', }}>ลงทะเบียน</Text>
-                        </TouchableOpacity >
-                    </CardSection>
-            </View>
+                        </CardSection>
+                    </View>
+                    <View style={{flex:1, justifyContent: 'flex-end'}}>
+                        <CardSection style={{ justifyContent: 'space-between' }}>
+                            <TouchableOpacity onPress={() => this.onButtonChangePass()}>
+                                <Text style={{  fontSize: 20, color:'#9932CC', }}>{I18n.t('titleforgetPassword')}</Text>
+                                </TouchableOpacity >
+                            <TouchableOpacity onPress={() => this.onButtonRegister()}>
+                                <Text style={{  fontSize: 20, color:'#9932CC',  }}>{I18n.t('titleRegister')}</Text>
+                            </TouchableOpacity >
+                        </CardSection>
+                    </View>
+                </View>
             {this._renderModal()}
           </ImageBackground>
         )
