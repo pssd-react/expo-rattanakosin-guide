@@ -98,6 +98,7 @@ class LoginForm extends Component {
             this.setState({loading:false})
             this._deactiveModal()
             if(response.data.ResponseDetail === 'Success'){
+                console.log(this.props.screenProps)
                 StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
                 this.onButtonToProfile()
             }else{
@@ -203,7 +204,6 @@ class LoginForm extends Component {
                             value={this.state.phone}
                             onChangeText={phone => this.setState({ phone })}
                             autoFocus={true}
-    
                             /> 
                     </CardSection>
                     <CardSection>
@@ -246,7 +246,7 @@ class LoginForm extends Component {
                             <Text style={{  fontSize: 20, color:'#9932CC', }}>ลืมรหัสผ่าน</Text>
                             </TouchableOpacity >
                         <TouchableOpacity onPress={() => this.onButtonRegister()}>
-                            <Text style={{  fontSize: 20, color:'#9932CC',  }}>ลงทะเบียน</Text>
+                            <Text style={{  fontSize: 20, color:'#9932CC', }}>ลงทะเบียน</Text>
                         </TouchableOpacity >
                     </CardSection>
             </View>

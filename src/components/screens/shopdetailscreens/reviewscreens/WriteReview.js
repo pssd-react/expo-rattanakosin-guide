@@ -90,8 +90,7 @@ class writereviwe extends Component {
             <Header 
             headerText={'Write Review'} 
             backgroundImage= {require('../../../images/drawable-hdpi/bg_more.webp')}
-            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.props.navigation.goBack()} />}
-            textContainerStyle={{flex:4, alignItems:'flex-start'}}/>
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.props.navigation.goBack()} />}/>
                 <View style={{ flexDirection: 'column', height: '30%', backgroundColor: '#595959' }}>
                     <View style={{ flex: 1 }}>
                         <View style={{ height: 20, flexDirection: 'column', flex: 1, marginTop: '5%' }}>
