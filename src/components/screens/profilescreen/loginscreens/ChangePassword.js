@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
-import { LabelInput, Button, CardSection, Spinner, Header } from '../../../common'
+import { LabelInput, Button, CardSection, Header, ModalSpinner } from '../../../common'
 import OtpInputs from 'react-native-otp-inputs'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 import TimerCountdown from 'react-native-timer-countdown'
@@ -116,27 +116,7 @@ export class ChangePassword extends Component {
     }
 
     onFailedModalRender() {
-        if (this.state.loading === true) {
-            return (
-                <View style={{
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    marginBottom: 270,
-                    marginTop: 270,
-                    marginLeft: 140,
-                    marginRight: 140,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Spinner />
-                </View>
-            )
-        }
+       
         return (
             <View style={{
                 flex: 1,
@@ -171,27 +151,6 @@ export class ChangePassword extends Component {
     }
 
     onSuccessModalRender() {
-        if (this.state.loading === true) {
-            return (
-                <View style={{
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    marginBottom: 270,
-                    marginTop: 270,
-                    marginLeft: 140,
-                    marginRight: 140,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Spinner />
-                </View>
-            )
-        }
         return (
             <View style={{
                 flex: 1,
@@ -349,6 +308,11 @@ export class ChangePassword extends Component {
     }
 
     _renderFailedModal() {
+        if (this.state.loading === true) {
+            return (
+                <ModalSpinner />
+            )
+        }
         return (
             <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
                 {this.onFailedModalRender()}
@@ -357,6 +321,11 @@ export class ChangePassword extends Component {
     }
 
     _renderSucceedModal() {
+        if (this.state.loading === true) {
+            return (
+                <ModalSpinner />
+            )
+        }
         return (
             <Modal isVisible={this.state.isModalSuccess} style={{ flex: 1 }}>
                 {this.onSuccessModalRender()}

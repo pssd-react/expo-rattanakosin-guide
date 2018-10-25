@@ -8,6 +8,9 @@ export default {
     prof: '个人资料',
     title_promotion: '优惠',
     title_favorite: '我的行程',
+    interestingTrip: '精选行程',
+    exclusive: '独家优惠',
+    myTrip: '我的行程',
     linkLang: 'cn',
     serviceLang: 'CN',
 
@@ -108,7 +111,7 @@ export default {
     registerAgree: 'I Agree to the ',
     registerTerm: '使用须知',
     
-    
+
     //============================
     
     //title

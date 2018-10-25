@@ -3,11 +3,14 @@ export default {
     greeting: 'สวัสดี!',
     home: 'หน้าหลัก',
     livemap: 'แผนที่',
-    flashsale: 'ลดฟ้าผ่า',
+    flashsale: 'โปรฟ้าผ่า',
     trip: 'ทริป',
     prof: 'ข้อมูลส่วนตัว',
     title_promotion: 'โปรโมชั่น',
     title_favorite: 'ทริปของฉัน',
+    interestingTrip: 'ทริปที่น่าสนใจ',
+    exclusive: 'Exclusive',
+    myTrip: 'ทริปของฉัน',
     linkLang: 'th',
     serviceLang: 'TH',
 
@@ -111,7 +114,7 @@ export default {
     //============================
 
     //title
-	toolbar_title_promotion: 'ปรโมชั่น',
+	toolbar_title_promotion: 'โปรโมชั่น',
     toolbar_title_favorite: 'ร้านที่สนใจ',
     toolbar_title_how_to_use: 'วิธีการใช้งาน',
     toolbar_title_about_app: 'เกี่ยวกับแอปพลิเคชัน',

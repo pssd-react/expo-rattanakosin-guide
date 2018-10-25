@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, Image, TouchableOpacity, Linking, } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
-import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../../../common'
+import { LabelInput, Button, CardSection, ModalSpinner, SignButton, Header } from '../../../common'
 import { StoreGlobal } from '../../../config/GlobalState'
 import axios from 'axios'
 import Modal from "react-native-modal"
@@ -83,27 +83,6 @@ export class RegisterForm extends Component {
     }
 
     onModalRender() {
-        if (this.state.loading === true) {
-            return (
-                <View style={{
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    marginBottom: 270,
-                    marginTop: 270,
-                    marginLeft: 140,
-                    marginRight: 140,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-                    <Spinner />
-                </View>
-            )
-        }
         return (
             <View style={{
                 flex: 1,
@@ -138,6 +117,11 @@ export class RegisterForm extends Component {
     }
 
     _renderModal() {
+        if (this.state.loading === true) {
+            return (
+                    <ModalSpinner />
+            )
+        }
         return (
             <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
                 {this.onModalRender()}

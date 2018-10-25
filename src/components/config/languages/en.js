@@ -5,6 +5,9 @@ export default {
     flashsale: 'Flash Sale',
     trip: 'Trip',
     prof: 'Profile',
+    interestingTrip: 'Recommended',
+    exclusive: 'Exclusive',
+    myTrip: 'My trip',
     linkLang: 'en',
     serviceLang: 'EN',
 
@@ -21,7 +24,7 @@ export default {
     changedPasswordSuccessDetail: 'ระบบได้เปลี่ยนรหัสผ่านให้เรียบร้อยแล้ว',
     aleartPasswordNotMatch: 'Password do not match',
 
-    getStarted: 'เริ่มต้นการใช้งาน',
+    getStarted: 'Get Started',
     commonSave: 'Save',
     buttonConfirm: 'Confirm',
     buttonCancel: 'Cancel',
@@ -94,7 +97,6 @@ export default {
     registerAgree: 'I Agree to the ',
     registerTerm: 'Term of user',
     
-
     //============================
 
     //title

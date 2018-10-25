@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Text, View, TouchableOpacity, ImageBackground, Image,TextInput } from 'react-native'
-import {LabelInput, Button, CardSection,Spinner} from '../../../common'
+import {LabelInput, Button, CardSection, ModalSpinner} from '../../../common'
 import { SocialIcon } from 'react-native-elements'
 import {StoreGlobal} from '../../../config/GlobalState'
 import axios from 'axios'
@@ -135,25 +135,6 @@ class LoginForm extends Component {
     }
 
     onModalRender(){
-        if(this.state.loading === true){
-            return (
-                <View style={{ flex: 1, 
-                    backgroundColor: '#fff', 
-                    marginBottom:270, 
-                    marginTop:270,
-                    marginLeft:140,
-                    marginRight:140,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'}}>
-                <Spinner/>
-            </View>
-            )
-        }
         return(
             <View style={{ flex: 1, 
                 backgroundColor: '#fff', 
@@ -186,6 +167,11 @@ class LoginForm extends Component {
     }
 
     _renderModal(){
+        if(this.state.loading === true){
+            return (
+                <ModalSpinner/>
+            )
+        }
         return(
             <Modal isVisible={this.state.isModalVisible} style={{flex:1}}>
                 {this.onModalRender()}
