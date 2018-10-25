@@ -41,6 +41,7 @@ class ShopDescriptionScreen extends Component {
     state = INITAIL_STATE
 
     componentDidMount() {
+        
         this.setState({
             loadingProService: true,
             loadingRecomService: true,
@@ -49,6 +50,9 @@ class ShopDescriptionScreen extends Component {
             this._postInquiryProductService()
             this._postInquiryRecommendedShopService()
             this._postInquiryShopDetailService()
+            if(this.props.screenProps.fromOverView === true){
+                this.props.navigation.navigate('ShopLoca')
+            }
         })
     }
 

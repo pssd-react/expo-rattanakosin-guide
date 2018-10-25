@@ -21,7 +21,8 @@ import {
     Button,
     Spinner,
     CardSection,
-    Header 
+    Header, 
+    ModalSpinner
 } from '../../common';
 import I18n from '../../config/i18n'
 
@@ -342,7 +343,7 @@ export class Bank extends Component {
     renderPageView(){
         if(this.state.loading === true){
             return (
-                <Spinner/>
+                <ModalSpinner loading={this.state.loading}  />
             )
         }
         else{

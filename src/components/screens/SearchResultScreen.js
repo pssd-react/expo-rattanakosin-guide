@@ -14,7 +14,8 @@ import {
     ButtonLocal,
     Button, 
     Header,   
-    Spinner} from '../common';
+    Spinner,
+    ModalSpinner} from '../common';
 import axios from 'axios'
 import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
@@ -367,7 +368,7 @@ export class SearchResultScreen extends Component {
     renderSecondHeader(){
         if(this.state.loading === true){
             return (
-                <Spinner/>
+                <ModalSpinner loading={this.state.loading}  />
             )
         }
         else if(this.state.ndHeaderStatus === true){

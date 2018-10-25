@@ -14,7 +14,7 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import _ from 'lodash'
-import { Spinner, Card, CardSection } from '../common'
+import { Spinner, Card, CardSection, ModalSpinner } from '../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../common/Header'
 import { ShopTap } from './shopdetailscreens/ShopTap';
@@ -46,6 +46,7 @@ const INITAIL_STATE = {
     marginTopBox: 230,
     statusButton: false,
     tatusIcon: false,
+    fromOverView: false
 }
 
 const ios = Platform.OS === 'ios';
@@ -63,9 +64,11 @@ export class ShopDetailScreen extends Component {
 
     componentDidMount() {
         const shopID = this.props.navigation.getParam('key', 'none')
+        const fromOverView = this.props.navigation.getParam('fromOverView', false)
         data.ShopID = shopID
         this.setState({
             loading: true,
+            fromOverView: fromOverView,
             shopID: shopID
         }, () => {
             this._renderingItem()
@@ -193,7 +196,7 @@ export class ShopDetailScreen extends Component {
         let count = 0
         let isSkip = false
         if (this.state.loading === true) {
-            locate = (<Spinner size={'large'} />)
+            locate = (<ModalSpinner loading={this.state.loading}  />)
         }
         else if (this.state.item !== undefined) {
             _.each(this.state, skipCheck => {
@@ -279,7 +282,11 @@ export class ShopDetailScreen extends Component {
                                 </Animated.View>
 
                                 <Animated.View style={{ flex: 1, height: height - 130 }}>
-                                    <ShopTap screenProps={{ items: items, navigation: this.props.navigation, forceUpdate: this.randomUpdate.bind(this) }} />
+                                    <ShopTap screenProps={{ 
+                                        items: items, 
+                                        navigation: this.props.navigation, 
+                                        forceUpdate: this.randomUpdate.bind(this),
+                                        fromOverView: this.state.fromOverView }} />
                                 </Animated.View>
 
                             </ScrollView>
