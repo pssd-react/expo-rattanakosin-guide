@@ -63,7 +63,7 @@ class LoginForm extends Component {
                this.props.screenProps.loginMeth(
                    response.data.UserDetail.UserID,
                    response.data.UserDetail.DisplayName,
-                   data.SessionToken )
+                   '' )
                StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
                 this.setState({ 
                     userInfoFB
@@ -99,7 +99,11 @@ class LoginForm extends Component {
             this.setState({loading:false})
             this._deactiveModal()
             if(response.data.ResponseDetail === 'Success'){
-                console.log(this.props.screenProps)
+                //console.log(this.props.screenProps)
+                this.props.screenProps.loginMeth(
+                    response.data.UserDetail.UserID,
+                    response.data.UserDetail.DisplayName,
+                    response.data.UserDetail.SessionToken )
                 StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
                 this.onButtonToProfile()
             }else if(response.data.ResponseDetail === ' Email is Require Or Not Empty  ,  Password is Require Or Not Empty ' || response.data.ResponseDetail === ' Email is Require Or Not Empty '){
@@ -121,9 +125,17 @@ class LoginForm extends Component {
 
     onButtonToProfile(){
         const reload = null
-        this.props.navigation.navigate(
-            'Main', {reload}
-          )
+        const fromScreen = this.props.navigation.getParam('fromScreen', 'none')
+        
+        if(fromScreen === 'none'){
+            this.props.navigation.navigate(
+                'Main', {reload}
+              )
+        }else{
+            this.props.navigation.goBack()
+        }
+
+        
     }
 
     onButtonChangePass(){

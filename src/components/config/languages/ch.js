@@ -149,6 +149,7 @@ export default {
     guide_page_three_title: '推荐店铺/推荐商品',
     guide_page_three_message: '更多推荐详情请点击 shopping planner,也可添加个人地图',
     txt_read_more: '阅读更多',
+    txt_read_less: '显示较少',
 
     guide_go_to_application: '登入 App',
     common_right_braces: ')',

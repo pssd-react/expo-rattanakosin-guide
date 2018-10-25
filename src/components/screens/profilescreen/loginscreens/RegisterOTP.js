@@ -192,6 +192,10 @@ export class RegisterOTP extends Component {
                             this.setState({ loading: false })
                             this._successModalFalse()
                             if (response.data.ResponseDetail === 'Success') {
+                                this.props.screenProps.loginMeth(
+                                    response.data.UserDetail.UserID,
+                                    response.data.UserDetail.DisplayName,
+                                    response.data.UserDetail.SessionToken )
                                 StoreGlobal({ type: 'set', key: 'userPhone', value: response.data })
                                 StoreGlobal({ type: 'set', key: 'RequestOTPService', value: null })
                                 this.props.navigation.navigate(

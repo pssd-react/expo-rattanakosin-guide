@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Text, View, TextInput, Image, TouchableWithoutFeedback } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../common'
+import I18n from '../config/i18n'
 
 class SearchScreen extends Component {
     state = {
@@ -57,10 +58,11 @@ class SearchScreen extends Component {
                         </View>
                         <View style={{ flex: 4 }}>
                             <TextInput
+                                returnKeyType={"search"}
                                 underlineColorAndroid={'transparent'}
                                 value={this.state.searchText}
                                 onChangeText={(searchText)=> this.setState({searchText: searchText})}
-                                placeholder={'ค้นหา'}
+                                placeholder={I18n.t('main_search')}
                                 placeholderTextColor={'grey'}
                                 onSubmitEditing={() => this.props.navigation.navigate({
                                     routeName: 'resSearchScreen',

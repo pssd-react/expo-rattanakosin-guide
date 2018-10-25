@@ -21,20 +21,7 @@ import _ from 'lodash'
 import ViewMoreText from 'react-native-view-more-text';
 import { HeaderBackButton } from 'react-navigation'
 import geolib from 'geolib'
-
-
-var data = {
-	"RqAppID":"1234",
-	"UserLanguage":"EN",
-	"ViewType":"05",
-	"RowNum":"0",
-	"Keyword":"",
-	"ShopCategory":"",
-	"UserID":"1",
-	"MarketID":"3",
-	"CouponType":"",
-	"CouponSubType":""
-}
+import I18n from '../config/i18n'
 
 var config = {
     headers: {
@@ -103,6 +90,18 @@ export class SearchResultScreen extends Component {
     }
 
     componentWillMount() {
+        var data = {
+            "RqAppID":"1234",
+            "UserLanguage": I18n.t('serviceLang'),
+            "ViewType":"05",
+            "RowNum":"0",
+            "Keyword":"",
+            "ShopCategory":"",
+            "UserID":"1",
+            "MarketID":"3",
+            "CouponType":"",
+            "CouponSubType":""
+        }
         const searchText = this.props.navigation.getParam('searchText', '')
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
@@ -246,7 +245,7 @@ export class SearchResultScreen extends Component {
         let shopDes = items.ShopDescription.toString()
         if((loca.includes(this.state.searchText) || shopDes.includes(this.state.searchText)) && this.state.searchText.length > 0){
             return (
-                <TouchableOpacity style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
+                <TouchableOpacity key={items.ShopID} style={{flex:1 ,  backgroundColor: '#ffffff',}} onPress={()=> this.onImgSlidePress(items.ShopID)}>
                     <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
                                 <View style={{flex:1,
                                          flexDirection:'row', alignSelf:'flex-start'}}>
@@ -315,12 +314,12 @@ export class SearchResultScreen extends Component {
 
     renderViewMore(onPress){
         return(
-          <Text onPress={onPress} style={{color:'blue'}}>Show more...</Text>
+          <Text onPress={onPress} style={{color:'blue'}}>{I18n.t('txt_read_more')}</Text>
         )
     }
     renderViewLess(onPress){
         return(
-          <Text onPress={onPress} style={{color:'blue'}}>Show less</Text>
+          <Text onPress={onPress} style={{color:'blue'}}>{I18n.t('txt_read_less')}</Text>
         )
     }
 
@@ -346,7 +345,7 @@ export class SearchResultScreen extends Component {
         
         return(
         <Button style = {{ backgroundColor: this.state.bt_non ,borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
-             ระยะทาง
+             { I18n.t('sort_by_distianct')}
         </Button>
         )
     }
@@ -354,7 +353,7 @@ export class SearchResultScreen extends Component {
     buttonScore(){
         return(
         <Button style = {{ backgroundColor: this.state.bt_sort ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
-            ความนิยม
+            {I18n.t('fab_label')}
         </Button>
         )
     }
@@ -376,7 +375,7 @@ export class SearchResultScreen extends Component {
                 <View style={{flex:1}}>
                     <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
                         <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20 }}>
-                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> เรียงตาม </Text>
+                            <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}> {I18n.t('sort_by')} </Text>
                         </View>
                         <View style = {{ flex: 3 , height: 30 , width: 80,marginTop: 15}}>
                             {this.buttonDistance()}
@@ -405,7 +404,7 @@ export class SearchResultScreen extends Component {
                 <Image
                   source={require('../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
                 />
-                <Text style={{ fontSize: 18, color: '#a6a6a6' }} > ไม่พบข้อมูลที่ค้นหา </Text>
+                <Text style={{ fontSize: 18, color: '#a6a6a6' }} > {I18n.t('home_search_no_item')} </Text>
               </View>
             )
         }

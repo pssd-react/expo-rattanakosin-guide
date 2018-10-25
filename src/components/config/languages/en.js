@@ -187,6 +187,14 @@ export default {
     detail20: 'Siam Commercial Bank reserves the right to make ',
     detail21: 'changes to the vouchers terms,conditions,usage',
     detail22: 'period without further notice',
+    navigate_map: 'Navigate',
+    shop_map: 'Map',
+    main_search: 'Search ...',
+    home_search: 'Search ...',
+    home_search_no_item: 'Data not found.',
+    txt_read_more: 'Show more',
+    txt_read_less: 'Show less',
+    sort_by: 'Sort by'
   
 
   };

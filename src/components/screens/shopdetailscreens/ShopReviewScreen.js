@@ -170,14 +170,20 @@ class ShopReviewScreen extends Component {
 
   }
   onPressWriteReview() {
-    console.log(this.props.screenProps)
-        this.props.screenProps.navigation.navigate('writeReview', { 
+    console.log(this.props.screenProps.userId)
+        if(this.props.screenProps.userId !== 'none'){
+          this.props.screenProps.navigation.navigate('writeReview', { 
             returnData: this.returnData.bind(this),
             shopId : this.props.screenProps.items.ShopId,
             userId : this.props.screenProps.userId,
             userDisplay : this.props.screenProps.userDisplay,
             token : this.props.screenProps.token
          });
+        }else{
+          this.props.screenProps.navigation.navigate('Login',{
+            fromScreen : 'reviewScreen'
+          })  
+        }
   }
 
   toggleModal(key) {
@@ -259,7 +265,7 @@ class ShopReviewScreen extends Component {
   }
 
   renderTooltip(reviewId, rating, content, userId){
-    if(userId === this.props.screenProps.userId){
+    if(userId.toString() === this.props.screenProps.userId.toString()){
       return (
         <PopoverTooltip
                   ref='tooltip4'
@@ -296,7 +302,7 @@ class ShopReviewScreen extends Component {
     let resultMapping = ''
     _.map(this.state, items => {
         resultMapping = _.map(items.Reviews, reviews => {
-        console.log(reviews);
+        console.log(reviews.UserID);
         let reviewId = ''
         reviewId = reviews.ReviewID
         return (
