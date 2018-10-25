@@ -237,7 +237,7 @@ export class Restaurants extends Component {
     };
 
     onButtonPress(){
-        
+        console.log(this.props.screenProps.userId)
     }
     
 

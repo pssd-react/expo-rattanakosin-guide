@@ -151,6 +151,7 @@ export default {
     guide_page_three_title: 'แนะนำร้านค้า/สินค้าที่น่าสนใจ',
     guide_page_three_message: 'ติดตามร้านค้าและสินค้าแนะนำได้จากเมนู Shopping Planner พร้อมให้คุณสร้างทริปด้วยตัวเองได้ด้วย',
     txt_read_more: 'อ่านเพิ่มเติม',
+    txt_read_less: 'แสดงน้อยลง',
 
     guide_go_to_application: 'เข้าสู่แอปพลิเคชัน',
     common_right_braces: ')',
