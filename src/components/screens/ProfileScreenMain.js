@@ -16,6 +16,7 @@ import { StoreGlobal } from '../config/GlobalState'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler'
 import Modal from "react-native-modal"
 import I18n from '../config/i18n'
+import { ModalSpinner } from '../common/ModalSpinner';
 
 const config = {
     headers: {
@@ -171,28 +172,7 @@ class ProfileScreenMain extends Component {
     }
 
     onLogoutModalRender() {
-        if (this.state.loading === true) {
-            return (
-                <View style={{
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    marginBottom: 270,
-                    marginTop: 270,
-                    marginLeft: 140,
-                    marginRight: 140,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-
-                    <Spinner />
-                </View>
-            )
-        }
+       
         return (
             <View style={{
                 flex: 1,
@@ -401,6 +381,11 @@ class ProfileScreenMain extends Component {
     }
 
     _renderLogoutModal() {
+        if (this.state.loading === true) {
+            return (
+                    <ModalSpinner />
+            )
+        }
         return (
             <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
                 {this.onLogoutModalRender()}
