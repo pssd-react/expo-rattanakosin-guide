@@ -117,7 +117,13 @@ export default {
     tripGuide: '请选择您要添加的地点。',
     tripGuide01: '',
     createTripStore: '创建行程',//trip_store_in_trip
-
+    tripNotFacility: '您的行程中还没添加任何地点。',//trip_no_facility_in_trip
+    tripNotFacility01: '',//trip_no_facility_in_trip01
+    addPlace: '添加地点',//add_place
+    tripNotInteresting: '沒有推薦的旅行',//trip_no_trip
+    needAddNotStore: '在您的行程中，添加更多地点。 添加地点',//no_store_in_trip2
+    needAddNotStore01: '',//no_store_in_trip2
+    
     titlepositionSticky: '锁定位置',//position_sticky
     textPositionSticky: '放置的图钉',//txt_position_sticky
     listNotPositionSticky: '您还没有图钉。',//tv_no_pin_list
