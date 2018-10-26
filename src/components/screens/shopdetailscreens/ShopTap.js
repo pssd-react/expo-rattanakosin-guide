@@ -48,7 +48,7 @@ const ShopTap = createMaterialTopTabNavigator({
             height: null,
             top: 0
         },
-        pressColor: 'black',
+
         style: {
             backgroundColor: 'white',
 
