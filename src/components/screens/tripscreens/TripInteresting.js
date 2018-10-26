@@ -94,7 +94,8 @@ class TripInteresting extends Component {
                 </View>
                 
                 </View>
-                <View style={{ flexDirection: 'row', marginTop: 5 }}>
+                
+                <View style={styles.imgLeft}>
                     <View style={{flexDirection: 'row', marginLeft: 10}}>
                         
                             {this._renderIcon(items.TripShopCategory)}
@@ -253,6 +254,28 @@ const styles = StyleSheet.create({
         backgroundColor: '#ffffff',
         width: 60,
     },
+    imgLeft: {
+        flexDirection: 'column',
+        paddingTop: 10,
+        paddingBottom: 5,
+        marginRight: '2.5%',
+        marginTop: '5%',
+        marginBottom: '5%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    }, imgRight: {
+        flexDirection: 'column',
+        paddingTop: 5,
+        paddingBottom: 5,
+        marginLeft: '2.5%',
+        marginRight: '2.5%',
+        marginTop: '5%',
+        marginBottom: '5%',
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
 })
 
 class ItemDetail extends Component {
@@ -272,7 +295,92 @@ class ItemDetail extends Component {
         )
     }
 
-    
+    //   275 ร้านอาหาร   source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
+    //   274 สถานที่ท่องเที่ยว   source={ require('../../images/drawable-hdpi/ic_category_place_travel.webp')} 
+    //   273 ร้านค้า  source={ require('../../images/drawable-hdpi/ic_category_shop.webp')} 
+    //   276 ที่พัก  source={ require('../../images/drawable-hdpi/ic_type_category_hotel.webp')} 
+    //   281 ย่านการค้า  source={ require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')} 
+    //   277 ธนาคาร     source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')} 
+    //   280 สถานศึกษา   source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')} 
+    //   278 บริการต่างๆ     source={ require('../../images/drawable-hdpi/ic_type_category_service.webp')} 
+    //   460 สิ่งอำนวยความสะดวก   source={ require('../../images/drawable-hdpi/ic_type_category_facilities.webp')} 
+
+    renderIcon(item) {
+        console.log(item)
+        return _.map((item), (shopID) => {
+            if (shopID.TripShopCategoryID === '274') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_food.webp')}
+                    />
+                )
+            } else if (shopID.TripShopCategoryID === '275') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_category_place_travel.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '273') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_category_shop.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '276') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '281') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '277') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '280') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_office.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '278') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_service.webp')}
+                    />
+                )
+            }
+            else if (shopID.TripShopCategoryID === '460') {
+                return (
+                    <Image
+                        style={{ width: 35, height: 35 }}
+                        source={require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
+                    />
+                )
+            }
+        })
+    }
     
     renderData(){
         //console.log(this.props.itemList.TripShop)
@@ -286,8 +394,10 @@ class ItemDetail extends Component {
             for (let i=0; i<renderingItem.length; i++){
                 if(renderingItem[i] === item.ShopID){
                     // console.log(renderingItem[i])
+                   //console.log(item.TripShopCategory) 
                     return (
                         <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
+                        
                         
                             <CardSection style={{flex:2,borderBottomWidth:2, borderColor: '#ddd'}}>   
                                     <View style={styles.ViewContainer}>
@@ -298,6 +408,19 @@ class ItemDetail extends Component {
                                             </View>
                                             
                                             <View style={{ flex: 2 ,flexDirection: 'column'}}>
+                                                <View style= {{ flexDirection: 'row' }}>
+                                                    <Text style={styles.ViewTextStyle}> {item.LocationName} </Text>
+                                                </View>
+
+                                                <View style= {{ flexDirection: 'row' , height: 40}}>
+                                                {/* <Image
+                                                    style={{ width: 25, height: 25 }}
+                                                    source={require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
+                                                /> */}
+                                                
+                                                {this.renderIcon(item)}
+                                                </View>
+                                                
                                                 <View style= {{ flexDirection: 'row' , height: 40}}>
                                                     <View style={{ flex: 1 , marginRight: 15} }>
                                                         <ButtonStar style={styles.buttonStarStyle}
@@ -332,13 +455,7 @@ class ItemDetail extends Component {
                                     </View>
                             </CardSection>
 
-                            <CardSection style={{height:40}}> 
-                                    <View style={{flex:4,
-                                            justifyContent:'flex-start', flexDirection:'row', alignSelf:'center'}}>
-                                            {/* {this._renderIcon(item.ShopCategory)} */}
-                                        <Text style={styles.ViewTextStyle}> {item.LocationName} </Text>
-                                    </View>
-                        </CardSection>
+                            
                         </View>
                        
                 

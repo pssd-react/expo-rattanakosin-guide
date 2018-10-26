@@ -25,6 +25,7 @@ var config = {
 
 
 class FlashSaleLightning extends Component {
+  static navigationOptions = { header: null }
   state = {
     item: '',
     activeSection: false,
@@ -81,8 +82,9 @@ class FlashSaleLightning extends Component {
 
   onPresentPress(items) {
     this.props.screenProps.headerStatusUpdate(false)
-    this.props.navigation.navigate('PromotionDetailScreen', {
-      items
+    this.props.screenProps.navigation.navigate('resPromotionDetail', {
+      items : items,
+      headerStatusUpdate : this.props.screenProps.headerStatusUpdate
     })
   }
 

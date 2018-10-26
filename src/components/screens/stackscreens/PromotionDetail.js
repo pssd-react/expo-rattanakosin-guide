@@ -17,7 +17,6 @@ import I18n from '../../config/i18n'
 
 
 class PromotionDetail extends Component {
-    static navigationOptions = { header: null }
     
     constructor() {
         super()
@@ -25,14 +24,19 @@ class PromotionDetail extends Component {
             isFocused: true,
             lat: undefined,
             long: undefined,
-            language: I18n.t('userlanguage')
+            language: I18n.t('userlanguage'),
+            headerStatusUpdate : undefined
         }
       }
 
     componentDidMount(){
          navigator.geolocation.getCurrentPosition(
         (position) => {
-            this.setState({lat: position.coords.latitude, long: position.coords.longitude});
+            this.setState({
+                lat: position.coords.latitude, 
+                long: position.coords.longitude,
+                headerStatusUpdate : this.props.navigation.getParam('headerStatusUpdate', undefined)
+            });
         },
 
         (error) => {alert("there was an error getting location")},
@@ -44,16 +48,21 @@ class PromotionDetail extends Component {
     }
       
     toggleHeaderPromotionStatus() {
-        if (this.state.isFocused === true) {
-            this.setState({ isFocused: false })
-        } else {
-            this.setState({ isFocused: true })
-        }
+        // if (this.state.isFocused === true) {
+        //     this.setState({ isFocused: false })
+        // } else {
+        //     this.setState({ isFocused: true })
+        // }
     }
 
     onButtonGoBack() {
-        this.props.screenProps.headerStatusUpdate(true)
-        this.props.navigation.navigate('FlashSaleMain')
+        if(this.state.headerStatusUpdate !== undefined){
+            this.state.headerStatusUpdate(true)
+        this.props.navigation.goBack()
+        }else{
+            this.props.navigation.goBack()
+        }
+        
     }
 
     _renderDate(key) {
@@ -270,7 +279,7 @@ class PromotionDetail extends Component {
     onImgSlidePress(key) {
         console.log(key)
         this.toggleHeaderPromotionStatus()
-        this.props.screenProps.navigation.navigate({
+        this.props.navigation.navigate({
             routeName: 'shopDetail',
             params: {
                 key: key,
@@ -314,48 +323,48 @@ class PromotionDetail extends Component {
             <TouchableWithoutFeedback  onPress={() => this.onImgSlidePress(items.ShopID)}>
                 <View style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }}>    
                     <View style={{ flexDirection: 'row', flex: 1 }}>
-                            <View style={{ flex: 1 }}>
-                                <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
+                        <View style={{ flex: 1 }}>
+                            <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
+                                <Image
+                                    style={{ width: 100, height: 150 }}
+                                    source={{ uri: items.ShopImageUrl }}
+                                />
+                            </View>
+                        </View>
+                        <View style={{ flexDirection: 'column', flex: 3 }}>
+                            <View style={{ flexDirection: 'row' }}>
+                                <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
+                                    {this._renderIcon(items.ShopCategory)}
+                                    <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
+                                </View>
+                                <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
                                     <Image
-                                        style={{ width: 100, height: 150 }}
-                                        source={{ uri: items.ShopImageUrl }}
+                                        style={{ width: 25, height: 30 }}
+                                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
                                     />
                                 </View>
                             </View>
-                            <View style={{ flexDirection: 'column', flex: 3 }}>
-                                <View style={{ flexDirection: 'row' }}>
-                                    <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
-                                        {this._renderIcon(items.ShopCategory)}
-                                        <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
-                                    </View>
-                                    <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
-                                        <Image
-                                            style={{ width: 25, height: 25 }}
-                                            source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                        />
-                                    </View>
+                            <View style={{ flexDirection: 'row', marginTop: 30 }}>
+                                <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
+                                    <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
                                 </View>
-                                <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                                    <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
-                                        <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
-                                    </View>
-                                    <View style={{ height: 40 }}>
-                                        {this._renderLocation()}
-                                    </View>
-                                    <View style={{ height: 40 }}>
-                                        <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
-                                    </View>
-                                    <View style={{ height: 40 }}>
-                                        <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
-                                    </View>
+                                <View style={{ height: 40 }}>
+                                    {this._renderLocation()}
+                                </View>
+                                <View style={{ height: 40 }}>
+                                    <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
+                                </View>
+                                <View style={{ height: 40 }}>
+                                    <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
+                                </View>
 
-                                </View>
                             </View>
                         </View>
-                        <View style={{ flex: 1 }}>
-
-                        </View>
                     </View>
+                    <View style={{ flex: 1 ,  alignItems: 'center' ,marginTop: 100}}>
+                            <Text style={{ fontSize: 16, color: '#4d0099' , textDecorationLine: 'underline' }} >  {I18n.t('flash_sale_see_shop')} </Text>
+                    </View>
+                </View>
             </TouchableWithoutFeedback>
         )
     }
