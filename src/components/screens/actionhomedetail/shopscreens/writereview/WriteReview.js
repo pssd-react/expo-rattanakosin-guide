@@ -18,7 +18,7 @@ class writereviwe extends Component {
 
  
     onPost() {
-        console.log(this.state)
+        // console.log(this.state)
         const data = {
             "RqAppID": "1234",
             "ShopID": "108428",

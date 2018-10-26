@@ -27,8 +27,8 @@ class writereviweUpdate extends Component {
         this.setState({ starCount })
         this.setState({ ReviewContent })
 
-        console.log(reviewId,starCount,ReviewContent)
-        console.log("this.state",this.state)
+        // console.log(reviewId,starCount,ReviewContent)
+        // console.log("this.state",this.state)
     }
 
     onPost() {

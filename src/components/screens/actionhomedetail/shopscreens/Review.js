@@ -235,15 +235,15 @@ class Review extends Component {
 
   CreatedDate(key) {
 
-    console.log("Date", key)
+    // console.log("Date", key) 
     const res = key.substring(0, 10)
     const resT = key.substring(11, 16)
     const DateBefore = res.split("/")
-    console.log("Date DateBefore", DateBefore)
-    console.log("resT ", resT)
+    // console.log("Date DateBefore", DateBefore)
+    // console.log("resT ", resT)
     const DateAfter = DateBefore[2] + '-' + DateBefore[1] + '-' + DateBefore[0]
     const formattedData = moment(DateAfter).format("D MMM YYYY")
-    console.log("Date formattedData", formattedData);
+    // console.log("Date formattedData", formattedData);
 
     return (
         <Text>

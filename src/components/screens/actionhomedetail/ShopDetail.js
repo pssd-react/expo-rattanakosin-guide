@@ -13,7 +13,7 @@ import {
   Dimensions
 } from 'react-native'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { DetailMenu, Promotion, GoogleMap, ReviewMenu } from './shopscreens'
+import { DetailMenu, Promotion, GoogleMap, ReviewMenu, PromotionMenu } from './shopscreens'
 import axios from 'axios'
 import _ from 'lodash'
 import { Rating } from 'react-native-ratings';
@@ -144,7 +144,7 @@ class ShopDetail extends Component {
               navigationState={this.state}
               renderScene={SceneMap({
                 first: DetailMenu,
-                second: Promotion,
+                second: PromotionMenu,
                 third: GoogleMap,
                 four: ReviewMenu
 
