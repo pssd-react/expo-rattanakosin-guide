@@ -12,10 +12,7 @@ import _ from 'lodash'
 import { Card  } from '../../common/Card'
 import { CardSection } from '../../common/CardSection'
 import { ButtonTrip } from '../../common/ButtonTrip'
-// import  LoginForm   from '../../authen/LoginForm'
-import { Actions } from 'react-native-router-flux'
 import { createStackNavigator } from 'react-navigation'
-import { CreateTripScreen } from './createtripscreen/CreateTripScreen'
 import { AddTripScreen } from './createtripscreen/addtrip/AddTripScreen'
 import { MarkLocation } from './MarkLocation'
 
@@ -83,11 +80,11 @@ class Tripme extends Component{
 
     render(){
         return (
-            <Card>
-                <CardSection>         
+            <View>
+                <CardSection style={{marginLeft:10, marginRight:10,}}>         
                     <ImageBackground
                         source={require('../../images/drawable-hdpi/bg_trip_main.webp')}
-                        style={styles.stretch}
+                        style={styles.stretch }
                         >
                       <View style= {styles.overlayContainer}>
                             <View style = {styles.top}>
@@ -107,7 +104,7 @@ class Tripme extends Component{
                 </CardSection>
 
                 <TouchableOpacity onPress={()=> this.onCardPress()}>
-                    <CardSection>         
+                    <CardSection style={{marginLeft:10, marginRight:10,}}>         
                         <ImageBackground
                             source={require('../../images/drawable-hdpi/bg_position_sticky.webp')}
                             style={styles.stretch}
@@ -125,7 +122,7 @@ class Tripme extends Component{
                         </ImageBackground> 
                     </CardSection>
                 </TouchableOpacity>
-            </Card>
+            </View>
             
         )
     }
@@ -139,7 +136,7 @@ const styles = StyleSheet.create({
     stretch: {
         flex:1,
         width: 400,
-        height: 150
+        height: 200,
     },
     header: {
         color: '#000000',
@@ -147,16 +144,13 @@ const styles = StyleSheet.create({
         paddingLeft: 40,
         paddingRight: 40,
         fontWeight: 'bold',
+        textAlign: 'center'
     },
     buttonStyle: {
-        //color: '#131313',
-        //fontSize: 18,
-        backgroundColor: '#F8E21C',
+        backgroundColor: '#ffc94c',
         width: 100,
-        height: 15,
-        alignItems: 'center',
+        alignSelf: 'center',
         justifyContent: 'center',
-        marginLeft: 150,
         marginBottom: 20
     },
     top: {

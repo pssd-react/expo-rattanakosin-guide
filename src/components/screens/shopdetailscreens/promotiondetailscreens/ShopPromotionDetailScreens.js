@@ -4,7 +4,7 @@ import moment from 'moment'
 import {  HeaderBackButton } from 'react-navigation'
 import { Header } from '../../../common'
 import I18n from '../../../config/i18n'
-class ShopPromotionDetailScreen extends Component {
+class ShopPromotionDetailScreens extends Component {
 
     onButtonGoBack() {
         this.props.navigation.goBack()
@@ -85,4 +85,4 @@ class ShopPromotionDetailScreen extends Component {
     }
 }
 
-export {ShopPromotionDetailScreen}
+export {ShopPromotionDetailScreens}

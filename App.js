@@ -34,7 +34,7 @@ import ShopDetailScreen from './src/components/screens/ShopDetailScreen';
 import writereviwe from './src/components/screens/shopdetailscreens/reviewscreens/WriteReview';
 import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
 import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
-import { ShopPromotionDetailScreen } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
+import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
@@ -207,6 +207,6 @@ moreDescription: {
     screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
 },
 shopPromotionDetail:{
-  screen: ShopPromotionDetailScreen, navigationOptions:{ header : null}
+  screen: ShopPromotionDetailScreens, navigationOptions:{ header : null}
 }
 })
