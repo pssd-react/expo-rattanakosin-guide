@@ -33,6 +33,7 @@ import { RegisterOTP } from './src/components/screens/profilescreen/loginscreens
 import ShopDetailScreen from './src/components/screens/ShopDetailScreen';
 import writereviwe from './src/components/screens/shopdetailscreens/reviewscreens/WriteReview';
 import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
+import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
@@ -200,5 +201,8 @@ writeReview: {
 },
 writeReviewUpdate: {
   screen: writereviweUpdate,navigationOptions: { header: null }
+},
+moreDescription: {
+    screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
 }
 })

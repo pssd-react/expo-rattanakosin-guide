@@ -100,13 +100,19 @@ export default {
     exclusive: 'Exclusive',
     myTrip: 'My trip',
 
-    tripGuide: 'เลือกร้านค้าและ',
-    tripGuide01: 'สร้างทริปส่วนตัวได้ที่นี่',
-    createTripStore: 'เริ่มสร้างทริป',//trip_store_in_trip
+    tripGuide: 'Select locations and',
+    tripGuide01: 'add them to your trip here.',
+    createTripStore: 'Create Trip',//trip_store_in_trip
+    tripNotFacility: 'There are no locations',//trip_no_facility_in_trip
+    tripNotFacility01: 'added to your trip.',//trip_no_facility_in_trip01
+    addPlace: 'Add a location',//add_place
+    tripNotInteresting: 'No recommended trip',//trip_no_trip
+    needAddNotStore: 'To add a location to your trip, tap below',//no_store_in_trip2
+    needAddNotStore01: '"Add a location"',//no_store_in_trip2
 
-    titlepositionSticky: 'สถานที่ปักหมุด',//position_sticky
-    textPositionSticky: 'ตำแหน่งที่ปักหมุด',//txt_position_sticky
-    listNotPositionSticky: 'ยังไม่มีรายการตำแหน่งที่ปักหมุดของคุณ',//tv_no_pin_list
+    titlepositionSticky: 'Pinned location.',//position_sticky
+    textPositionSticky: 'Pinned Location',//txt_position_sticky
+    listNotPositionSticky: 'You have no pinned locations.',//tv_no_pin_list
     
     //============================
 
@@ -207,7 +213,9 @@ export default {
     home_search_no_item: 'Data not found.',
     txt_read_more: 'Show more',
     txt_read_less: 'Show less',
-    sort_by: 'Sort by'
+    sort_by: 'Sort by',
+    sort_by_distianct: 'Distance',
+    fab_label: 'Rating',
   
 
   };
