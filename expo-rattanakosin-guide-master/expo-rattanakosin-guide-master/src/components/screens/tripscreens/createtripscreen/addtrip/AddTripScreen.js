@@ -289,9 +289,9 @@ class ItemDetail extends Component {
             
         }
         return(
-            <Image style={{width:100, height:130}}
-                source={{ uri: item.ImageUrl}} 
-            />
+        <Image style={{width:100, height:130}}
+            source={{ uri: item.ImageUrl}} 
+        />
         )
     }
 

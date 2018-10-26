@@ -17,10 +17,12 @@ import { Actions } from 'react-native-router-flux'
 import { createStackNavigator } from 'react-navigation'
 import { CreateTripScreen } from './createtripscreen/CreateTripScreen'
 import { AddTripScreen } from './createtripscreen/addtrip/AddTripScreen'
+import { MarkLocation } from './MarkLocation'
 
 
 const INITAL_STATE = {
     textbox: 'เลือกร้านค้าและสร้างทริปส่วนตัวได้ที่นี่',
+    textbox1: 'ตำแหน่งปักหมุดของคุณ',
     textBT: 'เริ่มสร้างทริป',
     login: 0
 }
@@ -73,6 +75,10 @@ class Tripme extends Component{
         this.props.navigation.navigate('trip')
     }
 
+    onCardPress() {
+        this.props.navigation.navigate('markmap')
+    }
+
 
 
     render(){
@@ -99,6 +105,26 @@ class Tripme extends Component{
                       </View>
                     </ImageBackground> 
                 </CardSection>
+
+                <TouchableOpacity onPress={()=> this.onCardPress()}>
+                    <CardSection>         
+                        <ImageBackground
+                            source={require('../../images/drawable-hdpi/bg_position_sticky.webp')}
+                            style={styles.stretch}
+                            >
+                        <View style= {styles.overlayContainer}>
+                                <View style = {styles.top}>
+                                    <Text style={styles.header}> {this.state.textbox1}</Text>
+                                </View>
+                                
+                                {/* <View style = {styles.top}>
+                                    
+                                </View> */}
+                                
+                        </View>
+                        </ImageBackground> 
+                    </CardSection>
+                </TouchableOpacity>
             </Card>
             
         )
@@ -116,7 +142,7 @@ const styles = StyleSheet.create({
         height: 150
     },
     header: {
-        color: '#FFFFFF',
+        color: '#000000',
         fontSize: 25,
         paddingLeft: 40,
         paddingRight: 40,
@@ -236,8 +262,11 @@ const TripMe = createStackNavigator({
         screen: Tripme, navigationOptions:{header:null} 
     },
     trip: {
-        screen: AddTripScreen, navigationOptions: { header: null }
+        screen: AddTripScreen, navigationOptions: {header: null}
     },
+    markmap: {
+        screen: MarkLocation, navigationOptions:{}
+    }
     
 })
 
