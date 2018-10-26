@@ -34,7 +34,8 @@ class FlashSalePromotion extends Component {
       'down': require('../../images/drawable-hdpi/ic_arrow_expanable_down.webp')
     },
     numPresent: undefined,
-    numComming: undefined
+    numComming: undefined,
+    language: I18n.t('userlanguage')
   }
 
   componentWillMount() {
@@ -260,18 +261,78 @@ class FlashSalePromotion extends Component {
     const DataBefore = ress.split("/")
     const DataAfter = DataBefore[2] + '-' + DataBefore[1] + '-' + DataBefore[0]
     const formattedData = moment(DataAfter).format("D MMM YYYY")
-    if (DateBefore[2] === DataBefore[2]) {
-      const formattedDate = moment(DateAfter).format("D MMM")
-      return (
-        <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
-      )
-    } else {
-      const formattedDate = moment(DateAfter).format("D MMM YYYY")
-      return (
-        <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
-      )
+    if(this.state.language === 'TH'){
+      if (DateBefore[2] === DataBefore[2]) {
+        const DayDate = moment(DateAfter).format("D")
+        const MonthDateEN = moment(DateAfter).format("MMM")
+        const DateTH = DayDate +" "+this._renderDateTH(MonthDateEN)
+        const DayDate2 = moment(DataAfter).format("D")
+        const MonthDateEN2 = moment(DataAfter).format("MMM")
+        const YearDate2 = moment(DataAfter).format("YYYY")
+        var Year2 = parseInt(YearDate2) + 543
+        const DateTH2 = DayDate2 +" "+this._renderDateTH(MonthDateEN2)+ " "+ Year2
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {DateTH} - {DateTH2} </Text>
+        )
+      } else {
+        const DayDate = moment(DateAfter).format("D")
+        const MonthDateEN = moment(DateAfter).format("MMM")
+        const YearDate1 = moment(DateAfter).format("YYYY")
+        var Year1 = parseInt(YearDate1) + 543
+        const DateTH = DayDate +" "+this._renderDateTH(MonthDateEN) + " " + Year1
+        const DayDate2 = moment(DataAfter).format("D")
+        const MonthDateEN2 = moment(DataAfter).format("MMM")
+        const YearDate2 = moment(DataAfter).format("YYYY")
+        var Year2 = parseInt(YearDate2) + 543
+        const DateTH2 = DayDate2 +" "+this._renderDateTH(MonthDateEN2)+ " "+ Year2
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {DateTH} - {DateTH2} </Text>
+        )
+      }
+    
+    }else{
+      if (DateBefore[2] === DataBefore[2]) {
+        const formattedDate = moment(DateAfter).format("D MMM")
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
+        )
+      } else {
+        const formattedDate = moment(DateAfter).format("D MMM YYYY")
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
+        )
+      }
     }
   }
+
+
+  _renderDateTH(formattedDate){
+    if(formattedDate === 'Jan'){
+      return formattedDate = 'ม.ค.'
+    }else if(formattedDate === 'Feb'){
+      return formattedDate = 'ก.พ.'
+    }else if(formattedDate === 'Mar'){
+      return formattedDate = 'มี.ค.'
+    }else if(formattedDate === 'Apr'){
+      return formattedDate = 'เม.ย.'
+    }else if(formattedDate === 'May'){
+      return formattedDate = 'พ.ค.'
+    }else if(formattedDate === 'Jun'){
+      return formattedDate = 'มิ.ย.'
+    }else if(formattedDate === 'Jul'){
+      return formattedDate = 'ก.ค.'
+    }else if(formattedDate === 'Aug'){
+      return formattedDate = 'ส.ค.'
+    }else if(formattedDate === 'Sep'){
+      return formattedDate = 'ก.ย.'
+    }else if(formattedDate === 'Oct'){
+      return formattedDate = 'ต.ค.'
+    }else if(formattedDate === 'Nov'){
+      return formattedDate = 'พ.ย.'
+    }else if(formattedDate === 'Dec'){
+      return formattedDate = 'ธ.ค.'
+    }
+}
 
 
   _renderScreen() {
