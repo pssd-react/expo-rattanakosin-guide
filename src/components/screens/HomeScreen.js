@@ -478,10 +478,7 @@ const HomeMenu = createStackNavigator({
     giftVou: {
         screen: GiftVoucherScreen, navigationOptions: { header: null }
     },
-    moreDescription: {
-        screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
-    }
-    ,searchScreen: {
+    searchScreen: {
         screen: SearchScreen , navigationOptions: {header : null}
     },
     searchResultScreen: {

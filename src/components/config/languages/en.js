@@ -207,7 +207,9 @@ export default {
     home_search_no_item: 'Data not found.',
     txt_read_more: 'Show more',
     txt_read_less: 'Show less',
-    sort_by: 'Sort by'
+    sort_by: 'Sort by',
+    sort_by_distianct: 'Distance',
+    fab_label: 'Rating',
   
 
   };

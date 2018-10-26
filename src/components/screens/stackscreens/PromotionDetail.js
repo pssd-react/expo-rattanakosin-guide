@@ -258,7 +258,7 @@ class PromotionDetail extends Component {
                     <View style={{ flex: 1 }}>
                         <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
                             <Image
-                                style={{ width: 120, height: 150 }}
+                                style={{ width: 100, height: 150 }}
                                 source={{ uri: items.ShopImageUrl }}
                             />
                         </View>
@@ -267,7 +267,7 @@ class PromotionDetail extends Component {
                         <View style={{ flexDirection: 'row' }}>
                             <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
                                 {this._renderIcon(items.ShopCategory)}
-                                <Text style={{ fontSize: 22 }}> {items.ShopName} </Text>
+                                <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
                             </View>
                             <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
                                 <Image
