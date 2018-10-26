@@ -113,11 +113,18 @@ export default {
     interestingTrip: 'ทริปที่น่าสนใจ',
     exclusive: 'Exclusive',
     myTrip: 'ทริปของฉัน',
-    
+
     tripGuide: 'เลือกร้านค้าและ',
     tripGuide01: 'สร้างทริปส่วนตัวได้ที่นี่',
+    createTripStore: 'เริ่มสร้างทริป',//trip_store_in_trip
+    tripNotFacility: 'ยังไม่มีสถานที่ในทริป',//trip_no_facility_in_trip
+    tripNotFacility01: '',//trip_no_facility_in_trip01
+    addPlace: 'เพิ่มสถานที่',//add_place
+    tripNotInteresting: 'ยังไม่มีทริปที่น่าสนใจ',//trip_no_trip
+    needAddNotStore: 'ต้องการเพิ่มร้านค้าในทริป กด “เพิ่มสถานที่”',//no_store_in_trip2
+    needAddNotStore01: '',//no_store_in_trip2
 
-    titlepositionSticky: 'สถานที่ปักหมุด',
+    titlepositionSticky: 'สถานที่ปักหมุด',//position_sticky
     textPositionSticky: 'ตำแหน่งที่ปักหมุด',//txt_position_sticky
     listNotPositionSticky: 'ยังไม่มีรายการตำแหน่งที่ปักหมุดของคุณ',//tv_no_pin_list
     //============================
