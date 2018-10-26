@@ -3,9 +3,9 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
     Dimensions,
-    Geolocation
+    Geolocation,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Button, } from 'react-native-elements'
 import { HeaderBackButton } from 'react-navigation'
@@ -311,50 +311,52 @@ class PromotionDetail extends Component {
         const { navigation } = this.props
         const items = navigation.getParam('items')
         return (
-            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }} onPress={() => this.onImgSlidePress(items.ShopID)}>
-                <View style={{ flexDirection: 'row', flex: 1 }}>
-                    <View style={{ flex: 1 }}>
-                        <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
-                            <Image
-                                style={{ width: 100, height: 150 }}
-                                source={{ uri: items.ShopImageUrl }}
-                            />
+            <TouchableWithoutFeedback  onPress={() => this.onImgSlidePress(items.ShopID)}>
+                <View style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }}>    
+                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                            <View style={{ flex: 1 }}>
+                                <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
+                                    <Image
+                                        style={{ width: 100, height: 150 }}
+                                        source={{ uri: items.ShopImageUrl }}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: 'column', flex: 3 }}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
+                                        {this._renderIcon(items.ShopCategory)}
+                                        <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
+                                    </View>
+                                    <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
+                                        <Image
+                                            style={{ width: 25, height: 25 }}
+                                            source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginTop: 30 }}>
+                                    <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
+                                        <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
+                                    </View>
+                                    <View style={{ height: 40 }}>
+                                        {this._renderLocation()}
+                                    </View>
+                                    <View style={{ height: 40 }}>
+                                        <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
+                                    </View>
+                                    <View style={{ height: 40 }}>
+                                        <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
+                                    </View>
+
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                    <View style={{ flexDirection: 'column', flex: 3 }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
-                                {this._renderIcon(items.ShopCategory)}
-                                <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
-                            </View>
-                            <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
-                                <Image
-                                    style={{ width: 25, height: 25 }}
-                                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                />
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                            <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
-                                <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
-                            </View>
-                            <View style={{ height: 40 }}>
-                                {this._renderLocation()}
-                            </View>
-                            <View style={{ height: 40 }}>
-                                <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
-                            </View>
-                            <View style={{ height: 40 }}>
-                                <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
-                            </View>
+                        <View style={{ flex: 1 }}>
 
                         </View>
                     </View>
-                </View>
-                <View style={{ flex: 1 }}>
-
-                </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         )
     }
 

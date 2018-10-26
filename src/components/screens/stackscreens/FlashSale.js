@@ -41,10 +41,8 @@ const FlashSale = createMaterialTopTabNavigator({
                 height: null,
                 top: 0
             },
-            pressColor: 'black',
             style: {
                 backgroundColor: 'white',
-
             },
             tabStyle: {
                 height: 40,
