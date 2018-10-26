@@ -68,6 +68,7 @@ export default {
     titleSetting: 'ตั้งค่า',
     Language: 'ภาษา',
     changelanguage: 'ไทย',
+    settingNewPassword: 'ตั้งค่ารหัสผ่านใหม่',
 
     //How To Use
     titleHowToUse: 'วิธีการใช้งาน',

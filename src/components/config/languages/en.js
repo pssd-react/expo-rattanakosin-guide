@@ -55,6 +55,7 @@ export default {
     titleSetting: 'Setting',
     Language: 'Language',
     changelanguage: 'English',
+    settingNewPassword: 'Create new password',
 
     //How To Use
     titleHowToUse: 'How to use',

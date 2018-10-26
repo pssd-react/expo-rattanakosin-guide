@@ -69,6 +69,7 @@ export default {
     titleSetting: '设置',
     Language: '语言',
     changelanguage: '中文',
+    settingNewPassword: '建立新密码',
 
     //How To Use
     titleHowToUse: '如何使用',

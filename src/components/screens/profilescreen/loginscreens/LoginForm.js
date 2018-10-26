@@ -63,7 +63,8 @@ class LoginForm extends Component {
                this.props.screenProps.loginMeth(
                    response.data.UserDetail.UserID,
                    response.data.UserDetail.DisplayName,
-                   '' )
+                   '',
+                   response.data.UserDetail.Contact )
                StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
                 this.setState({ 
                     userInfoFB
@@ -103,7 +104,8 @@ class LoginForm extends Component {
                 this.props.screenProps.loginMeth(
                     response.data.UserDetail.UserID,
                     response.data.UserDetail.DisplayName,
-                    response.data.UserDetail.SessionToken )
+                    response.data.UserDetail.SessionToken,
+                    response.data.UserDetail.Contact )
                 StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
                 this.onButtonToProfile()
             }else if(response.data.ResponseDetail === ' Email is Require Or Not Empty  ,  Password is Require Or Not Empty ' || response.data.ResponseDetail === ' Email is Require Or Not Empty '){

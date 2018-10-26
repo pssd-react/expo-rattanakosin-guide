@@ -32,7 +32,8 @@ export class ChangePassword extends Component {
         timer: false,
         isModalVisible: false,
         isModalSuccess: false,
-        alert_phone: ''
+        alert_phone: '',
+        editable: true,
     }
 
     _toggleModal = () => this.setState({ isModalVisible: !this.state.isModalVisible })
@@ -41,10 +42,17 @@ export class ChangePassword extends Component {
     _successModalTrue = () => this.setState({ isModalSuccess: true })
     _successModalFalse = () => this.setState({ isModalSuccess: false })
 
+    componentWillMount(){
+      //  console.log(this.props.screenProps.phone)
+        if(this.props.screenProps.phone != ''){
+            this.setState({ editable: false })
+        }
+    }
+
     onButtonGoBack() {
         this._successModalFalse()
-        this.props.navigation.navigate('Login')
-    }
+        this.props.navigation.goBack()
+        }
 
     onChangeInput(type, text) {
         if (type === 'phone') {
@@ -82,7 +90,7 @@ export class ChangePassword extends Component {
     }
 
     onRequestOTPPress() {
-        this.setState({ Timer: false , statusButton: true, loading: true})
+        this.setState({ Timer: false , statusButton: true, loading: true, editable:false})
         this._activeModal()
         const data = {
             "RqAppID": "1234",
@@ -409,9 +417,10 @@ export class ChangePassword extends Component {
                         <CardSection>
                             <LabelInput
                                 label={I18n.t('placeholderPhoneMore')}
-                                value={this.state.phone}
+                                value={(this.props.screenProps.phone != '')?this.state.phone=this.props.screenProps.phone : this.state.phone}
                                 onChangeText={this.onChangeInput.bind(this, 'phone')}
                                 autoFocus={true}
+                                editable={this.state.editable}
                             />
                         </CardSection>
                         <CardSection>

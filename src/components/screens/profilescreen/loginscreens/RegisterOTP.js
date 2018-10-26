@@ -153,7 +153,8 @@ export class RegisterOTP extends Component {
                                 this.props.screenProps.loginMeth(
                                     response.data.UserDetail.UserID,
                                     response.data.UserDetail.DisplayName,
-                                    response.data.UserDetail.SessionToken )
+                                    response.data.UserDetail.SessionToken,
+                                    response.data.UserDetail.Contact )
                                 StoreGlobal({ type: 'set', key: 'userPhone', value: response.data })
                                 StoreGlobal({ type: 'set', key: 'RequestOTPService', value: null })
                                 this.props.navigation.navigate(

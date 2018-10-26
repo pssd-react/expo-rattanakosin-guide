@@ -102,7 +102,8 @@ class ProfileScreenMain extends Component {
                this.props.screenProps.loginMeth(
                    response.data.UserDetail.UserID,
                    response.data.UserDetail.DisplayName,
-                   data.SessionToken )
+                   data.SessionToken,
+                   response.data.UserDetail.Contact )
                StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
                 this.setState({ userInfoFB })
             })
@@ -354,6 +355,7 @@ class ProfileScreenMain extends Component {
     }
 
     _renderLogoutStack() {
+      //  console.log(this.state.userPhone)
         if (this.state.userInfoFB || this.state.userPhone) {
             return (
                 <TouchableOpacity onPress={() => this.onListLogOut()}>

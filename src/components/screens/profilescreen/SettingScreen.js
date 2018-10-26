@@ -15,6 +15,10 @@ import I18n from '../../config/i18n'
 
 class SettingScreen extends Component {
 
+    componentDidMount(){
+        console.log(this.props.screenProps)
+    }
+
     onButtonGoBack() {
         this.props.navigation.popToTop()
     }
@@ -24,8 +28,32 @@ class SettingScreen extends Component {
             routeName: 'Language'
         })
     }
+    onChangePassword(){
+        this.props.navigation.navigate({
+            routeName: 'ChangePass'
+        })
+    }
+
+    renderListChangePassword(){
+        if(this.props.screenProps.phone != ''){
+            return (
+                <TouchableOpacity onPress={() => this.onChangePassword()}>
+                    <View style={styles.listViewContainer}>
+                        <View style={styles.listViewTextContainer}>
+                            <Text style={styles.listViewTextStyle}>{I18n.t('settingNewPassword')}</Text>
+                        </View>
+                        <View style={styles.chevronContainerStyle}>
+                            <Image source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+        
+    }
 
     render() {
+        
         return (
             <View>
                 <Header headerText={I18n.t('titleSetting')}
@@ -43,6 +71,7 @@ class SettingScreen extends Component {
                             </View>
                         </View>
                     </TouchableOpacity>
+                    {this.renderListChangePassword()}
                 <View style={styles.viewBlockStyle} />
             </View>
         )
