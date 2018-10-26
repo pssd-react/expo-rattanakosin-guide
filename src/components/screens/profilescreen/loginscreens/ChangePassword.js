@@ -114,7 +114,7 @@ export class ChangePassword extends Component {
                     })
                     this.setState({ onButtonOTP: true })
                 } else {
-                    this.setState({ alert_phone: response.data.ResponseDetail })
+                    this.setState({ statusButton: false, editable: true, alert_phone: response.data.ResponseDetail })
                     this._toggleModal()
                 }
             })
