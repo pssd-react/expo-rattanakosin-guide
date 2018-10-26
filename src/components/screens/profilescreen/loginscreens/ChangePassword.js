@@ -263,55 +263,58 @@ export class ChangePassword extends Component {
     }
 
     onButtonConfirm() {
-        if ( this.state.password.length < 6 || this.state.confirm_password.length < 6
-            && (this.state.password !== this.state.confirm_password)) {
+        if (this.state.password.length >= 6 && this.state.confirm_password.length >= 6
+            && (this.state.password === this.state.confirm_password)) {
+                this.setState({ loading: true })
+                this._successModalTrue()
+                const RequestOTPService = StoreGlobal({ type: 'get', key: 'RequestOTPService' })
+                const data = {
+                    "RqAppID": "1234",
+                    "Mobile": RequestOTPService.Phone,
+                    "Type": "2",
+                    "UserLanguage": I18n.t('serviceLang'),
+                    "OTP": this.state.codeOTP,
+                    "Reference": RequestOTPService.Reference
+                }
+                const dataResetPass = {
+                    "RqAppID": "1234",
+                    "UserLanguage": I18n.t('serviceLang'),
+                    "Contact": RequestOTPService.Phone,
+                    "NewPassword": RequestOTPService.Password,
+                    "UserID": "1",
+                    "SessionToken": ""
+                }
+                axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ValidateOTPService',
+                    data, config)
+                    .then(response => {
+                        this.setState({ loading: false })
+                        this._successModalFalse()
+                        if (response.data.ResponseStatus === '00') {
+                            this.setState({ loading: true })
+                            this._successModalTrue()
+                            axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ResetPasswordService',
+                                dataResetPass, config)
+                                .then(response => {
+                                    this.setState({ loading: false })
+                                    this._successModalFalse()
+                                    if (response.data.ResponseStatus === '00') {
+                                        this._successModalTrue()
+                                    } else {
+                                        this.setState({ alert_phone: response.data.ResponseDetail })
+                                        this._toggleModal()
+                                    }
+                                })
+                        } else {
+                            this.setState({ alert_phone: response.data.ResponseDetail })
+                            this._toggleModal()
+                        }
+                    })
+        }else if(this.state.password.length < 6 && this.state.confirm_password.length < 6){
+            this.setState({ alert_phone: I18n.t('aleartPasswordthan_6_number') })
+            this._toggleModal()
+        }else {
             this.setState({ alert_phone: I18n.t('aleartPasswordInvalidConfirm') })
             this._toggleModal()
-        } else {
-            this.setState({ loading: true })
-            this._successModalTrue()
-            const RequestOTPService = StoreGlobal({ type: 'get', key: 'RequestOTPService' })
-            const data = {
-                "RqAppID": "1234",
-                "Mobile": RequestOTPService.Phone,
-                "Type": "2",
-                "UserLanguage": I18n.t('serviceLang'),
-                "OTP": this.state.codeOTP,
-                "Reference": RequestOTPService.Reference
-            }
-            const dataResetPass = {
-                "RqAppID": "1234",
-                "UserLanguage": I18n.t('serviceLang'),
-                "Contact": RequestOTPService.Phone,
-                "NewPassword": RequestOTPService.Password,
-                "UserID": "1",
-                "SessionToken": ""
-            }
-            axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ValidateOTPService',
-                data, config)
-                .then(response => {
-                    this.setState({ loading: false })
-                    this._successModalFalse()
-                    if (response.data.ResponseStatus === '00') {
-                        this.setState({ loading: true })
-                        this._successModalTrue()
-                        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/ResetPasswordService',
-                            dataResetPass, config)
-                            .then(response => {
-                                this.setState({ loading: false })
-                                this._successModalFalse()
-                                if (response.data.ResponseStatus === '00') {
-                                    this._successModalTrue()
-                                } else {
-                                    this.setState({ alert_phone: response.data.ResponseDetail })
-                                    this._toggleModal()
-                                }
-                            })
-                    } else {
-                        this.setState({ alert_phone: response.data.ResponseDetail })
-                        this._toggleModal()
-                    }
-                })
         } 
     }
 

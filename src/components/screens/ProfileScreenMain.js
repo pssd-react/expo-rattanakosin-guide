@@ -5,7 +5,8 @@ import {
     StyleSheet,
     Image,
     ImageBackground,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Button, CardSection, ModalSpinner} from '../common'
 import firebase from 'firebase'
@@ -358,7 +359,7 @@ class ProfileScreenMain extends Component {
       //  console.log(this.state.userPhone)
         if (this.state.userInfoFB || this.state.userPhone) {
             return (
-                <TouchableOpacity onPress={() => this.onListLogOut()}>
+                <TouchableWithoutFeedback onPress={() => this.onListLogOut()}>
                     <View style={styles.listViewContainer}>
                         <View style={styles.iconContainerStyle}>
                             <Image style={{ width: 22, height: 22 }}
@@ -372,7 +373,7 @@ class ProfileScreenMain extends Component {
                                 source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             )
         } else {
             return (<View></View>)
@@ -405,7 +406,7 @@ class ProfileScreenMain extends Component {
                 </ImageBackground>
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity onPress={() => this.onListSetting()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListSetting()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
@@ -419,9 +420,9 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
-                    <TouchableOpacity onPress={() => this.onListHowToUse()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListHowToUse()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
@@ -435,9 +436,9 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
-                    <TouchableOpacity onPress={() => this.onListAboutRattanakosin()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListAboutRattanakosin()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
@@ -451,9 +452,9 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
-                    <TouchableOpacity onPress={() => this.onListAboutApp()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListAboutApp()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
@@ -467,7 +468,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
                     {this._renderLogoutStack()}
                 </ScrollView>
