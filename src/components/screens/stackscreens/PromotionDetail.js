@@ -17,7 +17,6 @@ import I18n from '../../config/i18n'
 
 
 class PromotionDetail extends Component {
-    static navigationOptions = { header: null }
     
     constructor() {
         super()
@@ -25,14 +24,19 @@ class PromotionDetail extends Component {
             isFocused: true,
             lat: undefined,
             long: undefined,
-            language: I18n.t('userlanguage')
+            language: I18n.t('userlanguage'),
+            headerStatusUpdate : undefined
         }
       }
 
     componentDidMount(){
          navigator.geolocation.getCurrentPosition(
         (position) => {
-            this.setState({lat: position.coords.latitude, long: position.coords.longitude});
+            this.setState({
+                lat: position.coords.latitude, 
+                long: position.coords.longitude,
+                headerStatusUpdate : this.props.navigation.getParam('headerStatusUpdate', undefined)
+            });
         },
 
         (error) => {alert("there was an error getting location")},
@@ -44,16 +48,21 @@ class PromotionDetail extends Component {
     }
       
     toggleHeaderPromotionStatus() {
-        if (this.state.isFocused === true) {
-            this.setState({ isFocused: false })
-        } else {
-            this.setState({ isFocused: true })
-        }
+        // if (this.state.isFocused === true) {
+        //     this.setState({ isFocused: false })
+        // } else {
+        //     this.setState({ isFocused: true })
+        // }
     }
 
     onButtonGoBack() {
-        this.props.screenProps.headerStatusUpdate(true)
-        this.props.navigation.navigate('FlashSaleMain')
+        if(this.state.headerStatusUpdate !== undefined){
+            this.state.headerStatusUpdate(true)
+        this.props.navigation.goBack()
+        }else{
+            this.props.navigation.goBack()
+        }
+        
     }
 
     _renderDate(key) {
@@ -330,7 +339,7 @@ class PromotionDetail extends Component {
                                     </View>
                                     <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
                                         <Image
-                                            style={{ width: 25, height: 25 }}
+                                            style={{ width: 25, height: 30 }}
                                             source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
                                         />
                                     </View>

@@ -27,26 +27,17 @@ class FlashSaleScreen extends Component {
     }
 
     headerStatusUpdate(status) {
-        if (status === true) {
-            this.setState({ isFocused: true })
-        } else {
-            this.setState({ isFocused: false })
-        }
+        //nothing here
     }
     _renderHeaderScreen() {
-        if (this.state.isFocused === true) {
             return <Header headerText={ I18n.t('text_flashsale') }
                 backgroundImage={require('../../components/images/drawable-hdpi/bg_more.webp')} />
-        }
-        else {
-            return null
-        }
     }
     render() {
         return (
             <View style={styles.container}>
                 {this._renderHeaderScreen()}
-                <FlashSaleNavScreen screenProps={{ headerStatusUpdate: this.headerStatusUpdate, navigation: this.props.navigation }} />
+                <FlashSale screenProps={{ headerStatusUpdate: this.headerStatusUpdate, navigation: this.props.navigation }} />
             </View>
         )
     }
@@ -58,18 +49,6 @@ const styles = StyleSheet.create({
     },
     tabbar: {
         backgroundColor: '#fff',
-    }
-})
-
-const FlashSaleNavScreen = createStackNavigator({
-    FlashSaleMain: {
-        screen: FlashSale, navigationOptions: { header: null }
-    },
-    PromotionDetailScreen: {
-        screen: PromotionDetail
-    },
-    shopDetail: {
-        screen: ShopDetailScreen, navigationOptions: { header: null }
     }
 })
 

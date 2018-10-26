@@ -284,8 +284,8 @@ class ItemDetail extends Component {
         if (_renderingImgs.Scale === 'F' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <View key={_renderingImgFull + '&&' + imgSlider.ImageURL} style={{ flex: 1 }}>
-                        <TouchableWithoutFeedback onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                <TouchableWithoutFeedback key={_renderingImgFull + '&&' + imgSlider.ImageURL} onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                    <View  style={{ flex: 1 }}>
                             <ImageBackground
                                 style={{
                                     width: 200,
@@ -298,8 +298,8 @@ class ItemDetail extends Component {
                                     <Text style={recomNameText}>{imgSlider.Name}</Text>
                                 </View>
                             </ImageBackground>
-                        </TouchableWithoutFeedback>
                     </View>
+                    </TouchableWithoutFeedback>
                 )
             })
 
@@ -417,14 +417,14 @@ class ItemDetail extends Component {
                     <View style={headerContentStyle}>
                         <CardSection style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
                             <Text style={headerTextStyle} >{_renderingItem.Name}</Text>
+                            <TouchableWithoutFeedback onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                                <TouchableWithoutFeedback onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
                                     <Text style={{ color: 'green', fontSize: 14 }}>{ I18n.t('seeall') }</Text>
-                                </TouchableWithoutFeedback>
                                 <Image
                                     style={{ height: 15, width: 15, tintColor: 'green' }}
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
+                            </TouchableWithoutFeedback>
                         </CardSection>
                     </View>
                 </CardSection>
