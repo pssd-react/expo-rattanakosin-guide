@@ -46,7 +46,7 @@ class FlashSaleScreen extends Component {
         return (
             <View style={styles.container}>
                 {this._renderHeaderScreen()}
-                <FlashSaleNavScreen screenProps={{ headerStatusUpdate: this.headerStatusUpdate }} />
+                <FlashSaleNavScreen screenProps={{ headerStatusUpdate: this.headerStatusUpdate, navigation: this.props.navigation }} />
             </View>
         )
     }

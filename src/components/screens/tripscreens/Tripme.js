@@ -20,7 +20,7 @@ const INITAL_STATE = {
 };
 
 
-export class Tripme extends Component{
+class Tripme extends Component{
    state = INITAL_STATE;
 
    onButtonPress = ()=>{
@@ -110,4 +110,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Tripme
+export {Tripme}

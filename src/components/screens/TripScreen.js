@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
 import { Header } from '../common'
-import TripTapScreen from './tripscreens'    
+import {TripTapScreen} from './tripscreens'    
     
 
 

@@ -37,11 +37,7 @@ var config = {
     }
 };
 
-
-
-
-
-export class TripList extends Component {
+class TripList extends Component {
     state = {
         item: []
     };
@@ -234,3 +230,5 @@ class ItemDetail extends Component {
         )
     }           
 }
+
+export {TripList}

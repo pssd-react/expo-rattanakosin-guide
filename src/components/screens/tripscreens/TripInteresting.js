@@ -360,4 +360,4 @@ class ItemDetail extends Component {
     }           
 }
 
-export default TripInteresting
+export {TripInteresting}
