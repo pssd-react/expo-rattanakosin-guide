@@ -5,7 +5,7 @@ import {
     StyleSheet,
     Image,
     Linking,
-    TouchableOpacity
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Header } from '../../common'
 import { HeaderBackButton } from 'react-navigation'
@@ -26,7 +26,7 @@ export class AboutAppScreen extends Component {
                 <Header headerText={I18n.t('titleAboutThisApp')}
                     backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
-                <TouchableOpacity onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')}>
+                <TouchableWithoutFeedback onPress={() => Linking.openURL('http://dv.co.th/rattanakosin-guide/terms.html')}>
                     <View style={styles.listViewContainer}>
                         <View style={styles.listViewTextContainer}>
                             <Text style={styles.listViewTextStyle}>{I18n.t('textTermsOfUse')}</Text>
@@ -36,7 +36,7 @@ export class AboutAppScreen extends Component {
                                 source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
                 <View style={styles.listViewContainer}>
                     <View style={styles.listViewTextContainer}>
                         <Text style={styles.listViewTextStyle}>{I18n.t('textVersion')}</Text>

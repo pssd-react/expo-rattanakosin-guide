@@ -4,8 +4,7 @@ import {
     Text,
     StyleSheet,
     Image,
-    ListView,
-    TouchableOpacity
+    TouchableWithoutFeedback
 } from 'react-native'
 import { createStackNavigator, HeaderBackButton } from 'react-navigation'
 import SettingLanguage from './settingscreens/SettingLanguage'
@@ -37,7 +36,7 @@ class SettingScreen extends Component {
     renderListChangePassword(){
         if(this.props.screenProps.phone != ''){
             return (
-                <TouchableOpacity onPress={() => this.onChangePassword()}>
+                <TouchableWithoutFeedback onPress={() => this.onChangePassword()}>
                     <View style={styles.listViewContainer}>
                         <View style={styles.listViewTextContainer}>
                             <Text style={styles.listViewTextStyle}>{I18n.t('settingNewPassword')}</Text>
@@ -46,7 +45,7 @@ class SettingScreen extends Component {
                             <Image source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             )
         }
         
@@ -59,7 +58,7 @@ class SettingScreen extends Component {
                 <Header headerText={I18n.t('titleSetting')}
                     backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
-                    <TouchableOpacity onPress={() => this.onChangeLanguage()}>
+                    <TouchableWithoutFeedback onPress={() => this.onChangeLanguage()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.listViewTextContainer}>
                                 <Text style={styles.listViewTextStyle}>{I18n.t('Language')}</Text>
@@ -70,7 +69,7 @@ class SettingScreen extends Component {
                                     source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
                     {this.renderListChangePassword()}
                 <View style={styles.viewBlockStyle} />
             </View>

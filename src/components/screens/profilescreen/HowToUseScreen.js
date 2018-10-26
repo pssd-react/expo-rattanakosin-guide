@@ -6,7 +6,7 @@ import {
     Image,
     ListView,
     Linking,
-    TouchableOpacity
+    TouchableWithoutFeedback
 } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
@@ -49,7 +49,7 @@ export class HowToUseScreen extends Component {
                     dataSource={this.state.dataSource}
                     renderRow={(rowData) => {
                         return (
-                            <TouchableOpacity onPress={() => Linking.openURL(rowData.url)}>
+                            <TouchableWithoutFeedback onPress={() => Linking.openURL(rowData.url)}>
                                 <View style={styles.listViewContainer}>
                                     <View style={styles.listViewTextContainer}>
                                         <Text style={styles.listViewTextStyle}>{rowData.section}</Text>
@@ -59,7 +59,7 @@ export class HowToUseScreen extends Component {
                                             source={require('../../images/drawable-hdpi/ic_arrow_right.webp')} />
                                     </View>
                                 </View>
-                            </TouchableOpacity>
+                            </TouchableWithoutFeedback>
                         )
                     }}
                     contentContainerStyle={{ width: '100%', backgroundColor: '#DDDDDD' }}

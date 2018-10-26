@@ -5,7 +5,7 @@ import {
     StyleSheet,
     ListView,
     Image,
-    TouchableOpacity
+    TouchableWithoutFeedback
 } from 'react-native'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../../common'
@@ -68,7 +68,7 @@ class SettingLanguage extends Component {
                     renderRow={(rowData) => {
 
                         return (
-                            <TouchableOpacity onPress={() => this.onRowPress(rowData)}>
+                            <TouchableWithoutFeedback onPress={() => this.onRowPress(rowData)}>
                                 <View style={styles.listViewContainer}>
                                     <View style={styles.listViewTextContainer}>
                                         <Text style={styles.listViewTextStyle}>{rowData.language}</Text>
@@ -80,7 +80,7 @@ class SettingLanguage extends Component {
                                             } />
                                     </View>
                                 </View>
-                            </TouchableOpacity>
+                            </TouchableWithoutFeedback>
                         )
                     }}
                     contentContainerStyle={{ width: '100%', backgroundColor: '#DDDDDD' }}
