@@ -1,3 +1,6 @@
 export * from './Exclusive'
 export * from './Interesting'
 export * from './Tripme'
+export * from './TripList'
+export * from './TripInteresting'
+export * from './TripTapScreen'
