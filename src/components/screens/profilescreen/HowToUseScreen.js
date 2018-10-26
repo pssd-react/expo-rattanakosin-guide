@@ -87,10 +87,10 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     listViewTextContainer: {
-        flex: 6
+        flex: 10
     },
     listViewTextStyle: {
-        fontSize: 18
+        fontSize: 16
     },
     viewBlockStyle: {
         height: '10%'
