@@ -24,7 +24,7 @@ const images = [
     "https://www.smartsme.co.th/wp-content/uploads/2017/10/SCB-%E0%B8%A2%E0%B9%88%E0%B8%AD-%E0%B8%A2%E0%B8%B7%E0%B8%94-%E0%B8%82%E0%B8%A2%E0%B8%B2%E0%B8%A2.jpg",
 ];
 
-export class Interesting extends Component{
+class Interesting extends Component{
 
     renderPage(image, index) {
         return (
@@ -117,3 +117,4 @@ const styles = StyleSheet.create({
     
 })
 
+export {Interesting}

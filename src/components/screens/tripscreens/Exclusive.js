@@ -8,8 +8,8 @@ import {
 import { Card } from '../../common/Card'
 import { CardSection } from '../../common/CardSection'
 import { TripImg } from '../../common/TripImg'
-export class Exclusive extends Component{
-  
+
+class Exclusive extends Component{
 
         render(){
             return (
@@ -40,3 +40,5 @@ const styles = StyleSheet.create({
         fontSize : 20
     }
 })
+
+export {Exclusive}

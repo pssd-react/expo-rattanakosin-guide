@@ -212,7 +212,7 @@ class PromotionDetail extends Component {
     onImgSlidePress(key) {
         console.log(key)
         this.toggleHeaderPromotionStatus()
-        this.props.navigation.navigate({
+        this.props.screenProps.navigation.navigate({
             routeName: 'shopDetail',
             params: {
                 key: key,
