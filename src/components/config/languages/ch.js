@@ -8,9 +8,6 @@ export default {
     prof: '个人资料',
     title_promotion: '优惠',
     title_favorite: '我的行程',
-    interestingTrip: '精选行程',
-    exclusive: '独家优惠',
-    myTrip: '我的行程',
     linkLang: 'cn',
     serviceLang: 'CN',
 
@@ -112,6 +109,18 @@ export default {
     registerAgree: 'I Agree to the ',
     registerTerm: '使用须知',
     
+    //Trip
+    interestingTrip: '精选行程',
+    exclusive: '独家优惠',
+    myTrip: '我的行程',
+
+    tripGuide: '请选择您要添加的地点。',
+    tripGuide01: '',
+    createTripStore: '创建行程',//trip_store_in_trip
+
+    titlepositionSticky: '锁定位置',//position_sticky
+    textPositionSticky: '放置的图钉',//txt_position_sticky
+    listNotPositionSticky: '您还没有图钉。',//tv_no_pin_list
 
     //============================
     

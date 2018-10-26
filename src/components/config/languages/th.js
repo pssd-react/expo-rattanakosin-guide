@@ -8,9 +8,6 @@ export default {
     prof: 'ข้อมูลส่วนตัว',
     title_promotion: 'โปรโมชั่น',
     title_favorite: 'ทริปของฉัน',
-    interestingTrip: 'ทริปที่น่าสนใจ',
-    exclusive: 'Exclusive',
-    myTrip: 'ทริปของฉัน',
     linkLang: 'th',
     serviceLang: 'TH',
 
@@ -112,6 +109,17 @@ export default {
     registerAgree: 'I Agree to the ',
     registerTerm: 'Term of user',
 
+    //Trip
+    interestingTrip: 'ทริปที่น่าสนใจ',
+    exclusive: 'Exclusive',
+    myTrip: 'ทริปของฉัน',
+    
+    tripGuide: 'เลือกร้านค้าและ',
+    tripGuide01: 'สร้างทริปส่วนตัวได้ที่นี่',
+
+    titlepositionSticky: 'สถานที่ปักหมุด',
+    textPositionSticky: 'ตำแหน่งที่ปักหมุด',//txt_position_sticky
+    listNotPositionSticky: 'ยังไม่มีรายการตำแหน่งที่ปักหมุดของคุณ',//tv_no_pin_list
     //============================
 
     //title
