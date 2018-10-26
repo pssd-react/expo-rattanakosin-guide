@@ -4,7 +4,7 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableOpacity,
+  TouchableWithoutFeedback,
   ScrollView
 } from 'react-native'
 import moment from 'moment'
@@ -149,26 +149,28 @@ class FlashSalePromotion extends Component {
         var Etime = this._dateFormating(dateEnd)
         if (Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'N') {
           return (
-            <TouchableOpacity style={styles.content} key={items.Name + '_' + items.ShopID} onPress={() => this.onPresentPress(items)}>
-              <View style={{ flex: 6 }}>
-                <View style={{ flexDirection: 'column' }}>
-                  <View style={{ flex: 1, marginBottom: 5 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
-                  </View>
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <Image
-                      source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
-                    />
-                    {this._renderDate(items)}
+            <TouchableWithoutFeedback  key={items.Name + '_' + items.ShopID} onPress={() => this.onPresentPress(items)}>
+              <View style={styles.content}>
+                <View style={{ flex: 6 }}>
+                  <View style={{ flexDirection: 'column' }}>
+                    <View style={{ flex: 1, marginBottom: 5 }}>
+                      <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                      <Image
+                        source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
+                      />
+                      {this._renderDate(items)}
+                    </View>
                   </View>
                 </View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+                  <Image
+                    source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
+                  />
+                </View>
               </View>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                <Image
-                  source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
-                />
-              </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
           )
         }
       })
@@ -192,26 +194,28 @@ class FlashSalePromotion extends Component {
         if (Ctime <= Stime && items.Is_FlashSale === 'N') {
           num++
           return (
-            <TouchableOpacity style={styles.content} key={items.Name} onPress={() => this.onPresentPress(items)}>
-              <View style={{ flex: 6 }}>
-                <View style={{ flexDirection: 'column' }}>
-                  <View style={{ flex: 1, marginBottom: 5 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
-                  </View>
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <Image
-                      source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
-                    />
-                    {this._renderDate(items)}
+            <TouchableWithoutFeedback  key={items.Name} onPress={() => this.onPresentPress(items)}>
+              <View style={styles.content}>
+                <View style={{ flex: 6 }}>
+                  <View style={{ flexDirection: 'column' }}>
+                    <View style={{ flex: 1, marginBottom: 5 }}>
+                      <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                      <Image
+                        source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
+                      />
+                      {this._renderDate(items)}
+                    </View>
                   </View>
                 </View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+                  <Image
+                    source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
+                  />
+                </View>
               </View>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                <Image
-                  source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
-                />
-              </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
           )
         }
       })
@@ -348,22 +352,22 @@ class FlashSalePromotion extends Component {
     } else {
       return (
         <ScrollView>
-          <TouchableOpacity onPress={this._toggleNow}>
+          <TouchableWithoutFeedback onPress={this._toggleNow}>
             <View style={styles.header}>
               {this._renderNowHeader()}
               {this._renderNowChev()}
             </View>
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
           <Collapsible collapsed={this.state.collapsed} align="center">
             {this._renderOngoingPromotion()}
           </Collapsible>
 
-          <TouchableOpacity onPress={this._toggleSoon}>
+          <TouchableWithoutFeedback onPress={this._toggleSoon}>
             <View style={styles.header}>
               {this._renderSoonHeader()}
               {this._renderSoonChev()}
             </View>
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
 
           <Collapsible collapsed={this.state.collapsedC} align="center">
             {this._renderSoonPromotion()}

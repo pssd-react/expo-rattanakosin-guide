@@ -66,7 +66,6 @@ const AppBottomNavigator = createMaterialTopTabNavigator(
                 height: null,
                 top: 0
             },
-            pressColor: 'black',
             showIcon: true,
             style: {
                 backgroundColor: 'white',
