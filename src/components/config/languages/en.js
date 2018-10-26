@@ -5,9 +5,6 @@ export default {
     flashsale: 'Flash Sale',
     trip: 'Trip',
     prof: 'Profile',
-    interestingTrip: 'Recommended',
-    exclusive: 'Exclusive',
-    myTrip: 'My trip',
     linkLang: 'en',
     serviceLang: 'EN',
 
@@ -97,6 +94,19 @@ export default {
     personalInformation: 'Please fill in information',
     registerAgree: 'I Agree to the ',
     registerTerm: 'Term of user',
+
+    //Trip
+    interestingTrip: 'Recommended',
+    exclusive: 'Exclusive',
+    myTrip: 'My trip',
+
+    tripGuide: 'เลือกร้านค้าและ',
+    tripGuide01: 'สร้างทริปส่วนตัวได้ที่นี่',
+    createTripStore: 'เริ่มสร้างทริป',//trip_store_in_trip
+
+    titlepositionSticky: 'สถานที่ปักหมุด',//position_sticky
+    textPositionSticky: 'ตำแหน่งที่ปักหมุด',//txt_position_sticky
+    listNotPositionSticky: 'ยังไม่มีรายการตำแหน่งที่ปักหมุดของคุณ',//tv_no_pin_list
     
     //============================
 
