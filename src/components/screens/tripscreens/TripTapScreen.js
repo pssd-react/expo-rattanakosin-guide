@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text } from 'react-native'
 import { createMaterialTopTabNavigator } from 'react-navigation'
-import {Exclusive,Tripme,Interesting} from './'
+import {Exclusive,TripMe,Interesting} from './'
 import { StoreGlobal } from './../../config/GlobalState'
 
 
@@ -13,7 +13,7 @@ const TripTapScreen = createMaterialTopTabNavigator({
         screen: Exclusive
     },
     MyTrip : {
-        screen: Tripme
+        screen: TripMe
     }
 }, {
         navigationOptions: ({ navigation }) => ({
@@ -45,7 +45,6 @@ const TripTapScreen = createMaterialTopTabNavigator({
                 height: null,
                 top: 0
             },
-            pressColor: 'black',
             style: {
                 backgroundColor: 'white',
             },

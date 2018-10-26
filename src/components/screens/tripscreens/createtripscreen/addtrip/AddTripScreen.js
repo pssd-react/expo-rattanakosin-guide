@@ -43,7 +43,7 @@ var config = {
 }
 
 
-export class AddTripScreen extends Component {
+class AddTripScreen extends Component {
     static navigationOptions = { header: null }
     state = {
         item: ''
@@ -289,9 +289,9 @@ class ItemDetail extends Component {
             
         }
         return(
-            <Image style={{width:100, height:130}}
-                source={{ uri: item.ImageUrl}} 
-            />
+        <Image style={{width:100, height:130}}
+            source={{ uri: item.ImageUrl}} 
+        />
         )
     }
 
@@ -379,4 +379,4 @@ class ItemDetail extends Component {
     }           
 }
 
-export default AddTripScreen
+export {AddTripScreen}

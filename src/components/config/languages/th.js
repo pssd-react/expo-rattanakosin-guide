@@ -789,7 +789,7 @@ export default {
     detail22: 'โดยไม่ต้องแจ้งให้ทราบล่วงหน้า',
     no_shop_detail: 'ไม่มีสถานที่อยู่ \n หรือสถานที่ที่ลงทะเบียนหมดอายุ',
     no_place: 'ไม่มีข้อมูล',
-    shop_detail_tab: 'ดูรายละเอียด',
+    shop_detail_tab: 'รายละเอียด',
     promotion_tab: 'โปรโมชัน',
     map_tab: 'แผนที่',
     review_tab:'รีวิว',
