@@ -10,7 +10,7 @@ import WriteReview from './reviewscreens/WriteReview';
 import WriteReviewUpdate from './reviewscreens/WriteReviewUpdate';
 import { createStackNavigator } from 'react-navigation'
 import Modal from "react-native-modal";
-
+import I18n from './../../config/i18n'
 // import Tooltip from 'rn-tooltip';
 // import ReactNativeTooltipMenu from 'react-native-tooltip-menu';
 import PopoverTooltip from 'react-native-popover-tooltip';
@@ -67,7 +67,7 @@ class ShopReviewScreen extends Component {
   fetchData() {
       const data2 ={
         "RqAppID": data.RqAppID,
-        "UserLanguage": data.UserLanguage,
+        "UserLanguage": I18n.t('serviceLang'),
         "ShopID": this.props.screenProps.items.ShopId,
         "UserID": data.UserID
       }
@@ -224,21 +224,21 @@ class ShopReviewScreen extends Component {
             style={{}} />
         </CardSection>
         <CardSection style={{ paddingLeft: 20 }}>
-          <Text style={{ fontSize: 24 }}>ยืนยันการลบรีวิว</Text>
+          <Text style={{ fontSize: 24 }}>{I18n.t('review_del_confirm')}</Text>
         </CardSection>
         <CardSection style={{ paddingLeft: 20 }}>
-          <Text style={{ fontSize: 16 }}>หากคุณหกยืนยัน รีวิวที่แสดงอยู่จะหายไป</Text>
+          <Text style={{ fontSize: 16 }}>{I18n.t('del_confirm_text')}</Text>
         </CardSection>
         <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
             onPress={() => this.setState({ isModalVisible: false },()=>{
                 this.props.screenProps.forceUpdate()
             })}>
-            <Text style={{ fontSize: 16 }}>ยกเลิก</Text>
+            <Text style={{ fontSize: 16 }}>{I18n.t('cancel')}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderLeftWidth: 0.5, borderColor: '#aaa', height: 50 }}
             onPress={() => this._onPressDelete()}>
-            <Text style={{ fontSize: 16 }}>ยืนยัน</Text>
+            <Text style={{ fontSize: 16 }}>{I18n.t('agree_txt')}</Text>
           </TouchableOpacity>
         </CardSection>
 
@@ -281,11 +281,11 @@ class ShopReviewScreen extends Component {
                   }
                   items={[
                     {
-                      label: 'Edit',
+                      label: I18n.t('review_update'),
                       onPress: () => this._onPressUpdate(reviewId, rating, content)
                     },
                     {
-                      label: 'Delete',
+                      label: I18n.t('review_delete'),
                       onPress: () => this.toggleModal(reviewId)
                     }
                   ]}
@@ -389,10 +389,10 @@ class ShopReviewScreen extends Component {
             style={{}} />
         </CardSection>
         <CardSection style={{ paddingLeft: 20 }}>
-          <Text style={{ fontSize: 24 }}>ลบสำเร็จ</Text>
+          <Text style={{ fontSize: 24 }}>{I18n.t('del_complete')}</Text>
         </CardSection>
         <CardSection style={{ paddingLeft: 20 }}>
-          <Text style={{ fontSize: 16 }}>ระบบทำการลบเรียบร้อย</Text>
+          <Text style={{ fontSize: 16 }}>{I18n.t('del_com_desc')}</Text>
         </CardSection>
         <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
           <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
@@ -402,7 +402,7 @@ class ShopReviewScreen extends Component {
              },()=> {
                     this.props.screenProps.forceUpdate()
             })}>
-            <Text style={{ fontSize: 16 }}>ปิด</Text>
+            <Text style={{ fontSize: 16 }}>{I18n.t('close_txt')}</Text>
           </TouchableOpacity>
         </CardSection>
 
@@ -423,7 +423,7 @@ class ShopReviewScreen extends Component {
             <View style={{ marginTop: '5%', alignItems: 'center' }}>
                   <Button
                     onPress={this.onPressWriteReview.bind(this)}
-                    title="Write a review"
+                    title={I18n.t('review_write')}
                     color='black'
                     buttonStyle={{
                       backgroundColor: 'white',

@@ -14,6 +14,7 @@ import axios from 'axios'
 import Modal from "react-native-modal"
 import { Spinner } from '../../common';
 import _ from 'lodash'
+import I18n from './../../config/i18n'
 
 var data = {
     "RqAppID": "1234",
@@ -389,13 +390,13 @@ class ShopDescriptionScreen extends Component {
                     <TouchableWithoutFeedback onPress={() => this.onViewMorePress()}>
                         <View>
                             <Text style={{ color: 'purple', textAlign: 'center' }}>
-                                More detail...
+                                {I18n.t('more_desc_shop')}
                             </Text>
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
             <View style={{ height: 20, marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
-                    <Text style={{fontSize: 20, fontWeight:'bold'}}>Similar Places</Text>
+                    <Text style={{fontSize: 20, fontWeight:'bold'}}>{I18n.t('simil_place')}</Text>
                 </View>
                 <View style={{ height: 160, marginTop: 10 }}>
                     {this.renderRecommend()}

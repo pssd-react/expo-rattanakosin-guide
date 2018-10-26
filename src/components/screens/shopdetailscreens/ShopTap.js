@@ -2,6 +2,7 @@ import React from 'react'
 import {Text} from 'react-native'
 import {createMaterialTopTabNavigator} from 'react-navigation'
 import {ShopDescriptionScreen, ShopLocateScreen, ShopPromotionScreen, ShopReviewScreen } from './'
+import I18n from './../../config/i18n'
 
 const ShopTap = createMaterialTopTabNavigator({
     ShopDes: {
@@ -22,13 +23,13 @@ const ShopTap = createMaterialTopTabNavigator({
             const { routeName } = navigation.state
             let labelName, textColor
             if (routeName === 'ShopDes') {
-                labelName = 'รายละเอียด'
+                labelName = I18n.t('shop_detail_tab')
             } else if (routeName === 'ShopPro') {
-                labelName = 'โปรโมชัน'
+                labelName = I18n.t('promotion_tab')
             } else if (routeName === 'ShopLoca') {
-                labelName = 'แผนที่'
+                labelName = I18n.t('map_tab')
             } else if (routeName === 'ShopRe') {
-                labelName = 'รีวิว'
+                labelName = I18n.t('review_tab')
             }
 
             if (focused) {

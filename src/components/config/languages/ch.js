@@ -799,8 +799,24 @@ export default {
     detail20: '暹罗商业银行保留制作权',
     detail21: '更改凭证条款，条件，使用情况',
     detail22: '期限恕不另行通知',
-  
-
-
-
+    no_shop_detail: '这个地方不存在。\n 或者已经过期了。',
+    no_place: '找不到地方',
+    shop_detail_tab: '详情',
+    promotion_tab: '提升',
+    map_tab: '地图',
+    review_tab:'评论',
+    more_desc_shop: '更多详情...',
+    simil_place: '类似的地方',
+    review_write: '写评论',
+    review_update: '编辑',
+    review_delete: '删除',
+    write_here_place_holder: '在这里写评论...',
+    tap_star:'标签开始给出评级',
+    post_btn: '邮寄',
+    more_desc_head: '位置详情',
+    tel: '电话号码。',
+    review_del_confirm: '确认',
+    del_confirm_text: '如果您按 “确认”，则此检查将被删除',
+    del_complete: '删除成功',
+    del_com_desc: '系统已成功删除。',
   };
