@@ -410,7 +410,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'left',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '200',
   },
   content: {
     padding: 15,
