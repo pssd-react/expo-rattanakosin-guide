@@ -213,7 +213,32 @@ export default {
     home_search_no_item: 'Data not found.',
     txt_read_more: 'Show more',
     txt_read_less: 'Show less',
-    sort_by: 'Sort by'
-  
+    sort_by: 'Sort by',
+    sort_by_distianct: 'Distance',
+    fab_label: 'Rating',
+    no_shop_detail: 'This place does not exist.\n Or already expired.',
+    no_place: 'Place not found.',
+    shop_detail_tab: 'Detail',
+    promotion_tab: 'Promotion',
+    map_tab: 'Map',
+    review_tab:'Review',
+    more_desc_shop: 'More detail...',
+    simil_place: 'Similar Places',
+    review_write: 'Write a review',
+    review_update: 'Edit',
+    review_delete: 'Delete',
+    write_here_place_holder: 'Write review here...',
+    tap_star:'Tab start to give rating.',
+    post_btn: 'Post',
+    more_desc_head: 'More description',
+    tel: 'Tel.',
+    cancel: 'Cancel',
+    agree_txt: 'Confirm',
+    review_del_confirm: 'Confirm',
+    del_confirm_text: 'If you press "Confirm", this review will be removed.',
+    del_complete: 'Delete completed',
+    del_com_desc: 'Review has been removed.',
+    close_txt: 'Close'
+    
 
   };

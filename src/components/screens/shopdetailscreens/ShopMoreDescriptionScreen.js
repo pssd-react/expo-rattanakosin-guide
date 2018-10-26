@@ -10,6 +10,7 @@ import _ from 'lodash'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../../common'
 import Communications from 'react-native-communications';
+import I18n from './../../config/i18n'
 
 
 class ShopMoreDescriptionScreen extends Component {
@@ -77,7 +78,7 @@ class ShopMoreDescriptionScreen extends Component {
                 />
                 <TouchableOpacity onPress={() => Communications.phonecall(shopPhone, true)}>
                     <Text style={{ fontSize: 16, fontWeight: '700', paddingHorizontal: 5, color: 'black', textDecorationLine: 'underline' }}>
-                        Tel. {shopPhone.includes('-') ? shopPhone : stThreeDigits+'-'+ndThreeDigits+'-'+lastFourDigits}
+                        {I18n.t('tel')} {shopPhone.includes('-') ? shopPhone : stThreeDigits+'-'+ndThreeDigits+'-'+lastFourDigits}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -123,7 +124,7 @@ class ShopMoreDescriptionScreen extends Component {
   render() {
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-        <Header headerText="รายละเอียดสถานที่"
+        <Header headerText={I18n.t('more_desc_head')}
                     backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
           {this.renderDescription()}

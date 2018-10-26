@@ -7,6 +7,7 @@ import { Button } from 'react-native-elements';
 import axios from 'axios'
 import _ from 'lodash'
 import { Header } from '../../../common';
+import I18n from './../../../config/i18n'
 
 class writereviwe extends Component {
 
@@ -106,8 +107,8 @@ class writereviwe extends Component {
                                 />
                             </View>
                             <View style={{ flex: 1, alignItems: 'center', marginTop: 5 }}>
-                                <Text style={{ fontSize: 16, fontStyle: 'bold', color: '#b3b3b3' }}>
-                                    Tap on star to give rating
+                                <Text style={{ fontSize: 16, fontWeight: 'bold', color: '#b3b3b3' }}>
+                                    {I18n.t('tap_star')}
                             </Text>
                             </View>
                         </View>
@@ -116,7 +117,7 @@ class writereviwe extends Component {
                 <View style={{ flex: 1 }}>
                     <View style={{ flex: 1, marginLeft: '5%' }}>
                         <LabelInput
-                            label="Write review here..."
+                            label={I18n.t('write_here_place_holder')}
                             value={this.state.ReviewContent}
                             onChangeText={ReviewContent => this.setState({ ReviewContent })}
                         />
@@ -125,7 +126,7 @@ class writereviwe extends Component {
 
                 <View>
                     <Button
-                        title='post'
+                        title={I18n.t('post_btn')}
                         onPress={() => this.onPost()}
                     />
                 </View>

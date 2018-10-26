@@ -3,8 +3,8 @@ import {
     View, 
     Text,
     StyleSheet,
-    TouchableOpacity,
-    Image
+    TouchableWithoutFeedback,
+    Image,
 } from 'react-native'
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
@@ -37,9 +37,8 @@ export class HomeMenuScreens extends Component {
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
                   
                     
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resRestaurants')}
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resRestaurants')}>
+                            <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')}
@@ -47,11 +46,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                     { I18n.t('cat1') }
                                 </Text>
-                        </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                    
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resTravel')}  
-                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                         >
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resTravel')} >
+                            <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_place_travel.webp')}
@@ -59,11 +58,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                     { I18n.t('cat2') }
                                 </Text>
-                        </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                   
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resShop')}
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resShop')}>
+                            <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_shop.webp')}
@@ -71,14 +70,14 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                 { I18n.t('cat3') }
                                 </Text>
-                        </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                 </CardSection>
                 
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
 
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resAccommondation')} 
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resAccommondation')}>
+                            <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
@@ -86,11 +85,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                 { I18n.t('cat4') }
                                 </Text>
-                        </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                  
-                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('resCommercial_Areas')} 
-                         style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                         >
+                         <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resCommercial_Areas')} >
+                             <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
@@ -98,11 +97,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                 { I18n.t('cat5') }
                                 </Text>
-                        </TouchableOpacity>
+                            </View>
+                        </TouchableWithoutFeedback>
                    
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resBank')}
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >           
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resBank')}>           
+                            <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                 style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_bank.webp')}
@@ -110,14 +109,14 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                 { I18n.t('cat6') }
                                 </Text>
-                        </TouchableOpacity> 
+                            </View>
+                        </TouchableWithoutFeedback> 
                 </CardSection>
 
                 <CardSection style={{ flexDirection: 'row', justifyContent:'space-around'  }} >
 
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resSchools_and_Government')} 
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >     
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resSchools_and_Government')}>     
+                           <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_office.webp')}
@@ -126,14 +125,13 @@ export class HomeMenuScreens extends Component {
                                     <Text style={{fontSize: 14, alignItems:'center'}} >
                                     { I18n.t('cat7') }
                                     </Text> 
-                               
-                        </TouchableOpacity>
+                           </View>    
+                        </TouchableWithoutFeedback>
                    
 
                     
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resServices')} 
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >       
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resServices')} >      
+                            <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}> 
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_service.webp')}
@@ -141,12 +139,11 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                 { I18n.t('cat8') }
                                 </Text>
-                           
-                        </TouchableOpacity>
+                           </View>
+                        </TouchableWithoutFeedback>
 
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('resFacilities')} 
-                        style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}
-                        >
+                        <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate('resFacilities')} >
+                          <View style={{flex:1, flexDirection:'column', justifyContent:'space-between', alignItems:'center'}}>
                                 <Image
                                     style = { {width: 70 , height: 70, alignItems:'center'}}
                                     source={ require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
@@ -154,8 +151,8 @@ export class HomeMenuScreens extends Component {
                                 <Text style={{fontSize: 14, alignItems:'center'}} >
                                 { I18n.t('cat9') }
                                 </Text>
-                           
-                        </TouchableOpacity>
+                          </View> 
+                        </TouchableWithoutFeedback>
                 </CardSection>
             </View>
         )

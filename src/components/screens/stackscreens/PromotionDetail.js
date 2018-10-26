@@ -3,9 +3,9 @@ import {
     View,
     Text,
     Image,
-    TouchableOpacity,
     Dimensions,
-    Geolocation
+    Geolocation,
+    TouchableWithoutFeedback
 } from 'react-native'
 import { Button, } from 'react-native-elements'
 import { HeaderBackButton } from 'react-navigation'
@@ -24,7 +24,8 @@ class PromotionDetail extends Component {
         this.state = {
             isFocused: true,
             lat: undefined,
-            long: undefined
+            long: undefined,
+            language: I18n.t('userlanguage')
         }
       }
 
@@ -55,30 +56,87 @@ class PromotionDetail extends Component {
         this.props.navigation.navigate('FlashSaleMain')
     }
 
-    _renderDate(items) {
-        const StartDate = items.StartDate
+    _renderDate(key) {
+        const StartDate = key.StartDate
         const res = StartDate.substring(0, 10)
         const DateBefore = res.split("/")
         const DateAfter = DateBefore[2] + '-' + DateBefore[1] + '-' + DateBefore[0]
-        const EndDate = items.EndDate
+        const EndDate = key.EndDate
         const ress = EndDate.substring(0, 10)
         const DataBefore = ress.split("/")
         const DataAfter = DataBefore[2] + '-' + DataBefore[1] + '-' + DataBefore[0]
         const formattedData = moment(DataAfter).format("D MMM YYYY")
-
-        if (DateBefore[2] === DataBefore[2]) {
+        if(this.state.language === 'TH'){
+          if (DateBefore[2] === DataBefore[2]) {
+            const DayDate = moment(DateAfter).format("D")
+            const MonthDateEN = moment(DateAfter).format("MMM")
+            const DateTH = DayDate +" "+this._renderDateTH(MonthDateEN)
+            const DayDate2 = moment(DataAfter).format("D")
+            const MonthDateEN2 = moment(DataAfter).format("MMM")
+            const YearDate2 = moment(DataAfter).format("YYYY")
+            var Year2 = parseInt(YearDate2) + 543
+            const DateTH2 = DayDate2 +" "+this._renderDateTH(MonthDateEN2)+ " "+ Year2
+            return (
+              <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {DateTH} - {DateTH2} </Text>
+            )
+          } else {
+            const DayDate = moment(DateAfter).format("D")
+            const MonthDateEN = moment(DateAfter).format("MMM")
+            const YearDate1 = moment(DateAfter).format("YYYY")
+            var Year1 = parseInt(YearDate1) + 543
+            const DateTH = DayDate +" "+this._renderDateTH(MonthDateEN) + " " + Year1
+            const DayDate2 = moment(DataAfter).format("D")
+            const MonthDateEN2 = moment(DataAfter).format("MMM")
+            const YearDate2 = moment(DataAfter).format("YYYY")
+            var Year2 = parseInt(YearDate2) + 543
+            const DateTH2 = DayDate2 +" "+this._renderDateTH(MonthDateEN2)+ " "+ Year2
+            return (
+              <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {DateTH} - {DateTH2} </Text>
+            )
+          }
+        
+        }else{
+          if (DateBefore[2] === DataBefore[2]) {
             const formattedDate = moment(DateAfter).format("D MMM")
             return (
-                <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
+              <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
             )
-        } else {
+          } else {
             const formattedDate = moment(DateAfter).format("D MMM YYYY")
             return (
-                <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
+              <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
             )
+          }
+        }
+      }
+    _renderDateTH(formattedDate){
+        if(formattedDate === 'Jan'){
+          return formattedDate = 'ม.ค.'
+        }else if(formattedDate === 'Feb'){
+          return formattedDate = 'ก.พ.'
+        }else if(formattedDate === 'Mar'){
+          return formattedDate = 'มี.ค.'
+        }else if(formattedDate === 'Apr'){
+          return formattedDate = 'เม.ย.'
+        }else if(formattedDate === 'May'){
+          return formattedDate = 'พ.ค.'
+        }else if(formattedDate === 'Jun'){
+          return formattedDate = 'มิ.ย.'
+        }else if(formattedDate === 'Jul'){
+          return formattedDate = 'ก.ค.'
+        }else if(formattedDate === 'Aug'){
+          return formattedDate = 'ส.ค.'
+        }else if(formattedDate === 'Sep'){
+          return formattedDate = 'ก.ย.'
+        }else if(formattedDate === 'Oct'){
+          return formattedDate = 'ต.ค.'
+        }else if(formattedDate === 'Nov'){
+          return formattedDate = 'พ.ย.'
+        }else if(formattedDate === 'Dec'){
+          return formattedDate = 'ธ.ค.'
         }
     }
-
+    
     //   264 ร้านอาหาร   source={ require('../../images/drawable-hdpi/ic_type_category_food.webp')} 
     //   268 สถานที่ท่องเที่ยว   source={ require('../../images/drawable-hdpi/ic_category_place_travel.webp')} 
     //   265 ร้านค้า  source={ require('../../images/drawable-hdpi/ic_category_shop.webp')} 
@@ -253,50 +311,52 @@ class PromotionDetail extends Component {
         const { navigation } = this.props
         const items = navigation.getParam('items')
         return (
-            <TouchableOpacity style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }} onPress={() => this.onImgSlidePress(items.ShopID)}>
-                <View style={{ flexDirection: 'row', flex: 1 }}>
-                    <View style={{ flex: 1 }}>
-                        <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
-                            <Image
-                                style={{ width: 120, height: 150 }}
-                                source={{ uri: items.ShopImageUrl }}
-                            />
+            <TouchableWithoutFeedback  onPress={() => this.onImgSlidePress(items.ShopID)}>
+                <View style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }}>    
+                    <View style={{ flexDirection: 'row', flex: 1 }}>
+                            <View style={{ flex: 1 }}>
+                                <View style={{ marginLeft: 5, marginTop: 10, marginRight: 5 }}>
+                                    <Image
+                                        style={{ width: 100, height: 150 }}
+                                        source={{ uri: items.ShopImageUrl }}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ flexDirection: 'column', flex: 3 }}>
+                                <View style={{ flexDirection: 'row' }}>
+                                    <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
+                                        {this._renderIcon(items.ShopCategory)}
+                                        <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
+                                    </View>
+                                    <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
+                                        <Image
+                                            style={{ width: 25, height: 25 }}
+                                            source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                                        />
+                                    </View>
+                                </View>
+                                <View style={{ flexDirection: 'row', marginTop: 30 }}>
+                                    <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
+                                        <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
+                                    </View>
+                                    <View style={{ height: 40 }}>
+                                        {this._renderLocation()}
+                                    </View>
+                                    <View style={{ height: 40 }}>
+                                        <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
+                                    </View>
+                                    <View style={{ height: 40 }}>
+                                        <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
+                                    </View>
+
+                                </View>
+                            </View>
                         </View>
-                    </View>
-                    <View style={{ flexDirection: 'column', flex: 3 }}>
-                        <View style={{ flexDirection: 'row' }}>
-                            <View style={{ flex: 3, marginLeft: 30, marginTop: 10, marginRight: 20, flexDirection: 'row' }}>
-                                {this._renderIcon(items.ShopCategory)}
-                                <Text style={{ fontSize: 22 }}> {items.ShopName} </Text>
-                            </View>
-                            <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
-                                <Image
-                                    style={{ width: 25, height: 25 }}
-                                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                />
-                            </View>
-                        </View>
-                        <View style={{ flexDirection: 'row', marginTop: 30 }}>
-                            <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
-                                <ButtonStar style={{ width: 50 }}> {items.Rating} </ButtonStar>
-                            </View>
-                            <View style={{ height: 40 }}>
-                                {this._renderLocation()}
-                            </View>
-                            <View style={{ height: 40 }}>
-                                <ButtonProduct style={{ width: 50 }}>  </ButtonProduct>
-                            </View>
-                            <View style={{ height: 40 }}>
-                                <ButtonPromotion style={{ width: 50 }}> </ButtonPromotion>
-                            </View>
+                        <View style={{ flex: 1 }}>
 
                         </View>
                     </View>
-                </View>
-                <View style={{ flex: 1 }}>
-
-                </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
         )
     }
 

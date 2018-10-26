@@ -18,14 +18,7 @@ import { Spinner, Card, CardSection, ModalSpinner } from '../common'
 import { HeaderBackButton } from 'react-navigation'
 import { Header } from '../common/Header'
 import { ShopTap } from './shopdetailscreens/ShopTap';
-
-var data = {
-    "RqAppID": "1234",
-    "UserLanguage": "EN",
-    "ShopID": "",
-    "UserID": "1",
-    "MarketID": "3"
-}
+import I18n from './../config/i18n'
 
 var config = {
     headers: {
@@ -65,7 +58,6 @@ export class ShopDetailScreen extends Component {
     componentDidMount() {
         const shopID = this.props.navigation.getParam('key', 'none')
         const fromOverView = this.props.navigation.getParam('fromOverView', false)
-        data.ShopID = shopID
         //console.log(this.props.screenProps.userId)
         this.setState({
             loading: true,
@@ -180,6 +172,15 @@ export class ShopDetailScreen extends Component {
     }
 
     _renderingItem() {
+        var data = {
+            "RqAppID": "1234",
+            "UserLanguage": I18n.t('serviceLang'),
+            "ShopID": "",
+            "UserID": "1",
+            "MarketID": "3"
+        }
+        data.ShopID = this.state.shopID
+
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryShopDetailService',
             data, config)
             .then(response => {
@@ -301,7 +302,7 @@ export class ShopDetailScreen extends Component {
                 if (count === 0) {
                     locate =
                         (<View style={{ flex: 1 }}>
-                            <Header headerText="ไม่พบข้อมูล"
+                            <Header headerText={I18n.t('no_place')}
                                 backgroundImage={require('../../components/images/drawable-hdpi/bg_more.webp')}
                                 headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
                         <View style={{ flex: 1, justifyContent:'center', flexDirection:'row' }}>
@@ -309,8 +310,8 @@ export class ShopDetailScreen extends Component {
                                 <Image
                                     source={require('../../components/images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
                                 />
-                                <Text style={{fontSize: 18, marginTop: 20,color: '#a6a6a6'}}>
-                                ขออภัย ไม่มีข้อมูลของสถานที่นี้
+                                <Text style={{fontSize: 18, marginTop: 20,color: '#a6a6a6',textAlign: 'center'}}>
+                                {I18n.t('no_shop_detail')}
                             </Text>
                             </View>
                         </View>

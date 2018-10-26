@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
     ScrollView,
     Image,
     ImageBackground,
@@ -136,7 +135,7 @@ class HomeScreen extends Component {
     _renderFloatingMenu() {
         return (
             <CardSection style={{ flex: 1, bottom: 40, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('resRestaurants')} >
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resRestaurants')} >
                     <View style={styles.imgLeft}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -146,8 +145,8 @@ class HomeScreen extends Component {
                              { I18n.t('eat') }
                         </Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('resTravel')}>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resTravel')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -157,8 +156,8 @@ class HomeScreen extends Component {
                             { I18n.t('travel') }
                         </Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('resShop')}>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resShop')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -168,8 +167,8 @@ class HomeScreen extends Component {
                         { I18n.t('shop') }
                         </Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('resHomedetail')} >
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resHomedetail')} >
                     <View style={styles.imgEnd}>
                         <Image
                             style={{ width: 70, height: 70 }}
@@ -179,7 +178,7 @@ class HomeScreen extends Component {
                         { I18n.t('etc') }
                         </Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             </CardSection>
         )
     }
@@ -286,7 +285,7 @@ class ItemDetail extends Component {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
                     <View key={_renderingImgFull + '&&' + imgSlider.ImageURL} style={{ flex: 1 }}>
-                        <TouchableOpacity onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                        <TouchableWithoutFeedback onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
                             <ImageBackground
                                 style={{
                                     width: 200,
@@ -299,7 +298,7 @@ class ItemDetail extends Component {
                                     <Text style={recomNameText}>{imgSlider.Name}</Text>
                                 </View>
                             </ImageBackground>
-                        </TouchableOpacity>
+                        </TouchableWithoutFeedback>
                     </View>
                 )
             })
@@ -319,7 +318,7 @@ class ItemDetail extends Component {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
                     <View key={_renderingImgHalf + '&&' + imgSlider.ImageURL} style={{ flex: 1 }}>
-                        <TouchableOpacity onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                        <TouchableWithoutFeedback onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
                             <ImageBackground
                                 style={{
                                     width: 150,
@@ -332,7 +331,7 @@ class ItemDetail extends Component {
                                     <Text style={recomNameText}>{imgSlider.Name}</Text>
                                 </View>
                             </ImageBackground>
-                        </TouchableOpacity>
+                        </TouchableWithoutFeedback>
                     </View>
                 )
             })
@@ -351,12 +350,12 @@ class ItemDetail extends Component {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
                     <View key={_renderingBanner + '&&' + imgSlider.ImageURL} style={{ width: Dimensions.get('window').width, height: 150 }} >
-                        <TouchableOpacity onPress={() => this.onBannerPress(imgSlider.Sequence)}>
+                        <TouchableWithoutFeedback onPress={() => this.onBannerPress(imgSlider.Sequence)}>
                             <Image
                                 style={{ height: 150 }}
                                 source={{ uri: baseURL + imgSlider.ImageURL }}
                             />
-                        </TouchableOpacity>
+                        </TouchableWithoutFeedback>
                     </View>
                 )
             })
@@ -419,9 +418,9 @@ class ItemDetail extends Component {
                         <CardSection style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
                             <Text style={headerTextStyle} >{_renderingItem.Name}</Text>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                                <TouchableOpacity onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
+                                <TouchableWithoutFeedback onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
                                     <Text style={{ color: 'green', fontSize: 14 }}>{ I18n.t('seeall') }</Text>
-                                </TouchableOpacity>
+                                </TouchableWithoutFeedback>
                                 <Image
                                     style={{ height: 15, width: 15, tintColor: 'green' }}
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
@@ -478,10 +477,7 @@ const HomeMenu = createStackNavigator({
     giftVou: {
         screen: GiftVoucherScreen, navigationOptions: { header: null }
     },
-    moreDescription: {
-        screen: ShopMoreDescriptionScreen, navigationOptions:{ header : null}
-    }
-    ,searchScreen: {
+    searchScreen: {
         screen: SearchScreen , navigationOptions: {header : null}
     },
     searchResultScreen: {
