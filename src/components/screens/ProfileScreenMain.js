@@ -104,7 +104,8 @@ class ProfileScreenMain extends Component {
                    response.data.UserDetail.UserID,
                    response.data.UserDetail.DisplayName,
                    data.SessionToken,
-                   response.data.UserDetail.Contact )
+                   response.data.UserDetail.Contact,
+                   response.data.UserDetail.Trip  )
                StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
                 this.setState({ userInfoFB })
             })

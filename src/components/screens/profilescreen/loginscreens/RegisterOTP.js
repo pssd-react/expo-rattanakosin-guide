@@ -154,7 +154,8 @@ export class RegisterOTP extends Component {
                                     response.data.UserDetail.UserID,
                                     response.data.UserDetail.DisplayName,
                                     response.data.UserDetail.SessionToken,
-                                    response.data.UserDetail.Contact )
+                                    response.data.UserDetail.Contact,
+                                    response.data.UserDetail.Trip  )
                                 StoreGlobal({ type: 'set', key: 'userPhone', value: response.data })
                                 StoreGlobal({ type: 'set', key: 'RequestOTPService', value: null })
                                 this.props.navigation.navigate(

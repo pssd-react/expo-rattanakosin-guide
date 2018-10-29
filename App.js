@@ -41,7 +41,8 @@ INITIAL_STATE = {
   userId: 'none',
   userDisplay: '',
   token: '',
-  phone: ''
+  phone: '',
+  trip: []
 }
 
 export default class App extends React.Component {
@@ -62,12 +63,13 @@ export default class App extends React.Component {
     I18n.locale = StoreGlobal({ type: 'get', key: 'lang' })
   }
 
-  loginMeth =(userId, userDisplay, token, phone)=>{
+  loginMeth =(userId, userDisplay, token, phone,trip)=>{
     this.setState({
       userId: userId,
       userDisplay: userDisplay,
       token: token,
-      phone: phone
+      phone: phone,
+      trip: trip
     })
   }
 
@@ -76,7 +78,8 @@ export default class App extends React.Component {
       userId: 'none',
       userDisplay: '',
       token: '',
-      phone: ''
+      phone: '',
+      trip: []
     })
   }
 
@@ -104,7 +107,8 @@ export default class App extends React.Component {
           userId : this.state.userId,
           userDisplay : this.state.userDisplay,
           token : this.state.token,
-          phone : this.state.phone
+          phone : this.state.phone,
+          trip : this.state.trip
         }} />
       )
     }
