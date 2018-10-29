@@ -5,7 +5,8 @@ import {
     Image,
     Dimensions,
     Geolocation,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    TouchableOpacity
 } from 'react-native'
 import { Button, } from 'react-native-elements'
 import { HeaderBackButton } from 'react-navigation'
@@ -316,6 +317,53 @@ class PromotionDetail extends Component {
     }
 
 
+    renderBtAddTrip(items){
+        console.log(this.props.screenProps)
+        var data = {
+            "RqAppID":"1234",
+            "UserLanguage":"EN",
+            "UserID": this.props.screenProps.userId,
+            "TripID": "",
+            "TripShop":[{
+                "ShopID": items
+            }],
+            "SessionToken":"",
+            "MarketID":"3"
+         }
+        if(this.props.screenProps.userId === 'none'){
+                this.props.navigation.navigate({
+                    routeName: 'Login'
+                })
+        }else {
+            return(
+                <Image
+                    style={{ width: 25, height: 30 }}
+                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                />
+            )
+        }
+          
+            // axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
+            //   data, config)
+            //   .then(response => {
+            //     this.setState({
+            //       item: response.data
+            //     }, () => {
+            //       this._updateNumPresent()
+            //       this._updateNumSoon()
+            //     })
+            //   })
+    }
+
+    renderBtImgAddTrip(){
+        return(
+            <Image
+                style={{ width: 25, height: 30 }}
+                source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+            />
+        )
+    }
+
     _renderStore() {
         const { navigation } = this.props
         const items = navigation.getParam('items')
@@ -337,12 +385,9 @@ class PromotionDetail extends Component {
                                     {this._renderIcon(items.ShopCategory)}
                                     <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
                                 </View>
-                                <View style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }}>
-                                    <Image
-                                        style={{ width: 25, height: 30 }}
-                                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                    />
-                                </View>
+                                <TouchableOpacity style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }} onPress={() => this.renderBtAddTrip(items.ShopID)}>
+                                    {this.renderBtImgAddTrip()}
+                                </TouchableOpacity>
                             </View>
                             <View style={{ flexDirection: 'row', marginTop: 30 }}>
                                 <View style={{ height: 40, marginLeft: 25, marginRight: 1 }} >
