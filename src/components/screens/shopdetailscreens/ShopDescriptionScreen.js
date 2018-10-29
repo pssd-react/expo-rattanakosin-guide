@@ -140,8 +140,8 @@ class ShopDescriptionScreen extends Component {
                         onPress={() => this.imgSlidePress(index-1)}>
                         <View
                             style={{
-                                height: 160,
-                                width: 110,
+                                height: Dimensions.get('window').height*0.25,
+                                width: 150,
                                 marginLeft: 20,
                                 borderWidth: 0.5,
                                 borderColor: '#dddddd',
@@ -217,8 +217,8 @@ class ShopDescriptionScreen extends Component {
                         onPress={() => this.onRecommendPress(recom.ShopID)}>
                         <View
                             style={{
-                                height: 160,
-                                width: 110,
+                                height: Dimensions.get('window').height*0.25,
+                                width: 150,
                                 marginLeft: 20,
                                 borderWidth: 0.5,
                                 borderColor: '#dddddd',
@@ -370,13 +370,13 @@ class ShopDescriptionScreen extends Component {
             <View
                 style={{ flex: 1 }}
             >
-                <View style={{ height: 160, marginTop: 20 }}>
+                <View style={{ height: Dimensions.get('window').height*0.25, marginTop: 20 }}>
                     {this.renderImgSlider()}
                 </View>
                 <View
                     style={{
                         width: Dimensions.get('window').width,
-                        height: 120,
+                        height: Dimensions.get('window').height*0.2,
                         marginTop: 10,
                         borderWidth: 1,
                         borderColor: '#dddddd',
@@ -398,7 +398,7 @@ class ShopDescriptionScreen extends Component {
             <View style={{ height: 20, marginTop: 10, justifyContent: 'center', alignItems: 'center' }}>
                     <Text style={{fontSize: 20, fontWeight:'bold'}}>{I18n.t('simil_place')}</Text>
                 </View>
-                <View style={{ height: 160, marginTop: 10 }}>
+                <View style={{ height: Dimensions.get('window').height*0.25, marginTop: 10 }}>
                     {this.renderRecommend()}
                 </View>
             </View>
