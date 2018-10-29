@@ -317,9 +317,8 @@ class ItemDetail extends Component {
         else if (_renderingImgs.Scale === 'H' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <View key={_renderingImgHalf + '&&' + imgSlider.ImageURL} style={{ flex: 1 }}>
-                        <TouchableWithoutFeedback onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
-                            <ImageBackground
+                        <TouchableWithoutFeedback key={_renderingImgHalf + '&&' + imgSlider.ImageURL} onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                            <View style={{ flex: 1 }}><ImageBackground
                                 style={{
                                     width: 150,
                                     height: 100,
@@ -331,8 +330,8 @@ class ItemDetail extends Component {
                                     <Text style={recomNameText}>{imgSlider.Name}</Text>
                                 </View>
                             </ImageBackground>
+                            </View>
                         </TouchableWithoutFeedback>
-                    </View>
                 )
             })
 
