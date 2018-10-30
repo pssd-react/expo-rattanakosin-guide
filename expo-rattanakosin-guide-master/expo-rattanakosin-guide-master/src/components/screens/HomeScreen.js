@@ -3,7 +3,6 @@ import {
     View,
     Text,
     StyleSheet,
-    TouchableOpacity,
     ScrollView,
     Image,
     ImageBackground,
@@ -11,17 +10,18 @@ import {
     StatusBar,
     TextInput,
     Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
 import {
     Restaurants,
-    Accommodation,
     Bank,
     Commercial_Areas,
     Facilities,
     Shop,
     Schools_and_Government,
     Services,
-    Travel
+    Travel,
+    Accommodation
 } from './itemscreens'
 import {
     EatScreen,
@@ -37,13 +37,18 @@ import _ from 'lodash'
 import { HomeMenuScreens } from './homelistscreens'
 import { createStackNavigator } from 'react-navigation'
 import { GiftVoucherScreen } from './homelistscreens/GiftVoucherScreen'
+import { ShopDetailScreen } from './ShopDetailScreen'
+import { ShopMoreDescriptionScreen } from './shopdetailscreens/ShopMoreDescriptionScreen';
+import SearchScreen from './SearchScreen'
+import { SearchResultScreen } from './SearchResultScreen';
+import I18n from '../config/i18n'
 
-const data = {
-    'RqAppID': '1234',
-    'UserLanguage': 'EN',
-    'MarketID': '3',
-    'Version': '1.1.4'
-}
+// const data = {
+//     'RqAppID': '1234',
+//     'UserLanguage': I18n.t('userlanguage'),
+//     'MarketID': '3',
+//     'Version': '1.1.4'
+// }
 const config = {
     headers: {
         'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
@@ -57,7 +62,12 @@ class HomeScreen extends Component {
         state_item: ''
     }
 
+    onSearchbarPress(){
+        this.props.navigation.navigate('searchScreen')
+    }
+
     componentWillMount() {
+    
         this.startHeaderHeight = 80
         if (Platform.OS == 'android') {
             this.startHeaderHeight = 100 + StatusBar.currentHeight
@@ -66,6 +76,12 @@ class HomeScreen extends Component {
     }
 
     _renderService() {
+        var data = {
+            'RqAppID': '1234',
+            'UserLanguage': I18n.t('userlanguage'),
+            'MarketID': '3',
+            'Version': '1.1.4'
+        }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryMenuGuideService',
             data, config)
             .then(response => { this.setState({ state_item: response.data }) })
@@ -89,9 +105,11 @@ class HomeScreen extends Component {
 
     _renderHeadBanner() {
         return (
+
             <ImageBackground
                 style={{ height: this.startHeaderHeight, borderBottomWidth: 1, borderBottomColor: '#dddddd', width: '100%' }}
                 source={require('../../components/images/drawable-hdpi/bg_platinum_main.webp')}>
+                <TouchableWithoutFeedback onPress={()=> this.onSearchbarPress()}>
                 <View style={{
                     width: '70%',
                     borderRadius: 8,
@@ -104,12 +122,12 @@ class HomeScreen extends Component {
                     marginTop: Platform.OS == 'android' ? 30 : null
                 }}>
                     <Icon name="search" size={20} style={{ marginRight: 10 }} />
-                    <TextInput
-                        underlineColorAndroid="transparent"
-                        placeholder="ค้นหา ..."
-                        placeholderTextColor="grey"
-                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} />
+                    <Text
+                        style={{ flex: 1, fontWeight: '700', backgroundColor: 'white' }} >
+                        {I18n.t('searching')} ...   
+                        </Text>
                 </View>
+                </TouchableWithoutFeedback>
             </ImageBackground>
         )
     }
@@ -117,50 +135,50 @@ class HomeScreen extends Component {
     _renderFloatingMenu() {
         return (
             <CardSection style={{ flex: 1, bottom: 40, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('restaurants')} >
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resRestaurants')} >
                     <View style={styles.imgLeft}>
                         <Image
                             style={{ width: 70, height: 70 }}
                             source={require('../images/drawable-hdpi/ic_main_food.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            กิน
+                             { I18n.t('eat') }
                         </Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('travel')}>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resTravel')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
                             source={require('../images/drawable-hdpi/ic_main_travel.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            เที่ยว
+                            { I18n.t('travel') }
                         </Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('shop')}>
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resShop')}>
                     <View style={styles.imgRight}>
                         <Image
                             style={{ width: 70, height: 70 }}
                             source={require('../images/drawable-hdpi/ic_main_shop.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            ช้อป
+                        { I18n.t('shop') }
                         </Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('Menu')} >
+                </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback onPress={() => this.props.navigation.navigate('resHomedetail')} >
                     <View style={styles.imgEnd}>
                         <Image
                             style={{ width: 70, height: 70 }}
                             source={require('../images/drawable-hdpi/ic_main_other.webp')}
                         />
                         <Text style={styles.textLeft} >
-                            อื่นๆ
+                        { I18n.t('etc') }
                         </Text>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             </CardSection>
         )
     }
@@ -265,21 +283,23 @@ class ItemDetail extends Component {
         let _renderingImgHalf = '_renderingImgHalf'
         if (_renderingImgs.Scale === 'F' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
-                //console.log(imgSlider.Sequence)
                 return (
-                    <ImageBackground
-                        key={_renderingImgFull + '&&' + imgSlider.ImageURL}
-                        style={{
-                            width: 200,
-                            height: 100,
-                            marginRight: 10
-                        }}
-                        source={{ uri: baseURL + imgSlider.ImageURL }}
-                    >
-                        <View style={recomBlog}>
-                            <Text style={recomNameText}>{imgSlider.Name}</Text>
-                        </View>
-                    </ImageBackground>
+                <TouchableWithoutFeedback key={_renderingImgFull + '&&' + imgSlider.ImageURL} onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                    <View  style={{ flex: 1 }}>
+                            <ImageBackground
+                                style={{
+                                    width: 200,
+                                    height: 100,
+                                    marginRight: 10
+                                }}
+                                source={{ uri: baseURL + imgSlider.ImageURL }}
+                            >
+                                <View style={recomBlog}>
+                                    <Text style={recomNameText}>{imgSlider.Name}</Text>
+                                </View>
+                            </ImageBackground>
+                    </View>
+                    </TouchableWithoutFeedback>
                 )
             })
 
@@ -297,19 +317,21 @@ class ItemDetail extends Component {
         else if (_renderingImgs.Scale === 'H' && _renderingImgs.MenuType === '06') {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
-                    <ImageBackground
-                        key={_renderingImgHalf + '&&' + imgSlider.ImageURL}
-                        style={{
-                            width: 150,
-                            height: 100,
-                            marginRight: 10
-                        }}
-                        source={{ uri: baseURL + imgSlider.ImageURL }}
-                    >
-                        <View style={recomBlog}>
-                            <Text style={recomNameText}>{imgSlider.Name}</Text>
-                        </View>
-                    </ImageBackground>
+                        <TouchableWithoutFeedback key={_renderingImgHalf + '&&' + imgSlider.ImageURL} onPress={() => this.onImgSlidePress(imgSlider.SlideParam)}>
+                            <View style={{ flex: 1 }}><ImageBackground
+                                style={{
+                                    width: 150,
+                                    height: 100,
+                                    marginRight: 10
+                                }}
+                                source={{ uri: baseURL + imgSlider.ImageURL }}
+                            >
+                                <View style={recomBlog}>
+                                    <Text style={recomNameText}>{imgSlider.Name}</Text>
+                                </View>
+                            </ImageBackground>
+                            </View>
+                        </TouchableWithoutFeedback>
                 )
             })
 
@@ -327,12 +349,12 @@ class ItemDetail extends Component {
             _imgResult = _.map(_renderingImgs.SliderList, imgSlider => {
                 return (
                     <View key={_renderingBanner + '&&' + imgSlider.ImageURL} style={{ width: Dimensions.get('window').width, height: 150 }} >
-                        <TouchableOpacity onPress={() => this.onBannerPress(imgSlider.Sequence)}>
+                        <TouchableWithoutFeedback onPress={() => this.onBannerPress(imgSlider.Sequence)}>
                             <Image
                                 style={{ height: 150 }}
                                 source={{ uri: baseURL + imgSlider.ImageURL }}
                             />
-                        </TouchableOpacity>
+                        </TouchableWithoutFeedback>
                     </View>
                 )
             })
@@ -353,29 +375,37 @@ class ItemDetail extends Component {
 
     }
 
-
     onBannerPress(key) {
         if (key === '1') {
             //do something here
         }
         else if (key === '2') {
-            this.props.navigation.navigate('giftVou')
+            this.props.navigation.navigate('resGiftVoucherScreen')
         }
     }
 
+    onImgSlidePress(key) {
+        this.props.navigation.navigate({
+            routeName: 'shopDetail',
+            params: {
+                key: key
+            },
+            key: 'shopDetail' + key
+        })
+    }
 
     onRecommendedPress(key) {
         if (key === '2') {
-            this.props.navigation.navigate('recomEat')
+            this.props.navigation.navigate('resEatScreen')
         }
         else if (key === '3') {
-            this.props.navigation.navigate('recomShop')
+            this.props.navigation.navigate('resShoppingScreen')
         }
         else if (key === '4') {
-            this.props.navigation.navigate('recomPlaces')
+            this.props.navigation.navigate('resPlacesScreen')
         }
         else if (key === '5') {
-            this.props.navigation.navigate('recomStays')
+            this.props.navigation.navigate('resStaysScreen')
         }
     }
 
@@ -386,14 +416,14 @@ class ItemDetail extends Component {
                     <View style={headerContentStyle}>
                         <CardSection style={{ flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
                             <Text style={headerTextStyle} >{_renderingItem.Name}</Text>
+                            <TouchableWithoutFeedback onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
                             <View style={{ flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center' }}>
-                                <TouchableOpacity onPress={() => this.onRecommendedPress(_renderingItem.Sequence)}>
-                                    <Text style={{ color: 'green', fontSize: 14 }}>ดูทั้งหมด</Text>
-                                </TouchableOpacity>
+                                    <Text style={{ color: 'green', fontSize: 14 }}>{ I18n.t('seeall') }</Text>
                                 <Image
                                     style={{ height: 15, width: 15, tintColor: 'green' }}
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
+                            </TouchableWithoutFeedback>
                         </CardSection>
                     </View>
                 </CardSection>
@@ -431,33 +461,6 @@ const HomeMenu = createStackNavigator({
     Menu: {
         screen: HomeMenuScreens, navigationOptions: { header: null }
     },
-    restaurants: {
-        screen: Restaurants, navigationOptions: { header: null }
-    },
-    travel: {
-        screen: Travel, navigationOptions: { header: null }
-    },
-    shop: {
-        screen: Shop, navigationOptions: { header: null }
-    },
-    accommodation: {
-        screen: Accommodation, navigationOptions: { header: null }
-    },
-    commercial_areas: {
-        screen: Commercial_Areas, navigationOptions: { header: null }
-    },
-    bank: {
-        screen: Bank, navigationOptions: { header: null }
-    },
-    schools_and_government: {
-        screen: Schools_and_Government, navigationOptions: { header: null }
-    },
-    services: {
-        screen: Services, navigationOptions: { header: null }
-    },
-    facilities: {
-        screen: Facilities, navigationOptions: { header: null }
-    },
     recomEat: {
         screen: EatScreen, navigationOptions: { header: null }
     },
@@ -473,6 +476,12 @@ const HomeMenu = createStackNavigator({
     giftVou: {
         screen: GiftVoucherScreen, navigationOptions: { header: null }
     },
+    searchScreen: {
+        screen: SearchScreen , navigationOptions: {header : null}
+    },
+    searchResultScreen: {
+        screen: SearchResultScreen, navigationOptions: {header: null}
+    }
 })
 
 export default HomeMenu

@@ -8,8 +8,8 @@ const ButtonStar = (props) => {
     return (
         <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.style]}>
             <View style={{flexDirection: 'row', justifyContent:'space-around'}}>
-            <Image style={{width:20, height:20, alignSelf:'center'}}
-             source={ require('../images/drawable-hdpi/ic_star_fill.webp')} 
+            <Image style={{ width:20, height:20 , alignSelf:'center'}}
+             source={ require('../images/drawable-hdpi/ic_star_active.png')} 
             /> 
             <Text style={[textStyle, props.textStyle]}>
              {props.children}
@@ -26,16 +26,16 @@ const styles = {
         alignSelf: 'center',
         color: '#000000',
         fontSize: 16,
-        fontWeight: '600'
+        fontWeight: '300'
     },
     buttonStyle:{
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#fffff',
+        backgroundColor: '#f2f2f2',
         borderColor: '#333333',
         justifyContent: 'center',
         borderRadius: 5,
-        marginLeft: 2,
+        marginLeft: 5,
         marginRight: 2,
         borderWidth: 1
     },

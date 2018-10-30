@@ -4,29 +4,22 @@ import {
     Text,
     StyleSheet,
     Image,
-    ScrollView
+    ScrollView,
+    TouchableOpacity,
+    Dimensions,
+    TouchableWithoutFeedback
 } from 'react-native'
-import { Card } from '../../common/Card';
-import { CardSection } from '../../common/CardSection';
+import { Card } from '../../common/Card'
+import { CardSection } from '../../common/CardSection'
 import axios from 'axios'
 import _ from 'lodash'
-import ViewMoreText from 'react-native-view-more-text';
-import { ButtonStar, ButtonLocal, ButtonHighlight } from '../../common';
+import ViewMoreText from 'react-native-view-more-text'
+import { ButtonStar, ButtonLocal, ButtonHighlight ,Button, Spinner, ModalSpinner } from '../../common'
 import { HeaderBackButton } from 'react-navigation'
-import { Header } from '../../common';
+import { Header } from '../../common'
+import geolib from 'geolib'
+import I18n from '../../config/i18n'
 
-const data = {
-    "RqAppID": "1234",
-    "UserLanguage": "EN",
-    "ViewType": "04",
-    "RowNum": "0",
-    "Keyword": "",
-    "ShopCategory": "265",
-    "UserID": "1",
-    "MarketID": "3",
-    "CouponType": "",
-    "CouponSubType": ""
-}
 
 const config = {
     headers: {
@@ -35,143 +28,349 @@ const config = {
     }
 };
 
+
+
+
 export class ShoppingScreen extends Component {
-    state = {
-        item: ''
-    };
+    constructor() {
+        super()
+        this.state = {
+            item: '',
+            lat: undefined,
+            long: undefined,
+            sortby: undefined,
+            sort: '',
+            bt_sort: '#ffffff',
+            bt_non: '#ffffff',
+            loading: true
+        }
+      }
+
+    componentDidMount(){
+         navigator.geolocation.getCurrentPosition(
+        (position) => {
+            this.setState({lat: position.coords.latitude, long: position.coords.longitude ,loading : false});
+        },
+
+        (error) => {alert("there was an error getting location")},
+
+        {enableHighAccuracy: true}
+
+        );
+        console.log('component',this.state.lat,this.state.long)
+    }
 
     componentWillMount() {
+        var data = {
+            "RqAppID": "1234",
+            "UserLanguage": I18n.t('userlanguage') ,
+            "ViewType": "04",
+            "RowNum": "0",
+            "Keyword": "",
+            "ShopCategory": "265",
+            "UserID": "1",
+            "MarketID": "3",
+            "CouponType": "",
+            "CouponSubType": ""
+        }
         axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryNewStaticLocationService',
             data, config)
-            .then(response => { this.setState({ item: response.data }) })
+            .then(response => { this.setState({ item: response.data ,   loading: true}) })
             .catch((error) => {
                 console.log('axios error:', error);
-            });
+        });
     }
 
-    onButtonGoBack() {
-        this.props.navigation.popToTop()
+    onButtonGoBack(){
+        this.props.navigation.goBack()
     }
 
-    _renderLocationList() {
-        let loKey = 0
-        const CardItem = _.map((this.state), (items) => {
-            loKey++
-            return (<ItemDetail key={'location_' + loKey} items={items.StaticLocation} />)
-        })
-        return CardItem
+    changeStatusSortDistance(){
+        this.setState({ bt_non: '#d9d9d9' , bt_sort: '#ffffff' })
+        this.setState({ sortby: true })
+        console.log(this.state.sortby)
     }
 
-    render() {
-        return (
-            <View style={{ flex: 1 }}>
-                <Header headerText="Recommended Shopping"
-                    backgroundImage={require('../../images/drawable-hdpi/bg_more.webp')}
-                    headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
-                <Card>
-                    <ScrollView>
-                        {this._renderLocationList()}
-                        <View style={{ height: 100 }} />
-                    </ScrollView>
-                </Card>
-            </View>
+    changeStatusSortScore(){
+        this.setState({ bt_sort: '#d9d9d9', bt_non: '#ffffff'  })
+        this.setState({ sortby: false })
+        console.log(this.state.sortby)
+    }
+
+
+    buttonDistance(){
+        
+        return(
+        <Button style = {{ backgroundColor: this.state.bt_non ,borderRadius: 10 }} onPress={() => this.changeStatusSortDistance()}>
+        {I18n.t('distan')}
+        </Button>
         )
     }
-}
 
-class ItemDetail extends Component {
-    state = {
-        item: []
-    }
-
-    onViewMorePress(onPress) {
-        return (
-            <Text onPress={onPress} style={{ color: 'blue' }}>Show more...</Text>
+    buttonScore(){
+        return(
+        <Button style = {{ backgroundColor: this.state.bt_sort ,borderRadius: 10}} onPress={() => this.changeStatusSortScore()}>
+        {I18n.t('score')}
+        </Button>
         )
     }
-    onViewLessPress(onPress) {
-        return (
-            <Text onPress={onPress} style={{ color: 'blue' }}>Show less</Text>
-        )
-    }
-    _renderLocationDetail() {
-        return _.map(this.props.items, item => {
-            if (item.HighlightShop === 'Y') {
-                return (
-                    <View key={item.CategoryName + '_' + item.ShopID} style={{ flex: 1 }}>
-                        <CardSection style={{ height: 40 }}>
-                            <View style={{
-                                flex: 4,
-                                justifyContent: 'flex-start', flexDirection: 'row', alignSelf: 'center'
-                            }}>
-                                <Image style={{ width: 30, height: 30, marginRight: 15 }}
-                                    source={require('../../images/drawable-hdpi/ic_category_shop.webp')}
-                                />
-                                <Text style={styles.ViewTextStyle}> {item.LocationName} </Text>
-                            </View>
-                            <View style={{ flex: 1, alignItems: 'flex-end' }}>
-                                <Image
-                                    style={{ width: 20, height: 20 }}
-                                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                                />
-                            </View>
-                        </CardSection>
-                        <CardSection style={{ flex: 1, borderBottomWidth: 1, borderColor: '#ddd' }}>
-                            <View style={styles.ViewContainer}>
-                                <View style={{ flex: 1 }}>
-                                    <Image style={{ width: 100, height: 130 }}
-                                        source={{ uri: item.ImageUrl }}
-                                    />
-                                </View>
-                                <View style={{ flex: 2, flexDirection: 'column' }}>
-                                    <View style={{ flexDirection: 'row', height: 40 }}>
-                                        <View style={{ flex: 1, marginRight: 15 }}>
-                                            <ButtonStar style={styles.buttonStarStyle}
-                                            >
-                                                {item.Rating}
-                                            </ButtonStar>
-                                        </View>
-                                        <View style={{ flex: 2, marginLeft: 8 }}>
-                                            <ButtonLocal style={styles.buttonLocalStyle}
-                                            >
-                                                8.03
-                                                    </ButtonLocal>
-                                        </View>
-                                        <View style={{ flex: 1 }}>
-                                            <ButtonHighlight style={styles.buttonHightLightStyle}>
-                                            </ButtonHighlight>
-                                        </View>
-                                        <View style={{ flex: 3 }} />
-                                    </View>
-                                    <View style={{ flex: 1 }}>
-                                        <Text />
-                                        <ViewMoreText
-                                            numberOfLines={3}
-                                            onViewMorePress={this.onViewMorePress}
-                                            onViewLessPress={this.onViewLessPress}
-                                        >
-                                            <Text>
-                                                {item.ShopDescription}
-                                            </Text>
-                                        </ViewMoreText>
-                                    </View>
-                                </View>
-                            </View>
-                        </CardSection>
-                    </View>
-                )
+    
+    renderItem() {
+
+        if(this.state.sortby === undefined){
+            return _.map((this.state.item.StaticLocation), (items) => {
+                if(items.HighlightShop === 'Y'){
+                    return(
+                        <View>
+                            {this.renderCardData(items)}
+                        </View>
+                    )
+                }
+            })
+        }else if(this.state.sortby === true){
+            var distance = '';
+            var array = [];
+            var i = 0;
+             _.map((this.state.item.StaticLocation), (items) => {
+                distance = geolib.getDistanceSimple(
+                    {latitude: this.state.lat, longitude: this.state.long},
+                    {latitude: items.Latitude, longitude: items.Longitude}
+                );
+                distance = distance / 1000
+                distance = distance.toFixed(2);
+
+                array[i] = { 
+                "CategoryID": items.CategoryID,
+                "LocationID": items.LocationID,
+                "ShopID": items.ShopID,
+                "CategoryName": items.CategoryName,
+                "LocationName": items.LocationName,
+                "Address": items.Address,
+                "Latitude": items.Latitude,
+                "Longitude": items.Longitude,
+                "Section": items.Section,
+                "Soi": items.Soi,
+                "Rating": items.Rating,
+                "TotalReview": items.TotalReview,
+                "HighlightShop":items.HighlightShop,
+                "IsPromotion": items.IsPromotion,
+                "IsFlashSale": items.IsFlashSale,
+                "ShopDescription":items.ShopDescription,
+                "Zone": items.Zone,
+                "Class": items.Class,
+                "Moo": items.Moo,
+                "Building": items.Building,
+                "Road": items.Road,
+                "Sub_District":items.Sub_District,
+                "District": items.District,
+                "City": items.City,
+                "Room": items.Room,
+                "ProductHighlight":items.ProductHighlight,
+                "ImageUrl": items.ImageUrl,
+                "IsMyTrip": items.IsMyTrip,
+                "CouponType": items.CouponType,
+                "Distance": distance
+                }
+              
+                i++;
+            })
+
+            for(var j = 0 ; j < array.length ; j++){
+                array.sort(function(a, b){return a.Distance - b.Distance});  
+               // console.log(array[i])
             }
-        })
+
+            return _.map((array), (items) => {
+                //console.log(items)
+                if(items.HighlightShop === 'Y'){
+                    return(
+                        <View>
+                            {this.renderCardData(items)}
+                        </View>
+                    )
+                }
+            })
+        }else if(this.state.sortby === false){
+            var array = [];
+            var sortItem = [];
+            var i = 0;
+            _.map((this.state.item.StaticLocation), (items) => {
+                // array = items;
+                sortItem[i] = items;
+                i++
+            })
+           for(var j = 0 ; j < sortItem.length ; j++){
+                sortItem.sort(function(a, b){return b.Rating - a.Rating});
+                //console.log(sortItem[j]);   
+           }
+          
+            return _.map((sortItem), (items) => {
+                //console.log(items)
+                if(items.HighlightShop === 'Y'){
+                    return(
+                        <View>
+                            {this.renderCardData(items)}
+                        </View>
+                    )
+                }
+            })
+        }
     }
 
-    render() {
+    _renderLocation(items){
+        console.log('Location',this.state.lat,this.state.long)
+        var distance = '';
+        if(this.state.lat === undefined){
+        return(
+            <ButtonLocal style={styles.buttonLocalStyle}>  0.00 {I18n.t('km')}</ButtonLocal>
+        )
+        }else{
+            distance = geolib.getDistanceSimple(
+                {latitude: this.state.lat, longitude: this.state.long},
+                {latitude: items.Latitude, longitude: items.Longitude}
+            );
+           distance = distance / 1000
+           console.log(distance , 'Km')
+           distance = distance.toFixed(2);
+           return(
+                <ButtonLocal style={styles.buttonLocalStyle}>  {distance} {I18n.t('km')}</ButtonLocal>
+           )
+        }
+    }
+
+    
+    renderCardData(items){
         return (
-            <View style={{ flex: 1, backgroundColor: '#FFFFFF' }}>
-                {this._renderLocationDetail()}
+            <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
+                <View style={{flex:1 ,  backgroundColor: '#ffffff'}} >
+            <CardSection style={{height:40, justifyContent:'center', alignItems: 'center'}}> 
+                <View style={{flex:1,flexDirection:'row', alignSelf:'flex-start'}}> 
+                        <Image style={{width:30, height:30,marginRight:15}}
+                            source={ require('../../images/drawable-hdpi/ic_category_shop.webp')} 
+                        /> 
+                </View>
+                <View style={{flex:10}}>
+                <Text 
+                    style={styles.ViewTextStyle} 
+                    numberOfLines={1}
+                    ellipsizeMode={'tail'}
+                    > {items.LocationName} </Text>
+                </View>
+                <View style={{flex:1,}}>
+                    <Image
+                        style={{width:25, height:30,}}
+                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                    />
+                </View>
+            </CardSection>
+            <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
+                    <View style={styles.ViewContainer}>
+                            <View style={{flex: 1 }}>
+                            <Image style={{width:110, height:150}}
+                                source={{ uri: items.ImageUrl}} 
+                            /> 
+                            </View>
+                            
+                            <View style={{ flex: 2 ,flexDirection: 'column'}}>
+                            <View style= {{ flexDirection: 'row' , height: 40}}>
+                                <View style={{ flex: 5} }>
+                                    <ButtonStar style={styles.buttonStarStyle}
+                                    > 
+                                    {items.Rating}
+                                    </ButtonStar>
+                                </View>
+                                <View style={{flex:0.4}}></View>
+                                <View style={{ flex: 7, marginLeft: 5 }}>
+                                    {this._renderLocation(items)}
+                                </View>
+                                <View style={{ flex: 2}}>
+                                    <ButtonHighlight style={styles.buttonHightLightStyle}>
+                                    </ButtonHighlight>
+                                </View>
+                                <View  style={{ flex: 6}}/>
+
+                            </View>
+                        
+                            <View style= {{ flex: 1 }}>
+                                <Text />
+                                <ViewMoreText
+                                    numberOfLines={3}
+                                    renderViewMore={this.renderViewMore}
+                                    renderViewLess={this.renderViewLess}
+                                >
+                                    <Text>
+                                        {items.ShopDescription}
+                                    </Text>
+                                </ViewMoreText>
+                            </View>
+                        </View>
+                    </View>
+            </CardSection>
+            </View>
+            </TouchableWithoutFeedback>
+        )
+    }
+
+    renderViewMore(onPress){
+        return(
+          <Text onPress={onPress} style={{color:'blue'}}>Show more...</Text>
+        )
+    }
+    renderViewLess(onPress){
+        return(
+          <Text onPress={onPress} style={{color:'blue'}}>Show less</Text>
+        )
+    }
+
+    onImgSlidePress(key){
+        console.log( key )
+        this.props.navigation.navigate('shopDetail', {key})
+    }
+
+    renderPageView(){
+        if(this.state.loading === true){
+            return (
+                <ModalSpinner loading={this.state.loading}  />
+            )
+        }
+        else{
+            return (
+                <View style={{flex:1}}>
+                <View style = {{ width: Dimensions.get('window').width, height: 60  , backgroundColor: '#f2f2f2' , flexDirection: 'row'}}>
+                    <View style = {{ flex: 2 , justifyContent: 'center' , marginLeft: 20}}>
+                        <Text style = {{ alignItems: 'center' , justifyContent: 'center' , fontSize: 18, fontWeight:'300'}}>  {I18n.t('sort')}  </Text>
+                    </View>
+                    <View style = {{  flex: 3 , height: 30 , width: 80,marginTop: 15 }}>
+                        {this.buttonDistance()}
+                    </View>
+                    <View style = {{ flex: 3 ,height: 30 , width: 80,marginTop: 15}}>
+                        {this.buttonScore()}
+                    </View>
+                </View>
+                <View>
+                    <ScrollView>
+                        {this.renderItem()}
+                        <View style={{ height: 50 ,backgroundColor: '#ffffff',}} />
+                    </ScrollView>
+                </View>
+            </View>
+            )
+        }
+    }
+
+
+    render(){
+        return (
+            <View style={{flex:1}}>
+            <Header headerText= {I18n.t('recomshop')}  
+            backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
+            headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
+                {this.renderPageView()}
             </View>
         )
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {
@@ -215,7 +414,7 @@ const styles = StyleSheet.create({
     },
     buttonLocalStyle: {
         backgroundColor: '#ffffff',
-        width: 60,
+        width: 80,
     },
     buttonHightLightStyle: {
         backgroundColor: '#ffffff',

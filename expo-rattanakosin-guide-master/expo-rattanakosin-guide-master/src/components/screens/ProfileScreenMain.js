@@ -3,25 +3,27 @@ import {
     View,
     Text,
     StyleSheet,
-    ListView,
     Image,
     ImageBackground,
-    Linking,
-    WebView,
-    TouchableOpacity
+    TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native'
-import { LabelInput, Button, Card, CardSection, Input, Spinner, SignButton, Header } from '../common'
+import { Button, CardSection, ModalSpinner} from '../common'
 import firebase from 'firebase'
+import axios from 'axios'
 import { SocialIcon } from 'react-native-elements'
 import { createStackNavigator } from 'react-navigation'
-import { SettingScreen, LanguageMenu, HowToUseScreen, AboutRattanakosinScreen, AboutAppScreen } from './profilescreen'
 import { StoreGlobal } from '../config/GlobalState'
-import { ChangePassword } from './profilescreen/loginscreens/ChangePassword'
-import { RegisterForm } from './profilescreen/loginscreens/RegisterForm'
-import { RegisterOTP } from './profilescreen/loginscreens/RegisterOTP'
-import LoginForm from './profilescreen/loginscreens/LoginForm'
 import { ScrollView } from '../../../node_modules/react-native-gesture-handler'
 import Modal from "react-native-modal"
+import I18n from '../config/i18n'
+
+const config = {
+    headers: {
+        'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+        'Content-Type': 'application/json'
+    }
+}
 
 const firebaseConfig = {
     // ADD YOUR FIREBASE CREDENTIALS
@@ -61,15 +63,57 @@ class ProfileScreenMain extends Component {
     _deactiveModal = () => this.setState({ isModalVisible: false })
 
     async loginWithFacebook() {
+        const data = {
+            "RqAppID":"1234",
+            "FacebookID":"",
+            "NickName":"",
+            "FirstName":"",
+            "LastName":"",
+            "ProfilePicture":"",
+            "Email":"",
+            "SessionToken":"287789215160486",
+            "UserLanguage":"EN",
+            "MarketID":"3"
+             }
         const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync
-            ('1886750428085436', { permissions: ['public_profile'] })
+            ( data.SessionToken, { permissions: ['public_profile'] })
 
         if (type === 'success') {
-            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large)`)
+            const response = await fetch(`https://graph.facebook.com/me?access_token=${token}&fields=id,name,picture.type(large),short_name,email`)
             const userInfoFB = await response.json()
+            const fullName = userInfoFB.name.split(' ')
+            const firstName = fullName[0]
+            const lastName = fullName[1]
 
-            StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
-            this.setState({ userInfoFB })
+            let userData ={
+                "RqAppID": data.RqAppID,
+                "FacebookID":userInfoFB.id,
+                "NickName":userInfoFB.short_name,
+                "FirstName":firstName,
+                "LastName":lastName,
+                "ProfilePicture":userInfoFB.picture.data.url,
+                "Email":userInfoFB.email,
+                "SessionToken": data.SessionToken,
+                "UserLanguage": data.UserLanguage,
+                "MarketID": data.MarketID
+            }
+            axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/FacebookLoginService',
+            userData, config)
+            .then(response => {
+               this.props.screenProps.loginMeth(
+                   response.data.UserDetail.UserID,
+                   response.data.UserDetail.DisplayName,
+                   data.SessionToken,
+                   response.data.UserDetail.Contact,
+                   response.data.UserDetail.Trip  )
+               StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
+                this.setState({ userInfoFB })
+            })
+            .catch((error) => {
+                console.log('axios error:', error);
+            });
+
+            
         }
     }
 
@@ -84,7 +128,10 @@ class ProfileScreenMain extends Component {
     }
 
     onListSetting() {
-        this.props.navigation.navigate('Setting')
+        
+        this.props.navigation.navigate({
+            routeName: 'Setting'
+        })
     }
 
     onListHowToUse() {
@@ -107,7 +154,7 @@ class ProfileScreenMain extends Component {
             this._toggleModal(),
                 this.state.loading = false,
                 this.onLogoutSuccess()
-        }, 3000)
+        }, 2000)
     }
 
     onListLogOut() {
@@ -117,6 +164,7 @@ class ProfileScreenMain extends Component {
     onLogoutSuccess() {
         StoreGlobal({ type: 'set', key: 'userInfo', value: null })
         StoreGlobal({ type: 'set', key: 'userPhone', value: null })
+        this.props.screenProps.logoutMeth()
         this.state.userInfoFB = undefined
         this.setState({ loading: false })
     }
@@ -126,28 +174,6 @@ class ProfileScreenMain extends Component {
     }
 
     onLogoutModalRender() {
-        if (this.state.loading === true) {
-            return (
-                <View style={{
-                    flex: 1,
-                    backgroundColor: '#fff',
-                    marginBottom: 270,
-                    marginTop: 270,
-                    marginLeft: 140,
-                    marginRight: 140,
-                    borderRadius: 5,
-                    shadowColor: '#000',
-                    shadowOffset: { width: 5, height: 5 },
-                    shadowRadius: 5,
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
-
-                    <Spinner />
-                </View>
-            )
-        }
         return (
             <View style={{
                 flex: 1,
@@ -166,19 +192,19 @@ class ProfileScreenMain extends Component {
                         style={{ width: 70, height: 70 }} />
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 24 }}>ออกจากระบบ</Text>
+                    <Text style={{ fontSize: 24 }}>{I18n.t('listSignOut')}</Text>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 20 }}>
-                    <Text style={{ fontSize: 16 }}>ต้องการออกจากระบบหรือไม่</Text>
+                    <Text style={{ fontSize: 16 }}>{I18n.t('logoutDetail')}</Text>
                 </CardSection>
                 <CardSection style={{ flex: 1, justifyContent: 'flex-end', padding: 0, marginTop: 60 }}>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderRightWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this._deactiveModal()}>
-                        <Text style={{ fontSize: 16 }}>ยกเลิก</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('buttonCancel')}</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={{ flex: 1, justifyContent: 'center', alignItems: 'center', borderTopWidth: 1, borderLeftWidth: 0.5, borderColor: '#aaa', height: 50 }}
                         onPress={() => this.onLogOutModal()}>
-                        <Text style={{ fontSize: 16 }}>ยืนยัน</Text>
+                        <Text style={{ fontSize: 16 }}>{I18n.t('buttonConfirm')}</Text>
                     </TouchableOpacity>
                 </CardSection>
 
@@ -208,7 +234,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
                                 />
                                 <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
+                                    <Text style={{ fontSize: 16, color: '#fff' }}>{I18n.t('textreviewHistory')}</Text>
                                     <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
                                 </View>
                             </View>
@@ -220,7 +246,7 @@ class ProfileScreenMain extends Component {
                                 source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
                             />
                             <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
+                                <Text style={{ fontSize: 16, color: '#fff' }} >{I18n.t('textCoupon')}</Text>
                             </View>
                         </View>
                     </View>
@@ -251,7 +277,7 @@ class ProfileScreenMain extends Component {
                                     source={require('../images/drawable-hdpi/ic_report_review_item.webp')}
                                 />
                                 <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                    <Text style={{ fontSize: 16, color: '#fff' }}>ประวัติการรีวิว</Text>
+                                    <Text style={{ fontSize: 16, color: '#fff' }}>{I18n.t('textreviewHistory')}</Text>
                                     <Text style={{ fontSize: 20, color: '#fff' }}>0</Text>
                                 </View>
                             </View>
@@ -263,7 +289,7 @@ class ProfileScreenMain extends Component {
                                 source={require('../images/drawable-hdpi/ic_report_coupon.webp')}
                             />
                             <View style={{ flexDirection: 'column', marginLeft: 10 }}>
-                                <Text style={{ fontSize: 16, color: '#fff' }} >คูปอง</Text>
+                                <Text style={{ fontSize: 16, color: '#fff' }} >{I18n.t('textCoupon')}</Text>
                             </View>
                         </View>
                     </View>
@@ -276,18 +302,18 @@ class ProfileScreenMain extends Component {
         return (
             <View>
                 <CardSection style={{ justifyContent: 'center', marginTop: 60 }}>
-                    <Text style={{ fontSize: 22, color: '#fff' }}>ยังไม่ได้เข้าสู่ระบบ</Text>
+                    <Text style={{ fontSize: 22, color: '#fff' }}>{I18n.t('titleNotLogin')}</Text>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
                     <Button onPress={() => this.onButtonLoginNumber()}
                         style={{ backgroundColor: '#ffc94c' }}
                         textStyle={{ color: '#000' }}>
-                        เข้าสู่ระบบด้วยหมายเลขโทรศัพท์
+                        {I18n.t('loginWithEmail')}
                         </Button>
                 </CardSection>
                 <CardSection style={{ paddingLeft: 30, paddingRight: 30 }}>
                     <SocialIcon style={{ flex: 1, borderRadius: 5 }}
-                        title='เข้าสู่ระบบด้วย Facebook'
+                        title={I18n.t('loginWithFacebook')}
                         fontStyle={{ fontSize: 16 }}
                         button
                         type='facebook'
@@ -296,7 +322,7 @@ class ProfileScreenMain extends Component {
                 </CardSection>
                 <CardSection style={{ justifyContent: 'center', marginTop: 18 }}>
                     <TouchableOpacity onPress={() => this.onButtonRegister()}>
-                        <Text style={{ fontSize: 16, textDecorationLine: 'underline', color: '#fff', }}>ลงทะเบียน</Text>
+                        <Text style={{ fontSize: 16, textDecorationLine: 'underline', color: '#fff', }}>{I18n.t('titleRegister')}</Text>
                     </TouchableOpacity >
                 </CardSection>
             </View>
@@ -331,23 +357,24 @@ class ProfileScreenMain extends Component {
     }
 
     _renderLogoutStack() {
+      //  console.log(this.state.userPhone)
         if (this.state.userInfoFB || this.state.userPhone) {
             return (
-                <TouchableOpacity onPress={() => this.onListLogOut()}>
+                <TouchableWithoutFeedback onPress={() => this.onListLogOut()}>
                     <View style={styles.listViewContainer}>
                         <View style={styles.iconContainerStyle}>
                             <Image style={{ width: 22, height: 22 }}
                                 source={require('../images/drawable-hdpi/ic_more_logout.webp')} />
                         </View>
                         <View style={styles.listViewTextContainer}>
-                            <Text style={styles.listViewTextStyle}>ออกจากระบบ</Text>
+                            <Text style={styles.listViewTextStyle}>{I18n.t('listSignOut')}</Text>
                         </View>
                         <View style={styles.chevronContainerStyle}>
                             <Image
                                 source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                         </View>
                     </View>
-                </TouchableOpacity>
+                </TouchableWithoutFeedback>
             )
         } else {
             return (<View></View>)
@@ -356,6 +383,11 @@ class ProfileScreenMain extends Component {
     }
 
     _renderLogoutModal() {
+        if (this.state.loading === true) {
+            return (
+                <ModalSpinner />
+            )
+        }
         return (
             <Modal isVisible={this.state.isModalVisible} style={{ flex: 1 }}>
                 {this.onLogoutModalRender()}
@@ -375,69 +407,69 @@ class ProfileScreenMain extends Component {
                 </ImageBackground>
                 <ScrollView
                     showsVerticalScrollIndicator={false}>
-                    <TouchableOpacity onPress={() => this.onListSetting()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListSetting()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
                                     source={require('../images/drawable-hdpi/ic_more_setting.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>ตั้งค่า</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listSetting')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
-                    <TouchableOpacity onPress={() => this.onListHowToUse()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListHowToUse()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
                                     source={require('../images/drawable-hdpi/ic_more_how_to_use.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>วิธีการใช้งาน</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listHowToUse')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
-                    <TouchableOpacity onPress={() => this.onListAboutRattanakosin()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListAboutRattanakosin()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
                                     source={require('../images/drawable-hdpi/ic_more_about_jj.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>เกี่ยวกับรัตนโกสินทร์</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listAboutGuide')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
-                    <TouchableOpacity onPress={() => this.onListAboutApp()}>
+                    <TouchableWithoutFeedback onPress={() => this.onListAboutApp()}>
                         <View style={styles.listViewContainer}>
                             <View style={styles.iconContainerStyle}>
                                 <Image style={{ width: 22, height: 22 }}
                                     source={require('../images/drawable-hdpi/ic_about_jj.webp')} />
                             </View>
                             <View style={styles.listViewTextContainer}>
-                                <Text style={styles.listViewTextStyle}>เกี่่ยวกับแอปพลิเคชัน</Text>
+                                <Text style={styles.listViewTextStyle}>{I18n.t('listAboutThisApp')}</Text>
                             </View>
                             <View style={styles.chevronContainerStyle}>
                                 <Image
                                     source={require('../images/drawable-hdpi/ic_arrow_right.webp/')} />
                             </View>
                         </View>
-                    </TouchableOpacity>
+                    </TouchableWithoutFeedback>
 
                     {this._renderLogoutStack()}
                 </ScrollView>
@@ -498,29 +530,4 @@ export const ProfileMenu = createStackNavigator({
     Main: {
         screen: ProfileScreenMain
     },
-    Setting: {
-        screen: LanguageMenu, navigationOptions: { header: null }
-    },
-    HowToUse: {
-        screen: HowToUseScreen
-    },
-    AboutRattanakosin: {
-        screen: AboutRattanakosinScreen
-    },
-    AboutApp: {
-        screen: AboutAppScreen
-    },
-    Login: {
-        screen: LoginForm, navigationOptions: { header: null }
-    },
-    Register: {
-        screen: RegisterForm
-    },
-    ChangePass: {
-        screen: ChangePassword
-    },
-    RegisterOTP: {
-        screen: RegisterOTP
-    },
-
 })

@@ -4,7 +4,7 @@ import { createMaterialTopTabNavigator } from 'react-navigation'
 import FlashSaleLightning from './FlashSaleLightning'
 import FlashSalePromotion from './FlashSalePromotion'
 import { StoreGlobal } from './../../config/GlobalState'
-
+import I18n from '../../config/i18n'
 
 const FlashSale = createMaterialTopTabNavigator({
     FlashLight: {
@@ -19,9 +19,9 @@ const FlashSale = createMaterialTopTabNavigator({
                 const { routeName } = navigation.state
                 let labelName, textColor
                 if (routeName === 'FlashLight') {
-                    labelName = 'Flash Sale'
+                    labelName = I18n.t('text_flashsale')
                 } else if (routeName === 'FlashPromotion') {
-                    labelName = 'Promotion'
+                    labelName = I18n.t('text_promotion')
                 }
 
                 if (focused) {
@@ -41,10 +41,8 @@ const FlashSale = createMaterialTopTabNavigator({
                 height: null,
                 top: 0
             },
-            pressColor: 'black',
             style: {
                 backgroundColor: 'white',
-
             },
             tabStyle: {
                 height: 40,

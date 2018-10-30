@@ -43,7 +43,7 @@ var config = {
 }
 
 
-export class AddTripScreen extends Component {
+class AddTripScreen extends Component {
     static navigationOptions = { header: null }
     state = {
         item: ''
@@ -379,7 +379,4 @@ class ItemDetail extends Component {
     }           
 }
 
-export default AddTripScreen
-
-
-
+export {AddTripScreen}

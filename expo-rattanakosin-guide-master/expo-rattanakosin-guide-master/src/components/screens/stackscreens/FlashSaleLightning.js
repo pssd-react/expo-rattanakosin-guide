@@ -4,22 +4,17 @@ import {
   Text,
   StyleSheet,
   Image,
-  TouchableOpacity,
-  ScrollView
+  TouchableWithoutFeedback,
+  ScrollView,
 } from 'react-native'
 import moment from 'moment'
 import Collapsible from 'react-native-collapsible'
 import axios from 'axios'
 import _ from 'lodash'
+import { Spinner } from '../../common';
+import I18n from '../../config/i18n'
 
-var data = {
-  "RqAppID": "1234",
-  "UserLanguage": "EN",
-  "UserID": "",
-  "ClientTime": "",
-  "MarketID": "3",
-  "ShopPromotionType": "A"
-}
+
 
 var config = {
   headers: {
@@ -30,6 +25,7 @@ var config = {
 
 
 class FlashSaleLightning extends Component {
+  static navigationOptions = { header: null }
   state = {
     item: '',
     activeSection: false,
@@ -40,8 +36,31 @@ class FlashSaleLightning extends Component {
       'down': require('../../images/drawable-hdpi/ic_arrow_expanable_down.webp')
     },
     numPresent: undefined,
-    numComming: undefined
+    numComming: undefined,
+    language: I18n.t('userlanguage')
 
+  }
+
+  componentWillMount() {
+    var data = {
+      "RqAppID": "1234",
+      "UserLanguage": I18n.t('userlanguage'),
+      "UserID": "",
+      "ClientTime": "",
+      "MarketID": "3",
+      "ShopPromotionType": "A"
+    }
+    axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
+      data, config)
+      .then(response => { this.setState(
+        { item: response.data }, 
+        () => {
+        this._updateNumPresent()
+        this._updateNumSoon()
+      }) })
+      .catch((error) => {
+        console.log('axios error:', error)
+      })
   }
 
   _setSection = section => {
@@ -55,38 +74,31 @@ class FlashSaleLightning extends Component {
     this.setState({ collapsedC: !this.state.collapsedC })
   }
 
-  componentWillMount() {
-    axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
-      data, config)
-      .then(response => { this.setState({ item: response.data }) })
-      .catch((error) => {
-        console.log('axios error:', error)
-      })
+  _dateFormating(date) {
+    var a1 = date[0].split('/')
+    var a2 = date[1].split(':')
+    return new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
   }
 
   onPresentPress(items) {
-    this.props.navigation.navigate('PromotionDetailScreen', {
-      items
+    this.props.screenProps.headerStatusUpdate(false)
+    this.props.screenProps.navigation.navigate('resPromotionDetail', {
+      items : items,
+      headerStatusUpdate : this.props.screenProps.headerStatusUpdate
     })
   }
 
   _updateNumSoon() {
     let num = 0
     _.map((this.state.item.StaticLocation), (items) => {
-      var d1 = items.CurrentDateTime.split(' ')
-      var a1 = d1[0].split('/')
-      var a2 = d1[1].split(':')
-      var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+      var dateNow = items.CurrentDateTime.split(' ')
+      var Ctime = this._dateFormating(dateNow)
 
-      var d2 = items.StartDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+      var dateStart = items.StartDate.split(' ')
+      var Stime = this._dateFormating(dateStart)
 
-      var d2 = items.EndDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+      var dateEnd = items.EndDate.split(' ')
+      var Etime = this._dateFormating(dateEnd)
       if (Ctime <= Stime && items.Is_FlashSale === 'Y') {
         num++
       }
@@ -97,21 +109,14 @@ class FlashSaleLightning extends Component {
   _updateNumPresent() {
     let num = 0
     _.map((this.state.item.StaticLocation), (items) => {
-      var d1 = items.CurrentDateTime.split(' ')
-      var a1 = d1[0].split('/')
-      var a2 = d1[1].split(':')
-      var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+      var dateNow = items.CurrentDateTime.split(' ')
+      var Ctime = this._dateFormating(dateNow)
 
-      var d2 = items.StartDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+      var dateStart = items.StartDate.split(' ')
+      var Stime = this._dateFormating(dateStart)
 
-      var d2 = items.EndDate.split(' ')
-      var b1 = d2[0].split('/')
-      var b2 = d2[1].split(':')
-      var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
-
+      var dateEnd = items.EndDate.split(' ')
+      var Etime = this._dateFormating(dateEnd)
       if (Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'Y') {
         num++
       }
@@ -121,58 +126,52 @@ class FlashSaleLightning extends Component {
 
   _renderNowHeader() {
     return (
-      <Text style={styles.headerText}>ปัจจุบัน ({this.state.numPresent})</Text>
+      <Text style={styles.headerText}> {I18n.t('flashsale_tab_1')} ({this.state.numPresent})</Text>
     )
   }
 
   _renderSoonHeader() {
     return (
-      <Text style={styles.headerText}>เร็วๆ นี้ ({this.state.numComming})</Text>
+      <Text style={styles.headerText}> {I18n.t('flashsale_tab_2')} ({this.state.numComming})</Text>
     )
   }
 
   _renderOngoingPromotion() {
     let count = null
-    if (this.state.numPresent === undefined) {
-      this._updateNumPresent()
-    } else if (this.state.numPresent) {
+    if (this.state.numPresent) {
       count = _.map((this.state.item.StaticLocation), (items) => {
-        var d1 = items.CurrentDateTime.split(' ')
-        var a1 = d1[0].split('/')
-        var a2 = d1[1].split(':')
-        var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+        var dateNow = items.CurrentDateTime.split(' ')
+        var Ctime = this._dateFormating(dateNow)
 
-        var d2 = items.StartDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+        var dateStart = items.StartDate.split(' ')
+        var Stime = this._dateFormating(dateStart)
 
-        var d2 = items.EndDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+        var dateEnd = items.EndDate.split(' ')
+        var Etime = this._dateFormating(dateEnd)
         if (Ctime >= Stime && Ctime <= Etime && items.Is_FlashSale === 'Y') {
           return (
-            <TouchableOpacity style={styles.content} key={items.Name} onPress={() => this.onPresentPress(items)}>
-              <View style={{ flex: 6 }}>
-                <View style={{ flexDirection: 'column' }}>
-                  <View style={{ flex: 1, marginBottom: 5 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
-                  </View>
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <Image
-                      source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
-                    />
-                    {this._renderDate(items)}
+            <TouchableWithoutFeedback  key={items.Name} onPress={() => this.onPresentPress(items)}>
+              <View style={styles.content}>
+                <View style={{ flex: 6 }}>
+                  <View style={{ flexDirection: 'column' }}>
+                    <View style={{ flex: 1, marginBottom: 5 }}>
+                      <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                      <Image
+                        source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
+                      />
+                      {this._renderDate(items)}
+                    </View>
                   </View>
                 </View>
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+                  <Image
+                    source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
+                  />
+                </View>
               </View>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                <Image
-                  source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
-                />
-              </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
           )
         }
       })
@@ -183,48 +182,42 @@ class FlashSaleLightning extends Component {
   _renderSoonPromotion() {
     let num = 0
     let count = null
-    if (this.state.numComming === undefined) {
-      this._updateNumSoon()
-    } else if (this.state.numComming) {
+    if (this.state.numComming) {
       count = _.map((this.state.item.StaticLocation), (items) => {
-        var d1 = items.CurrentDateTime.split(' ')
-        var a1 = d1[0].split('/')
-        var a2 = d1[1].split(':')
-        var Ctime = new Date(a1[2], a1[1], a1[0], a2[0], a2[1], a2[2])
+        var dateNow = items.CurrentDateTime.split(' ')
+        var Ctime = this._dateFormating(dateNow)
 
-        var d2 = items.StartDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Stime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+        var dateStart = items.StartDate.split(' ')
+        var Stime = this._dateFormating(dateStart)
 
-        var d2 = items.EndDate.split(' ')
-        var b1 = d2[0].split('/')
-        var b2 = d2[1].split(':')
-        var Etime = new Date(b1[2], b1[1], b1[0], b2[0], b2[1], b2[2])
+        var dateEnd = items.EndDate.split(' ')
+        var Etime = this._dateFormating(dateEnd)
         if (Ctime <= Stime && items.Is_FlashSale === 'Y') {
           num++
           return (
-            <TouchableOpacity style={styles.content} key={items.Name} onPress={() => this.onPresentPress(items)}>
-              <View style={{ flex: 6 }}>
-                <View style={{ flexDirection: 'column' }}>
-                  <View style={{ flex: 1, marginBottom: 5 }}>
-                    <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
-                  </View>
-                  <View style={{ flex: 1, flexDirection: 'row' }}>
-                    <Image
-                      source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
-                    />
-                    {this._renderDate(items)}
+            <TouchableWithoutFeedback key={items.Name} onPress={() => this.onPresentPress(items)}>
+              <View style={styles.content}>
+                <View style={{ flex: 6 }}>
+                  <View style={{ flexDirection: 'column' }}>
+                    <View style={{ flex: 1, marginBottom: 5 }}>
+                      <Text style={{ fontWeight: 'bold', fontSize: 20 }}> {items.Name} </Text>
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                      <Image
+                        source={require('../../images/drawable-hdpi/ic_clock_promotion.webp/')}
+                      />
+                      {this._renderDate(items)}
+                    </View>
                   </View>
                 </View>
-              </View>
-              <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
-                <Image
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'flex-end' }}>
+                  <Image
 
-                  source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
-                />
+                    source={require('../../images/drawable-hdpi/ic_arrow_right.webp/')}
+                  />
+                </View>
               </View>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
           )
         }
       })
@@ -275,18 +268,81 @@ class FlashSaleLightning extends Component {
     const DataBefore = ress.split("/")
     const DataAfter = DataBefore[2] + '-' + DataBefore[1] + '-' + DataBefore[0]
     const formattedData = moment(DataAfter).format("D MMM YYYY")
-    if (DateBefore[2] === DataBefore[2]) {
-      const formattedDate = moment(DateAfter).format("D MMM")
-      return (
-        <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
-      )
-    } else {
-      const formattedDate = moment(DateAfter).format("D MMM YYYY")
-      return (
-        <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
-      )
+    if(this.state.language === 'TH'){
+      if (DateBefore[2] === DataBefore[2]) {
+        const DayDate = moment(DateAfter).format("D")
+        const MonthDateEN = moment(DateAfter).format("MMM")
+        const DateTH = DayDate +" "+this._renderDateTH(MonthDateEN)
+        const DayDate2 = moment(DataAfter).format("D")
+        const MonthDateEN2 = moment(DataAfter).format("MMM")
+        const YearDate2 = moment(DataAfter).format("YYYY")
+        var Year2 = parseInt(YearDate2) + 543
+        const DateTH2 = DayDate2 +" "+this._renderDateTH(MonthDateEN2)+ " "+ Year2
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {DateTH} - {DateTH2} </Text>
+        )
+      } else {
+        const DayDate = moment(DateAfter).format("D")
+        const MonthDateEN = moment(DateAfter).format("MMM")
+        const YearDate1 = moment(DateAfter).format("YYYY")
+        var Year1 = parseInt(YearDate1) + 543
+        const DateTH = DayDate +" "+this._renderDateTH(MonthDateEN) + " " + Year1
+        const DayDate2 = moment(DataAfter).format("D")
+        const MonthDateEN2 = moment(DataAfter).format("MMM")
+        const YearDate2 = moment(DataAfter).format("YYYY")
+        var Year2 = parseInt(YearDate2) + 543
+        const DateTH2 = DayDate2 +" "+this._renderDateTH(MonthDateEN2)+ " "+ Year2
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {DateTH} - {DateTH2} </Text>
+        )
+      }
+    
+    }else{
+      if (DateBefore[2] === DataBefore[2]) {
+        const formattedDate = moment(DateAfter).format("D MMM")
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
+        )
+      } else {
+        const formattedDate = moment(DateAfter).format("D MMM YYYY")
+        return (
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }}> {formattedDate} - {formattedData} </Text>
+        )
+      }
     }
   }
+
+
+  _renderDateTH(formattedDate){
+        if(formattedDate === 'Jan'){
+          return formattedDate = 'ม.ค.'
+        }else if(formattedDate === 'Feb'){
+          return formattedDate = 'ก.พ.'
+        }else if(formattedDate === 'Mar'){
+          return formattedDate = 'มี.ค.'
+        }else if(formattedDate === 'Apr'){
+          return formattedDate = 'เม.ย.'
+        }else if(formattedDate === 'May'){
+          return formattedDate = 'พ.ค.'
+        }else if(formattedDate === 'Jun'){
+          return formattedDate = 'มิ.ย.'
+        }else if(formattedDate === 'Jul'){
+          return formattedDate = 'ก.ค.'
+        }else if(formattedDate === 'Aug'){
+          return formattedDate = 'ส.ค.'
+        }else if(formattedDate === 'Sep'){
+          return formattedDate = 'ก.ย.'
+        }else if(formattedDate === 'Oct'){
+          return formattedDate = 'ต.ค.'
+        }else if(formattedDate === 'Nov'){
+          return formattedDate = 'พ.ย.'
+        }else if(formattedDate === 'Dec'){
+          return formattedDate = 'ธ.ค.'
+        }
+  }
+
+
+
 
   _renderScreen() {
     if (this.state.numPresent === 0 && this.state.numComming === 0) {
@@ -295,27 +351,27 @@ class FlashSaleLightning extends Component {
           <Image
             source={require('../../images/drawable-hdpi/ic_no_flash_sale_foun.webp')}
           />
-          <Text style={{ fontSize: 18, color: '#a6a6a6' }} > ไม่มีรายการโปรฟ้าฝ่า </Text>
+          <Text style={{ fontSize: 18, color: '#a6a6a6' }} > {I18n.t('flashsaledetail')} </Text>
         </View>
       )
     } else {
       return (
         <ScrollView>
-          <TouchableOpacity onPress={this._togglePresent}>
+          <TouchableWithoutFeedback onPress={this._togglePresent}>
             <View style={styles.header}>
               {this._renderNowHeader()}
               {this._renderNowChev()}
             </View>
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
           <Collapsible collapsed={this.state.collapsed} align="center">
             {this._renderOngoingPromotion()}
           </Collapsible>
-          <TouchableOpacity onPress={this._toggleSoon}>
+          <TouchableWithoutFeedback onPress={this._toggleSoon}>
             <View style={styles.header}>
               {this._renderSoonHeader()}
               {this._renderSoonChev()}
             </View>
-          </TouchableOpacity>
+          </TouchableWithoutFeedback>
           <Collapsible collapsed={this.state.collapsedC} align="center">
             {this._renderSoonPromotion()}
           </Collapsible>
@@ -360,7 +416,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'left',
     fontSize: 16,
-    fontWeight: '500',
+    fontWeight: '200',
   },
   content: {
     padding: 15,

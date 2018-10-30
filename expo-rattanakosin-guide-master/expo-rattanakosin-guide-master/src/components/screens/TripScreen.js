@@ -6,8 +6,8 @@ import {
     Dimensions
 } from 'react-native'
 import { TabView, TabBar, SceneMap } from 'react-native-tab-view';
-import { Header } from '../common/Header'
-import TripTapScreen from './tripscreens/TripTapScreen'    
+import { Header } from '../common'
+import {TripTapScreen} from './tripscreens'    
     
 
 
@@ -19,7 +19,7 @@ export class TripScreen extends Component{
             <View style={styles.container}>
                 <Header headerText="ทริป" 
                 backgroundImage= {require('../../components/images/drawable-hdpi/bg_more.webp')}/>
-                <TripTapScreen/>
+                <TripTapScreen screenProps={{userId:this.props.screenProps.userId, navigation : this.props.navigation}}/>
             </View>
         )
     }

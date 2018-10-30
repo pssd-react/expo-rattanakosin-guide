@@ -5,11 +5,11 @@ import {
     StyleSheet,
     ScrollView,
 } from 'react-native'
-import { CardSection, Header, Button } from '../../common'
+import { CardSection, Header, Button } from '../../../../common'
 import { HeaderBackButton } from 'react-navigation'
 import MapView, { Marker } from 'react-native-maps'
 
-export class MarkLocation extends Component {
+class MarkLocation extends Component {
     state = {
         _data: '',
         marginBottom: 1
@@ -99,3 +99,5 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     }
 })
+
+export {MarkLocation}

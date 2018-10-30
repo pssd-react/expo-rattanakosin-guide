@@ -3,27 +3,30 @@ import {
     View,
     Text, 
     StyleSheet,
-    Image
+    Image,
+    Dimensions
 } from 'react-native'
-import { Card } from '../../common/Card'
-import { CardSection } from '../../common/CardSection'
-import { TripImg } from '../../common/TripImg'
+
 class Exclusive extends Component{
-  
 
         render(){
             return (
-                <Card style = {styles.container}>
-                    <CardSection>
-                        <View >
-                            <TripImg />
-                        </View>
-                    </CardSection>
-                    <View style={styles.container}>
-                        {/* <Text style={styles.text} > </Text> */}
-                        <Image ></Image>
+                <View style={{flex:1, flexDirection: 'column',}}>
+                    <View>
+                        <Image
+                            style={{width: Dimensions.get('window').width,
+                                height: 150}}
+                            source={{uri: 'http://www.wikalenda.com/images/business_owner_image/main/MDAwMDAwMDAx_NTc0MjcwODIwMDkzNzAwNDU1MzAwNDc3.bmp'}}
+                        />
+                    
                     </View>
-                </Card>
+                    <View style={styles.container}>
+                            <Image
+                            style={{width: 300 , height: 60}}
+                            source={require('../../images/drawable-hdpi/ic_line_exclusive.webp')}
+                        />
+                    </View>
+                </View>
                 
             )
         }
@@ -42,4 +45,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Exclusive
+export {Exclusive}

@@ -6,7 +6,9 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    Dimensions
+    Dimensions,
+    Platform,
+    StatusBar
 } from 'react-native'
 import { Card  } from '../../common/Card';
 import { CardSection } from '../../common/CardSection';
@@ -18,6 +20,7 @@ import { ButtonStar,ButtonLocal } from '../../common';
 import { HeaderBackButton } from 'react-navigation'
 import { Header,ButtonFollow } from '../../common';
 import { Grayscale } from 'react-native-color-matrix-image-filters'
+import I18n from '../../config/i18n'
 
 const data = {
     'RqAppID': '1234',
@@ -32,6 +35,11 @@ const config = {
         }
 };
 
+const MyStatusBar = ({backgroundColor, ...props}) => (
+    <View style={[styles.statusBar, { backgroundColor }]}>
+      <StatusBar translucent backgroundColor={backgroundColor} {...props} />
+    </View>
+);
 
 export class GiftVoucherScreen extends Component {
   
@@ -53,7 +61,7 @@ export class GiftVoucherScreen extends Component {
     }
 
     onButtonGoBack(){
-        this.props.navigation.popToTop()
+        this.props.navigation.goBack()
     }
 
     
@@ -71,7 +79,7 @@ export class GiftVoucherScreen extends Component {
         
         return (
             <View style={{flex:1}}>
-                <Header headerText="Gift Voucher"
+                <Header headerText= { I18n.t('herdergift') }
                 backgroundImage= {require('../../images/drawable-hdpi/bg_more.webp')}
                 headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />}/>
                     
@@ -79,48 +87,37 @@ export class GiftVoucherScreen extends Component {
                             {this.renderItem()}
                             <View style ={{ flex: 1 , backgroundColor: '#ffffff'}} >
                                 <View style ={{ marginTop: 90,marginBottom: 90 , alignItems: 'center'}}>
-                                    <Text style = {{ alignItems: 'center' , fontSize: 18}}>Thank you participating merchants and customers for joining this promotional event. Stay tuned for</Text>
-                                    <Text style = {{ alignItems: 'center' , fontSize: 18}}> more very soon! </Text>
+                                    <Text style = {{ alignItems: 'center' , fontSize: 18}}>{ I18n.t('detail1') }{ I18n.t('detail2') }</Text>
                                 </View>
                                 <View style ={{flex: 1 , alignItems: 'center'}}>
                                     <TouchableOpacity style={{ justifyContent: 'center',height: 50,width: '95%' ,marginBottom: 20 ,backgroundColor: '#666666' , alignItems: 'center' , borderRadius: 20}}> 
-                                        <Text style = {{ alignItems: 'center' , fontSize: 14 , color: '#ffffff' , justifyContent: 'center'}}> List participate shop </Text> 
+                                        <Text style = {{ alignItems: 'center' , fontSize: 14 , color: '#ffffff' , justifyContent: 'center'}}> { I18n.t('detail3') } </Text> 
                                     </TouchableOpacity>
                                 </View> 
                             </View>
                             <View style={{ flex:1}}>
                                 <View style={{marginTop: 20,marginLeft: 5,marginBottom: 20}}>
-                                    <Text style={{ fontSize: 14 }}> Voucher Usage Terms</Text>
+                                    <Text style={{ fontSize: 14 }}> { I18n.t('detail4') }</Text>
                                 </View>
                                 <View style={{ marginLeft: 20}}>
-                                    <Text style={{ fontSize: 15 }}> {'\u2022'} Gift vouchers valued at 50 THB are valid for</Text>
-                                    <Text style={{ fontSize: 15 }}>   participating shops within the Rattanakosin Guide</Text>
-                                    <Text style={{ fontSize: 15 }}>   mobile app</Text>
+                                    <Text style={{ fontSize: 15 }}> {'\u2022'} { I18n.t('detail5') } { I18n.t('detail6') }{ I18n.t('detail7') }</Text>
                                 </View>
                                 <View style={{ marginLeft: 20}}>
-                                    <Text style={{ fontSize: 15 }}> {'\u2022'} Discounts can be redeemed on the Rattanakosin</Text>
-                                    <Text style={{ fontSize: 15 }}>   Guide mobile app when you are within close</Text>
-                                    <Text style={{ fontSize: 15 }}>   Proximity of Koh Rattanakosin</Text>
+                                    <Text style={{ fontSize: 15 }}> {'\u2022'} { I18n.t('detail8') }{ I18n.t('detail9') }{ I18n.t('detail10') }</Text>
                                 </View>
                                 <View style={{ marginLeft: 20}}>
-                                    <Text style={{ fontSize: 15 }}> {'\u2022'} Each user to limited to one redemption per one</Text>
-                                    <Text style={{ fontSize: 15 }}>   campaign. Up to 1,000 vouchers are available for</Text>
-                                    <Text style={{ fontSize: 15 }}>   redemption every campaign</Text>
+                                    <Text style={{ fontSize: 15 }}> {'\u2022'} { I18n.t('detail11') }{ I18n.t('detail12') }{ I18n.t('detail13') }</Text>
                                 </View>
                                 <View style={{ marginLeft: 20}}>
-                                    <Text style={{ fontSize: 15 }}> {'\u2022'} Vouchers must be used between July 30,2018 to</Text>
-                                    <Text style={{ fontSize: 15 }}>   August 5,2018 or as indicated on the terms and </Text>
-                                    <Text style={{ fontSize: 15 }}>   conditions</Text>
+                                    <Text style={{ fontSize: 15 }}> {'\u2022'} { I18n.t('detail14') }{ I18n.t('detail15') }{ I18n.t('detail16') }</Text>
                                 </View>
                                 <View style={{ marginLeft: 20}}>
-                                    <Text style={{ fontSize: 15 }}> {'\u2022'} Each voucher is valid for one day starting from the</Text>
-                                    <Text style={{ fontSize: 15 }}>   time of redemption, users must use the voucher</Text>
-                                    <Text style={{ fontSize: 15 }}>   within the period</Text>
+                                    <Text style={{ fontSize: 15 }}> {'\u2022'} { I18n.t('detail17') }{ I18n.t('detail18') }{ I18n.t('detail19') }</Text>
                                 </View>
                                 <View style={{ marginLeft: 20}}>
-                                    <Text style={{ fontSize: 15 }}> {'\u2022'} Siam Commercial Bank reserves the right to make</Text>
-                                    <Text style={{ fontSize: 15 }}>   changes to the vouchers terms,conditions,usage</Text>
-                                    <Text style={{ fontSize: 15 }}>   period without further notice</Text>
+                                    <Text style={{ fontSize: 15 }}> {'\u2022'} { I18n.t('detail20') }{ I18n.t('detail21') } { I18n.t('detail22') }</Text>
+                                    <Text style={{ fontSize: 15 }}>  </Text>
+                                    <Text style={{ fontSize: 15 }}>  </Text>
                                 </View>
                             </View>
                         </ScrollView>
@@ -177,3 +174,19 @@ class ItemDetail extends Component {
         )
     }
 }
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight;
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#F5FCFF',
+    },
+    statusBar: {
+        height: STATUSBAR_HEIGHT,
+    },
+    appBar: {
+        backgroundColor:'#52BDE8',
+        height: APPBAR_HEIGHT,
+  },
+});

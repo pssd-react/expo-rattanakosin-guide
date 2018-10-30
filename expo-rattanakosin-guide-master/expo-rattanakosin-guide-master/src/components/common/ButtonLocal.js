@@ -8,7 +8,7 @@ const ButtonLocal = (props) => {
     return (
         <TouchableOpacity onPress={props.onPress} style={[buttonStyle, props.style]}>
             <View style={{flexDirection: 'row', justifyContent:'space-around', flex:1}}>
-            <Image style={{width:14, height:20, alignSelf:'center'}}
+            <Image style={{marginLeft: 2,width:14, height:20, alignSelf:'center'}}
              source={ require('../images/drawable-hdpi/ic_location_active.webp')} 
             /> 
             <Text style={[textStyle, props.textStyle]}>
@@ -26,12 +26,12 @@ const styles = {
         alignSelf: 'center',
         color: '#000000',
         fontSize: 16,
-        fontWeight: '600'
+        fontWeight: '300'
     },
     buttonStyle:{
         flex: 1,
         alignSelf: 'stretch',
-        backgroundColor: '#fffff',
+        backgroundColor: '#f2f2f2',
         borderColor: '#333333',
         justifyContent: 'center',
         borderRadius: 5,
