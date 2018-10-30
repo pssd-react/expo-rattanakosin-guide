@@ -28,7 +28,7 @@ import I18n from '../../config/i18n'
 
 
 
-
+var tripId = ''
 var config = {
     headers: {
         'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
@@ -212,36 +212,120 @@ export class Restaurants extends Component {
         }
     }
 
-    
-    renderButton(key){
-        console.log(key.IsMyTrip)
-        if(key.IsMyTrip === '0'){
-            return (
-                <TouchableOpacity style={{flex:1}} onPress={()=> this.onButtonPress()}>
+
+
+    renderBtAddTrip(items){
+      //  console.log(this.props.screenProps.userId)
+        if(this.props.screenProps.userId === 'none'){
+            this.props.navigation.navigate({
+                routeName: 'Login',
+                params: {
+                    fromScreen: 'PromotionDetail'
+                }
+            })
+        }else if(tripId === '0'){
+                console.log("Add: ", tripId)
+                var data = {
+                    "RqAppID":"1234",
+                    "UserLanguage":"EN",
+                    "UserID": this.props.screenProps.userId,
+                    "TripID": "",
+                    "TripShop":[{
+                        "ShopID": items
+                    }],
+                    "SessionToken":"",
+                    "MarketID":"3"
+                 }
+                 axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/AddTripShopService',data, config)
+                 .then(response => {
+                   console.log(response.data)
+                   this.setState({
+                     loading: true
+                   },()=>{
+                       this.props.screenProps.updateInquiryTrip(),
+                       tripId = '0'
+                   })
+                 })
+        }else{
+            console.log("Delete: " , tripId)
+            var data =  {
+                "RqAppID":"1234",
+                "UserLanguage":"EN",
+                "UserID": this.props.screenProps.userId,
+                "TripID": tripId,
+                "TripShop":[{
+                    "ShopID":items
+                }],
+                "SessionToken":"",
+                "MarketID":"3"
+             }
+             axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/DeleteTripShopService',data, config)
+             .then(response => {
+               this.setState({
+                  loading: false
+               },()=>{
+                    this.props.screenProps.updateInquiryTrip(),
+                    tripId = '0';
+                })
+             })
+
+        }
+    }
+
+   
+    renderBtImgAddTrip(ShopID){
+        var result = ''
+        var count = 0
+        if(this.props.screenProps.userId === 'none'){
+            //console.log(this.props.screenProps.InquiryTrip)
+            result = (
+                <Image
+                    style={{ width: 25, height: 30 }}
+                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                />
+            )
+        }else{  
+            _.map((this.props.screenProps.InquiryTrip.Trip), (items) => {
+                if(items.TripType === '01'){
+                    _.map((items.TripShop), (item) => {
+                        if(item.ShopID === ShopID && count === 0){ 
+                            tripId = items.TripID
+                            count = 1
+                            result = (
+                                <Image
+                                    style={{ width: 25, height: 30 }}
+                                    source={require('../../images/drawable-hdpi/ic_fav_trip_selected.webp')}
+                                />
+                            )
+                        }
+                    })
+                }    
+            })
+            if(count===0){
+                 result = (
                     <Image
-                        style={{width:25, height:30}}
+                        style={{ width: 25, height: 30 }}
                         source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
                     />
-                </TouchableOpacity>
-            )
-        }else{
-            return (
-                <TouchableOpacity style={{flex:1}} onPress={()=> this.onButtonPress()}>
-                    <Image
-                        style={{width:25, height:30}}
-                        source={require('../../images/drawable-hdpi/ic_fav_trip_selected.webp')}
-                    />
-                </TouchableOpacity>
-            )
+                )
+            }
+           
         }
-    };
 
-    onButtonPress(){
-        console.log(this.props.screenProps.userId)
+        return (<View style={{flex:1}}>{result}</View>)
+     
     }
-    
-
     renderCardData(items){
+
+        // let tripID = ''
+        // _.map((this.props.screenProps.InquiryTrip.Trip), trip =>{
+        //         if(trip.TripShop !== [] && trip.TripType === '01'){
+        //             console.log('trip ID : '+tripID) 
+        //         tripID = trip.TripID
+        //             console.log('trip ID : '+tripID)  
+        //         }
+        // })
+        
         return (
             <TouchableWithoutFeedback onPress={()=> this.onImgSlidePress(items.ShopID)}>
             <View style={{flex:1 ,  backgroundColor: '#ffffff',}} >
@@ -258,7 +342,9 @@ export class Restaurants extends Component {
                             ellipsizeMode={'tail'}
                             > {items.LocationName} </Text>
                         </View>
-                        {this.renderButton(items)}
+                        <TouchableOpacity style={{flex:1}} onPress={()=> this.renderBtAddTrip(items.ShopID)}>
+                            {this.renderBtImgAddTrip(items.ShopID)}
+                        </TouchableOpacity>
             </CardSection>
             <CardSection style={{flex:1,borderBottomWidth:1, borderColor: '#ddd'}}>   
                     <View style={styles.ViewContainer}>
