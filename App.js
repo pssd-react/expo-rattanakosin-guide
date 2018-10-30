@@ -36,10 +36,13 @@ import writereviweUpdate from './src/components/screens/shopdetailscreens/review
 import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
 import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
 import axios from 'axios'
+import { AddTripScreen } from './src/components/screens/tripscreens/createtripscreen/addtrip/AddTripScreen';
+import { MarkLocation, TripInteresting } from './src/components/screens/tripscreens';
 
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
+  alreadyLoading: false,
   userId: 'none',
   userDisplay: '',
   token: '',
@@ -156,6 +159,13 @@ export default class App extends React.Component {
   }
 }
 
+const styles = {
+  imageContainerStyle: {
+      flex:1, 
+      justifyContent: 'center', 
+      alignItems: 'center'}
+};
+
 const MainStack = createStackNavigator({
   mainApp : {
     screen: AppBottomNavigator, navigationOptions: { header: null }
@@ -249,5 +259,14 @@ moreDescription: {
 },
 shopPromotionDetail:{
   screen: ShopPromotionDetailScreens, navigationOptions:{ header : null}
+},
+trip: {
+  screen: AddTripScreen, navigationOptions: {header: null}
+},
+markmap: {
+  screen: MarkLocation, navigationOptions: {header: null}
+},
+shop: {
+  screen: TripInteresting, navigationOptions:{header:null}
 }
 })

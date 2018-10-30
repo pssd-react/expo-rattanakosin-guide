@@ -42,6 +42,7 @@ export default {
     buttonNext: '下一個',
     buttonOTP: '取得 OTP',
     buttonOTP01: '取得 OTP',
+    buttonFollow: '关注',
     textOTPminute: '您可以再次获取OTP密码',
     buttonConfirmOTP: '确认 OTP',
     placeholderOTP: '请输入您收到的六位数 OTP 一次性密码',

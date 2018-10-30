@@ -22,8 +22,8 @@ class Exclusive extends Component{
                     </View>
                     <View style={styles.container}>
                             <Image
-                            style={{width: null, height: null}}
-                            source={require('../../images/drawable-hdpi/ic_line_exclusive.png')}
+                            style={{width: 300 , height: 60}}
+                            source={require('../../images/drawable-hdpi/ic_line_exclusive.webp')}
                         />
                     </View>
                 </View>

@@ -29,6 +29,7 @@ export default {
     buttonNext: 'Next',
     buttonOTP: 'Get OTP',
     buttonOTP01: 'Get OTP',
+    buttonFollow: 'Follow',
     textOTPminute: 'You can get OTP password again in ',
     buttonConfirmOTP: 'Confirm OTP',
     placeholderOTP: 'Please enter the 6-digit OTP',
