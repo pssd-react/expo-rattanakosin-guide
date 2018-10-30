@@ -69,11 +69,11 @@ class Tripme extends Component{
         }
 
     onCreateTrip() {
-        this.props.navigation.navigate('trip')
+        this.props.screenProps.navigation.navigate('trip')
     }
 
     onCardPress() {
-        this.props.navigation.navigate('markmap')
+        this.props.screenProps.navigation.navigate('markmap')
     }
 
 
@@ -255,12 +255,7 @@ const TripMe = createStackNavigator({
     Home: { 
         screen: Tripme, navigationOptions:{header:null} 
     },
-    trip: {
-        screen: AddTripScreen, navigationOptions: {header: null}
-    },
-    markmap: {
-        screen: MarkLocation, navigationOptions:{}
-    }
+    
     
 })
 

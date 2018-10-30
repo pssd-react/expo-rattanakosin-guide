@@ -36,6 +36,8 @@ import writereviweUpdate from './src/components/screens/shopdetailscreens/review
 import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
 import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
 import axios from 'axios'
+import { AddTripScreen } from './src/components/screens/tripscreens/createtripscreen/addtrip/AddTripScreen';
+import { MarkLocation } from './src/components/screens/tripscreens';
 
 INITIAL_STATE = {
   lang: 'th',
@@ -257,5 +259,11 @@ moreDescription: {
 },
 shopPromotionDetail:{
   screen: ShopPromotionDetailScreens, navigationOptions:{ header : null}
+},
+trip: {
+  screen: AddTripScreen, navigationOptions: {header: null}
+},
+markmap: {
+  screen: MarkLocation, navigationOptions: {header: null}
 }
 })

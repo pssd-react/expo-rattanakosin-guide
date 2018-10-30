@@ -15,7 +15,7 @@ import {
 } from 'react-native'
 import { CardSection } from '../../common/CardSection'
 import {TripInteresting} from './TripInteresting'
-import ViewMoreText from 'react-native-view-more-text'
+import I18n from '../../config/i18n'
 import { Button, ModalSpinner } from '../../common';
 
 const ImgWidth = null
@@ -26,12 +26,13 @@ class TripListShop extends Component{
     state = {
         items: '',
         Banner: '',
+        loading: false
     }
 
     componentWillUpdate(){
         const data = {
             "RqAppID":"1234",
-            "UserLanguage":"EN",
+            "UserLanguage":I18n.t('serviceLang'),
             "MarketID":"3",
             "UserID": this.props.screenProps.userId
         }
@@ -53,7 +54,7 @@ class TripListShop extends Component{
     componentWillMount() {
         const data = {
             "RqAppID":"1234",
-            "UserLanguage":"EN",
+            "UserLanguage":I18n.t('serviceLang'),
             "MarketID":"3",
             "UserID": this.props.screenProps.userId
         }
@@ -192,10 +193,10 @@ class TripListShop extends Component{
     onButtonLike(TripID, IsLike){
         if(this.props.screenProps.userId !== 'none' ){
             if(IsLike === "0"){
-                
+                this.setState({loading: true},()=>{
                     const data = {
                         "RqAppID":"1234",
-                        "UserLanguage":"EN",
+                        "UserLanguage":I18n.t('serviceLang'),
                         "UserID": this.props.screenProps.userId,
                         "TripID": TripID,
                         "SessionToken":""
@@ -209,16 +210,18 @@ class TripListShop extends Component{
                     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/UpdateLikeTripService',
                     data, config)
                     .then(Response => { 
-                        console.log(Response.data.ResponseDetail)
+                        if(Response.data.ResponseDetail == "Success"){
+                            this.setState({loading: false})
+                        }
                     }).catch((error) => {
                         console.log('axios error:', error)
                     });
-                            
+                })       
             }else if(IsLike === "1"){
-               
+                this.setState({loading: true},()=>{
                     const data = {
                         "RqAppID":"1234",
-                        "UserLanguage":"EN",
+                        "UserLanguage":I18n.t('serviceLang'),
                         "UserID": this.props.screenProps.userId,
                         "TripID": TripID,
                         "SessionToken":""
@@ -232,11 +235,13 @@ class TripListShop extends Component{
                     axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/UpdateUnLikeTripService',
                     data, config)
                     .then(Response => { 
-                        console.log(Response.data.ResponseDetail)
+                        if(Response.data.ResponseDetail == "Success"){
+                            this.setState({loading: false})
+                        }
                     }).catch((error) => {
                         console.log('axios error:', error)
                     });
-           
+                })
             }
         }else{
             this.props.screenProps.navigation.navigate({ 
@@ -266,48 +271,51 @@ class TripListShop extends Component{
     onButtonFollow(TripID, IsFollow){
         if(this.props.screenProps.userId !== 'none' ){
             if(IsFollow === "0"){
-                const data = {
-                    "RqAppID":"1234",
-                    "UserLanguage":"EN",
-                    "UserID": this.props.screenProps.userId,
-                    "TripID": TripID,
-                    "SessionToken":""
-                }
-                const config = {
-                    headers: {
-                        'Authorization' : 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
-                        'Content-Type' : 'application/json'
+                this.setState({loading: true},()=>{
+                    const data = {
+                        "RqAppID":"1234",
+                        "UserLanguage":I18n.t('serviceLang'),
+                        "UserID": this.props.screenProps.userId,
+                        "TripID": TripID,
+                        "SessionToken":""
                     }
-                }
-                axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/UpdateFollowTripService',
-                data, config)
-                .then(Response => { 
-                    console.log(Response.data.ResponseDetail)
-                }).catch((error) => {
-                    console.log('axios error:', error)
-                });
-                            
+                    const config = {
+                        headers: {
+                            'Authorization' : 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+                            'Content-Type' : 'application/json'
+                        }
+                    }
+                    axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/UpdateFollowTripService',
+                    data, config)
+                    .then(Response => { 
+                        this.setState({loading: false})
+                    }).catch((error) => {
+                        console.log('axios error:', error)
+                    });
+                })            
             }else if(IsFollow === "1"){
-                const data = {
-                    "RqAppID":"1234",
-                    "UserLanguage":"EN",
-                    "UserID": this.props.screenProps.userId,
-                    "TripID": TripID,
-                    "SessionToken":""
-                }
-                const config = {
-                    headers: {
-                        'Authorization' : 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
-                        'Content-Type' : 'application/json'
+                this.setState({loading: true},()=>{
+                    const data = {
+                        "RqAppID":"1234",
+                        "UserLanguage":I18n.t('serviceLang'),
+                        "UserID": this.props.screenProps.userId,
+                        "TripID": TripID,
+                        "SessionToken":""
                     }
-                }
-                axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/UpdateUnFollowTripService',
-                data, config)
-                .then(Response => { 
-                    console.log(Response.data.ResponseDetail)
-                }).catch((error) => {
-                    console.log('axios error:', error)
-                });
+                    const config = {
+                        headers: {
+                            'Authorization' : 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+                            'Content-Type' : 'application/json'
+                        }
+                    }
+                    axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/UpdateUnFollowTripService',
+                    data, config)
+                    .then(Response => { 
+                        this.setState({loading: false})
+                    }).catch((error) => {
+                        console.log('axios error:', error)
+                    });
+                })
             }
         }else{
             this.props.screenProps.navigation.navigate({ 
@@ -325,7 +333,7 @@ class TripListShop extends Component{
                 <Button onPress={() => this.onButtonFollow(item.TripID, item.IsFollow)}
                         style={{borderWidth: 1, borderColor: '#00BFFF', height: 30, alignSelf:"center", width:50, backgroundColor:"#00BFFF"}}  
                         textStyle={{fontSize: 14, color:"#fff"}} name={"md-add"} iconColor={"#fff"}>
-                    ติดตาม
+                    {I18n.t('buttonFollow')}
                 </Button>
             )
         }
@@ -333,13 +341,17 @@ class TripListShop extends Component{
             <Button onPress={() => this.onButtonFollow(item.TripID, item.IsFollow)}
                     style={{borderWidth: 1, borderColor: '#00BFFF', height: 30, alignSelf:"center", width:50, }}  
                     textStyle={{fontSize: 14, color:"#00BFFF"}} name={"md-add"} iconColor={"#00BFFF"}>
-                ติดตาม
+                {I18n.t('buttonFollow')}
             </Button>
         )
     }
 
     renderData() {
-       
+       if(this.state.loading === true){
+           return (
+               <ModalSpinner />
+           )
+       }
         let i = 0
         return _.map(this.state.items, items => {
             return _.map(items, item => {
@@ -376,7 +388,6 @@ class TripListShop extends Component{
                     )
                 }
             })
-            // }
         })
     }
     
