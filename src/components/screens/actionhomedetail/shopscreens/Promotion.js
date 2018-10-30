@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, ScrollView, RefreshControl, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text,ScrollView, RefreshControl, TouchableOpacity, Image,Platform, StyleSheet, Share, TextInput, Button, Alert } from 'react-native';
 import axios from 'axios'
 import _ from 'lodash'
 import moment from 'moment'
 import { CardSection } from '../../../../components/common'
 import PromotionDetail from './promotion/PromotionDetail'
 import { createStackNavigator } from 'react-navigation'
+
 
 var data = {
   "RqAppID": "1234",
@@ -28,12 +29,37 @@ var config = {
 class Promotion extends Component {
 
 
-  state = {
-    item: '',
+ 
+  constructor(){
+        super();
+ 
+        this.state = 
+          { 
+ 
+            TextInputValueHolder: '',
+            item: '',
     isDatePromo: '',
     numPresent: '',
     numComming: ''
-  };
+ 
+          }
+    }
+//  state = {
+//     item: '',
+//     isDatePromo: '',
+//     numPresent: '',
+//     numComming: ''
+//   };
+  
+    ShareMessage=()=>
+    {
+            Share.share(
+            {
+                
+              message: this.state.TextInputValueHolder.toString()
+            
+            }).then(result => console.log(result)).catch(errorMsg => console.log(errorMsg));
+    }
 
   componentDidMount() {
     setInterval(() => {
@@ -231,7 +257,7 @@ class Promotion extends Component {
     })
   }
 
-  render() {
+  _renderPromotion(){
     if (this.state.numPresent === 0 && this.state.numComming === 0) {
       return (
         <View  style={styles.containerflex}>
@@ -277,6 +303,36 @@ class Promotion extends Component {
       );
     }
   }
+
+  _renderShare(){
+    return (
+    <View>
+ 
+    <TextInput 
+      underlineColorAndroid = "transparent" 
+      placeholder="Enter Text Here To Share"
+      style = { styles.TextInputStyle } 
+      onChangeText = { ( TextInputText ) => { this.setState({ TextInputValueHolder: TextInputText })} } 
+    />
+
+    <Button title="Click Here To Share TextInput Inside Typed Text as Message" onPress={ this.ShareMessage } />
+    
+    </View>
+    );
+  }
+  render() {
+    
+      return (
+        <View style = { {flex:1} }>
+          <View>
+         {this._renderPromotion()}
+         </View>
+         <View>
+         {/* {this._renderShare()} */}
+         </View>
+        </View>
+      );
+  }
 }
 
 
@@ -286,7 +342,8 @@ const PromotionMenu = createStackNavigator({
   },
   PromotionDetail: {
     screen: PromotionDetail,
-  },
+  }
+  
 
 })
 
@@ -300,6 +357,24 @@ const styles = StyleSheet.create({
     backgroundColor: '#f2f2f2',
     alignItems: 'center',
     justifyContent: 'center'
+  },MainContainer:
+  {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      paddingTop: (Platform.OS === 'ios') ? 20 : 0,
+      margin:10
+  },
+
+  TextInputStyle:
+  {
+      borderWidth: 1,
+      borderColor: '#009688',
+      width: '100%',
+      height: 40,
+      borderRadius: 10,
+      marginBottom: 10,
+      textAlign: 'center'
   }
 })
 
