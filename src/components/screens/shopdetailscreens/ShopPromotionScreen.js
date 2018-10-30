@@ -13,7 +13,7 @@ import {
 import axios from 'axios'
 import _ from 'lodash'
 import moment from 'moment'
-import { CardSection } from '../../../components/common'
+import { CardSection, Spinner } from '../../../components/common'
 import { createStackNavigator } from 'react-navigation'
 
 var data = {
@@ -40,22 +40,18 @@ class ShopPromotionScreen extends Component {
   state = {
     item: '',
     isDatePromo: '',
-    numPresent: '',
-    numComming: ''
+    numPresent: 0,
+    numComming: 0,
+    loading: false
   };
 
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        curTime: new Date().toLocaleString()
-      })
-    }, 1000)
-    this._updateNumPresent()
-    this._updateNumSoon()
-    this.fetchData()
-  }
   componentWillMount() {
-
+    this.setState({
+      curTime: new Date().toLocaleString(),
+      loading: true
+    },()=>{
+      this.fetchData()
+    })
   }
 
   fetchData() {
@@ -63,7 +59,8 @@ class ShopPromotionScreen extends Component {
       data, config)
       .then(response => {
         this.setState({
-          item: response.data
+          item: response.data,
+          loading: false
         }, () => {
           this._updateNumPresent()
           this._updateNumSoon()
@@ -229,7 +226,12 @@ class ShopPromotionScreen extends Component {
   }
 
   render() {
-    if (this.state.numPresent === 0 && this.state.numComming === 0) {
+    if(this.state.loading === true){
+      return (
+        <Spinner />
+      )
+    }else{
+      if (this.state.numPresent === 0 && this.state.numComming === 0) {
       return (
         <View  style={styles.containerflex}>
           <Image
@@ -272,6 +274,8 @@ class ShopPromotionScreen extends Component {
         
       );
     }
+    }
+    
   }
 }
 

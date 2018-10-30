@@ -1,5 +1,4 @@
 import React from 'react'
-import { View } from 'react-native'
 import AppBottomNavigator from './src/components/AppBottomNavigator'
 import { StoreGlobal } from './src/components/config/GlobalState'
 import I18n from './src/components/config/i18n'
@@ -36,7 +35,8 @@ import writereviwe from './src/components/screens/shopdetailscreens/reviewscreen
 import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
 import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
 import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
-import { ModalSpinner } from './src/components/common';
+import axios from 'axios'
+
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
@@ -44,7 +44,9 @@ INITIAL_STATE = {
   userId: 'none',
   userDisplay: '',
   token: '',
-  phone: ''
+  phone: '',
+  trip: [],
+  InquiryTrip: ''
 }
 
 export default class App extends React.Component {
@@ -53,12 +55,6 @@ export default class App extends React.Component {
   changeAccessingState =() =>{
     this.setState({
       alreadyAccessed: true
-    })
-  }
-
-  changeLoadingState = () => {
-    this.setState({
-      alreadyLoading: true
     })
   }
 
@@ -71,12 +67,44 @@ export default class App extends React.Component {
     I18n.locale = StoreGlobal({ type: 'get', key: 'lang' })
   }
 
-  loginMeth =(userId, userDisplay, token, phone)=>{
+  updateInquiryTrip=()=>{
+    this.inqTrip()
+  }
+
+  inqTrip(){
+    if(this.state.userId === 'none'){
+        
+    }else{
+        var data = {
+            "RqAppID":"1234",
+            "UserLanguage": I18n.t('userlanguage'),
+            "MarketID":"3",
+            "UserID": this.state.userId
+        }
+        var config = {
+          headers: {
+            'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+            'Content-Type': 'application/json'
+          }
+        }
+        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryTripService',data, config)
+        .then(response => {
+            this.setState({
+            InquiryTrip: response.data
+            })
+        })
+    }
+}
+
+  loginMeth =(userId, userDisplay, token, phone,trip,InquiryTrip)=>{
     this.setState({
       userId: userId,
       userDisplay: userDisplay,
       token: token,
-      phone: phone
+      phone: phone,
+      trip: trip,
+    },()=>{
+      this.inqTrip()
     })
   }
 
@@ -85,7 +113,9 @@ export default class App extends React.Component {
       userId: 'none',
       userDisplay: '',
       token: '',
-      phone: ''
+      phone: '',
+      trip: [],
+      InquiryTrip: ''
     })
   }
 
@@ -96,18 +126,6 @@ export default class App extends React.Component {
       alreadyAccessed: false,
       lang : lang
     })
-  }
-
-  LoadingSet = (naviga) => {
-    console.log(naviga)
-  }
-
-  renderLoading(){
-    if(this.state.alreadyLoading === true){
-      return (
-        <ModalSpinner />
-      )
-    }
   }
 
   renderIntroduction(){
@@ -125,19 +143,17 @@ export default class App extends React.Component {
           userId : this.state.userId,
           userDisplay : this.state.userDisplay,
           token : this.state.token,
-          phone : this.state.phone
+          phone : this.state.phone,
+          trip : this.state.trip,
+          InquiryTrip: this.state.InquiryTrip,
+          updateInquiryTrip: this.updateInquiryTrip
         }} />
       )
     }
   }
 
   render() {
-    return (  
-      //<View style={styles.imageContainerStyle}>
-      this.renderIntroduction()
-      //this.renderLoading()
-      //</View>
-    )
+    return this.renderIntroduction()
   }
 }
 

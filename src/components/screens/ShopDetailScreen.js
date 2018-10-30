@@ -69,10 +69,10 @@ export class ShopDetailScreen extends Component {
     }
 
     onButtonGoBack() {
-        const toggleHeaderPromotionStatus = this.props.navigation.getParam('toggleHeaderPromotionStatus', 'none')
-        if (toggleHeaderPromotionStatus !== 'none') {
-            toggleHeaderPromotionStatus()
-        }
+        // const toggleHeaderPromotionStatus = this.props.navigation.getParam('toggleHeaderPromotionStatus', 'none')
+        // if (toggleHeaderPromotionStatus !== 'none') {
+        //     toggleHeaderPromotionStatus()
+        // }
         this.props.navigation.goBack()
     }
 
@@ -147,7 +147,7 @@ export class ShopDetailScreen extends Component {
         } else {
             if (this.state.statusButton === true) {
                 return (
-                    <View style={{ flex: 1, marginRight: 15, marginTop: 175, justifyContent: "center", flexDirection: "row", }}>
+                    <View style={{ flex: 1, marginRight: 15, marginTop: Dimensions.get('window').height*0.32, justifyContent: "center", flexDirection: "row", }}>
                         <TouchableOpacity>
                             <Image style={{ width: 25, height: 30 }} source={require('../../components/images/drawable-xhdpi/ic_fav_trip_unselected.webp')} />
                         </TouchableOpacity>
@@ -158,7 +158,7 @@ export class ShopDetailScreen extends Component {
                 )
             }
             return (
-                <View style={{ flex: 1, marginTop: 20, justifyContent: "center", flexDirection: "row", }}>
+                <View style={{ flex: 1, marginTop: 20, justifyContent: "center", flexDirection: "row",}}>
                     <TouchableOpacity>
                         <Image style={{ width: 25, height: 30 }} source={require('../../components/images/drawable-xhdpi/ic_fav_trip_unselected.webp')} />
                     </TouchableOpacity>

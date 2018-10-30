@@ -64,7 +64,8 @@ class LoginForm extends Component {
                    response.data.UserDetail.UserID,
                    response.data.UserDetail.DisplayName,
                    '',
-                   response.data.UserDetail.Contact )
+                   response.data.UserDetail.Contact,
+                   response.data.UserDetail.Trip  )
                StoreGlobal({ type: 'set', key: 'userInfo', value: userInfoFB })
                 this.setState({ 
                     userInfoFB
@@ -105,7 +106,8 @@ class LoginForm extends Component {
                     response.data.UserDetail.UserID,
                     response.data.UserDetail.DisplayName,
                     response.data.UserDetail.SessionToken,
-                    response.data.UserDetail.Contact )
+                    response.data.UserDetail.Contact,
+                    response.data.UserDetail.Trip  )
                 StoreGlobal({type: 'set', key: 'userPhone', value: response.data})
                 this.onButtonToProfile()
             }else if(response.data.ResponseDetail === ' Email is Require Or Not Empty  ,  Password is Require Or Not Empty ' || response.data.ResponseDetail === ' Email is Require Or Not Empty '){
