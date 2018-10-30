@@ -1,4 +1,5 @@
 import React from 'react'
+import { View } from 'react-native'
 import AppBottomNavigator from './src/components/AppBottomNavigator'
 import { StoreGlobal } from './src/components/config/GlobalState'
 import I18n from './src/components/config/i18n'
@@ -35,9 +36,11 @@ import writereviwe from './src/components/screens/shopdetailscreens/reviewscreen
 import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
 import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
 import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
+import { ModalSpinner } from './src/components/common';
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
+  alreadyLoading: false,
   userId: 'none',
   userDisplay: '',
   token: '',
@@ -50,6 +53,12 @@ export default class App extends React.Component {
   changeAccessingState =() =>{
     this.setState({
       alreadyAccessed: true
+    })
+  }
+
+  changeLoadingState = () => {
+    this.setState({
+      alreadyLoading: true
     })
   }
 
@@ -89,6 +98,18 @@ export default class App extends React.Component {
     })
   }
 
+  LoadingSet = (naviga) => {
+    console.log(naviga)
+  }
+
+  renderLoading(){
+    if(this.state.alreadyLoading === true){
+      return (
+        <ModalSpinner />
+      )
+    }
+  }
+
   renderIntroduction(){
     if(this.state.alreadyAccessed === false){
       return (
@@ -111,9 +132,21 @@ export default class App extends React.Component {
   }
 
   render() {
-    return this.renderIntroduction()
+    return (  
+      //<View style={styles.imageContainerStyle}>
+      this.renderIntroduction()
+      //this.renderLoading()
+      //</View>
+    )
   }
 }
+
+const styles = {
+  imageContainerStyle: {
+      flex:1, 
+      justifyContent: 'center', 
+      alignItems: 'center'}
+};
 
 const MainStack = createStackNavigator({
   mainApp : {

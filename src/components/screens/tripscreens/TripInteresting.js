@@ -200,10 +200,10 @@ class TripInteresting extends Component {
             <View style={{ flex: 1 }}>
                 {this._renderImgCover()}
                 
-                <Card> 
+                <View> 
                     {this.renderItem()}
                     <View style={{ height: 100}} />
-                </Card>
+                </View>
             </View>
             </ScrollView>
         )
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     },
     ViewContainer:{
-        padding: 5,
+       
         backgroundColor: '#ffffff',
         flexDirection: 'row',
         flex: 1,
@@ -399,7 +399,7 @@ class ItemDetail extends Component {
                         <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
                         
                         
-                            <CardSection style={{flex:2,borderBottomWidth:2, borderColor: '#ddd'}}>   
+                            <CardSection style={{flex:2}}>   
                                     <View style={styles.ViewContainer}>
                                             <View style={{flex: 1  }}>
                                             <Image style={{width:120, height:150}}
