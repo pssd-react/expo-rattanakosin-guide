@@ -25,7 +25,6 @@ class TripListShop extends Component{
     static navigationOptions = { header: null }
     state = {
         items: '',
-        Banner: '',
         loading: false
     }
 
@@ -74,7 +73,7 @@ class TripListShop extends Component{
     } 
 
     onCardPress(item){
-        this.props.navigation.navigate('shop', {item})
+        this.props.screenProps.navigation.navigate('shop', {item})
     }
 
     _renderIcon(item) {
@@ -355,7 +354,7 @@ class TripListShop extends Component{
         let i = 0
         return _.map(this.state.items, items => {
             return _.map(items, item => {
-                if(item.TripType == '02'){
+                if(item.TripType === "02"){
                     return (
                         <View key={i++}>
                         <View style={{margin: 5,}}>
@@ -407,14 +406,6 @@ class TripListShop extends Component{
         )
     }
 
-}
-
-class ItemDetail extends Component {
-    static navigationOptions = { header: null }
-    state = {
-    } 
-
-    
 }
 
 const styles = StyleSheet.create({
@@ -472,9 +463,6 @@ const Interesting = createStackNavigator({
     Home: { 
         screen: TripListShop, navigationOptions:{header:null} 
     },
-    shop: {
-        screen: TripInteresting, navigationOptions:{header:null}
-    }
 })
 
 

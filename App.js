@@ -37,7 +37,7 @@ import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailsc
 import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
 import axios from 'axios'
 import { AddTripScreen } from './src/components/screens/tripscreens/createtripscreen/addtrip/AddTripScreen';
-import { MarkLocation } from './src/components/screens/tripscreens';
+import { MarkLocation, TripInteresting } from './src/components/screens/tripscreens';
 
 INITIAL_STATE = {
   lang: 'th',
@@ -265,5 +265,8 @@ trip: {
 },
 markmap: {
   screen: MarkLocation, navigationOptions: {header: null}
+},
+shop: {
+  screen: TripInteresting, navigationOptions:{header:null}
 }
 })
