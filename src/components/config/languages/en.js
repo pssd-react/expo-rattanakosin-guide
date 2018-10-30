@@ -141,7 +141,7 @@ export default {
 
     setting: 'Setting',
 
-
+    flash_sale_see_shop: 'see shop',
 
 
 //flash sale

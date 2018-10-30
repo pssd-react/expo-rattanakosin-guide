@@ -35,6 +35,8 @@ import writereviwe from './src/components/screens/shopdetailscreens/reviewscreen
 import writereviweUpdate from './src/components/screens/shopdetailscreens/reviewscreens/WriteReviewUpdate';
 import { ShopMoreDescriptionScreen } from './src/components/screens/shopdetailscreens/ShopMoreDescriptionScreen';
 import { ShopPromotionDetailScreens } from './src/components/screens/shopdetailscreens/promotiondetailscreens/ShopPromotionDetailScreens';
+import axios from 'axios'
+
 INITIAL_STATE = {
   lang: 'th',
   alreadyAccessed: false,
@@ -42,7 +44,8 @@ INITIAL_STATE = {
   userDisplay: '',
   token: '',
   phone: '',
-  trip: []
+  trip: [],
+  InquiryTrip: ''
 }
 
 export default class App extends React.Component {
@@ -63,13 +66,44 @@ export default class App extends React.Component {
     I18n.locale = StoreGlobal({ type: 'get', key: 'lang' })
   }
 
-  loginMeth =(userId, userDisplay, token, phone,trip)=>{
+  updateInquiryTrip=()=>{
+    this.inqTrip()
+  }
+
+  inqTrip(){
+    if(this.state.userId === 'none'){
+        
+    }else{
+        var data = {
+            "RqAppID":"1234",
+            "UserLanguage": I18n.t('userlanguage'),
+            "MarketID":"3",
+            "UserID": this.state.userId
+        }
+        var config = {
+          headers: {
+            'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+            'Content-Type': 'application/json'
+          }
+        }
+        axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryTripService',data, config)
+        .then(response => {
+            this.setState({
+            InquiryTrip: response.data
+            })
+        })
+    }
+}
+
+  loginMeth =(userId, userDisplay, token, phone,trip,InquiryTrip)=>{
     this.setState({
       userId: userId,
       userDisplay: userDisplay,
       token: token,
       phone: phone,
-      trip: trip
+      trip: trip,
+    },()=>{
+      this.inqTrip()
     })
   }
 
@@ -79,7 +113,8 @@ export default class App extends React.Component {
       userDisplay: '',
       token: '',
       phone: '',
-      trip: []
+      trip: [],
+      InquiryTrip: ''
     })
   }
 
@@ -108,7 +143,9 @@ export default class App extends React.Component {
           userDisplay : this.state.userDisplay,
           token : this.state.token,
           phone : this.state.phone,
-          trip : this.state.trip
+          trip : this.state.trip,
+          InquiryTrip: this.state.InquiryTrip,
+          updateInquiryTrip: this.updateInquiryTrip
         }} />
       )
     }

@@ -12,10 +12,19 @@ import { Button, } from 'react-native-elements'
 import { HeaderBackButton } from 'react-navigation'
 import _ from 'lodash'
 import moment from 'moment'
-import { ButtonStar, ButtonLocal, Header, ButtonProduct , ButtonPromotion } from '../../common'
+import { ButtonStar, ButtonLocal, Header, ButtonProduct , ButtonPromotion, Spinner } from '../../common'
 import geolib from 'geolib'
 import I18n from '../../config/i18n'
+import axios from 'axios'
 
+var config = {
+    headers: {
+      'Authorization': 'Basic Z3Vlc3Q6cGFzc3dvcmQ=',
+      'Content-Type': 'application/json'
+    }
+}
+
+var tripId = ''
 
 class PromotionDetail extends Component {
     
@@ -26,8 +35,14 @@ class PromotionDetail extends Component {
             lat: undefined,
             long: undefined,
             language: I18n.t('userlanguage'),
-            headerStatusUpdate : undefined
+            headerStatusUpdate : undefined,
+            AddShopId: '',
+            loading: true
         }
+      }
+
+      componentWillMount(){
+
       }
 
     componentDidMount(){
@@ -45,9 +60,9 @@ class PromotionDetail extends Component {
         {enableHighAccuracy: true}
 
         );
-        console.log('component',this.state.lat,this.state.long)
+        
     }
-      
+
     toggleHeaderPromotionStatus() {
         // if (this.state.isFocused === true) {
         //     this.setState({ isFocused: false })
@@ -278,7 +293,7 @@ class PromotionDetail extends Component {
     }
 
     onImgSlidePress(key) {
-        console.log(key)
+        //console.log(key)
         this.toggleHeaderPromotionStatus()
         this.props.navigation.navigate({
             routeName: 'shopDetail',
@@ -292,10 +307,10 @@ class PromotionDetail extends Component {
 
 
     _renderLocation(){
-        console.log('Location',this.state.lat,this.state.long)
+    //  console.log('Location',this.state.lat,this.state.long)
         const { navigation } = this.props
         const items = navigation.getParam('items')
-        console.log('Items: ',items.Latitude,items.Longitude)
+    //  console.log('Items: ',items.Latitude,items.Longitude)
         var distance = '';
         if(this.state.lat === undefined){
         return(
@@ -309,7 +324,7 @@ class PromotionDetail extends Component {
 
            distance = distance / 1000
            distance = distance.toFixed(2);
-           console.log(distance , 'Km')
+        //   console.log(distance , 'Km')
            return(
                 <ButtonLocal style={{ width: 70 }}> {distance} </ButtonLocal>
            )
@@ -318,55 +333,109 @@ class PromotionDetail extends Component {
 
 
     renderBtAddTrip(items){
-        console.log(this.props.screenProps)
-        var data = {
-            "RqAppID":"1234",
-            "UserLanguage":"EN",
-            "UserID": this.props.screenProps.userId,
-            "TripID": "",
-            "TripShop":[{
-                "ShopID": items
-            }],
-            "SessionToken":"",
-            "MarketID":"3"
-         }
+        //console.log(this.props.screenProps.trip)
         if(this.props.screenProps.userId === 'none'){
-                this.props.navigation.navigate({
-                    routeName: 'Login'
+            this.props.navigation.navigate({
+                routeName: 'Login',
+                params: {
+                    fromScreen: 'PromotionDetail'
+                }
+            })
+        }else if(tripId === ''){
+                var data = {
+                    "RqAppID":"1234",
+                    "UserLanguage":"EN",
+                    "UserID": this.props.screenProps.userId,
+                    "TripID": "",
+                    "TripShop":[{
+                        "ShopID": items
+                    }],
+                    "SessionToken":"",
+                    "MarketID":"3"
+                 }
+                 axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/AddTripShopService',data, config)
+                 .then(response => {
+                   this.setState({
+                     loading: true
+                   },()=>{
+                       this.props.screenProps.updateInquiryTrip()
+                       tripId = ''
+                   })
+                 })
+            
+        }else{
+            var data =  {
+                "RqAppID":"1234",
+                "UserLanguage":"EN",
+                "UserID": this.props.screenProps.userId,
+                "TripID": tripId,
+                "TripShop":[{
+                    "ShopID":items
+                }],
+                "SessionToken":"",
+                "MarketID":"3"
+             }
+             axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/DeleteTripShopService',data, config)
+             .then(response => {
+               this.setState({
+                  loading: false
+               },()=>{
+                this.props.screenProps.updateInquiryTrip()
+                tripId = ''
                 })
-        }else {
-            return(
+             })
+        }
+    }
+
+
+
+    renderBtImgAddTrip(ShopID){
+        let result = ''
+        let count = 0
+        if(this.props.screenProps.userId === 'none'){
+            //console.log(this.props.screenProps.InquiryTrip)
+            result = (
                 <Image
                     style={{ width: 25, height: 30 }}
                     source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
                 />
             )
+        }else{  
+            _.map((this.props.screenProps.InquiryTrip.Trip), (items) => {
+                if(items.TripType === '01'){
+                    _.map((items.TripShop), (item) => {
+                        if(item.ShopID === ShopID && count === 0){ 
+                            tripId = items.TripID
+                            count=1
+                            result = (
+                                <Image
+                                    style={{ width: 25, height: 30 }}
+                                    source={require('../../images/drawable-hdpi/ic_fav_trip_selected.webp')}
+                                />
+                            )
+                        }
+                    })
+                }    
+            })
+            if(count===0){
+                 result = (
+                <Image
+                    style={{ width: 25, height: 30 }}
+                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                />
+            )
+            }
+           
         }
-          
-            // axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/InquiryFlashSaleService',
-            //   data, config)
-            //   .then(response => {
-            //     this.setState({
-            //       item: response.data
-            //     }, () => {
-            //       this._updateNumPresent()
-            //       this._updateNumSoon()
-            //     })
-            //   })
-    }
 
-    renderBtImgAddTrip(){
-        return(
-            <Image
-                style={{ width: 25, height: 30 }}
-                source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-            />
-        )
+        return (<View style={{flex:1}}>{result}</View>)
+     
     }
 
     _renderStore() {
         const { navigation } = this.props
         const items = navigation.getParam('items')
+        
         return (
             <TouchableWithoutFeedback  onPress={() => this.onImgSlidePress(items.ShopID)}>
                 <View style={{ flex: 1, flexDirection: 'column', marginTop: 2, backgroundColor: '#ffffff' }}>    
@@ -386,7 +455,7 @@ class PromotionDetail extends Component {
                                     <Text style={{ fontSize: 16 }} numberOfLines={1} ellipsizeMode={'tail'}> {items.ShopName} </Text>
                                 </View>
                                 <TouchableOpacity style={{ flex: 1, marginTop: 10, alignItems: 'flex-end', marginRight: 3 }} onPress={() => this.renderBtAddTrip(items.ShopID)}>
-                                    {this.renderBtImgAddTrip()}
+                                    {this.renderBtImgAddTrip(items.ShopID)}
                                 </TouchableOpacity>
                             </View>
                             <View style={{ flexDirection: 'row', marginTop: 30 }}>
