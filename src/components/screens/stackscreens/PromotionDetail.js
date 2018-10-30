@@ -342,6 +342,7 @@ class PromotionDetail extends Component {
                 }
             })
         }else if(tripId === ''){
+                console.log(tripId)
                 var data = {
                     "RqAppID":"1234",
                     "UserLanguage":"EN",
@@ -355,15 +356,16 @@ class PromotionDetail extends Component {
                  }
                  axios.post('https://uat-shop.digitalventures.co.th/wp-json/jj/dvservice/v1/AddTripShopService',data, config)
                  .then(response => {
+                     console.log(response.data)
                    this.setState({
                      loading: true
                    },()=>{
                        this.props.screenProps.updateInquiryTrip()
-                       tripId = ''
                    })
                  })
-            
+                 tripId = ''
         }else{
+            console.log(tripId)
             var data =  {
                 "RqAppID":"1234",
                 "UserLanguage":"EN",
@@ -381,17 +383,17 @@ class PromotionDetail extends Component {
                   loading: false
                },()=>{
                 this.props.screenProps.updateInquiryTrip()
-                tripId = ''
                 })
              })
+             tripId = ''
         }
     }
 
 
 
     renderBtImgAddTrip(ShopID){
-        let result = ''
-        let count = 0
+        var result = ''
+        var count = 0
         if(this.props.screenProps.userId === 'none'){
             //console.log(this.props.screenProps.InquiryTrip)
             result = (
@@ -406,7 +408,7 @@ class PromotionDetail extends Component {
                     _.map((items.TripShop), (item) => {
                         if(item.ShopID === ShopID && count === 0){ 
                             tripId = items.TripID
-                            count=1
+                            count = 1
                             result = (
                                 <Image
                                     style={{ width: 25, height: 30 }}
@@ -419,11 +421,11 @@ class PromotionDetail extends Component {
             })
             if(count===0){
                  result = (
-                <Image
-                    style={{ width: 25, height: 30 }}
-                    source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
-                />
-            )
+                    <Image
+                        style={{ width: 25, height: 30 }}
+                        source={require('../../images/drawable-hdpi/ic_fav_trip_unselected.webp')}
+                    />
+                )
             }
            
         }
