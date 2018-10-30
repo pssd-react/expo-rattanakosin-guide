@@ -78,42 +78,24 @@ class TripListShop extends Component{
 
     _renderIcon(item) {
         return _.map((item), (shopID) => {
-            if (shopID.TripShopCategoryID === '274') {
+           // console.log(shopID.TripShopCategoryID)
+            if (shopID.TripShopCategoryID === '273' || shopID.TripShopCategoryID === '264' || shopID.TripShopCategoryID === '282') {
                 return (
                     <Image
-                        key={shopID.TripID+''+shopID.TripShopCategoryID}
+                    key={shopID.TripID+''+shopID.TripShopCategoryID}
                         style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
                         source={require('../../images/drawable-hdpi/ic_type_category_food.webp')}
                     />
                 )
-            } else if (shopID.TripShopCategoryID === '275') {
+            }else if (shopID.TripShopCategoryID === '274' || shopID.TripShopCategoryID === '265' || shopID.TripShopCategoryID === '283') {
                 return (
                     <Image
-                    key={shopID.TripID+''+shopID.TripShopCategoryID}
+                        key={shopID.TripID+''+shopID.TripShopCategoryID}
                         style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
-                        source={require('../../images/drawable-hdpi/ic_category_place_travel.webp')}
+                        source={require('../../images/drawable-hdpi/ic_type_category_shop.webp')}
                     />
                 )
-            }
-            else if (shopID.TripShopCategoryID === '273') {
-                return (
-                    <Image
-                    key={shopID.TripID+''+shopID.TripShopCategoryID}
-                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
-                        source={require('../../images/drawable-hdpi/ic_category_shop.webp')}
-                    />
-                )
-            }
-            else if (shopID.TripShopCategoryID === '276') {
-                return (
-                    <Image
-                    key={shopID.TripID+''+shopID.TripShopCategoryID}
-                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
-                        source={require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
-                    />
-                )
-            }
-            else if (shopID.TripShopCategoryID === '281') {
+            } else if (shopID.TripShopCategoryID === '275' || shopID.TripShopCategoryID === '266' || shopID.TripShopCategoryID === '284') {
                 return (
                     <Image
                     key={shopID.TripID+''+shopID.TripShopCategoryID}
@@ -121,8 +103,47 @@ class TripListShop extends Component{
                         source={require('../../images/drawable-hdpi/ic_type_category_shopping_mall.webp')}
                     />
                 )
-            }
-            else if (shopID.TripShopCategoryID === '277') {
+            }else if (shopID.TripShopCategoryID === '276' || shopID.TripShopCategoryID === '267' || shopID.TripShopCategoryID === '285') {
+                return (
+                    <Image
+                    key={shopID.TripID+''+shopID.TripShopCategoryID}
+                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
+                        source={require('../../images/drawable-hdpi/ic_type_category_hotel.webp')}
+                    />
+                )
+            }else if (shopID.TripShopCategoryID === '277' || shopID.TripShopCategoryID === '268' || shopID.TripShopCategoryID === '286') {
+                return (
+                    <Image
+                    key={shopID.TripID+''+shopID.TripShopCategoryID}
+                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
+                        source={require('../../images/drawable-hdpi/ic_type_category_place_travel.webp')}
+                    />
+                )
+            }else if (shopID.TripShopCategoryID === '278' || shopID.TripShopCategoryID === '269' || shopID.TripShopCategoryID === '287') {
+                return (
+                    <Image
+                    key={shopID.TripID+''+shopID.TripShopCategoryID}
+                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
+                        source={require('../../images/drawable-hdpi/ic_type_category_office.webp')}
+                    />
+                )
+            }else if (shopID.TripShopCategoryID === '280' || shopID.TripShopCategoryID === '270' || shopID.TripShopCategoryID === '288') {
+                return (
+                    <Image
+                    key={shopID.TripID+''+shopID.TripShopCategoryID}
+                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
+                        source={require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
+                    />
+                )
+            }else if (shopID.TripShopCategoryID === '281' || shopID.TripShopCategoryID === '271' || shopID.TripShopCategoryID === '289') {
+                return (
+                    <Image
+                    key={shopID.TripID+''+shopID.TripShopCategoryID}
+                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
+                        source={require('../../images/drawable-hdpi/ic_type_category_service.webp')}
+                    />
+                )
+            }else if (shopID.TripShopCategoryID === '460' || shopID.TripShopCategoryID === '459' || shopID.TripShopCategoryID === '461') {
                 return (
                     <Image
                     key={shopID.TripID+''+shopID.TripShopCategoryID}
@@ -131,38 +152,12 @@ class TripListShop extends Component{
                     />
                 )
             }
-            else if (shopID.TripShopCategoryID === '280') {
-                return (
-                    <Image
-                    key={shopID.TripID+''+shopID.TripShopCategoryID}
-                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
-                        source={require('../../images/drawable-hdpi/ic_type_category_office.webp')}
-                    />
-                )
-            }
-            else if (shopID.TripShopCategoryID === '278') {
-                return (
-                    <Image
-                    key={shopID.TripID+''+shopID.TripShopCategoryID}
-                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
-                        source={require('../../images/drawable-hdpi/ic_type_category_service.webp')}
-                    />
-                )
-            }
-            else if (shopID.TripShopCategoryID === '460') {
-                return (
-                    <Image
-                    key={shopID.TripID+''+shopID.TripShopCategoryID}
-                        style={{ width: 30, height: 30 , marginLeft:5, marginLeft:5}}
-                        source={require('../../images/drawable-hdpi/ic_type_category_facilities.webp')}
-                    />
-                )
-            }
         })
     }
 
     checkImg(item){
         if(item.TripImageUrl === ""){
+            //console.log(item)
             return(
                 <ImageBackground
                 key={item.TripID}
@@ -365,7 +360,7 @@ class TripListShop extends Component{
                                         {this.checkImg(item)}
                                         <Text style={styles.ViewTextStyle}> {item.TripName} </Text>
                                         <View style= {{ flex: 1, marginLeft: 5, marginRight: 5 }}>
-                                            <Text  numberOfLines={2}>
+                                            <Text style={{color:"gray"}} numberOfLines={2}>
                                                 {item.TripDescription}
                                             </Text>
                                         </View>
