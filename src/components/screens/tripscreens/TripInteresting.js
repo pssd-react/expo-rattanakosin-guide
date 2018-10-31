@@ -484,6 +484,16 @@ class TripInteresting extends Component {
          })
     }
 
+    onImgSlidePress(key) {
+        this.props.navigation.navigate({
+            routeName: 'shopDetail',
+            params: {
+                key: key
+            },
+            key: 'shopDetail' + key
+        })
+    }
+
    renderData(){
         const itemList = this.props.navigation.getParam('item')
         let renderingItem = _.map(itemList.TripShop, itemsShop => {
@@ -495,6 +505,7 @@ class TripInteresting extends Component {
             for (let i=0; i<renderingItem.length; i++){
                 if(renderingItem[i] === item.ShopID){
                     return (
+                    <TouchableOpacity onPress={() => this.onImgSlidePress(item.ShopID)}>
                         <View key={item.CategoryName+'_'+item.ShopID} style={{flex:1}}>
                             <CardSection style={{flex:2}}>   
                             <View style={{flex:1, flexDirection: 'column', backgroundColor: "#FFFAFA", padding:10}}>
@@ -534,7 +545,8 @@ class TripInteresting extends Component {
                                 </View>
                                 </View>
                             </CardSection>
-                        </View>
+                        </View> 
+                    </TouchableOpacity>
                     )
                 }
             }

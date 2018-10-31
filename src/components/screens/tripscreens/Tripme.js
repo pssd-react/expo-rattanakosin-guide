@@ -92,7 +92,7 @@ class Tripme extends Component{
     }
 
     onCardPress() {
-        this.props.screenProps.navigation.navigate('markmap')
+        this.props.screenProps.navigation.navigate('location')
     }
 
     onCardShop(item){
@@ -416,11 +416,11 @@ class Tripme extends Component{
                         style={styles.stretch }
                         >
                       <View style= {styles.overlayContainer}>
-                            <View style = {styles.top}>
+                            <View style = {{flex: 2, alignItems:"center", marginTop:10}}>
                                 <Text style={styles.header}> {this.state.textbox}</Text>
                             </View>
                             
-                            <View style = {styles.top}>
+                            <View style = {{flex: 1, alignItems:"center", justifyContent: 'center',}}>
                                 <ButtonTrip style={styles.buttonStyle}
                                  onPress={() => this.onCreateTrip()}
                                  > 
@@ -439,7 +439,7 @@ class Tripme extends Component{
                             style={styles.stretch}
                             >
                             <View style= {styles.overlayContainer}>
-                                <View style = {styles.top}>
+                                <View style = {{flex: 2, alignItems:"center", marginTop:10}}>
                                     <Text style={styles.header}> {this.state.textbox1}</Text>
                                 </View>
                             </View>
@@ -456,6 +456,8 @@ class Tripme extends Component{
 const styles = StyleSheet.create({
     overlayContainer:{
         flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
        // color: '#FFFFFF'
     },
     stretch: {
@@ -474,13 +476,13 @@ const styles = StyleSheet.create({
     buttonStyle: {
         backgroundColor: '#ffc94c',
         width: 100,
-        alignSelf: 'center',
+        height: 30,
+        alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 20
+        marginBottom: 10
     },
     top: {
         alignItems: 'center',
-        height: '50%',
         justifyContent: 'center'
     },
     container:{
