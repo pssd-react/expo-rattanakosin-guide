@@ -53,6 +53,7 @@
     "react-native-searchbar": "^1.15.0",
     "react-native-smart-pull-to-refresh-listview": "^1.6.11-beta.2",
     "react-native-star-rating": "^1.1.0",
+    "react-native-swipeout": "^2.3.6",
     "react-native-swiper": "^1.5.13",
     "react-native-tab-view": "^1.0.2",
     "react-native-timer-countdown": "^2.0.3",
