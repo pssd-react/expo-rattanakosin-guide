@@ -38,10 +38,9 @@ import { ShopPromotionDetailScreens } from './src/components/screens/shopdetails
 import axios from 'axios'
 import { AddTripScreen } from './src/components/screens/tripscreens/createtripscreen/addtrip/AddTripScreen';
 import { TripMeAddLocation } from './src/components/screens/tripscreens/createtripscreen/addtrip/TripMeAddLocation';
+import  MarkLocation  from './src/components/screens/tripscreens/createtripscreen/markmap/MarkLocation';
 import { Location } from './src/components/screens/tripscreens/createtripscreen/markmap/Location'
-import { MarkLocation } from './src/components/screens/tripscreens/createtripscreen/markmap/MarkLocation';
-import  Search  from './src/components/screens/tripscreens/createtripscreen/addtrip/Search';
-import { ResultSearchLocation } from './src/components/screens/tripscreens/createtripscreen/addtrip/ResultSearchLocation'
+import SearchScreen from './src/components/screens/SearchScreen'
 import { TripInteresting } from './src/components/screens/tripscreens';
 
 INITIAL_STATE = {
@@ -268,19 +267,17 @@ shopPromotionDetail:{
 trip: {
   screen: TripMeAddLocation, navigationOptions: {header: null}
 },
+markmap: {
+  screen: MarkLocation, navigationOptions: {header: null}
+},
 location: {
   screen: Location, navigationOptions: {header: null}
-},
-markmap: {
-  screen: MarkLocation, navigationOptions:{header:null} 
 },
 shop: {
   screen: TripInteresting, navigationOptions:{header:null}
 },
-search: {
-  screen: Search, navigationOptions: {header: null}
+SearchScreen: {
+  screen: SearchScreen, navigationOptions: {header: null}
 },
-ResultSearchLocation: {
-        screen: ResultSearchLocation, navigationOptions: {header: null}
-    },
+
 })
