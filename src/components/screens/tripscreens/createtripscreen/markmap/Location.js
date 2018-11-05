@@ -20,6 +20,7 @@ const ImgHeight = 200
 
 const INITAL_STATE = {
     textbox: 'ตำแหน่งที่ปักหมุด',
+    textBT:'เพิ่มตำแหน่ง',
     login: 0
 }
 
@@ -31,9 +32,9 @@ export class Location extends Component {
         this.props.navigation.popToTop()
     }
 
-    onCreateTrip() {
+    onMarkLocation() {
         console.log("click!")
-        this.props.screenProps.navigation.navigate('markmap')
+        this.props.navigation.navigate('markmap')
     }
 
     render() {
@@ -53,17 +54,18 @@ export class Location extends Component {
                                 <Text style={styles.header}> {this.state.textbox}</Text>
                             </View>
                             
-                            
+                            <View style = {{flex: 1, alignItems:"center", justifyContent: 'center',}}>
+                                <ButtonTrip style={styles.buttonStyle}
+                                 onPress={() => this.onMarkLocation()}
+                                 > 
+                                    {this.state.textBT}
+                                 </ButtonTrip>
+                            </View>
                         </View>
                         </ImageBackground>
                     </View>
                 </ScrollView>
-                <Image
-                style={{width: 25, height: 25}}
-                source={require('../../../../images/drawable-hdpi/ic_location_map_unselect_bg_white.webp')}
-                >
-
-                </Image>
+                
             </View>
         )
     }
@@ -72,6 +74,8 @@ export class Location extends Component {
 const styles = StyleSheet.create({
     overlayContainer:{
         flex:1,
+        alignItems: 'center',
+        justifyContent: 'center',
        // color: '#FFFFFF'
     },
     container: {
@@ -97,9 +101,10 @@ const styles = StyleSheet.create({
     buttonStyle: {
         backgroundColor: '#ffc94c',
         width: 100,
-        alignItems: 'flex-start',
+        height: 30,
+        alignItems: 'center',
         justifyContent: 'center',
-        marginBottom: 20
+        marginBottom: 10
     },
     top: {
         alignItems: 'center',
@@ -115,4 +120,4 @@ const Locations = createStackNavigator({
 })
 
 
-export  {Locations}
+export {Locations}

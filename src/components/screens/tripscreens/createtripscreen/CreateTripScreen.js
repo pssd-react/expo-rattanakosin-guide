@@ -40,7 +40,6 @@ class CreateTripScreen extends Component {
                 <Header headerText="ทริปของฉัน"
                     backgroundImage={require('../../../images/drawable-hdpi/bg_more.webp')}
                     headerLeft={<HeaderBackButton tintColor='#fff' onPress={() => this.onButtonGoBack()} />} />
-                <ScrollView>
                     <Card>
                         <CardSection>
                             <ImageBackground
@@ -56,7 +55,6 @@ class CreateTripScreen extends Component {
                             </View>
                         </CardSection>
                     </Card>
-                </ScrollView>
             </View>
         )
     }

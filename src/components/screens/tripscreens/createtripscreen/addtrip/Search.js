@@ -65,7 +65,7 @@ class Search extends Component {
                                 placeholder={I18n.t('main_search')}
                                 placeholderTextColor={'grey'}
                                 onSubmitEditing={() => this.props.navigation.navigate({
-                                    routeName: 'resSearchScreen',
+                                    routeName: 'SearchRS',
                                     params: {
                                         searchText: this.state.searchText
                                     },

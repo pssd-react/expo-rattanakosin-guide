@@ -21,7 +21,7 @@ import I18n from '../../config/i18n'
 const ImgWidth = null
 const ImgHeight = 200
 
-class Tripme extends Component{
+class TripMe extends Component{
     static navigationOptions = { header: null }
 
    state = {
@@ -83,7 +83,6 @@ class Tripme extends Component{
             loKey++
             return (<ItemDetail key={'location_'+loKey} items={items.StaticLocation} />)
         })
-
         return CardItem
         }*/
 
@@ -363,20 +362,18 @@ class Tripme extends Component{
     }
 
     renderData() {
+        let i = 0
+        let result_data = undefined
        if(this.state.loading === true){
            return (
                <ModalSpinner />
            )
        }
-        let i = 0
-        return _.map(this.state.items, items => {
-            return _.map(items, item => {
+         _.map(this.state.items, items => {
+            result_data = _.map(items, item => {
                 if(item.TripType === "02" && item.IsFollow === "1"){
                     return (
-                        <View key={i++}>
-                        <View style={{margin: 5,}}>
-                            <CardSection >
-                                <View style={styles.ViewContainer}>
+                                <View key={i++} style={styles.ViewContainer}>
                                 <TouchableWithoutFeedback  onPress={()=> this.onCardShop(item)} >
                                     <View style={{ flex: 1 }} >
                                         {this.checkImg(item)}
@@ -398,18 +395,21 @@ class Tripme extends Component{
                                         </View>
                                     </View>
                                 </View> 
-                            </CardSection>
-                        </View> 
-                        </View>  
                     )
                 }
             })
         })
+
+        return (
+            <ScrollView>
+                {result_data}
+            </ScrollView>
+        )
     }
 
     render(){
         return (
-            <ScrollView>
+            <View style={{flex:1}}>
                 <CardSection style={{marginLeft:10, marginRight:10,}}>         
                     <ImageBackground
                         source={require('../../images/drawable-hdpi/bg_trip_main.webp')}
@@ -447,8 +447,7 @@ class Tripme extends Component{
                     </CardSection>
                 </TouchableOpacity>
                 {this.renderData()}
-            </ScrollView>
-            
+            </View>
         )
     }
 }
@@ -537,11 +536,9 @@ const styles = StyleSheet.create({
 })
 /*
 class ItemDetail extends Component {
-
     state = {
         item: []
     }
-
     renderData() {
         return _.map(this.props.items, item => {
            console.log( this.props.ShopID )
@@ -589,9 +586,7 @@ class ItemDetail extends Component {
                                                     8.03
                                                 </ButtonLocal>
                                             </View>
-
                                             <View  style={{ flex: 3}}/>
-
                                         </View>
                                      
                                         <View style= {{ flex: 1  }}>
@@ -617,7 +612,6 @@ class ItemDetail extends Component {
         })
     }
     
-
     render() {
         return (
             <View style = {{flex:1, backgroundColor: '#FFFFFF'}}>
@@ -627,13 +621,5 @@ class ItemDetail extends Component {
     } 
 }*/
 
-const TripMe = createStackNavigator({
-    Home: { 
-        screen: Tripme, navigationOptions:{header:null} 
-    },
-    
-    
-})
 
-
-export  {TripMe}
+export {TripMe}

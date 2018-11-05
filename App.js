@@ -38,7 +38,7 @@ import { ShopPromotionDetailScreens } from './src/components/screens/shopdetails
 import axios from 'axios'
 import { AddTripScreen } from './src/components/screens/tripscreens/createtripscreen/addtrip/AddTripScreen';
 import { TripMeAddLocation } from './src/components/screens/tripscreens/createtripscreen/addtrip/TripMeAddLocation';
-import { MarkLocation } from './src/components/screens/tripscreens/createtripscreen/markmap/MarkLocation';
+import {MarkLocation} from './src/components/screens/tripscreens/createtripscreen/markmap/MarkLocation';
 import { Location } from './src/components/screens/tripscreens/createtripscreen/markmap/Location'
 import  Search  from './src/components/screens/tripscreens/createtripscreen/addtrip/Search';
 import { TripInteresting } from './src/components/screens/tripscreens';
